@@ -1,7 +1,39 @@
-// @font-face {
-//   src: url("../../assets/fonts/Lato-Black.woff2") format("woff2");
-//   font-family: "Lato";
-//   font-weight: 900;
-//   font-style: normal;
-//   font-display: swap;
-// }
+@font-face {
+  src: url("../../../public/fonts/Inter-Black.woff2") format("woff2");
+  font-family: "Inter";
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  src: url("../../../public/fonts/Inter-SemiBold.woff2") format("woff2");
+  font-family: "Inter";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  src: url("../../../public/fonts/Inter-Medium.woff2") format("woff2");
+  font-family: "Inter";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  src: url("../../../public/fonts/Inter-Regular.woff2") format("woff2");
+  font-family: "Inter";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  src: url("../../../public/fonts/Sen-Bold.woff2") format("woff2");
+  font-family: "Sen";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

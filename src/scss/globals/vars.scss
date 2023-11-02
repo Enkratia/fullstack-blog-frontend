@@ -2,27 +2,35 @@
 
 :root {
   // Colors
-  --white-color: #fff;
-  --black-color: #000;
+  --black-color: #232536;
+  --yellow-color: #ffd050;
+  --darkgray-color: #4c4c4c;
+  --mediumgray-color: #6d6e76;
+  --purple-color: #592ea9;
+  --light-color: #fff;
+  --lightyellow-color: #fbf6ea;
+  --lightgray-color: #f4f4f4;
+  --lavender-color: #f4f0f8;
 
+  // **
+  --yellow-hover-color: #edc14a;
 
   // Filters
   // --primary-filter: invert(28%) sepia(11%) saturate(5606%) hue-rotate(143deg) brightness(97%) contrast(82%);
 
   // Fonts
-  // --h1-font: 900 2.875rem / 130% "Lato", sans-serif; // 46
+  --display-font: 700 3.5rem / 114% "Sen", sans-serif; // 56
+  --h1-font: 700 3rem / 114% "Sen", sans-serif; // 48
+  --h2-font: 700 2.25rem / 133% "Sen", sans-serif; // 36
+  --h3-font: 700 1.75rem / 142% "Sen", sans-serif; // 28
+  --h4-font: 700 1.5rem / 133% "Sen", sans-serif; // 24
+  --h5-font: 700 1.25rem / 160% "Sen", sans-serif; // 20
+  --h6-font: 700 1rem / 150% "Sen", sans-serif; // 16
 
-  // Linear-gradients
-  // --divider-gradient: linear-gradient(rgb(218 219 221 / 0%) 0%,
-  //     rgb(218 219 221 / 50%) 12.33%,
-  //     #dadbdd 51.91%,
-  //     rgb(218 219 221 / 50%) 87.85%,
-  //     rgb(218 219 221 / 0%) 100%);
-
-
-  // Drop-shadows
-  // --small-shadow: 0 4px 4px rgb(30 33 44 / 3%), 0 12px 10px rgb(154 156 165 / 4%),
-  //   0 30px 24px rgb(154 156 165 / 5%), 0 80px 80px rgb(154 156 165 / 8%);
+  // **
+  --body01-font: 400 1rem / 175% "Inter", sans-serif; // 16
+  --body02-font: 400 0.875rem / 142% "Inter", sans-serif; // 14
+  --label-font: 500 0.875rem / 142% "Inter", sans-serif; // 14
 
   // Z-indexes
   --z-modal: 1000;
