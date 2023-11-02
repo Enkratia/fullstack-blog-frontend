@@ -1,0 +1,56 @@
+@use "../utils/" as *;
+
+:root {
+  // Colors
+  --white-color: #fff;
+  --black-color: #000;
+
+
+  // Filters
+  // --primary-filter: invert(28%) sepia(11%) saturate(5606%) hue-rotate(143deg) brightness(97%) contrast(82%);
+
+  // Fonts
+  // --h1-font: 900 2.875rem / 130% "Lato", sans-serif; // 46
+
+  // Linear-gradients
+  // --divider-gradient: linear-gradient(rgb(218 219 221 / 0%) 0%,
+  //     rgb(218 219 221 / 50%) 12.33%,
+  //     #dadbdd 51.91%,
+  //     rgb(218 219 221 / 50%) 87.85%,
+  //     rgb(218 219 221 / 0%) 100%);
+
+
+  // Drop-shadows
+  // --small-shadow: 0 4px 4px rgb(30 33 44 / 3%), 0 12px 10px rgb(154 156 165 / 4%),
+  //   0 30px 24px rgb(154 156 165 / 5%), 0 80px 80px rgb(154 156 165 / 8%);
+
+  // Z-indexes
+  --z-modal: 1000;
+  --z-premodal: 999;
+  --z-tooltip: 100;
+  --z-postfixed: 11;
+  --z-fixed: 10;
+  --z-prefixed: 9;
+  --z-postup: 2;
+  --z-up: 1;
+  --z-down: -1;
+
+  // Offsets
+  --scrollbar-offset: 0;
+
+  // Animations
+  // --to-right-05-animation: to-right 0.4s ease-in-out forwards 0.5s;
+}
+
+// Skeleton
+@keyframes skeleton-animation {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}

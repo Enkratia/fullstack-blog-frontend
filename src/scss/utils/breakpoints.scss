@@ -1,0 +1,71 @@
+// Min-width
+$breakpoints-up: (
+  "340": "21.25em",
+  "350": "21.875em",
+  "375": "23.4375em",
+  "414": "25.875em",
+  "440": "27.5em",
+  "480": "30em",
+  "500": "31.25em",
+  "576": "36em",
+  "678": "42.375em",
+  "768": "48em",
+  "876": "54.75em",
+  "885": "55.3125em",
+  "992": "62em",
+  "1024": "64em",
+  "1060": "66.25em",
+  "1120": "70em",
+  "1200": "75em",
+  "1290": "80.625em",
+  "1310": "81.875em",
+  "1325": "82.8125em",
+  "1400": "87.5em",
+  "1920": "120em",
+  "container": "80.625em",
+  /* container max-width + margin-inline = 1230 + 30*2 */
+  "container-wide": "120em",
+  /* container max-width + margin-inline = 1860 + 30*2 */
+);
+
+// Max-width
+$breakpoints-down: (
+  "340": "21.1875em",
+  "350": "21.8125em",
+  "375": "23.375em",
+  "414": "25.8125em",
+  "440": "27.4375em",
+  "480": "29.9375em",
+  "500": "31.1875em",
+  "576": "35.9375em",
+  "678": "42.3125em",
+  "768": "47.9375em",
+  "876": "54.6875em",
+  "885": "55.25em",
+  "992": "61.9375em",
+  "1024": "63.9375em",
+  "1060": "66.1875em",
+  "1120": "69.9375em",
+  "1200": "74.9375em",
+  "1290": "80.5625em",
+  "1310": "81.8125em",
+  "1325": "82.75em",
+  "1400": "87.4375em",
+  "1920": "119.9375em",
+  "container": "80.5625em",
+  /* container max-width + margin-inline = 1230 + 30*2 - 1px*/
+  "container-wide": "119.9375em",
+  /* container max-width + margin-inline = 1860 + 30*2 - 1px */
+);
+
+@mixin bp-up($size) {
+  @media (min-width: map-get($breakpoints-up, $size)) {
+    @content;
+  }
+}
+
+@mixin bp-down($size) {
+  @media (max-width: map-get($breakpoints-down, $size)) {
+    @content;
+  }
+}

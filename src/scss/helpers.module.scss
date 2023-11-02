@@ -1,0 +1,14 @@
+@use "./utils/" as *;
+
+.srOnly {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+}
+
+.overflowHiddenX {
+  overflow-x: hidden;
+}
