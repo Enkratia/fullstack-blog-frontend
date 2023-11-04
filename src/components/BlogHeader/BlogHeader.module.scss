@@ -76,12 +76,12 @@
 .image {
   // object-fit: cover;
 
-  &Wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  // &Wrapper {
+  //   display: grid;
+  //   grid-template-columns: repeat(3, 1fr);
 
-    @include bp-down("992") {
-      grid-template-columns: 1fr;
-    }
-  }
+  //   @include bp-down("992") {
+  //     grid-template-columns: 1fr;
+  //   }
+  // }
 }

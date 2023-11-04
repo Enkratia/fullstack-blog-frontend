@@ -89,7 +89,7 @@ export const BlogHeader: React.FC = () => {
               // fill
             /> */}
 
-            <Image
+            {/* <Image
               src={post.imageUrl}
               alt="Picture of the author"
               width={2250}
@@ -111,14 +111,14 @@ export const BlogHeader: React.FC = () => {
                 width: "100%",
                 height: "auto",
               }}
-            />
+            /> */}
 
             <Image
               src={post.imageUrl}
               alt="Picture of the author"
               width={2250}
               height={1500}
-              sizes="(max-width: 920px) 100vw, 33vw"
+              sizes="100vw"
               style={{
                 width: "100%",
                 height: "auto",
