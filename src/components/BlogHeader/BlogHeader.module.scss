@@ -71,15 +71,17 @@
 
 .right {
   width: 100%;
-  max-width: rem(515);
 }
 
 .image {
-  // object-fit: contain;
+  // object-fit: cover;
 
   &Wrapper {
-    position: relative;
-    width: 100%;
-    max-width: rem(515);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    @include bp-down("992") {
+      grid-template-columns: 1fr;
+    }
   }
 }
