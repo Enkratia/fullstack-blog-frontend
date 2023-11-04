@@ -456,14 +456,6 @@
         "unspecified": "bottomAlphabetical"
       }
     ],
-    "at-rule-empty-line-before": [
-      "always",
-      {
-        "except": ["blockless-after-same-name-blockless", "first-nested"],
-        "ignore": ["after-comment"],
-        "ignoreAtRules": ["else"]
-      }
-    ],
     "at-rule-no-unknown": null,
     "at-rule-no-vendor-prefix": true,
     "block-closing-brace-empty-line-before": "never",
@@ -587,12 +579,6 @@
       }
     ],
     "property-no-vendor-prefix": null,
-    "rule-empty-line-before": [
-      "always-multi-line",
-      {
-        "ignore": ["after-comment"]
-      }
-    ],
     "selector-attribute-brackets-space-inside": "never",
     "selector-attribute-operator-space-after": "never",
     "selector-attribute-operator-space-before": "never",

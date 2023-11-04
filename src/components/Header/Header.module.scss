@@ -3,3 +3,47 @@
 .root {
   background-color: var(--black-color);
 }
+
+.container {
+  display: flex;
+  align-items: center;
+  padding-top: rem(12);
+  padding-bottom: rem(12);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  margin-right: rem(32);
+}
+
+.logo {
+  position: relative;
+  top: rem(2);
+  width: rem(146);
+  height: rem(29);
+  fill: var(--light-color);
+  transition: fill 0.3s;
+
+  &Link {
+    margin-right: auto;
+  }
+
+  &:hover {
+    fill: var(--yellow-hover-color);
+  }
+}
+
+.link {
+  font: var(--body01-font);
+  color: var(--light-color);
+
+  &:not(:last-child) {
+    margin-right: rem(24);
+  }
+
+  &:hover {
+    color: var(--yellow-color);
+    transition: color 0.3s;
+  }
+}

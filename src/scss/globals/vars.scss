@@ -1,3 +1,4 @@
+/* stylelint-disable rule-empty-line-before */
 @use "../utils/" as *;
 
 :root {
@@ -31,6 +32,12 @@
   --body01-font: 400 1rem / 175% "Inter", sans-serif; // 16
   --body02-font: 400 0.875rem / 142% "Inter", sans-serif; // 14
   --label-font: 500 0.875rem / 142% "Inter", sans-serif; // 14
+
+  // **
+  --cap03-font: 500 1rem / 125% "Inter", sans-serif; // 16
+
+  // **
+  --btn-font: 700 1.125rem / 133% "Sen", sans-serif;
 
   // Z-indexes
   --z-modal: 1000;
