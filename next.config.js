@@ -44,7 +44,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "vast-tam-lamb.cyclic.app",
         port: "",
-        pathname: "",
+        pathname: "/images/**",
       },
     ],
   },
