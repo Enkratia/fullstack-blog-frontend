@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 // const nextConfig = {};
 
-const isProd = process.env.NODE_ENV === "production";
+// const isProd = process.env.NODE_ENV === "production";
 
 // module.exports = nextConfig;
 
@@ -33,7 +33,7 @@ const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig = {
   // Use the CDN in production and localhost for development.
-  assetPrefix: isProd ? "https://сdn.incomparable-truffle-a06b40.netlify.app" : undefined,
+  // assetPrefix: isProd ? "https://сdn.incomparable-truffle-a06b40.netlify.app" : undefined,
   images: {
     remotePatterns: [
       {
