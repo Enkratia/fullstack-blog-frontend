@@ -39,6 +39,14 @@ const nextConfig = {
         pathname: "/img/**",
       },
     ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "vast-tam-lamb.cyclic.app",
+        port: "",
+        pathname: "",
+      },
+    ],
   },
   webpack(config) {
     config.module.rules.push({
