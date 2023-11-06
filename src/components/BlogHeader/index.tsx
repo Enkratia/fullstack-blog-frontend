@@ -16,9 +16,9 @@ const post = {
   createdAt: "2023-11-03T17:44:30.644Z",
   updatedAt: "2023-11-03T17:44:30.644Z",
   text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-  // imageUrl:
-  //   "https://s3-alpha-sig.figma.com/img/ffdd/fb94/98174abefa2a086436f620be49d2f85c?Expires=1699833600&Signature=if1TexCLIeTWV6k8yHI9J7UGHThFUEqezGPuqYrKkauuPXzP30TN1sJ88TAWzXCLHL2MOEO3TsDeaisJNF9aK2KuCVq-QU-iZJ5eiH7RmUJKOVGlcUS6o7H237xlExHVbThSxKaOcfXTuua-wyXQuwcuJR3JlZtJv9vJMWBT1APRXqA6pgZO0GIoMvTnTFbZY4R03RukOXnszQ2hPiS4HYBEr9vn3fueMsDMKME23TxhfWF~C9jzt9xv0nGKUV5y-9WDcinmHWj2KKgh1-vkGxYSm54QByiXjLMDPDlrhfN8ja~~9VSNIUkwe~J49o9vxcdxTslTA1d3ilgYWnqcrg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
-  imageUrl: "https://vast-tam-lamb.cyclic.app/images/test-image.png",
+  imageUrl:
+    "https://s3-alpha-sig.figma.com/img/ffdd/fb94/98174abefa2a086436f620be49d2f85c?Expires=1699833600&Signature=if1TexCLIeTWV6k8yHI9J7UGHThFUEqezGPuqYrKkauuPXzP30TN1sJ88TAWzXCLHL2MOEO3TsDeaisJNF9aK2KuCVq-QU-iZJ5eiH7RmUJKOVGlcUS6o7H237xlExHVbThSxKaOcfXTuua-wyXQuwcuJR3JlZtJv9vJMWBT1APRXqA6pgZO0GIoMvTnTFbZY4R03RukOXnszQ2hPiS4HYBEr9vn3fueMsDMKME23TxhfWF~C9jzt9xv0nGKUV5y-9WDcinmHWj2KKgh1-vkGxYSm54QByiXjLMDPDlrhfN8ja~~9VSNIUkwe~J49o9vxcdxTslTA1d3ilgYWnqcrg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
+  // imageUrl: "https://vast-tam-lamb.cyclic.app/images/test-image.png",
   tags: ["business", "experience"],
   isFeatured: true,
   authorId: 1,
