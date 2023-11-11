@@ -21,15 +21,15 @@
   }
 
   @include bp-down("container") {
-    margin-inline: rem(40);
-  }
-
-  @include bp-down("992") {
     margin-inline: rem(30);
   }
 
+  @include bp-down("992") {
+    margin-inline: rem(20);
+  }
+
   @include bp-down("576") {
-    margin-inline: rem(15);
+    margin-inline: rem(10);
   }
 }
 
@@ -42,19 +42,37 @@
 
 .btn {
   display: inline-block;
+  border: rem(1) solid var(--yellow-color);
   padding-top: rem(17);
   padding-bottom: rem(15);
   padding-inline: rem(48);
   font: var(--btn-font);
   color: var(--black-color);
   background-color: var(--yellow-color);
+  cursor: pointer;
 
   &White {
     background-color: var(--light-color);
   }
 
   &:hover {
+    border: rem(1) solid var(--yellow-hover-color);
     background-color: var(--yellow-hover-color);
     transition: background-color 0.3s;
+  }
+}
+
+.socialBtn {
+  display: inline-flex;
+
+  svg {
+    width: rem(16);
+    height: rem(16);
+    fill: var(--mediumgray-color);
+    transition: fill 0.3s;
+
+    &:hover {
+      fill: var(--yellow-color);
+    }
   }
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { Header } from "@/components";
+import { Footer, Header } from "../components";
 
 import "./globals.scss";
 
@@ -15,6 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -1,0 +1,47 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: rem(48);
+  padding-block: rem(80);
+  padding-inline: rem(64);
+  background-color: var(--light005-color);
+}
+
+.title {
+  margin-right: rem(64);
+  font: var(--h2-font);
+  letter-spacing: rem(-2);
+  color: var(--light-color);
+}
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: rem(526);
+}
+
+.input {
+  flex-grow: 1;
+  margin-right: rem(24);
+  border: rem(1) solid var(--darkgray-color);
+  padding-block: rem(14);
+  padding-inline: rem(25);
+  font: var(--body01-font);
+  color: var(--light-color);
+  background-color: transparent;
+  transition: box-shadow 0.3s;
+
+  &::placeholder {
+    font: inherit;
+    color: var(--darkgray-color);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 1px 1px rgb(150 150 150 / 90%);
+  }
+}

@@ -1,0 +1,7 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(44);
+  padding-bottom: rem(56);
+  background-color: var(--black-color);
+}

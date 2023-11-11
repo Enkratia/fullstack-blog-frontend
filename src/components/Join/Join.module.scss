@@ -1,0 +1,23 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(128);
+  padding-bottom: rem(125);
+  text-align: center;
+  color: var(--black-color);
+}
+
+.container {
+  max-width: rem(414);
+}
+
+.title {
+  margin-bottom: rem(16);
+}
+
+.descr {
+  margin: 0;
+  margin-bottom: rem(32);
+  font: var(--body01-font);
+  color: var(--mediumgray-color);
+}
