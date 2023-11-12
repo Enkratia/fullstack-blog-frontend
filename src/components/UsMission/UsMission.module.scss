@@ -1,0 +1,80 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(126);
+}
+
+.decoration {
+  width: 100%;
+  height: rem(23);
+  background-color: transparent;
+
+  &Item {
+    display: inline-block;
+    height: 100%;
+
+    &:nth-child(1) {
+      width: 17%;
+    }
+
+    &:nth-child(2) {
+      width: 61%;
+      background-color: var(--yellow-color);
+    }
+
+    &:nth-child(3) {
+      width: 22%;
+      background-color: var(--purple-color);
+    }
+  }
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-right: rem(108);
+  padding-left: rem(80);
+  padding-block: rem(96);
+  background-color: var(--lavender-color);
+}
+
+.subtitle {
+  display: inline-block;
+  margin-bottom: rem(24);
+  font: var(--cap01-font);
+  letter-spacing: rem(3);
+  text-transform: uppercase;
+}
+
+.title {
+  margin-bottom: rem(16);
+  letter-spacing: rem(-2);
+}
+
+.descr {
+  font: var(--body01-font);
+  color: var(--mediumgray-color);
+}
+
+.us {
+  width: 100%;
+  max-width: rem(505);
+}
+
+.btn {
+  font: var(--btn2-font);
+  color: var(--purple-color);
+}
+
+.mission {
+  width: 100%;
+  max-width: rem(516);
+
+  &Title {
+    margin: 0;
+    max-width: rem(450);
+    font: var(--h3-font);
+    letter-spacing: rem(-1);
+  }
+}

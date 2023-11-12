@@ -101,12 +101,12 @@ export const AllPosts: React.FC = () => {
           {posts.map((obj) => (
             <article key={obj.id} className={s.post}>
               <div className={s.imageWrapper}>
-                <div className={s.imageWrapperInner}>
-                  <Link href="" aria-label="Go to the post.">
-                    <Image src={obj.imageUrl} alt={obj.title} fill className={s.image} />
-                  </Link>
-                </div>
+                {/* <div className={s.imageWrapperInner}> */}
+                <Link href="" className={s.imageWrapperInner} aria-label="Go to the post.">
+                  <Image src={obj.imageUrl} alt={obj.title} fill className={s.image} />
+                </Link>
               </div>
+              {/* </div> */}
 
               <div className={s.data}>
                 <span className={s.dataCategory}>{obj.category}</span>

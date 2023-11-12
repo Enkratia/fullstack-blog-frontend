@@ -38,6 +38,10 @@
   font: var(--h2-font);
   letter-spacing: rem(-2);
   color: var(--black-color);
+
+  @include bp-down("container") {
+    font-size: calc(rem(25.49) + 0.78vw); // 36>28 (1340>320)
+  }
 }
 
 .btn {
@@ -72,7 +76,56 @@
     transition: fill 0.3s;
 
     &:hover {
-      fill: var(--yellow-color);
+      fill: var(--yellow-hover-color);
     }
+  }
+}
+
+.metadata {
+  display: flex;
+  align-items: center;
+  margin-bottom: rem(16);
+  font: var(--label-font);
+  color: var(--darkgray-color);
+
+  &Item {
+    &:first-child {
+      &::after {
+        content: "l";
+        padding-right: rem(10);
+        padding-left: rem(12);
+        font: inherit;
+      }
+
+      &Gold {
+        &:first-child {
+          &::after {
+            content: "|";
+          }
+        }
+      }
+    }
+  }
+
+  &Name {
+    color: var(--purple-color);
+    transform: color 0.3s;
+
+    &:hover {
+      color: var(--black-color);
+    }
+
+    &Gold {
+      color: var(--yellow-color);
+
+      &:hover {
+        color: var(--yellow-hover-color);
+      }
+    }
+  }
+
+  &Gold {
+    font: var(--body01-font);
+    color: var(--light-color);
   }
 }

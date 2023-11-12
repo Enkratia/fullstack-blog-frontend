@@ -2,18 +2,17 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-// import { SizeImage } from "../../components";
 import { formatDate } from "@/utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./BlogHeader.module.scss";
+import s from "./Hero.module.scss";
 
 const post = {
   id: 1,
   title: "Step-by-step guide to choosing great font pairs",
   category: "startup",
-  firstName: "John",
-  lastName: "Doe",
+  firstName: "James",
+  lastName: "West",
   createdAt: "2023-11-03T17:44:30.644Z",
   updatedAt: "2023-11-03T17:44:30.644Z",
   text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
@@ -23,45 +22,40 @@ const post = {
   authorId: 1,
 };
 
-export const BlogHeader: React.FC = () => {
+export const Hero: React.FC = () => {
   return (
     <section className={s.root}>
-      <h2 className={cs.srOnly}>{`Featured post: ${post.title}`}</h2>
-
+      <h2 className={cs.srOnly}>{post.title}</h2>
       <div className={`${s.container} ${cs.container}`}>
-        <div className={s.left}>
-          <span className={s.subtitle}>Featured post</span>
-          <h3 className={`${s.title} ${cs.title}`}>{post.title}</h3>
+        <Image src={post.imageUrl} alt={post.title} className={s.image} aria-hidden="true" fill />
 
-          <div className={cs.metadata}>
-            <span className={cs.metadataItem}>
+        <div className={s.content}>
+          <span className={s.subtitle}>
+            Posted on<Link href="" className={s.category}>{` ${post.category}`}</Link>
+          </span>
+          <p className={`${s.title} ${cs.title}`}>
+            <Link href="" className={s.titleLink}>
+              {post.title}
+            </Link>
+          </p>
+
+          <div className={`${cs.metadata} ${cs.metadataGold}`}>
+            <span className={`${cs.metadataItem} ${cs.metadataItemGold}`}>
               By
               <Link
                 href={`/users/${post.authorId}`}
-                className={cs.metadataName}>{` ${post.firstName} ${post.lastName}`}</Link>
+                className={`${cs.metadataName} ${cs.metadataNameGold}`}>{` ${post.firstName} ${post.lastName}`}</Link>
             </span>
-            <span className={cs.metadataItem}>{formatDate(post.createdAt)}</span>
+            <span className={`${cs.metadataItem} ${cs.metadataItemGold}`}>
+              {formatDate(post.createdAt)}
+            </span>
           </div>
 
-          <p className={s.text}>{post.text}</p>
-          <Link href={`/blog/${post.id}`} className={`${s.link} ${cs.btn}`}>{`Read More >`}</Link>
-        </div>
+          <p className={s.descr}>{post.text}</p>
 
-        <div className={s.right}>
-          <div className={s.imageWrapper}>
-            <Image src={post.imageUrl} alt="Image of the post." className={s.image} fill />
-          </div>
+          <Link href="" className={`${s.btn} ${cs.btn}`}>{`Read More >`}</Link>
         </div>
       </div>
     </section>
   );
 };
-
-// {
-//   /* <SizeImage
-//             src={post.imageUrl}
-//             alt="Image of the post."
-//             sizes="100vw"
-//             className={s.image}
-//           /> */
-// }

@@ -3,6 +3,10 @@
 .root {
   margin-bottom: rem(42);
   background-color: var(--black-color);
+
+  @include bp-down("576") {
+    margin-bottom: rem(32);
+  }
 }
 
 .container {
@@ -10,11 +14,24 @@
   align-items: center;
   padding-top: rem(12);
   padding-bottom: rem(12);
+
+  @include bp-down("768") {
+    flex-direction: column;
+    align-items: revert;
+  }
+
+  @include bp-down("576") {
+    align-items: center;
+  }
 }
 
 .nav {
   display: flex;
   align-items: center;
+
+  @include bp-down("576") {
+    flex-direction: column;
+  }
 }
 
 .logo {
@@ -28,10 +45,19 @@
 
   &Link {
     margin-right: auto;
+
+    @include bp-down("576") {
+      margin-right: 0;
+    }
   }
 
   &:hover {
     fill: var(--yellow-hover-color);
+  }
+
+  @include bp-down("768") {
+    margin-right: 0;
+    margin-bottom: rem(20);
   }
 }
 
@@ -41,10 +67,15 @@
 
   &:not(:last-child) {
     margin-right: rem(24);
+
+    @include bp-down("576") {
+      margin-right: 0;
+      margin-bottom: rem(8);
+    }
   }
 
   &:hover {
-    color: var(--yellow-color);
+    color: var(--yellow-hover-color);
     transition: color 0.3s;
   }
 }

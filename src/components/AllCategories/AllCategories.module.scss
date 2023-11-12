@@ -2,8 +2,20 @@
 
 .root {
   padding-top: rem(65);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(38.72) + 1.96vw); // 65>45 (container>320)
+  }
 }
 
 .title {
   margin-bottom: rem(48);
+
+  @include bp-down("768") {
+    margin-bottom: rem(40);
+  }
+
+  @include bp-down("576") {
+    margin-bottom: rem(32);
+  }
 }

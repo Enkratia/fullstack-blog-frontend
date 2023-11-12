@@ -8,28 +8,54 @@
   padding-block: rem(80);
   padding-inline: rem(64);
   background-color: var(--light005-color);
+
+  @include bp-down("992") {
+    padding-block: rem(50);
+    padding-inline: rem(44);
+  }
+
+  @include bp-down("768") {
+    flex-wrap: wrap;
+    padding-block: rem(35);
+    padding-inline: rem(30);
+  }
+
+  @include bp-down("576") {
+    padding-block: rem(25);
+    padding-inline: rem(20);
+  }
 }
 
 .title {
   margin-right: rem(64);
-  font: var(--h2-font);
   letter-spacing: rem(-2);
   color: var(--light-color);
+
+  @include bp-down("992") {
+    margin-right: rem(44);
+  }
+
+  @include bp-down("768") {
+    margin-right: 0;
+    margin-bottom: rem(30);
+  }
 }
 
 .form {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
   max-width: rem(526);
+  gap: rem(24);
 }
 
 .input {
   flex-grow: 1;
-  margin-right: rem(24);
   border: rem(1) solid var(--darkgray-color);
   padding-block: rem(14);
   padding-inline: rem(25);
+  max-width: 100%;
   font: var(--body01-font);
   color: var(--light-color);
   background-color: transparent;
@@ -43,5 +69,11 @@
   &:focus {
     outline: none;
     box-shadow: 0 0 1px 1px rgb(150 150 150 / 90%);
+  }
+}
+
+.btn {
+  @include bp-down("576") {
+    width: 100%;
   }
 }

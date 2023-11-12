@@ -8,7 +8,7 @@ export const FooterMid: React.FC = () => {
     <div className={s.root}>
       <h2 className={cs.srOnly}>Form to subscribe for lastest updates</h2>
       <p className={`${s.title} ${cs.title}`}>
-        Subscribe to our news letter to get latest updates and news
+        Subscribe to&nbsp;our news letter to&nbsp;get latest updates and news
       </p>
 
       <form className={s.form}>

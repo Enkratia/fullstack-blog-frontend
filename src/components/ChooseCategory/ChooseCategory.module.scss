@@ -1,0 +1,10 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(129);
+}
+
+.title {
+  margin-bottom: rem(48);
+  text-align: center;
+}

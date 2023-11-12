@@ -5,10 +5,24 @@
   padding-bottom: rem(125);
   text-align: center;
   color: var(--black-color);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(75.45) + 3.92vw); // 128>88(1340>320)
+    padding-bottom: calc(rem(72.45) + 3.92vw); // 125>85(1340>320)
+  }
 }
 
 .container {
+  display: flex;
+  justify-content: center;
+}
+
+.content {
   max-width: rem(414);
+
+  @include bp-down("container") {
+    max-width: calc(rem(283.94) + 9.7vw); // 414>315(1340>320)
+  }
 }
 
 .title {

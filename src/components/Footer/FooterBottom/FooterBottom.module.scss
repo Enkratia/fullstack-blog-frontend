@@ -4,6 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @include bp-down("576") {
+    flex-direction: column;
+  }
 }
 
 .info {
@@ -11,8 +15,15 @@
   column-gap: rem(10);
   grid-template-columns: repeat(2, max-content);
   grid-template-rows: repeat(2, auto);
+  margin-right: rem(40);
   font: var(--body01-font);
   color: var(--light070-color);
+
+  @include bp-down("576") {
+    margin-right: 0;
+    margin-bottom: rem(30);
+    text-align: center;
+  }
 }
 
 .street {
@@ -26,7 +37,7 @@
   transition: color 0.3s;
 
   &:hover {
-    color: var(--light-color);
+    color: var(--yellow-hover-color);
   }
 }
 
@@ -36,7 +47,7 @@
   transition: color 0.3s;
 
   &:hover {
-    color: var(--light-color);
+    color: var(--yellow-hover-color);
   }
 }
 

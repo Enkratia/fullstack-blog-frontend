@@ -31,7 +31,7 @@ const basicLinks = [
 export const FooterTop: React.FC = () => {
   return (
     <div className={s.root}>
-      <div className={`${s.container} ${cs.container}`}>
+      <div className={s.container}>
         <Link href="/" className={s.logoLink} aria-label="Go to home page.">
           <Logo className={s.logo} aria-hidden="true" />
         </Link>

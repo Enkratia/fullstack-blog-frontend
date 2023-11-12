@@ -1,0 +1,63 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  position: relative;
+  height: rem(718);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: var(--z-up);
+    width: 100%;
+    height: 100%;
+    background-image: var(--overlay-gradient);
+  }
+}
+
+.container {
+  height: 100%;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.content {
+  position: relative;
+  z-index: var(--z-postup);
+  padding-top: rem(126);
+  color: var(--light-color);
+}
+
+.subtitle {
+  display: inline-block;
+  margin-bottom: rem(24);
+  font: var(--cap03-font);
+  letter-spacing: rem(3);
+  text-transform: uppercase;
+}
+
+.category {
+  font: var(--cap00-font);
+}
+
+.title {
+  margin: 0;
+  margin-bottom: rem(24);
+  max-width: rem(803);
+  font: var(--display-font);
+  letter-spacing: rem(-2);
+  color: var(--light-color);
+}
+
+.descr {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-bottom: rem(48);
+  max-width: rem(599);
+  font: var(--body01-font);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}

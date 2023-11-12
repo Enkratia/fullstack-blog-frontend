@@ -1,0 +1,132 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(128);
+  color: var(--black-color);
+}
+
+.container {
+  display: grid;
+  column-gap: rem(30);
+  justify-content: space-between;
+  grid-template-columns: minmax(0, rem(733)) minmax(0, rem(517));
+}
+
+.featured {
+  &Title {
+    margin-bottom: rem(32);
+
+    &Second {
+      margin: 0;
+      margin-bottom: rem(16);
+      font: var(--h3-font);
+      letter-spacing: rem(-1);
+      transition: color 0.3s;
+
+      &Link {
+        display: inline-block;
+      }
+
+      &:hover {
+        color: var(--darkgray-color);
+      }
+    }
+  }
+
+  &Content {
+    border: rem(1) solid var(--mediumgray01-color);
+    padding: rem(32);
+  }
+
+  &Image {
+    object-fit: cover;
+    transition: transform 0.3s;
+
+    &Wrapper {
+      overflow: hidden;
+      margin-bottom: rem(32);
+      width: 100%;
+
+      &Inner {
+        position: relative;
+        padding-top: 52.6%;
+        width: 100%;
+      }
+    }
+  }
+
+  &Metadata {
+    margin-bottom: rem(16);
+  }
+
+  &Descr {
+    display: -webkit-box;
+    overflow: hidden;
+    margin: 0;
+    margin-bottom: rem(32);
+    max-width: rem(551);
+    font: var(--body01-font);
+    color: var(--mediumgray-color);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.03);
+    }
+  }
+}
+
+.all {
+  &Head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &Title {
+    letter-spacing: rem(-2);
+
+    &Second {
+      margin: 0;
+      max-width: rem(369);
+      font: var(--h4-font);
+
+      &Link {
+        display: inline-block;
+      }
+    }
+  }
+
+  &View {
+    font: var(--body01-font);
+    color: var(--purple-color);
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-position: under;
+    }
+  }
+
+  &List {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-top: rem(32);
+  }
+
+  &Item {
+    padding: rem(32);
+    padding-bottom: rem(25);
+    transition: background-color 0.3;
+
+    &:hover {
+      background-color: var(--lightyellow-color);
+    }
+  }
+
+  &Metadata {
+    margin-bottom: rem(8);
+  }
+}

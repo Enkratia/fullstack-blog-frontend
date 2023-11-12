@@ -3,6 +3,10 @@
 .root {
   padding-block: rem(80);
   background-color: var(--lavender-color);
+
+  @include bp-down("container") {
+    padding-block: calc(rem(53.72) + 1.96vw); // 80>60 (1340>320)
+  }
 }
 
 .container {
@@ -40,34 +44,6 @@
 
   @include bp-down("container") {
     font-size: calc(rem(25.49) + 0.78vw); // 36>28 (1340>320)
-  }
-}
-
-.metadata {
-  display: flex;
-  align-items: center;
-  margin-bottom: rem(16);
-  font: var(--label-font);
-  color: var(--darkgray-color);
-
-  &Item {
-    &:first-child {
-      &::after {
-        content: "l";
-        padding-right: rem(10);
-        padding-left: rem(12);
-        font: inherit;
-      }
-    }
-  }
-
-  &Name {
-    color: var(--purple-color);
-    transform: font-weight 0.3s;
-
-    &:hover {
-      font-weight: 600;
-    }
   }
 }
 
