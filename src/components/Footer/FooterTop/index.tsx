@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 
 import s from "./FooterTop.module.scss";
-import cs from "../../../scss/helpers.module.scss";
 import Logo from "../../../../public/img/logo.svg";
 
 const basicLinks = [

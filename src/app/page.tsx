@@ -1,4 +1,11 @@
-import { ChooseCategory, FeaturedPosts, Hero, UsMission } from "../components";
+import {
+  ChooseCategory,
+  FeaturedPosts,
+  Hero,
+  ListAuthors,
+  UsMission,
+  WhyWeStarted,
+} from "../components";
 
 import s from "./page.module.scss";
 import cs from "../scss/helpers.module.scss";
@@ -11,6 +18,8 @@ export default function Home() {
       <FeaturedPosts />
       <UsMission />
       <ChooseCategory />
+      <WhyWeStarted />
+      <ListAuthors />
     </main>
   );
 }

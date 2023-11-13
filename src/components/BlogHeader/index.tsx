@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-// import { SizeImage } from "../../components";
 import { formatDate } from "@/utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
@@ -56,12 +55,3 @@ export const BlogHeader: React.FC = () => {
     </section>
   );
 };
-
-// {
-//   /* <SizeImage
-//             src={post.imageUrl}
-//             alt="Image of the post."
-//             sizes="100vw"
-//             className={s.image}
-//           /> */
-// }

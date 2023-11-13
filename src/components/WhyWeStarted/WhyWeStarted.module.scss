@@ -1,0 +1,57 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(128);
+  color: var(--black-color);
+}
+
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  width: 100%;
+  height: rem(705);
+}
+
+.image {
+  object-fit: cover;
+
+  &Wrapper {
+    position: absolute;
+    right: rem(173);
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: var(--z-up);
+  place-self: self-end;
+  padding: rem(80);
+  padding-bottom: rem(79);
+  max-width: rem(706);
+  background-color: var(--light-color);
+}
+
+.subtitle {
+  display: inline-block;
+  margin-bottom: rem(24);
+  font: var(--cap01-font);
+  letter-spacing: rem(3);
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  margin-bottom: rem(16);
+  font: var(--h1-font);
+  letter-spacing: rem(-2);
+}
+
+.descr {
+  margin-bottom: rem(32);
+  font: var(--body01-font);
+  color: var(--mediumgray-color);
+}
