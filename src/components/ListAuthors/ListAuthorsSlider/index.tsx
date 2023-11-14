@@ -7,7 +7,24 @@ import { AuthorCard } from "../../../components";
 
 import s from "./ListAuthorsSlider.module.scss";
 
-const authorsList = [
+// type AuthorsListTitleType = [
+//   Record<"facebook", string>,
+//   Record<"twitter", string>,
+//   Record<"instagram", string>,
+//   Record<"linkedin", string>,
+// ];
+
+// type AuthorsListItemType = {
+//   id: number;
+//   imageUrl: string;
+//   firstName: string;
+//   lastName: string;
+//   profession: string;
+//   company: string;
+//   authorLinks: AuthorsListTitleType;
+// };
+
+const authorsList: AuthorsListItemType[] = [
   {
     id: 1,
     imageUrl: "https://i.postimg.cc/7YBBcBS5/5b103af032f344457c097e10aa7ebd86.png",
@@ -15,10 +32,7 @@ const authorsList = [
     lastName: "Miles",
     profession: "Content Writer",
     company: "Company",
-    facebookUrl: "#",
-    twitterUrl: "#",
-    instagramUrl: "#",
-    linkedinUrl: "#",
+    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
     id: 2,
@@ -27,10 +41,7 @@ const authorsList = [
     lastName: "Russell",
     profession: "Content Writer",
     company: "Company",
-    facebookUrl: "#",
-    twitterUrl: "#",
-    instagramUrl: "#",
-    linkedinUrl: "#",
+    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
     id: 3,
@@ -39,10 +50,7 @@ const authorsList = [
     lastName: "Wilson",
     profession: "Content Writer",
     company: "Company",
-    facebookUrl: "#",
-    twitterUrl: "#",
-    instagramUrl: "#",
-    linkedinUrl: "#",
+    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
     id: 4,
@@ -51,10 +59,7 @@ const authorsList = [
     lastName: "Alexander",
     profession: "Content Writer",
     company: "Company",
-    facebookUrl: "#",
-    twitterUrl: "#",
-    instagramUrl: "#",
-    linkedinUrl: "#",
+    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
     id: 5,
@@ -63,10 +68,7 @@ const authorsList = [
     lastName: "Alexander2",
     profession: "Content Writer",
     company: "Company",
-    facebookUrl: "#",
-    twitterUrl: "#",
-    instagramUrl: "#",
-    linkedinUrl: "#",
+    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
 ];
 
@@ -259,15 +261,15 @@ export const ListAuthorsSlider = () => {
 
   return (
     <div
-      className={s.slider}
+      className={s.root}
       tabIndex={0}
       onFocus={onSliderFocus}
       onKeyDown={onSliderKeyDown}
       onBlur={onSliderBlur}
       onPointerDown={onSliderPointerDown}>
-      <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
+      <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings} className={s.slider}>
         {authorsList.map((obj) => (
-          <AuthorCard key={obj.id} test="ghjg" />
+          <AuthorCard key={obj.id} author={obj} />
         ))}
       </Slider>
     </div>

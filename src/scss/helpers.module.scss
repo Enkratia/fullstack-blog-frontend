@@ -79,6 +79,19 @@
       fill: var(--yellow-hover-color);
     }
   }
+
+  &Dark {
+    svg {
+      width: rem(16);
+      height: rem(16);
+      fill: var(--black-color);
+      transition: fill 0.3s;
+
+      &:hover {
+        fill: var(--darkgray-color);
+      }
+    }
+  }
 }
 
 .metadata {

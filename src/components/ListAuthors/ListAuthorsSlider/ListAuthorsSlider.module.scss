@@ -1,0 +1,16 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  margin-inline: rem(-16);
+  // [class*="slick-list"] {
+
+  // }
+}
+
+.slider {
+  [class*="slick-slide"] {
+    >div {
+      margin-inline: rem(16);
+    }
+  }
+}

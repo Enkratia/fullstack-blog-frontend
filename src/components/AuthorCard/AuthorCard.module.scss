@@ -1,1 +1,61 @@
 @use "../../scss/utils/" as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: rem(40);
+  padding-inline: rem(30);
+  text-align: center;
+  color: var(--black-color);
+  background-color: var(--lightgray-color);
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: var(--lightyellow-color);
+
+    img {
+      transform: scale(1.03);
+    }
+  }
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.3s;
+
+  &Wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: rem(20);
+    border-radius: 50%;
+    width: rem(128);
+    height: rem(128);
+  }
+}
+
+.fullname {
+  margin: 0;
+  font: var(--h3-font);
+  letter-spacing: rem(-1);
+}
+
+.info {
+  margin: 0;
+  margin-bottom: rem(20);
+  font: var(--body02-font);
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &Item {
+    &:not(:last-child) {
+      margin-right: rem(16);
+    }
+  }
+}

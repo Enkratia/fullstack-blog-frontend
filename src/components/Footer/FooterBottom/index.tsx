@@ -25,7 +25,7 @@ const socialLinks = [
     linkUrl: "#",
   },
   {
-    title: "Linkein",
+    title: "Linkedin",
     icon: <Linkedin aria-label="hidden" />,
     linkUrl: "#",
   },
@@ -47,7 +47,11 @@ export const FooterBottom: React.FC = () => {
       <ul className={s.social}>
         {socialLinks.map((obj, i) => (
           <li key={i} className={s.socialItem}>
-            <a href={obj.linkUrl} className={cs.socialBtn} aria-label={`Go to our ${obj.title}`}>
+            <a
+              href={obj.linkUrl}
+              target="_blank"
+              className={cs.socialBtn}
+              aria-label={`Go to our ${obj.title}`}>
               {obj.icon}
             </a>
           </li>
