@@ -1,0 +1,61 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(96);
+  padding-bottom: rem(92);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+  padding-inline: rem(14);
+}
+
+.text {
+  position: relative;
+  top: rem(-3);
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-right: rem(86);
+
+  &Top {
+    font: var(--body02-font);
+    color: var(--mediumgray06-color);
+  }
+
+  &Bottom {
+    font: var(--h4-font);
+    color: var(--mediumgray-color);
+  }
+}
+
+.slider {
+  [class*="slick-slide"] {
+    >div {
+      margin-inline: rem(12);
+    }
+  }
+
+  &Wrapper {
+    align-self: center;
+    margin-inline: rem(-24);
+  }
+}
+
+.image {
+  object-fit: contain;
+  filter: var(--featured-filter);
+  transition: filter 0.3s;
+
+  &:hover {
+    filter: none;
+  }
+}
+
+.link {
+  position: relative;
+  overflow: visible;
+  width: rem(160);
+  height: rem(32);
+}

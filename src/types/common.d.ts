@@ -1,9 +1,18 @@
 // Authors
-type AuthorsListTitleType = [
-  Record<"facebook", string>,
-  Record<"twitter", string>,
-  Record<"instagram", string>,
-  Record<"linkedin", string>,
+// enum AuthorsLinksEnum {
+//   FACEBOOK = "facebook",
+//   TWITTER = "twitter",
+//   INSTAGRAM = "instagram",
+//   LINKEDIN = "linkedin",
+// }
+
+// type AuthorsLinksEnumKey = keyof typeof AuthorsLinksEnum;
+
+type AuthorsListLinksType = [
+  Record<"facebook", string | null>,
+  Record<"twitter", string | null>,
+  Record<"instagram", string | null>,
+  Record<"linkedin", string | null>,
 ];
 
 type AuthorsListItemType = {
@@ -13,5 +22,5 @@ type AuthorsListItemType = {
   lastName: string;
   profession: string;
   company: string;
-  authorLinks: AuthorsListTitleType;
+  authorLinks: AuthorsListLinksType;
 };

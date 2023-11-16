@@ -1,61 +1,53 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+
 import Slider from "react-slick";
 
-import { AuthorCard } from "../../../components";
+import s from "./FeaturedIn.module.scss";
+import cs from "../../scss/helpers.module.scss";
 
-import s from "./ListAuthorsSlider.module.scss";
-
-const authorsList: AuthorsListItemType[] = [
+const featuredCompanies = [
+  {
+    id: 0,
+    title: "logoIpsum",
+    // imageUrl: "https://i.postimg.cc/RFqF58jQ/Logo-1.png",
+    imageUrl: "https://i.postimg.cc/3dh8PYqS/Logo-1.png",
+    linkUrl: "#",
+  },
   {
     id: 1,
-    imageUrl: "https://i.postimg.cc/7YBBcBS5/5b103af032f344457c097e10aa7ebd86.png",
-    firstName: "Floyd",
-    lastName: "Miles",
-    profession: "Content Writer",
-    company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    title: "logoIpsum",
+    // imageUrl: "https://i.postimg.cc/q7JqQgwF/Logo-2.png",
+    imageUrl: "https://i.postimg.cc/Z0pY7Cwv/Logo-2.png",
+    linkUrl: "#",
   },
   {
     id: 2,
-    imageUrl: "https://i.postimg.cc/c419Fqtq/94c1db47acb8141c7502d8724bd28fbd.png",
-    firstName: "Dianne",
-    lastName: "Russell",
-    profession: "Content Writer",
-    company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    title: "logoIpsum",
+    // imageUrl: "https://i.postimg.cc/kgdB6Tbq/Logo-3.png",
+    imageUrl: "https://i.postimg.cc/MnKWptq1/Logo-3.png",
+    linkUrl: "#",
   },
   {
     id: 3,
-    imageUrl: "https://i.postimg.cc/QNJYgNtk/e2521d1f9982ee7c506948d0020e937f.png",
-    firstName: "Jenny",
-    lastName: "Wilson",
-    profession: "Content Writer",
-    company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    title: "logoIpsum",
+    // imageUrl: "https://i.postimg.cc/y8XWF0m9/Logo-4.png",
+    imageUrl: "https://i.postimg.cc/XrHnGFYm/Logo-4.png",
+    linkUrl: "#",
   },
   {
     id: 4,
-    imageUrl: "https://i.postimg.cc/zGVd1nk0/f310490df993fe9cb9b6b77f5e1512cb.png",
-    firstName: "Leslie",
-    lastName: "Alexander",
-    profession: "Content Writer",
-    company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
-  },
-  {
-    id: 5,
-    imageUrl: "https://i.postimg.cc/zGVd1nk0/f310490df993fe9cb9b6b77f5e1512cb.png",
-    firstName: "Leslie",
-    lastName: "Alexander",
-    profession: "Content Writer",
-    company: "Company",
-    authorLinks: [{ facebook: null }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    title: "logoIpsum",
+    // imageUrl: "https://i.postimg.cc/rsvyXN4h/Logo-5-1.png",
+    imageUrl: "https://i.postimg.cc/KR5GbCSZ/Logo-5.png",
+    linkUrl: "#",
   },
 ];
 
-export const ListAuthorsSlider = () => {
+export const FeaturedIn: React.FC = () => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
 
@@ -231,7 +223,7 @@ export const ListAuthorsSlider = () => {
     dots: false,
     swipeToSlide: true,
     slidesToScroll: 1,
-    slidesToShow: 4,
+    slidesToShow: 5,
     responsive: [
       // {
       //   breakpoint: 1024,
@@ -243,18 +235,36 @@ export const ListAuthorsSlider = () => {
   };
 
   return (
-    <div
-      className={s.root}
-      tabIndex={0}
-      onFocus={onSliderFocus}
-      onKeyDown={onSliderKeyDown}
-      onBlur={onSliderBlur}
-      onPointerDown={onSliderPointerDown}>
-      <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings} className={s.slider}>
-        {authorsList.map((obj) => (
-          <AuthorCard key={obj.id} author={obj} />
-        ))}
-      </Slider>
-    </div>
+    <section className={s.root}>
+      <h2 className={cs.srOnly}>Places where we featured in.</h2>
+
+      <div className={`${s.container} ${cs.container}`}>
+        <div className={s.text}>
+          <span className={s.textTop}>We are</span>
+          <span className={s.textBottom}>Featured in</span>
+        </div>
+
+        <div
+          className={s.sliderWrapper}
+          tabIndex={0}
+          onFocus={onSliderFocus}
+          onKeyDown={onSliderKeyDown}
+          onBlur={onSliderBlur}
+          onPointerDown={onSliderPointerDown}>
+          <Slider
+            ref={sliderRef}
+            swipeEvent={swipeEvent}
+            {...settings}
+            className={s.slider}
+            autoplay>
+            {featuredCompanies.map((obj) => (
+              <Link key={obj.id} href={obj.linkUrl} className={s.link}>
+                <Image src={obj.imageUrl} alt={obj.title} className={s.image} unoptimized fill />
+              </Link>
+            ))}
+          </Slider>
+        </div>
+      </div>
+    </section>
   );
 };

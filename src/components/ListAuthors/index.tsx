@@ -10,7 +10,7 @@ export const ListAuthors: React.FC = () => {
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
-        <h2 className={`${s.title} ${cs.title}`}>List of authors</h2>
+        <h2 className={`${s.title} ${cs.title}`}>List of Authors</h2>
 
         <ListAuthorsSlider />
       </div>

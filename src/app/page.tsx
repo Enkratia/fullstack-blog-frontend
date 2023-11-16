@@ -1,8 +1,10 @@
 import {
   ChooseCategory,
+  FeaturedIn,
   FeaturedPosts,
   Hero,
   ListAuthors,
+  Testimonials,
   UsMission,
   WhyWeStarted,
 } from "../components";
@@ -20,6 +22,8 @@ export default function Home() {
       <ChooseCategory />
       <WhyWeStarted />
       <ListAuthors />
+      <FeaturedIn />
+      <Testimonials />
     </main>
   );
 }

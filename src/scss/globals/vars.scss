@@ -15,13 +15,16 @@
 
   // **
   --yellow-hover-color: #edc14a;
+  --mediumgray06-color: rgb(110 111 120 / 60%);
+  --mediumgray04-color: rgb(110 111 120 / 40%);
   --mediumgray03-color: rgb(110 111 120 / 30%);
   --mediumgray01-color: rgb(110 111 120 / 10%);
   --light005-color: rgb(255 255 255 / 5%);
   --light070-color: rgb(255 255 255 / 70%);
+  --featured-color: #282938;
 
   // Filters
-  // --primary-filter: invert(28%) sepia(11%) saturate(5606%) hue-rotate(143deg) brightness(97%) contrast(82%);
+  --featured-filter: invert(14%) sepia(7%) saturate(2165%) hue-rotate(198deg) brightness(89%) contrast(90%);
 
   // Fonts
   --display-font: 700 3.5rem / 114% "Sen", sans-serif; // 56

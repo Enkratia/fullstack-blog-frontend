@@ -10,49 +10,24 @@ import Twitter from "../../../public/img/twitter.svg";
 import Instagram from "../../../public/img/instagram.svg";
 import Linkedin from "../../../public/img/linkedin.svg";
 
-// type AuthorsListTitleType = [
-//   Record<"facebook", string>,
-//   Record<"twitter", string>,
-//   Record<"instagram", string>,
-//   Record<"linkedin", string>,
-// ];
-
-// type AuthorsListItemType = {
-//   id: number;
-//   imageUrl: string;
-//   firstName: string;
-//   lastName: string;
-//   profession: string;
-//   company: string;
-//   authorLinks: AuthorsListTitleType;
-// };
-
-// type AuthorCardProps = {
-//   author: AuthorsListItemType;
-// };
+const socialIcons = [
+  {
+    icon: <Facebook aria-label="hidden" />,
+  },
+  {
+    icon: <Twitter aria-label="hidden" />,
+  },
+  {
+    icon: <Instagram aria-label="hidden" />,
+  },
+  {
+    icon: <Linkedin aria-label="hidden" />,
+  },
+];
 
 type AuthorCardProps = {
   author: AuthorsListItemType;
 };
-
-const socialLinks = [
-  {
-    title: "facebook",
-    icon: <Facebook aria-label="hidden" />,
-  },
-  {
-    title: "twitter",
-    icon: <Twitter aria-label="hidden" />,
-  },
-  {
-    title: "instagram",
-    icon: <Instagram aria-label="hidden" />,
-  },
-  {
-    title: "linkedin",
-    icon: <Linkedin aria-label="hidden" />,
-  },
-];
 
 export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
   const fullname = `${author.firstName} ${author.lastName}`;
@@ -76,14 +51,16 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
           const socialTitle = socialLinkInfo[0];
           const socialLink = socialLinkInfo[1];
 
+          if (socialLink === null) return;
+
           return (
-            <li className={s.socialItem}>
+            <li key={i} className={s.socialItem}>
               <a
                 href={socialLink}
                 target="_blank"
                 className={`${cs.socialBtn} ${cs.socialBtnDark}`}
                 aria-label={`Go to the ${socialTitle} of ${fullname}`}>
-                {socialLinks[i].icon}
+                {socialIcons[i].icon}
               </a>
             </li>
           );

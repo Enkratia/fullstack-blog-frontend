@@ -2,15 +2,24 @@
 
 .root {
   margin-inline: rem(-16);
-  // [class*="slick-list"] {
-
-  // }
 }
 
 .slider {
+  [class*="slick-track"] {
+    display: flex !important;
+  }
+
   [class*="slick-slide"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: inherit !important;
+
     >div {
+      display: flex !important;
       margin-inline: rem(16);
+      width: 100% !important;
+      height: 100% !important;
     }
   }
 }

@@ -1,63 +1,101 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+
 import Slider from "react-slick";
 
-import { AuthorCard } from "../../../components";
+import s from "./TestimonialsSlider.module.scss";
+import Arrow from "../../../../public/img/arrow.svg";
 
-import s from "./ListAuthorsSlider.module.scss";
-
-const authorsList: AuthorsListItemType[] = [
+const testimonials = [
   {
-    id: 1,
-    imageUrl: "https://i.postimg.cc/7YBBcBS5/5b103af032f344457c097e10aa7ebd86.png",
-    firstName: "Floyd",
-    lastName: "Miles",
-    profession: "Content Writer",
-    company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    id: 0,
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporliqua eius tempor dipiscing elit.",
+    imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
+    fullName: "Jonathan Vallem",
+    address: "New york, USA",
   },
   {
     id: 2,
-    imageUrl: "https://i.postimg.cc/c419Fqtq/94c1db47acb8141c7502d8724bd28fbd.png",
-    firstName: "Dianne",
-    lastName: "Russell",
-    profession: "Content Writer",
-    company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    text: "Lorem ipsum t dolore magna aliqua dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ed  sed do eiusmod tempor incididunt, t dolore magna aliqua dolor sit.",
+    imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
+    fullName: "Winston Leski",
+    address: "New york, USA",
   },
   {
     id: 3,
-    imageUrl: "https://i.postimg.cc/QNJYgNtk/e2521d1f9982ee7c506948d0020e937f.png",
-    firstName: "Jenny",
-    lastName: "Wilson",
-    profession: "Content Writer",
-    company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
-  },
-  {
-    id: 4,
-    imageUrl: "https://i.postimg.cc/zGVd1nk0/f310490df993fe9cb9b6b77f5e1512cb.png",
-    firstName: "Leslie",
-    lastName: "Alexander",
-    profession: "Content Writer",
-    company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
-  },
-  {
-    id: 5,
-    imageUrl: "https://i.postimg.cc/zGVd1nk0/f310490df993fe9cb9b6b77f5e1512cb.png",
-    firstName: "Leslie",
-    lastName: "Alexander",
-    profession: "Content Writer",
-    company: "Company",
-    authorLinks: [{ facebook: null }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    text: "Lorem adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo aliquid beatae aperiam, sed ullam odio incidunt suscipit quidem quam error in. Beatae rerum quae modi ullam, ipsam commodi doloremque veniam excepturi est. Consequuntur quibusdam ratione numquam fugiat id molestias. Doloremque debitis eius, ullam voluptatum sapiente soluta suscipit excepturi inventore explicabo laudantium nulla quibusdam architecto ipsa impedit rerum laboriosam dolorem in eveniet nobis magni sequi eligendi amet voluptatem? Ullam minus nostrum id in culpa tempora sapiente ipsa rem eveniet. Odio, dolorum minima quisquam quos accusantium vitae fuga incidunt aut illo suscipit nemo molestiae dolore ab porro, asperiores impedit deleniti eveniet ea!",
+    imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
+    fullName: "William Bradly",
+    address: "New york, USA",
   },
 ];
 
-export const ListAuthorsSlider = () => {
+const defaultHeight = 128;
+
+const TextButton: React.FC = () => {
+  const [isActive, setIsActive] = React.useState(false);
+
+  const onTextBtnClick = () => {
+    setIsActive((b) => !b);
+  };
+
+  return (
+    <button
+      onClick={onTextBtnClick}
+      className={s.textBtn}
+      data-text-btn-active={isActive ? true : false}
+      aria-label={`Show / hide entire message.`}
+      aria-pressed={isActive ? true : false}></button>
+  );
+};
+
+export const TestimonialsSlider: React.FC = () => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
+  const sliderWrapperRef = React.useRef<HTMLDivElement>(null);
+
+  const [slide, setSlide] = React.useState(0);
+  const slidesTotal = testimonials.length;
+
+  React.useEffect(() => {
+    console.log(sliderWrapperRef.current.querySelector(".slick-current"));
+  });
+
+  // **
+  const onNextClick = () => {
+    sliderRef.current?.slickNext();
+  };
+
+  const onPrevClick = () => {
+    sliderRef.current?.slickPrev();
+  };
+
+  const onAfterChange = (idx: number) => {
+    setSlide(idx);
+
+    if (!sliderWrapperRef.current) return;
+
+    const prevOverflowSlide = sliderWrapperRef.current.querySelector(`[data-text-btn-visible]`);
+    if (prevOverflowSlide) {
+      prevOverflowSlide.removeAttribute("data-text-btn-visible");
+    }
+
+    const currentSlide = sliderWrapperRef.current.querySelector(`[data-index="${idx}"]`);
+    if (!currentSlide) return;
+
+    const textBtn = currentSlide.querySelector("button");
+    if (!textBtn) return;
+
+    const text = textBtn.nextElementSibling;
+    if (!text) return;
+
+    const textSH = text?.scrollHeight;
+    if (textSH > defaultHeight) {
+      textBtn.setAttribute("data-text-btn-visible", "");
+    }
+  };
 
   // **
   const createSliderExit = (e: React.FocusEvent) => {
@@ -231,7 +269,9 @@ export const ListAuthorsSlider = () => {
     dots: false,
     swipeToSlide: true,
     slidesToScroll: 1,
-    slidesToShow: 4,
+    slidesToShow: 1,
+    infinite: false,
+    afterChange: onAfterChange,
     responsive: [
       // {
       //   breakpoint: 1024,
@@ -246,15 +286,49 @@ export const ListAuthorsSlider = () => {
     <div
       className={s.root}
       tabIndex={0}
+      ref={sliderWrapperRef}
       onFocus={onSliderFocus}
       onKeyDown={onSliderKeyDown}
       onBlur={onSliderBlur}
       onPointerDown={onSliderPointerDown}>
       <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings} className={s.slider}>
-        {authorsList.map((obj) => (
-          <AuthorCard key={obj.id} author={obj} />
+        {testimonials.map((obj) => (
+          <div key={obj.id} className={s.item}>
+            <div className={s.textWrapper}>
+              <TextButton />
+              <p className={s.text}>{obj.text}</p>
+            </div>
+
+            <div className={s.info}>
+              <div className={s.imageWrapper}>
+                <Image src={obj.imageUrl} alt="Avatar of the author." className={s.image} fill />
+              </div>
+
+              <div className={s.bottom}>
+                <div className={s.metadata}>
+                  <span className={s.fullname}>{obj.fullName}</span>
+                  <span className={s.address}>{obj.address}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         ))}
       </Slider>
+
+      <div className={s.navigation}>
+        <button
+          onClick={onPrevClick}
+          className={`${s.btn} ${slide === 0 ? s.btnInactive : ""}`}
+          aria-label="Go to the previous slide.">
+          <Arrow aria-hidden="true" />
+        </button>
+        <button
+          onClick={onNextClick}
+          className={`${s.btn} ${slide === slidesTotal - 1 ? s.btnInactive : ""}`}
+          aria-label="Go to the next slide.">
+          <Arrow aria-hidden="true" />
+        </button>
+      </div>
     </div>
   );
 };
