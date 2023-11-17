@@ -2,6 +2,7 @@
 
 .root {
   position: relative;
+  overflow: hidden;
   border-left: rem(1) solid var(--mediumgray04-color);
   color: var(--black-color);
 }
@@ -16,36 +17,18 @@
 }
 
 .slider {
+  display: flex;
   height: 100%;
-
-  [class*="slick-list"] {
-    display: flex !important;
-    height: 100% !important;
-  }
-
-  [class*="slick-track"] {
-    display: flex !important;
-    height: 100% !important;
-  }
-
-  [class*="slick-slide"] {
-    display: flex !important;
-    height: auto !important;
-
-    >div {
-      display: flex !important;
-      width: 100%;
-      height: 100% !important;
-    }
-  }
 }
 
 .item {
   display: flex !important;
+  flex: 0 0 100%;
   flex-direction: column;
   justify-content: space-between;
   padding-left: rem(96);
   width: 100%;
+  min-width: 0;
 }
 
 .text {
@@ -54,6 +37,7 @@
   width: 100%;
   max-height: rem(128);
   font: var(--h4-font);
+  transition: max-height 0.3s ease-in-out;
 
   &Wrapper {
     display: flex;
@@ -63,21 +47,52 @@
   }
 
   &Btn {
+    position: relative;
+    left: 50%;
     display: none;
     order: 1;
     border: none;
     padding: 0;
+    width: max-content;
     background-color: transparent;
+    transform: translateX(-50%);
     cursor: pointer;
 
     &::before {
       content: "...";
-      font: var(--h4-font);
+      font: var(--h3-font);
       line-height: 0.75;
+    }
+
+    &:hover {
+      &::after {
+        content: "Expand";
+        position: absolute;
+        left: 50%;
+        bottom: 75%;
+        border-radius: rem(8);
+        padding: rem(5) rem(8);
+        width: max-content;
+        font: var(--body01-font);
+        color: var(--light-color);
+        background-color: var(--black-color);
+      }
     }
 
     &[data-text-btn-visible] {
       display: block;
+    }
+
+    &[data-text-btn-active="true"] {
+      &::before {
+        content: "..";
+      }
+
+      &:hover {
+        &::after {
+          content: "Collapse";
+        }
+      }
     }
   }
 }
