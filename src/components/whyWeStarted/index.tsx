@@ -12,9 +12,10 @@ export const WhyWeStarted: React.FC = () => {
       <h2 className={cs.srOnly}>The reason for starting this project.</h2>
 
       <div className={`${s.container} ${cs.container}`}>
-        <div className={s.imageWrapper}>
-          <Image src={WhyWeStartedImage} alt="Background image." aria-hidden="true" fill />
-        </div>
+        <div className={s.coincidenceBlock1} aria-hidden="true"></div>
+        <div className={s.coincidenceBlock2} aria-hidden="true"></div>
+        <div className={s.coincidenceBlock3} aria-hidden="true"></div>
+        <div className={s.imageWrapper} aria-hidden="true"></div>
 
         <div className={s.content}>
           <span className={s.subtitle}>Why we started</span>

@@ -1,10 +1,18 @@
 @use "../../scss/utils/" as *;
 
 .root {
-  padding-top: rem(129);
+  padding-top: rem(127);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(45.55) + 6.08vw); // 127>65(1340>320)
+  }
 }
 
 .title {
   margin-bottom: rem(48);
   text-align: center;
+
+  @include bp-down("container") {
+    margin-bottom: calc(rem(17.78) + 2.25vw); // 48>25(1340>320)
+  }
 }

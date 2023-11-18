@@ -2,7 +2,7 @@
 
 .root {
   position: relative;
-  height: rem(718);
+  min-height: rem(718);
 
   &::before {
     content: "";
@@ -13,6 +13,10 @@
     width: 100%;
     height: 100%;
     background-image: var(--overlay-gradient);
+  }
+
+  @include bp-down("container") {
+    min-height: calc(rem(641.8) + 5.68vw) // 718>660(1340>320);
   }
 }
 
@@ -29,6 +33,10 @@
   z-index: var(--z-postup);
   padding-top: rem(126);
   color: var(--light-color);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(52.43) + 5.49vw) // 126>70(1340>320);
+  }
 }
 
 .subtitle {
@@ -50,6 +58,19 @@
   font: var(--display-font);
   letter-spacing: rem(-2);
   color: var(--light-color);
+
+  @include bp-down("container") {
+    font-size: calc(rem(40.23) + 1.18vw) // 56>44(1340>320)
+  }
+}
+
+.metadata {
+  display: flex;
+  flex-wrap: wrap;
+
+  &Item {
+    white-space: nowrap;
+  }
 }
 
 .descr {

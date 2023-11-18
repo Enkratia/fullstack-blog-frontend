@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 
 import useEmblaCarousel from "embla-carousel-react";
@@ -32,7 +32,7 @@ const testimonials = [
   },
 ];
 
-const defaultHeight = 130;
+const defaultHeight = 160;
 
 type TextButtonProps = {
   thisSlide: number;
@@ -58,7 +58,7 @@ const TextButton: React.FC<TextButtonProps> = ({ thisSlide, currentSlide }) => {
     text.style.maxHeight = textSH + "px";
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const text = textBtnRef.current?.nextElementSibling as HTMLParagraphElement;
     if (!text) return;
 

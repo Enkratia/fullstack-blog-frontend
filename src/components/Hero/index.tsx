@@ -39,14 +39,14 @@ export const Hero: React.FC = () => {
             </Link>
           </p>
 
-          <div className={`${cs.metadata} ${cs.metadataGold}`}>
-            <span className={`${cs.metadataItem} ${cs.metadataItemGold}`}>
+          <div className={`${s.metadata} ${cs.metadata} ${cs.metadataGold}`}>
+            <span className={`${s.metadataItem} ${cs.metadataItem} ${cs.metadataItemGold}`}>
               By
               <Link
                 href={`/users/${post.authorId}`}
                 className={`${cs.metadataName} ${cs.metadataNameGold}`}>{` ${post.firstName} ${post.lastName}`}</Link>
             </span>
-            <span className={`${cs.metadataItem} ${cs.metadataItemGold}`}>
+            <span className={`${s.metadataItem} ${cs.metadataItem} ${cs.metadataItemGold}`}>
               {formatDate(post.createdAt)}
             </span>
           </div>

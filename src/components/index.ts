@@ -20,7 +20,7 @@ export * from "./Hero";
 export * from "./FeaturedPosts";
 export * from "./UsMission";
 export * from "./ChooseCategory";
-export * from "./WhyWeStarted";
+export * from "./whyWeStarted";
 export * from "./ListAuthors";
 export * from "./FeaturedIn";
 export * from "./Testimonials";

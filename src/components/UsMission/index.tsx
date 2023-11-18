@@ -23,7 +23,7 @@ export const UsMission: React.FC = () => {
               We&nbsp;are a&nbsp;community of content&nbsp;writers who share their learnings
             </p>
 
-            <p className={s.descr}>
+            <p className={`${s.descr} ${s.descrMargin}`}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua.
             </p>

@@ -2,6 +2,10 @@
 
 .root {
   padding-top: rem(126);
+
+  @include bp-down("1120") {
+    padding-top: calc(rem(60.31) + 4.9vw); // 126>76(13540>320)
+  }
 }
 
 .decoration {
@@ -37,6 +41,26 @@
   padding-left: rem(80);
   padding-block: rem(96);
   background-color: var(--lavender-color);
+
+  @include bp-down("1120") {
+    padding-inline: rem(70);
+  }
+
+  @include bp-down("1024") {
+    padding-block: rem(60);
+    padding-inline: rem(45);
+  }
+
+  @include bp-down("768") {
+    flex-direction: column;
+    padding-block: rem(55);
+    padding-inline: rem(35);
+  }
+
+  @include bp-down("576") {
+    padding-block: rem(35);
+    padding-inline: rem(20);
+  }
 }
 
 .subtitle {
@@ -45,21 +69,40 @@
   font: var(--cap01-font);
   letter-spacing: rem(3);
   text-transform: uppercase;
+
+  @include bp-down("768") {
+    margin-bottom: rem(10);
+  }
 }
 
 .title {
   margin-bottom: rem(16);
   letter-spacing: rem(-2);
+
+  @include bp-down("678") {
+    margin-bottom: rem(10);
+  }
 }
 
 .descr {
+  margin: 0;
   font: var(--body01-font);
   color: var(--mediumgray-color);
+
+  &Margin {
+    margin-bottom: rem(18);
+  }
 }
 
 .us {
+  margin-right: rem(45);
   width: 100%;
   max-width: rem(505);
+
+  @include bp-down("768") {
+    margin-right: 0;
+    margin-bottom: rem(35);
+  }
 }
 
 .btn {
@@ -73,8 +116,17 @@
 
   &Title {
     margin: 0;
+    margin-bottom: rem(20);
     max-width: rem(450);
     font: var(--h3-font);
     letter-spacing: rem(-1);
+
+    @include bp-down("container") {
+      font-size: calc(rem(22.75) + 0.39vw); // 28>24(1340>320)
+    }
+
+    @include bp-down("678") {
+      margin-bottom: rem(10);
+    }
   }
 }

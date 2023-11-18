@@ -3,6 +3,7 @@ import {
   FeaturedIn,
   FeaturedPosts,
   Hero,
+  Join,
   ListAuthors,
   Testimonials,
   UsMission,
@@ -24,6 +25,7 @@ export default function Home() {
       <ListAuthors />
       <FeaturedIn />
       <Testimonials />
+      <Join />
     </main>
   );
 }

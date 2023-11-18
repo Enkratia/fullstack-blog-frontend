@@ -4,16 +4,8 @@
   position: relative;
   overflow: hidden;
   border-left: rem(1) solid var(--mediumgray04-color);
-  color: var(--black-color);
-}
-
-.divider {
-  justify-self: center;
-  width: rem(1);
-  height: 100%;
   min-height: rem(310);
-  background-color: var(--mediumgray-color);
-  opacity: 0.4;
+  color: var(--black-color);
 }
 
 .slider {
@@ -35,7 +27,7 @@
   overflow: hidden;
   margin: 0;
   width: 100%;
-  max-height: rem(128);
+  max-height: rem(160);
   font: var(--h4-font);
   transition: max-height 0.3s ease-in-out;
 
