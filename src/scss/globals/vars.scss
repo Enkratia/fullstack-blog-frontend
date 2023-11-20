@@ -22,6 +22,7 @@
   --light005-color: rgb(255 255 255 / 5%);
   --light070-color: rgb(255 255 255 / 70%);
   --featured-color: #282938;
+  --post-marker-color: #494a53;
 
   // Filters
   --featured-filter: invert(14%) sepia(7%) saturate(2165%) hue-rotate(198deg) brightness(89%) contrast(90%);
@@ -67,7 +68,8 @@
   // --to-right-05-animation: to-right 0.4s ease-in-out forwards 0.5s;
 
   // Gradients
-  --overlay-gradient: radial-gradient(80.99% 71.93% at 74.58% 0%, rgb(0 0 0), rgba(0 0 0 / 60%) 100%);
+  // --overlay-gradient: radial-gradient(80.99% 71.93% at 74.58% 0%, rgb(0 0 0), rgba(0 0 0 / 60%) 100%);
+  --overlay-gradient: radial-gradient(80.99% 71.93% at 74.58% 0%, rgba(0 0 0 / 40%) 0%, rgba(0 0 0 / 60%) 100%);
 }
 
 // Skeleton

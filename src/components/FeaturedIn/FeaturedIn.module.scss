@@ -3,12 +3,21 @@
 .root {
   padding-top: rem(96);
   padding-bottom: rem(92);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(56.59) + 2.94vw); // 96>66(340>320)
+    padding-bottom: calc(rem(52.59) + 2.94vw); // 92>62(340>320)
+  }
 }
 
 .container {
   display: grid;
   grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
   padding-inline: rem(14);
+
+  @include bp-down("1024") {
+    display: block;
+  }
 }
 
 .text {
@@ -28,6 +37,24 @@
     font: var(--h4-font);
     color: var(--mediumgray-color);
   }
+
+  @include bp-down("1060") {
+    margin-right: rem(40);
+  }
+
+  @include bp-down("1024") {
+    margin-right: 0;
+    margin-bottom: rem(30);
+  }
+
+  @include bp-down("576") {
+    margin-bottom: rem(20);
+    text-align: center;
+  }
+
+  @include bp-down("375") {
+    margin-bottom: rem(10);
+  }
 }
 
 .slider {
@@ -44,6 +71,7 @@
 }
 
 .image {
+  width: 100%;
   object-fit: contain;
   filter: var(--featured-filter);
   transition: filter 0.3s;

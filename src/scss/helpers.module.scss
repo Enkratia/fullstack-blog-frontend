@@ -16,6 +16,14 @@
 .container {
   max-width: rem(1280);
 
+  &768 {
+    max-width: rem(768);
+  }
+
+  &836 {
+    max-width: rem(836);
+  }
+
   @include bp-up("container") {
     margin-inline: auto;
   }

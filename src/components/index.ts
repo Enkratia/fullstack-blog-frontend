@@ -20,15 +20,20 @@ export * from "./Hero";
 export * from "./FeaturedPosts";
 export * from "./UsMission";
 export * from "./ChooseCategory";
-export * from "./whyWeStarted";
+export * from "./WhyWeStarted";
 export * from "./ListAuthors";
 export * from "./FeaturedIn";
 export * from "./Testimonials";
 
 // **
 export * from "./Testimonials/TestimonialsSlider";
+// export * from "./ListAuthors/ListAuthorsSlider";
 
-// Blog
+// BlogPage
 export * from "./BlogHeader";
 export * from "./AllPosts";
 export * from "./AllCategories";
+
+// BlogPostPage
+export * from "./Post";
+export * from "./WhatToReadNext";

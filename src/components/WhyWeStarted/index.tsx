@@ -1,10 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./WhyWeStarted.module.scss";
-import WhyWeStartedImage from "../../../public/img/why-we-started.png";
 
 export const WhyWeStarted: React.FC = () => {
   return (

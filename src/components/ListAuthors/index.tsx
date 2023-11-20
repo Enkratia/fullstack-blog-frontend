@@ -1,10 +1,10 @@
-import Link from "next/link";
 import React from "react";
 
+// import { ListAuthorsSlider } from "../../components";
 import { ListAuthorsSlider } from "./ListAuthorsSlider";
 
-import s from "./ListAuthors.module.scss";
 import cs from "../../scss/helpers.module.scss";
+import s from "./ListAuthors.module.scss";
 
 export const ListAuthors: React.FC = () => {
   return (

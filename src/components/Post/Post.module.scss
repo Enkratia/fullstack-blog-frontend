@@ -1,0 +1,138 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(126);
+  color: var(--black-color);
+}
+
+// Head
+.head {
+  margin-bottom: rem(64);
+}
+
+.user {
+  display: flex;
+  margin-bottom: rem(25);
+
+  &Image {
+    object-fit: cover;
+
+    &Wrapper {
+      position: relative;
+      top: rem(5);
+      flex-shrink: 0;
+      overflow: hidden;
+      margin-right: rem(16);
+      border-radius: 50%;
+      width: rem(48);
+      height: rem(48);
+    }
+  }
+
+  &Data {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &Fullname {
+    margin-bottom: rem(-4);
+    font: var(--h3-font);
+    letter-spacing: rem(-1);
+    color: var(--purple-color);
+    opacity: 0.87;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &Date {
+    font: var(--body01-font);
+    color: var(--mediumgray-color);
+  }
+}
+
+.title {
+  margin: 0;
+  margin-bottom: rem(34);
+  font: var(--h1-font);
+  letter-spacing: rem(-2);
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  font: var(--h4-font);
+  transition: opacity 0.3s;
+
+  svg {
+    margin-right: rem(8);
+    width: rem(24);
+    height: rem(24);
+  }
+
+  &:hover {
+    opacity: 0.87;
+  }
+}
+
+// Image
+.image {
+  object-fit: cover;
+
+  &Wrapper {
+    margin-bottom: rem(64);
+
+    &Inner {
+      position: relative;
+      padding-top: 45.47%;
+    }
+  }
+}
+
+// Article
+.article {
+  &Title {
+    margin: 0;
+    margin-top: rem(48);
+    margin-bottom: rem(16);
+    font: var(--h2-font);
+    letter-spacing: rem(-2);
+  }
+
+  &Paragraph {
+    margin: 0;
+    margin-bottom: rem(24);
+    font: var(--body01-font);
+    color: var(--mediumgray-color);
+  }
+
+  &List {
+    list-style: none;
+    margin: 0;
+    margin-bottom: rem(24);
+    padding: 0;
+  }
+
+  &Item {
+    display: flex;
+    align-items: center;
+    margin-bottom: rem(2);
+    font: var(--h4-font);
+    opacity: 0.78;
+
+    &::before {
+      content: "";
+      position: relative;
+      top: rem(2);
+      display: inline-block;
+      margin-right: rem(12);
+      margin-bottom: rem(2);
+      border-radius: 50%;
+      width: rem(5);
+      height: rem(5);
+      background-color: var(--post-marker-color);
+    }
+  }
+}

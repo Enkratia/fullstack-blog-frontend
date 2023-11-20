@@ -1,13 +1,23 @@
+// Post
+type PostType = {
+  id: number;
+  title: string;
+  category: string;
+  createdAt: string;
+  updatedAt: string;
+  text: string;
+  imageUrl: string;
+  tags: string[];
+  isFeatured: boolean;
+  user: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    imageUrl: string;
+  };
+};
+
 // Authors
-// enum AuthorsLinksEnum {
-//   FACEBOOK = "facebook",
-//   TWITTER = "twitter",
-//   INSTAGRAM = "instagram",
-//   LINKEDIN = "linkedin",
-// }
-
-// type AuthorsLinksEnumKey = keyof typeof AuthorsLinksEnum;
-
 type AuthorsListLinksType = [
   Record<"facebook", string | null>,
   Record<"twitter", string | null>,
