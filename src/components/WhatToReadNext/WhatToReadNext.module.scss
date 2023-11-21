@@ -1,1 +1,15 @@
 @use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(130);
+}
+
+.container {
+  border-bottom: rem(1) solid var(--mediumgray03-color);
+  padding-bottom: rem(64);
+}
+
+.title {
+  margin-bottom: rem(64);
+  letter-spacing: rem(-2);
+}

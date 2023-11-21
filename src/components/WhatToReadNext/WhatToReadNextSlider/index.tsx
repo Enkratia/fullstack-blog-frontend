@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import useEmblaCarousel from "embla-carousel-react";
 
-import { formatDate } from "@/utils/customFunctions";
+import { formatDate3 } from "@/utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./WhatToReadNextSlider.module.scss";
@@ -23,20 +23,26 @@ export const WhatToReadNextSlider: React.FC<WhatToReadNextSliderProps> = ({ next
       <div className={s.slider}>
         {nextPosts.map((obj) => (
           <div key={obj.id} className={s.slide}>
-            <div className={s.imageWrapper}>
+            <Link href="" className={s.imageWrapper}>
               <Image src={obj.imageUrl} alt={obj.title} className={s.image} fill />
-            </div>
+            </Link>
 
             <div className={cs.metadata}>
-            <span className={cs.metadataItem}>
-              By
-              <Link
-                href={`/users/${obj.user.id}`}
-                className={cs.metadataName}>{` ${obj.user.firstName} ${obj.user.lastName}`}</Link>
-            </span>
+              <span className={cs.metadataItem}>
+                By
+                <Link
+                  href={`/users/${obj.user.id}`}
+                  className={cs.metadataName}>{` ${obj.user.firstName} ${obj.user.lastName}`}</Link>
+              </span>
 
-            <span className={cs.metadataItem}>{formatDate(obj.createdAt)}</span>
-          </div>
+              <span className={cs.metadataItem}>{formatDate3(obj.createdAt)}</span>
+            </div>
+
+            <h3 className={s.title}>
+              <Link href="">{obj.title}</Link>
+            </h3>
+
+            <p className={s.descr}>{obj.text}</p>
           </div>
         ))}
       </div>

@@ -108,6 +108,7 @@
   margin-bottom: rem(16);
   font: var(--label-font);
   color: var(--darkgray-color);
+  transition: color 0.3s;
 
   &Item {
     &:first-child {

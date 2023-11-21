@@ -1,4 +1,4 @@
-import { Post, WhatToReadNext } from "../../../components";
+import { Join, Post, WhatToReadNext } from "../../../components";
 
 import cs from "../../../scss/helpers.module.scss";
 
@@ -10,6 +10,7 @@ export default function BlogPostPage() {
 
       <Post />
       <WhatToReadNext />
+      <Join />
     </main>
   );
 }
