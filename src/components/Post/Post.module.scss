@@ -3,6 +3,10 @@
 .root {
   padding-top: rem(126);
   color: var(--black-color);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(34.46) + 6.73vw); // 126>56(1360>320)
+  }
 }
 
 // Head
@@ -101,6 +105,7 @@
     height: rem(582);
 
     @include bp-down("container") {
+      margin-bottom: calc(rem(22.15) + 3.07vw); // 64>32(1360>320)
       height: calc(rem(43.23) + 39.61vw); // 582>170(1360>320)
     }
   }
@@ -114,6 +119,11 @@
     margin-bottom: rem(16);
     font: var(--h2-font);
     letter-spacing: rem(-2);
+
+    @include bp-down("container") {
+      margin-top: calc(rem(27.08) + 1.54vw); // 48>32(1360>320)
+      font-size: calc(rem(30.77) + 0.38vw); // 36>32(1360>320)
+    }
   }
 
   &Paragraph {
