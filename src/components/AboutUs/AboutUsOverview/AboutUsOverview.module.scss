@@ -1,0 +1,42 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto min-content;
+  height: rem(444);
+  color: var(--black-color);
+  background-image: url("../../../../public/img/why-we-started.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+}
+
+.overview {
+  display: flex;
+  align-self: self-end;
+  list-style: none;
+  margin: 0;
+  padding-block: rem(32);
+  padding-inline: rem(49);
+  width: max-content;
+  background-color: var(--yellow-color);
+
+  &Item {
+    &:not(:last-child) {
+      margin-right: rem(68);
+    }
+  }
+
+  &Data {
+    display: block;
+    font: var(--display-font);
+    letter-spacing: rem(-2);
+  }
+
+  &Descr {
+    display: block;
+    font: var(--body01-font);
+  }
+}

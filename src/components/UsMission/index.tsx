@@ -10,10 +10,10 @@ export const UsMission: React.FC = () => {
       <h2 className={cs.srOnly}>Our mission and information about us.</h2>
 
       <div className={`${s.container} ${cs.container}`}>
-        <div className={s.decoration}>
-          <span className={s.decorationItem}></span>
-          <span className={s.decorationItem}></span>
-          <span className={s.decorationItem}></span>
+        <div className={cs.decoration}>
+          <span className={cs.decorationItem}></span>
+          <span className={cs.decorationItem}></span>
+          <span className={cs.decorationItem}></span>
         </div>
 
         <div className={s.content}>

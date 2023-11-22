@@ -1,4 +1,4 @@
-// Post
+// Common
 type PostType = {
   id: number;
   title: string;
@@ -17,7 +17,6 @@ type PostType = {
   };
 };
 
-// Authors
 type AuthorsListLinksType = [
   Record<"facebook", string | null>,
   Record<"twitter", string | null>,
@@ -33,4 +32,10 @@ type AuthorsListItemType = {
   profession: string;
   company: string;
   authorLinks: AuthorsListLinksType;
+};
+
+// AboutUsPage
+type AboutUsOverviewType = {
+  type: string;
+  count: number;
 };

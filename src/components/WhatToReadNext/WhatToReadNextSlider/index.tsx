@@ -16,7 +16,7 @@ type WhatToReadNextSliderProps = {
 };
 
 export const WhatToReadNextSlider: React.FC<WhatToReadNextSliderProps> = ({ nextPosts }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
 
   return (
     <div className={s.root} ref={emblaRef}>
@@ -27,7 +27,7 @@ export const WhatToReadNextSlider: React.FC<WhatToReadNextSliderProps> = ({ next
               <Image src={obj.imageUrl} alt={obj.title} className={s.image} fill />
             </Link>
 
-            <div className={cs.metadata}>
+            <div className={`${s.metadata} ${cs.metadata}`}>
               <span className={cs.metadataItem}>
                 By
                 <Link

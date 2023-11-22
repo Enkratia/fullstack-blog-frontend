@@ -37,3 +37,11 @@ export * from "./AllCategories";
 // BlogPostPage
 export * from "./Post";
 export * from "./WhatToReadNext";
+
+// AboutUsPage
+export * from "./AboutUs";
+
+// **
+export * from "./AboutUs/AboutUsHeader";
+export * from "./AboutUs/AboutUsOverview";
+export * from "./AboutUs/AboutUsVision";

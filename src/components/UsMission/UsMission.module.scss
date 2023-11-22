@@ -8,31 +8,6 @@
   }
 }
 
-.decoration {
-  width: 100%;
-  height: rem(23);
-  background-color: transparent;
-
-  &Item {
-    display: inline-block;
-    height: 100%;
-
-    &:nth-child(1) {
-      width: 17%;
-    }
-
-    &:nth-child(2) {
-      width: 61%;
-      background-color: var(--yellow-color);
-    }
-
-    &:nth-child(3) {
-      width: 22%;
-      background-color: var(--purple-color);
-    }
-  }
-}
-
 .content {
   display: flex;
   align-items: flex-start;

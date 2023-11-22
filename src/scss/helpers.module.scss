@@ -1,3 +1,4 @@
+/* stylelint-disable order/order */
 @use "./utils/" as *;
 
 .srOnly {
@@ -65,6 +66,10 @@
       margin-inline: rem(20);
     }
   }
+}
+
+.containerAboutUs {
+  padding-left: rem(108);
 }
 
 .title {
@@ -175,5 +180,47 @@
   &Gold {
     font: var(--body01-font);
     color: var(--light-color);
+  }
+}
+
+.decoration {
+  width: 100%;
+  height: rem(23);
+  background-color: transparent;
+
+  &Item {
+    display: inline-block;
+    height: 100%;
+
+    &:nth-child(1) {
+      width: 17%;
+    }
+
+    &:nth-child(2) {
+      width: 61%;
+      background-color: var(--yellow-color);
+    }
+
+    &:nth-child(3) {
+      width: 22%;
+      background-color: var(--purple-color);
+    }
+
+    &Purple {
+      &:nth-child(1) {
+        width: 27%;
+        background-color: var(--purple-color);
+      }
+
+      &:nth-child(2) {
+        width: 47%;
+        background-color: var(--yellow-color);
+      }
+
+      &:nth-child(3) {
+        width: 26%;
+        background-color: transparent;
+      }
+    }
   }
 }

@@ -2,14 +2,26 @@
 
 .root {
   padding-top: rem(130);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(25.38) + 7.69vw); // 130>50(1360>320)
+  }
 }
 
 .container {
   border-bottom: rem(1) solid var(--mediumgray03-color);
   padding-bottom: rem(64);
+
+  @include bp-down("container") {
+    padding-bottom: calc(rem(45.69) + 1.34vw); // 64>50(1360>320)
+  }
 }
 
 .title {
   margin-bottom: rem(64);
   letter-spacing: rem(-2);
+
+  @include bp-down("container") {
+    margin-bottom: calc(rem(24.77) + 2.88vw); // 64>34(1360>320)
+  }
 }
