@@ -16,14 +16,6 @@
 .container {
   max-width: rem(1280);
 
-  &768 {
-    max-width: rem(768);
-  }
-
-  &836 {
-    max-width: rem(836);
-  }
-
   @include bp-up("container") {
     margin-inline: auto;
   }
@@ -38,6 +30,40 @@
 
   @include bp-down("576") {
     margin-inline: rem(10);
+  }
+
+  &836 {
+    max-width: rem(836);
+
+    @include bp-down("container") {
+      margin-inline: auto;
+    }
+
+    @include bp-down("992") {
+      margin-inline: auto;
+    }
+
+    @include bp-down("896") {
+      // 836 + 20*2(margin-inline) + 20(scrollbar)
+      margin-inline: rem(20);
+    }
+  }
+
+  &768 {
+    max-width: rem(768);
+
+    @include bp-down("container") {
+      margin-inline: auto;
+    }
+
+    @include bp-down("992") {
+      margin-inline: auto;
+    }
+
+    @include bp-down("828") {
+      // 768 + 20*2(margin-inline) + 20(scrollbar)
+      margin-inline: rem(20);
+    }
   }
 }
 

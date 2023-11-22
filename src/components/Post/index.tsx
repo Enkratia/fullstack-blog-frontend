@@ -76,9 +76,7 @@ export const Post: React.FC = () => {
         </div>
 
         <div className={`${s.imageWrapper} ${cs.container}`}>
-          <div className={s.imageWrapperInner}>
-            <Image src={post.imageUrl} alt={post.title} className={s.image} fill />
-          </div>
+          <Image src={post.imageUrl} alt={post.title} className={s.image} fill />
         </div>
 
         <div className={`${s.article} ${cs.container} ${cs.container836}`}>

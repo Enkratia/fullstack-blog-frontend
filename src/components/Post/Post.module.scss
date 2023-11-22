@@ -8,6 +8,10 @@
 // Head
 .head {
   margin-bottom: rem(64);
+
+  @include bp-down("container") {
+    margin-bottom: calc(rem(25.77) + 2.88vw); // 65>35(1360>320)
+  }
 }
 
 .user {
@@ -51,15 +55,25 @@
     font: var(--body01-font);
     color: var(--mediumgray-color);
   }
+
+  @include bp-down("container") {
+    margin-bottom: calc(rem(11.92) + 0.96vw); // 25>15(1360>320)
+  }
 }
 
+// Title
 .title {
   margin: 0;
   margin-bottom: rem(34);
   font: var(--h1-font);
   letter-spacing: rem(-2);
+
+  @include bp-down("container") {
+    font-size: calc(rem(39.46) + 0.48vw); // 46>41(1360>320)
+  }
 }
 
+// Category
 .category {
   display: flex;
   align-items: center;
@@ -82,11 +96,12 @@
   object-fit: cover;
 
   &Wrapper {
+    position: relative;
     margin-bottom: rem(64);
+    height: rem(582);
 
-    &Inner {
-      position: relative;
-      padding-top: 45.47%;
+    @include bp-down("container") {
+      height: calc(rem(43.23) + 39.61vw); // 582>170(1360>320)
     }
   }
 }

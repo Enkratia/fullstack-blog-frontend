@@ -11,8 +11,11 @@ $breakpoints-up: (
   "576": "36em",
   "678": "42.375em",
   "768": "48em",
+  "828": "51.75em",
+  "836": "52.25em",
   "876": "54.75em",
   "885": "55.3125em",
+  "896": "56em",
   "992": "62em",
   "1024": "64em",
   "1060": "66.25em",
@@ -23,8 +26,8 @@ $breakpoints-up: (
   "1325": "82.8125em",
   "1400": "87.5em",
   "1920": "120em",
-  "container": "83.75em",
-  /* container max-width + margin-inline = 1280 + 30*2 = 1340 */
+  "container": "85em",
+  /* container max-width + margin-inline = 1280(max-width) + 30*2(margin-inline) + 20(scrollbar) = 1360 */
 );
 
 // Max-width
@@ -40,8 +43,11 @@ $breakpoints-down: (
   "576": "35.9375em",
   "678": "42.3125em",
   "768": "47.9375em",
+  "828": "51.6875em",
+  "836": "52.1875em",
   "876": "54.6875em",
   "885": "55.25em",
+  "896": "55.9375em",
   "992": "61.9375em",
   "1024": "63.9375em",
   "1060": "66.1875em",
@@ -52,8 +58,8 @@ $breakpoints-down: (
   "1325": "82.75em",
   "1400": "87.4375em",
   "1920": "119.9375em",
-  "container": "83.6875em",
-  /* container max-width + margin-inline = 1280 + 30*2 - 1px = 1339*/
+  "container": "84.9375em",
+  /* container max-width + margin-inline = 1280(max-width) + 30*2(margin-inline) + 20(scrollbar) - 1 = 1359 */
 );
 
 @mixin bp-up($size) {
