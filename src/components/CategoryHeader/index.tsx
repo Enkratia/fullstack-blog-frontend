@@ -4,11 +4,7 @@ import Link from "next/link";
 import cs from "../../scss/helpers.module.scss";
 import s from "./CategoryHeader.module.scss";
 
-const categories = ["startup", "business", "economy", "technology"];
-
-export const CategoryHeader: React.FC = ({ params: { slug: string } }) => {
-  console.log(slug);
-
+export const CategoryHeader: React.FC = () => {
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>

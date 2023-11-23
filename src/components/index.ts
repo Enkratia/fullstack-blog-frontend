@@ -50,4 +50,4 @@ export * from "./AboutUs/AboutUsOverview";
 export * from "./AboutUs/AboutUsVision";
 
 // BlogCategoryPage
-export
+export * from "./CategoryHeader";
