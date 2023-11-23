@@ -1,0 +1,57 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(128);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(36.46) + 6.73vw); // 128>58(1360>320)
+  }
+}
+
+.title {
+  margin-bottom: rem(49);
+  text-align: center;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: rem(32);
+
+  @include bp-down("1120") {
+    gap: rem(20);
+  }
+
+  @include bp-down("1024") {
+    grid-template-columns: repeat(3, 1fr);
+    gap: rem(32);
+  }
+
+  @include bp-down("876") {
+    gap: rem(20);
+  }
+
+  @include bp-down("768") {
+    grid-template-columns: repeat(2, 1fr);
+    gap: rem(32);
+  }
+
+  @include bp-down("576") {
+    gap: rem(20);
+  }
+
+  @include bp-down("520") {
+    grid-template-columns: 1fr;
+  }
+}
+
+.item {
+  height: 100%;
+
+  >article {
+    height: 100%;
+  }
+}

@@ -3,9 +3,27 @@
 .root {
   display: flex;
   padding-top: rem(128);
-  padding-bottom: rem(64);
+  padding-right: rem(38);
+  padding-bottom: rem(61);
   color: var(--black-color);
   background-color: var(--lavender-color);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(36.46) + 6.73vw); // 128>58(1360>320)
+    padding-bottom: calc(rem(20.46) + 2.98vw); // 61>30(1360>320)
+  }
+
+  @include bp-down("1024") {
+    padding-inline: rem(30);
+  }
+
+  @include bp-down("768") {
+    display: block;
+  }
+
+  @include bp-down("500") {
+    padding-inline: rem(20);
+  }
 }
 
 .box {
@@ -13,6 +31,11 @@
 
   &:first-child {
     margin-right: rem(32);
+
+    @include bp-down("768") {
+      margin-right: 0;
+      margin-bottom: rem(32);
+    }
   }
 }
 
@@ -22,6 +45,11 @@
   font: var(--cap01-font);
   letter-spacing: rem(3);
   text-transform: uppercase;
+
+  @include bp-down("container") {
+    margin-right: 0;
+    margin-bottom: calc(rem(3.23) + 2.11vw); // 32>10(1360>320)
+  }
 }
 
 .title {

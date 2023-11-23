@@ -1,6 +1,5 @@
 import React from "react";
 
-// import { ListAuthorsSlider } from "../../components";
 import { ListAuthorsSlider } from "./ListAuthorsSlider";
 
 import cs from "../../scss/helpers.module.scss";

@@ -70,6 +70,18 @@
 
 .containerAboutUs {
   padding-left: rem(108);
+
+  @include bp-down("container") {
+    padding-left: calc(rem(-207.71) + 23.21vw); // 108>30(1360>1024)
+  }
+
+  @include bp-down("1024") {
+    padding-left: rem(30);
+  }
+
+  @include bp-down("1024") {
+    padding-left: 0;
+  }
 }
 
 .title {

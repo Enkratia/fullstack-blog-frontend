@@ -1,4 +1,3 @@
-// Common
 type PostType = {
   id: number;
   title: string;
@@ -32,10 +31,4 @@ type AuthorsListItemType = {
   profession: string;
   company: string;
   authorLinks: AuthorsListLinksType;
-};
-
-// AboutUsPage
-type AboutUsOverviewType = {
-  type: string;
-  count: number;
 };

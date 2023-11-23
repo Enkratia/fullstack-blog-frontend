@@ -40,8 +40,14 @@ export * from "./WhatToReadNext";
 
 // AboutUsPage
 export * from "./AboutUs";
+export * from "./KnowMore";
+export * from "./WhyThisBlog";
+export * from "./AboutUsList";
 
 // **
 export * from "./AboutUs/AboutUsHeader";
 export * from "./AboutUs/AboutUsOverview";
 export * from "./AboutUs/AboutUsVision";
+
+// BlogCategoryPage
+export

@@ -3,15 +3,13 @@
 const nextConfig = {
   // output: "standalone",
   images: {
-    // remotePatterns: [
-    //   {
-    //     protocol: "https",
-    //     hostname: "s3-alpha-sig.figma.com",
-    //     port: "",
-    //     pathname: "/img/**",
-    //   },
-    // ],
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "s3-alpha-sig.figma.com",
+        port: "",
+        pathname: "/img/**",
+      },
       {
         protocol: "https",
         hostname: "i.postimg.cc",

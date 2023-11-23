@@ -1,0 +1,86 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(128);
+  color: var(--black-color);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(36.46) + 6.73vw); // 128>58(1360>320)
+  }
+}
+
+.container {
+  display: grid;
+  column-gap: rem(64);
+  justify-content: space-between;
+  grid-template-columns: minmax(0, rem(519)) minmax(0, rem(624));
+
+  @include bp-down("896") {
+    column-gap: rem(44);
+  }
+
+  @include bp-down("678") {
+    grid-template-columns: 1fr;
+    row-gap: rem(25);
+  }
+}
+
+// **
+.text {
+  align-self: center;
+
+  @include bp-down("678") {
+    order: 1;
+  }
+}
+
+.title {
+  margin-bottom: rem(16);
+
+  @include bp-down("678") {
+    margin-bottom: rem(10);
+  }
+}
+
+.subtitle {
+  display: inline-block;
+  margin-bottom: rem(16);
+  font: var(--h4-font);
+}
+
+.description {
+  margin: 0;
+  font: var(--body01-font);
+  color: var(--mediumgray-color);
+}
+
+// **
+.image {
+  object-fit: cover;
+
+  &Wrapper {
+    width: 100%;
+
+    &Inner {
+      position: relative;
+      padding-top: 76.9%;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: -9%;
+        top: 23.5%;
+        z-index: var(--z-up);
+        display: block;
+        border-top-left-radius: 40%;
+        width: 16.5%;
+        height: 24%;
+        background-color: var(--yellow-color);
+
+        @include bp-down("678") {
+          content: none;
+        }
+      }
+    }
+  }
+}

@@ -10,7 +10,6 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-
 }
 
 .overview {
@@ -20,12 +19,21 @@
   margin: 0;
   padding-block: rem(32);
   padding-inline: rem(49);
-  width: max-content;
+  max-width: max-content;
   background-color: var(--yellow-color);
 
   &Item {
     &:not(:last-child) {
       margin-right: rem(68);
+
+      @include bp-down("container") {
+        margin-right: 5vw; // 68>16(1360>320)
+      }
+
+      @include bp-down("414") {
+        margin-right: 0;
+        margin-bottom: rem(16);
+      }
     }
   }
 
@@ -33,10 +41,28 @@
     display: block;
     font: var(--display-font);
     letter-spacing: rem(-2);
+
+    @include bp-down("container") {
+      font-size: calc(rem(29.85) + 1.92vw); // 56>36(1360>320)
+    }
   }
 
   &Descr {
-    display: block;
     font: var(--body01-font);
+  }
+
+  // **
+  @include bp-down("768") {
+    padding-block: rem(25);
+    padding-inline: rem(30);
+  }
+
+  @include bp-down("500") {
+    padding-block: rem(25);
+    padding-inline: rem(20);
+  }
+
+  @include bp-down("414") {
+    flex-direction: column;
   }
 }

@@ -9,6 +9,19 @@
   margin-bottom: rem(-42);
   padding-right: rem(38);
   color: var(--black-color);
+
+  @include bp-down("1024") {
+    align-items: center;
+    margin-bottom: 0;
+    padding-right: rem(30);
+    padding-bottom: rem(60);
+  }
+
+  @include bp-down("768") {
+    display: block;
+    padding-bottom: rem(55);
+    padding-inline: 0;
+  }
 }
 
 // Left
@@ -20,6 +33,24 @@
   width: 100%;
   max-width: rem(624);
   background-color: var(--light-color);
+
+  @include bp-down("container") {
+    padding: calc(rem(-65.52) + 9.52vw); // 64>32(1360>1024)
+  }
+
+  @include bp-down("1024") {
+    padding: 0;
+  }
+
+  @include bp-down("1024") {
+    position: revert;
+    margin-right: rem(40);
+  }
+
+  @include bp-down("768") {
+    margin-right: 0;
+    margin-bottom: rem(15);
+  }
 }
 
 .subtitle {
@@ -34,6 +65,10 @@
   margin: 0;
   font: var(--h1-font);
   letter-spacing: rem(-2);
+
+  @include bp-down("container") {
+    font-size: calc(rem(38.84) + 0.67vw); // 48>41(1360>320)
+  }
 }
 
 // Right
