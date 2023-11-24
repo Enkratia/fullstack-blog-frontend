@@ -5,6 +5,7 @@ export * from "./Join";
 export * from "./SizeImage";
 export * from "./Categories";
 export * from "./AuthorCard";
+export * from "./Article";
 
 // Layout
 export * from "./Header";
@@ -51,3 +52,12 @@ export * from "./AboutUs/AboutUsVision";
 
 // BlogCategoryPage
 export * from "./CategoryHeader";
+export * from "./CategoryBlock";
+
+// **
+export * from "./CategoryBlock/CategoryPosts";
+export * from "./CategoryBlock/CategoryCategories";
+export * from "./CategoryBlock/CategoryTags";
+
+// AuthorPage
+export * from "./AuthorHeader";

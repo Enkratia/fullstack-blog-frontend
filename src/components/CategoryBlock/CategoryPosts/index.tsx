@@ -1,11 +1,9 @@
 import React from "react";
-import Link from "next/link";
-// import Image from "next/image";
 
-import { Article } from "../../components";
+import { Article } from "@/components";
 
-import cs from "../../scss/helpers.module.scss";
-import s from "./AllPosts.module.scss";
+import cs from "../../../scss/helpers.module.scss";
+import s from "./CategoryPosts.module.scss";
 
 const posts: PostType[] = [
   {
@@ -88,26 +86,26 @@ const posts: PostType[] = [
       userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
   },
-  {
-    id: 5,
-    title: "Design tips for designers that cover everything you need",
-    category: "startup",
-    createdAt: "2023-12-03T17:44:30.644Z",
-    updatedAt: "2023-12-03T17:44:30.644Z",
-    text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-    imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
-    tags: ["business", "experience"],
-    isFeatured: true,
-    user: {
-      id: 1,
-      firstName: "John",
-      lastName: "Doe",
-      imageUrl: "",
-      profession: "",
-      company: "",
-      userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
-    },
-  },
+  // {
+  //   id: 5,
+  //   title: "Design tips for designers that cover everything you need",
+  //   category: "startup",
+  //   createdAt: "2023-12-03T17:44:30.644Z",
+  //   updatedAt: "2023-12-03T17:44:30.644Z",
+  //   text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+  //   imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
+  //   tags: ["business", "experience"],
+  //   isFeatured: true,
+  //   user: {
+  //     id: 1,
+  //     firstName: "John",
+  //     lastName: "Doe",
+  //     imageUrl: "",
+  //     profession: "",
+  //     company: "",
+  //     userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
+  //   },
+  // },
   // {
   //   id: 6,
   //   title: "Design tips for designers that cover everything you need",
@@ -130,23 +128,14 @@ const posts: PostType[] = [
   // },
 ];
 
-export const AllPosts: React.FC = () => {
+export const CategoryPosts: React.FC = () => {
   return (
-    <section className={s.root}>
-      <div className={`${s.container} ${cs.container}`}>
-        <h2 className={s.title}>All posts</h2>
-        <div className={s.posts}>
-          {posts.map((obj) => (
-            <Article key={obj.id} obj={obj} />
-          ))}
-        </div>
-        <div className={s.navigation}>
-          <Link
-            href="#"
-            className={`${s.navigationLink} ${s.navigationLinkInactive}`}>{`< Prev`}</Link>
-          <Link href="#" className={s.navigationLink}>{`Next >`}</Link>
-        </div>
-      </div>
-    </section>
+    <ul className={s.root}>
+      {posts.map((obj) => (
+        <li className={s.item}>
+          <Article key={obj.id} obj={obj} isCategoryPage={true} />
+        </li>
+      ))}
+    </ul>
   );
 };

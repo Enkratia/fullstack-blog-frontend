@@ -1,0 +1,66 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  // padding-top: rem(128);
+  // padding-bottom: rem(128);
+  color: var(--black-color);
+  background-color: var(--lavender-color);
+}
+
+.container {
+  position: relative;
+  display: grid;
+  column-gap: rem(32);
+  grid-template-columns: minmax(0, rem(251)) minmax(0, rem(669));
+  padding-top: rem(128);
+  padding-bottom: rem(128);
+}
+
+// **
+.image {
+  object-fit: cover;
+
+  &Wrapper {
+    width: 100%;
+
+    &Inner {
+      position: relative;
+      padding-top: 117%;
+    }
+  }
+}
+
+// **
+.title {
+  margin: 0;
+  margin-bottom: rem(24);
+  font: var(--h1-font);
+  letter-spacing: rem(-2);
+}
+
+.descr {
+  margin: 0;
+  margin-bottom: rem(24);
+  font: var(--body01-font);
+  color: var(--mediumgrayc-olor);
+}
+
+.social {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &Item {
+    &:not(:last-child) {
+      margin-right: rem(16);
+    }
+  }
+}
+
+// **
+.decoration {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}

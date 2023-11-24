@@ -5,7 +5,7 @@ import { AuthorCard } from ".././../components";
 import cs from "../../scss/helpers.module.scss";
 import s from "./AboutUsList.module.scss";
 
-const authorsList: AuthorsListItemType[] = [
+const authorsList: UserType[] = [
   {
     id: 1,
     imageUrl: "https://i.postimg.cc/7YBBcBS5/5b103af032f344457c097e10aa7ebd86.png",
@@ -13,7 +13,7 @@ const authorsList: AuthorsListItemType[] = [
     lastName: "Miles",
     profession: "Content Writer",
     company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const authorsList: AuthorsListItemType[] = [
     lastName: "Russell",
     profession: "Content Writer",
     company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const authorsList: AuthorsListItemType[] = [
     lastName: "Wilson",
     profession: "Content Writer",
     company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ const authorsList: AuthorsListItemType[] = [
     lastName: "Alexander",
     profession: "Content Writer",
     company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ const authorsList: AuthorsListItemType[] = [
     lastName: "Alexander",
     profession: "Content Writer",
     company: "Company",
-    authorLinks: [{ facebook: null }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: [{ facebook: null }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ const authorsList: AuthorsListItemType[] = [
     lastName: "Wilson",
     profession: "Content Writer",
     company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
     id: 7,
@@ -67,7 +67,7 @@ const authorsList: AuthorsListItemType[] = [
     lastName: "Alexander",
     profession: "Content Writer",
     company: "Company",
-    authorLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
     id: 8,
@@ -76,7 +76,7 @@ const authorsList: AuthorsListItemType[] = [
     lastName: "Alexander",
     profession: "Content Writer",
     company: "Company",
-    authorLinks: [{ facebook: null }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: [{ facebook: null }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
 ];
 

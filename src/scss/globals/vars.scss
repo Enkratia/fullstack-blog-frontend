@@ -24,6 +24,7 @@
   --light070-color: rgb(255 255 255 / 70%);
   --featured-color: #282938;
   --post-marker-color: #494a53;
+  --grayborder-color: #c1c1c3;
 
   // Filters
   --featured-filter: invert(14%) sepia(7%) saturate(2165%) hue-rotate(198deg) brightness(89%) contrast(90%);
@@ -50,6 +51,7 @@
   // **
   --btn-font: 700 1.125rem / 133% "Sen", sans-serif; // 18
   --btn2-font: 700 1.125rem / 177% "Sen", sans-serif; // 18
+  --tag-font: 700 0.875rem / 228% "Sen", sans-serif; // 14
 
   // Z-indexes
   --z-modal: 1000;

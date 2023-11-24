@@ -26,7 +26,7 @@ const socialIcons = [
 ];
 
 type AuthorCardProps = {
-  author: AuthorsListItemType;
+  author: UserType;
 };
 
 export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
@@ -46,7 +46,7 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
       <span className={s.info}>{`${author.profession} @${author.company}`}</span>
 
       <ul className={s.social}>
-        {author.authorLinks.map((obj, i) => {
+        {author.userLinks.map((obj, i) => {
           const socialLinkInfo = Object.entries(obj)[0];
           const socialTitle = socialLinkInfo[0];
           const socialLink = socialLinkInfo[1];

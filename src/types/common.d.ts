@@ -10,25 +10,30 @@ type PostType = {
   isFeatured: boolean;
   user: {
     id: number;
+    imageUrl: string;
     firstName: string;
     lastName: string;
-    imageUrl: string;
+    profession: string;
+    company: string;
+    userLinks: UserLinksType;
   };
 };
 
-type AuthorsListLinksType = [
+// **
+type UserLinksType = [
   Record<"facebook", string | null>,
   Record<"twitter", string | null>,
   Record<"instagram", string | null>,
   Record<"linkedin", string | null>,
 ];
 
-type AuthorsListItemType = {
+type UserType = {
   id: number;
   imageUrl: string;
   firstName: string;
   lastName: string;
   profession: string;
   company: string;
-  authorLinks: AuthorsListLinksType;
+  representation: string;
+  userLinks: UserLinksType;
 };

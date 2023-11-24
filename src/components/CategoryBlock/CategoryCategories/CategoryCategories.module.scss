@@ -1,0 +1,56 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  margin-bottom: rem(48);
+  color: var(--black-color);
+}
+
+.title {
+  margin-bottom: rem(40);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  svg {
+    margin-right: rem(16);
+    border-radius: rem(4);
+    padding: rem(12.5);
+    width: rem(48);
+    height: rem(48);
+    background-color: var(--lightyellow-color);
+  }
+
+  &:not(:last-child) {
+    margin-bottom: rem(22);
+  }
+
+  &:nth-child(2) {
+    svg {
+      padding: 0;
+    }
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  border: rem(1.5) solid var(--grayborder-color);
+  padding: rem(24);
+  width: 100%;
+  transition: background-color 0.3s, border-color 0.3s;
+
+  &:hover {
+    border-color: var(--yellow-color);
+    background-color: var(--yellow-color);
+  }
+}
+
+.category {
+  font: var(--h3-font);
+  letter-spacing: rem(-1);
+}

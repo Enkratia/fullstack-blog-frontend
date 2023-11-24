@@ -1,0 +1,12 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(128);
+  padding-bottom: rem(123);
+}
+
+.container {
+  display: grid;
+  column-gap: rem(60);
+  grid-template-columns: 1fr minmax(0, rem(296));
+}

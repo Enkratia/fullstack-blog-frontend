@@ -1,11 +1,12 @@
 import React from "react";
-import Link from "next/link";
-// import Image from "next/image";
+import { notFound, useParams } from "next/navigation";
 
-import { Article } from "../../components";
+import { CategoryCategories, CategoryPosts, CategoryTags } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./AllPosts.module.scss";
+import s from "./CategoryBlock.module.scss";
+
+const categories = ["startup", "business", "economy", "technology"];
 
 const posts: PostType[] = [
   {
@@ -130,22 +131,27 @@ const posts: PostType[] = [
   // },
 ];
 
-export const AllPosts: React.FC = () => {
+type ParamsType = {
+  category: string;
+};
+
+export const CategoryBlock: React.FC = () => {
+  // const params: ParamsType = useParams();
+  // const category = params.category;
+
+  // if (!categories.includes(category)) {
+  //   notFound();
+  // }
+
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
-        <h2 className={s.title}>All posts</h2>
-        <div className={s.posts}>
-          {posts.map((obj) => (
-            <Article key={obj.id} obj={obj} />
-          ))}
-        </div>
-        <div className={s.navigation}>
-          <Link
-            href="#"
-            className={`${s.navigationLink} ${s.navigationLinkInactive}`}>{`< Prev`}</Link>
-          <Link href="#" className={s.navigationLink}>{`Next >`}</Link>
-        </div>
+        <CategoryPosts />
+
+        <aside className={s.sidebar}>
+          <CategoryCategories />
+          <CategoryTags />
+        </aside>
       </div>
     </section>
   );
