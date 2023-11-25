@@ -36,8 +36,8 @@ export const CategoryCategories: React.FC = () => {
       <h3 className={`${s.title} ${cs.title}`}>Categories</h3>
 
       <ul className={s.list}>
-        {categories.map((category) => (
-          <li className={s.item}>
+        {categories.map((category, i) => (
+          <li key={i} className={s.item}>
             <Link href="" className={s.link}>
               {category.icon}
               <span className={s.category}>{capitalize(category.title)}</span>

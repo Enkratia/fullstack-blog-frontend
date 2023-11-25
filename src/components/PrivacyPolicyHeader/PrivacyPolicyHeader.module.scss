@@ -1,0 +1,20 @@
+@use "../../scss//utils/" as *;
+
+.root {
+  padding-block: rem(80);
+  text-align: center;
+  color: var(--black-color);
+  background-color: var(--lavender-color);
+}
+
+.title {
+  margin: 0;
+  margin-bottom: rem(3);
+  font: var(--h1-font);
+  letter-spacing: rem(-2);
+}
+
+.update {
+  font: var(--body01-font);
+  color: var(--black06-color);
+}

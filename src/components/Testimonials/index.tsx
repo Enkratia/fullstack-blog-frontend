@@ -5,6 +5,12 @@ import { TestimonialsSlider } from "../../components";
 import s from "./Testimonials.module.scss";
 import cs from "../../scss/helpers.module.scss";
 
+const data: TestimonialStaticType = {
+  subtitle: "Testimonials",
+  title: "What people say about our blog",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+};
+
 export const Testimonials: React.FC = () => {
   return (
     <section className={s.root}>
@@ -12,11 +18,9 @@ export const Testimonials: React.FC = () => {
 
       <div className={`${s.container} ${cs.container}`}>
         <div className={s.left}>
-          <span className={s.subtitle}>Testimonials</span>
-          <p className={s.title}>What people say about our blog</p>
-          <p className={s.descr}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
-          </p>
+          <span className={s.subtitle}>{data.subtitle}</span>
+          <p className={s.title}>{data.title}</p>
+          <p className={s.descr}>{data.description}</p>
         </div>
 
         <TestimonialsSlider />

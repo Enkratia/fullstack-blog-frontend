@@ -61,3 +61,14 @@ export * from "./CategoryBlock/CategoryTags";
 
 // AuthorPage
 export * from "./AuthorHeader";
+export * from "./MyPosts";
+
+// ContactUsPage
+export * from "./ContactUs";
+
+// **
+export * from "./ContactUs/ContactUsForm";
+
+// PrivacyPolicyPage
+export * from "./PrivacyPolicyHeader";
+export * from "./PrivacyPolicyBlock";

@@ -4,7 +4,7 @@ import cs from "../../scss/helpers.module.scss";
 import s from "./WhatToReadNext.module.scss";
 import { WhatToReadNextSlider } from "./WhatToReadNextSlider";
 
-const nextPosts = [
+const nextPosts: PostType[] = [
   {
     id: 1,
     title: "A UX Case Study Creating a Studious Environment for Students: ",
@@ -16,10 +16,14 @@ const nextPosts = [
     tags: ["business, startup"],
     isFeatured: false,
     user: {
-      id: 2,
+      id: 1,
       firstName: "John",
       lastName: "Doe",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
+      profession: "",
+      company: "",
+      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+      userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
   },
   {
@@ -33,10 +37,14 @@ const nextPosts = [
     tags: ["business, startup"],
     isFeatured: false,
     user: {
-      id: 2,
+      id: 1,
       firstName: "John",
       lastName: "Doe",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
+      profession: "",
+      company: "",
+      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+      userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
   },
   {
@@ -50,10 +58,14 @@ const nextPosts = [
     tags: ["business, startup"],
     isFeatured: false,
     user: {
-      id: 2,
+      id: 1,
       firstName: "John",
       lastName: "Doe",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
+      profession: "",
+      company: "",
+      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+      userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
   },
   {
@@ -67,10 +79,14 @@ const nextPosts = [
     tags: ["business, startup"],
     isFeatured: false,
     user: {
-      id: 3,
+      id: 1,
       firstName: "John",
       lastName: "Doe",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
+      profession: "",
+      company: "",
+      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+      userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
   },
   {
@@ -84,10 +100,14 @@ const nextPosts = [
     tags: ["business, startup"],
     isFeatured: false,
     user: {
-      id: 3,
+      id: 1,
       firstName: "John",
       lastName: "Doe",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
+      profession: "",
+      company: "",
+      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+      userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
   },
 ];

@@ -13,6 +13,7 @@ const authorsList: UserType[] = [
     lastName: "Miles",
     profession: "Content Writer",
     company: "Company",
+    representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
@@ -22,6 +23,7 @@ const authorsList: UserType[] = [
     lastName: "Russell",
     profession: "Content Writer",
     company: "Company",
+    representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
@@ -31,6 +33,7 @@ const authorsList: UserType[] = [
     lastName: "Wilson",
     profession: "Content Writer",
     company: "Company",
+    representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
@@ -40,6 +43,7 @@ const authorsList: UserType[] = [
     lastName: "Alexander",
     profession: "Content Writer",
     company: "Company",
+    representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
@@ -49,6 +53,7 @@ const authorsList: UserType[] = [
     lastName: "Alexander",
     profession: "Content Writer",
     company: "Company",
+    representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: [{ facebook: null }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
@@ -58,6 +63,7 @@ const authorsList: UserType[] = [
     lastName: "Wilson",
     profession: "Content Writer",
     company: "Company",
+    representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
@@ -67,6 +73,7 @@ const authorsList: UserType[] = [
     lastName: "Alexander",
     profession: "Content Writer",
     company: "Company",
+    representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
   {
@@ -76,6 +83,7 @@ const authorsList: UserType[] = [
     lastName: "Alexander",
     profession: "Content Writer",
     company: "Company",
+    representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: [{ facebook: null }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
   },
 ];

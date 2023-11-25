@@ -277,3 +277,229 @@
     }
   }
 }
+
+// **
+.input {
+  outline: none;
+  border: rem(1) solid var(--mediumgray05-color);
+  border-radius: rem(2);
+  padding-right: rem(60);
+  padding-left: rem(24);
+  padding-block: rem(23);
+  width: 100%;
+  font: var(--body01-font);
+  color: inherit;
+  background-color: var(--light-color);
+  transition: border-color 0.3s;
+
+  &Wrapper {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      top: calc(100% - rem(6));
+      font: var(--validation-font);
+    }
+
+    &::after {
+      position: absolute;
+      right: rem(50);
+      top: 50%;
+      z-index: var(--z-up);
+      display: block;
+      width: rem(20);
+      height: rem(20);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transform: translateY(-50%);
+    }
+
+    &:not(:last-child) {
+      margin-bottom: rem(16);
+    }
+
+    &Warning {
+      &::before {
+        color: var(--danger-color);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      &::after {
+        content: "";
+        background-image: url("../../public/img/warning.svg");
+        opacity: 1;
+        visibility: visible;
+      }
+
+      >.input {
+        border-color: var(--danger-color);
+
+        svg {
+          display: none;
+        }
+      }
+
+      &[data-validity="email"] {
+        &::before {
+          content: "Email must contain «@» and «.»";
+        }
+      }
+
+      &[data-validity="pass-length"] {
+        &::before {
+          content: "Password must contain at least 6 characters.";
+        }
+
+        &::after {
+          content: none;
+        }
+      }
+
+      &[data-validity="pass-confirm"] {
+        &::before {
+          content: "Passwords do not match.";
+        }
+
+        &::after {
+          content: none;
+        }
+      }
+    }
+
+    &Success {
+      &::before {
+        content: "Looks good!";
+        color: var(--success-color);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      &::after {
+        content: "";
+        background-image: url("../../public/img/success.svg");
+        opacity: 1;
+        visibility: visible;
+      }
+
+      >.input {
+        border-color: var(--success-color);
+
+        svg {
+          display: none;
+        }
+      }
+
+      &[data-validity^="pass-"] {
+        &::after {
+          content: none;
+        }
+      }
+    }
+  }
+
+  // **
+  &::placeholder {
+    font: inherit;
+    color: inherit;
+  }
+
+  &:focus {
+    border: rem(1) solid var(--black-color);
+  }
+}
+
+// **
+.select {
+  position: relative;
+  cursor: pointer;
+
+  &Head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--black-color);
+
+    &:hover {
+      color: var(--mediumgray-color);
+    }
+
+    // &Dark {
+    //   color: inherit;
+
+    //   svg {
+    //     width: rem(8);
+    //     height: rem(8);
+    //     fill: currentcolor;
+    //     transition: fill 0.3s;
+    //   }
+
+    //   &:hover {
+    //     color: var(--white-color);
+    //   }
+    // }
+
+    &Active {
+      color: var(--darkgray-color);
+    }
+  }
+
+  &Selected {
+    margin-right: rem(4);
+    transition: color 0.3s;
+    user-select: none;
+  }
+
+  &Wrapper {
+    position: absolute;
+    right: 0;
+    top: calc(100% + rem(4));
+    z-index: var(--z-up);
+    border: rem(1) solid var(--mediumgray-color);
+    border-radius: rem(4);
+    padding-right: rem(10); // Для каст. скроллбара
+    width: 100%;
+    // box-shadow: var(--small-shadow);
+    background-color: var(--light-color);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    cursor: default;
+
+    // &Dark {
+    //   padding: rem(10) rem(20);
+    //   width: 200%;
+    // }
+
+    &Active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &List {
+    list-style: none;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    max-height: rem(180);
+    background-color: var(--light-color);
+  }
+
+  &Item {
+    padding-block: rem(2);
+    color: var(--black-color);
+    transition: color 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--mediumgray-color);
+    }
+
+    &Active {
+      color: var(--mediumgray-color);
+    }
+  }
+}

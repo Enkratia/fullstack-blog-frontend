@@ -5,6 +5,7 @@ import { CategoryCategories, CategoryPosts, CategoryTags } from "../../component
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./CategoryBlock.module.scss";
+import Close from "../../../public/img/close.svg";
 
 const categories = ["startup", "business", "economy", "technology"];
 
@@ -26,6 +27,7 @@ const posts: PostType[] = [
       imageUrl: "",
       profession: "",
       company: "",
+      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
       userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
   },
@@ -46,6 +48,7 @@ const posts: PostType[] = [
       imageUrl: "",
       profession: "",
       company: "",
+      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
       userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
   },
@@ -66,6 +69,7 @@ const posts: PostType[] = [
       imageUrl: "",
       profession: "",
       company: "",
+      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
       userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
   },
@@ -86,6 +90,7 @@ const posts: PostType[] = [
       imageUrl: "",
       profession: "",
       company: "",
+      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
       userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
   },
@@ -106,52 +111,28 @@ const posts: PostType[] = [
       imageUrl: "",
       profession: "",
       company: "",
+      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
       userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
   },
-  // {
-  //   id: 6,
-  //   title: "Design tips for designers that cover everything you need",
-  //   category: "startup",
-  //   createdAt: "2023-12-03T17:44:30.644Z",
-  //   updatedAt: "2023-12-03T17:44:30.644Z",
-  //   text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-  //   imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
-  //   tags: ["business", "experience"],
-  //   isFeatured: true,
-  //   user: {
-  //     id: 1,
-  //     firstName: "John",
-  //     lastName: "Doe",
-  //     imageUrl: "",
-  //     profession: "",
-  //     company: "",
-  //     userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
-  //   },
-  // },
 ];
 
-type ParamsType = {
-  category: string;
-};
-
 export const CategoryBlock: React.FC = () => {
-  // const params: ParamsType = useParams();
-  // const category = params.category;
-
-  // if (!categories.includes(category)) {
-  //   notFound();
-  // }
-
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
         <CategoryPosts />
 
-        <aside className={s.sidebar}>
-          <CategoryCategories />
-          <CategoryTags />
-        </aside>
+        <div className={s.sidebarWrapper}>
+          <aside className={s.sidebar}>
+            <CategoryCategories />
+            <CategoryTags />
+
+            <button className={s.close} aria-label="Close the modal window.">
+              <Close aria-hidden="true" />
+            </button>
+          </aside>
+        </div>
       </div>
     </section>
   );

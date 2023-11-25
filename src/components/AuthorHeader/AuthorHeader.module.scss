@@ -1,8 +1,6 @@
 @use "../../scss/utils/" as *;
 
 .root {
-  // padding-top: rem(128);
-  // padding-bottom: rem(128);
   color: var(--black-color);
   background-color: var(--lavender-color);
 }
@@ -13,7 +11,7 @@
   column-gap: rem(32);
   grid-template-columns: minmax(0, rem(251)) minmax(0, rem(669));
   padding-top: rem(128);
-  padding-bottom: rem(128);
+  padding-bottom: rem(126);
 }
 
 // **

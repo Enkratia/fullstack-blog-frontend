@@ -1,10 +1,16 @@
 @use "../../scss/utils/" as *;
 
 .root {
-  padding-block: rem(79);
+  padding-top: rem(79);
+  padding-bottom: rem(79);
   text-align: center;
   color: var(--black-color);
   background-color: var(--lavender-color);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(39.77) + 2.88vw); // 79>49(1360>320)
+    padding-bottom: calc(rem(52.84) + 1.92vw); // 79>59(1360>320)
+  }
 }
 
 .container {

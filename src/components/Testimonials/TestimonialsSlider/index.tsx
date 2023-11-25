@@ -8,7 +8,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import s from "./TestimonialsSlider.module.scss";
 import Arrow from "../../../../public/img/arrow.svg";
 
-const testimonials = [
+const testimonials: TestimonialType[] = [
   {
     id: 0,
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporliqua eius tempor dipiscing elit.",

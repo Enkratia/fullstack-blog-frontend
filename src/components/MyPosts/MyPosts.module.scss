@@ -1,0 +1,27 @@
+@use "../../scss//utils/" as *;
+
+.root {
+  padding-top: rem(128);
+  padding-bottom: rem(124);
+  color: var(--black-color);
+}
+
+.title {
+  margin: 0;
+  margin-bottom: rem(65);
+  font: var(--h1-font);
+  letter-spacing: rem(-2);
+}
+
+// **
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  &:not(:last-child) {
+    margin-bottom: rem(59);
+  }
+}

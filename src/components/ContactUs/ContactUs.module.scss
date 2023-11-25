@@ -1,0 +1,80 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(126);
+  padding-bottom: rem(128);
+  text-align: center;
+  color: var(--black-color);
+}
+
+// Header
+.header {
+  margin-bottom: rem(64);
+
+  &Subtitle {
+    display: block;
+    margin-bottom: rem(12);
+    font: var(--cap00-font);
+    letter-spacing: rem(3);
+    text-transform: uppercase;
+  }
+
+  &Title {
+    margin: 0;
+    margin-bottom: rem(24);
+    font: var(--h1-font);
+    letter-spacing: rem(-2);
+  }
+
+  &Descr {
+    margin: 0;
+    font: var(--body01-font);
+    color: var(--mediumgray-color);
+  }
+}
+
+// Info
+.info {
+  display: flex;
+  margin-bottom: rem(32);
+  padding-block: rem(48);
+  padding-inline: rem(64);
+  text-align: left;
+  color: var(--light-color);
+  background-color: var(--purple-color);
+}
+
+.box {
+  width: 100%;
+  max-width: rem(294);
+
+  a {
+    &:hover {
+      color: var(--yellow-color);
+    }
+  }
+
+  &Title {
+    margin: 0;
+    margin-bottom: rem(15);
+    border-bottom: rem(1) solid var(--light010-color);
+    padding-bottom: rem(16);
+    font: var(--body02-font);
+    opacity: 0.6;
+  }
+
+  &Item {
+    display: block;
+    font: var(--h5-font);
+    transition: color 0.3s;
+
+    &Muted {
+      font: var(--body01-font);
+      opacity: 0.6;
+    }
+  }
+
+  &:first-child {
+    margin-right: rem(42);
+  }
+}

@@ -9,39 +9,34 @@ import Slider from "react-slick";
 import s from "./FeaturedIn.module.scss";
 import cs from "../../scss/helpers.module.scss";
 
-const featuredCompanies = [
+const featuredCompanies: FeaturedCompanyType[] = [
   {
     id: 0,
     title: "logoIpsum",
-    // imageUrl: "https://i.postimg.cc/RFqF58jQ/Logo-1.png",
     imageUrl: "https://i.postimg.cc/3dh8PYqS/Logo-1.png",
     linkUrl: "#",
   },
   {
     id: 1,
     title: "logoIpsum",
-    // imageUrl: "https://i.postimg.cc/q7JqQgwF/Logo-2.png",
     imageUrl: "https://i.postimg.cc/Z0pY7Cwv/Logo-2.png",
     linkUrl: "#",
   },
   {
     id: 2,
     title: "logoIpsum",
-    // imageUrl: "https://i.postimg.cc/kgdB6Tbq/Logo-3.png",
     imageUrl: "https://i.postimg.cc/MnKWptq1/Logo-3.png",
     linkUrl: "#",
   },
   {
     id: 3,
     title: "logoIpsum",
-    // imageUrl: "https://i.postimg.cc/y8XWF0m9/Logo-4.png",
     imageUrl: "https://i.postimg.cc/XrHnGFYm/Logo-4.png",
     linkUrl: "#",
   },
   {
     id: 4,
     title: "logoIpsum",
-    // imageUrl: "https://i.postimg.cc/rsvyXN4h/Logo-5-1.png",
     imageUrl: "https://i.postimg.cc/KR5GbCSZ/Logo-5.png",
     linkUrl: "#",
   },

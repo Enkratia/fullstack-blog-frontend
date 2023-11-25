@@ -8,17 +8,26 @@ import s from "./Article.module.scss";
 type ArticleType = {
   obj: PostType;
   isCategoryPage?: boolean;
+  isArticlePage?: boolean;
 };
 
-export const Article: React.FC<ArticleType> = ({ obj, isCategoryPage = false }) => {
+export const Article: React.FC<ArticleType> = ({
+  obj,
+  isCategoryPage = false,
+  isArticlePage = false,
+}) => {
   return (
-    <article key={obj.id} className={`${s.root} ${isCategoryPage ? s.rootCategoryPage : ""}`}>
+    <article
+      key={obj.id}
+      className={`${s.root} ${isCategoryPage ? s.rootCategoryPage : ""} ${
+        isArticlePage ? s.rootArticlePage : ""
+      }`}>
       <div className={s.imageWrapper}>
         <Link
           href=""
           className={`${s.imageWrapperInner} ${
             isCategoryPage ? s.imageWrapperInnerCategoryPage : ""
-          }`}
+          } ${isArticlePage ? s.imageWrapperInnerArticlePage : ""}`}
           aria-label="Go to the post.">
           <Image src={obj.imageUrl} alt={obj.title} fill className={s.image} />
         </Link>

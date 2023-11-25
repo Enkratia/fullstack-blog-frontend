@@ -8,15 +8,7 @@ type PostType = {
   imageUrl: string;
   tags: string[];
   isFeatured: boolean;
-  user: {
-    id: number;
-    imageUrl: string;
-    firstName: string;
-    lastName: string;
-    profession: string;
-    company: string;
-    userLinks: UserLinksType;
-  };
+  user: UserType;
 };
 
 // **
@@ -36,4 +28,16 @@ type UserType = {
   company: string;
   representation: string;
   userLinks: UserLinksType;
+};
+
+// **
+type CategoryDescription = {
+  title: string;
+  description: string;
+};
+
+// **
+type JoinType = {
+  title: string;
+  description: string;
 };

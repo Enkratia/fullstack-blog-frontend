@@ -9,6 +9,10 @@
     grid-template-columns: minmax(0, rem(294)) minmax(rem(50), rem(512));
   }
 
+  &ArticlePage {
+    grid-template-columns: minmax(0, rem(412)) minmax(rem(50), rem(580));
+  }
+
   &:hover {
     img {
       transform: scale(1.03);
@@ -42,6 +46,10 @@
 
       &CategoryPage {
         padding-top: 106.12%;
+      }
+
+      &ArticlePage {
+        padding-top: 77.67%;
       }
     }
   }

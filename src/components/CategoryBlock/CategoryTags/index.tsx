@@ -12,8 +12,8 @@ export const CategoryTags: React.FC = () => {
       <h3 className={`${s.title} ${cs.title}`}>All Tags</h3>
 
       <ul className={s.list}>
-        {tags.map((tag) => (
-          <li className={s.item}>
+        {tags.map((tag, i) => (
+          <li key={i} className={s.item}>
             <Link href="#" className={s.tag}>
               {tag}
             </Link>

@@ -7,19 +7,26 @@ import { formatDate } from "@/utils/customFunctions";
 import cs from "../../scss/helpers.module.scss";
 import s from "./Hero.module.scss";
 
-const post = {
+const post: PostType = {
   id: 1,
   title: "Step-by-step guide to choosing great font pairs",
   category: "startup",
-  firstName: "James",
-  lastName: "West",
   createdAt: "2023-11-03T17:44:30.644Z",
   updatedAt: "2023-11-03T17:44:30.644Z",
   text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
   imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
   tags: ["business", "experience"],
   isFeatured: true,
-  authorId: 1,
+  user: {
+    id: 1,
+    firstName: "John",
+    lastName: "Doe",
+    imageUrl: "",
+    profession: "",
+    company: "",
+    representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+    userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
+  },
 };
 
 export const Hero: React.FC = () => {
@@ -43,8 +50,8 @@ export const Hero: React.FC = () => {
             <span className={`${s.metadataItem} ${cs.metadataItem} ${cs.metadataItemGold}`}>
               By
               <Link
-                href={`/users/${post.authorId}`}
-                className={`${cs.metadataName} ${cs.metadataNameGold}`}>{` ${post.firstName} ${post.lastName}`}</Link>
+                href={`/users/${post.user.id}`}
+                className={`${cs.metadataName} ${cs.metadataNameGold}`}>{` ${post.user.firstName} ${post.user.lastName}`}</Link>
             </span>
             <span className={`${s.metadataItem} ${cs.metadataItem} ${cs.metadataItemGold}`}>
               {formatDate(post.createdAt)}

@@ -1,0 +1,23 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  color: var(--black-color);
+  background-color: var(--light-color);
+}
+
+.inputWrapper {
+  display: flex;
+  text-align: left;
+}
+
+.textarea {
+  height: rem(144);
+  resize: none;
+}
+
+.submit {
+  padding-top: rem(15);
+  padding-bottom: rem(15);
+  width: 100%;
+  font: var(--h4-font);
+}

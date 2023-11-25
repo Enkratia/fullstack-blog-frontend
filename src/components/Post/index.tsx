@@ -15,7 +15,7 @@ import Startup from "../../../public/img/startup.svg";
 import Economy from "../../../public/img/economy.svg";
 import Technology from "../../../public/img/technology.svg";
 
-const post = {
+const post: PostType = {
   id: 6,
   title: "Step-by-step guide to choosing great font pairs",
   category: "startup",
@@ -26,10 +26,14 @@ const post = {
   tags: ["business, startup"],
   isFeatured: false,
   user: {
-    authorId: 2,
+    id: 1,
     firstName: "Andrew",
     lastName: "Jonson",
     imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
+    profession: "",
+    company: "",
+    representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+    userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
   },
 };
 
@@ -67,7 +71,7 @@ export const Post: React.FC = () => {
             </div>
           </div>
 
-          <h2 className={s.title}>{post.title}</h2>
+          <p className={s.title}>{post.title}</p>
 
           <Link href="" className={s.category}>
             {icons[post.category]}
@@ -80,9 +84,9 @@ export const Post: React.FC = () => {
         </div>
 
         <div className={`${s.article} ${cs.container} ${cs.container836}`}>
-          <h3 className={s.articleTitle}>
+          <h2 className={s.articleTitle2}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-          </h3>
+          </h2>
 
           <p className={s.articleParagraph}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -93,9 +97,9 @@ export const Post: React.FC = () => {
             non.
           </p>
 
-          <h3 className={s.articleTitle}>
+          <h2 className={s.articleTitle2}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-          </h3>
+          </h2>
 
           <p className={s.articleParagraph}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -130,9 +134,9 @@ export const Post: React.FC = () => {
             non.
           </p>
 
-          <h3 className={s.articleTitle}>
+          <h2 className={s.articleTitle2}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-          </h3>
+          </h2>
 
           <p className={s.articleParagraph}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor

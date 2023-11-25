@@ -7,19 +7,26 @@ import { formatDate } from "@/utils/customFunctions";
 import cs from "../../scss/helpers.module.scss";
 import s from "./BlogHeader.module.scss";
 
-const post = {
+const post: PostType = {
   id: 1,
   title: "Step-by-step guide to choosing great font pairs",
   category: "startup",
-  firstName: "John",
-  lastName: "Doe",
   createdAt: "2023-11-03T17:44:30.644Z",
   updatedAt: "2023-11-03T17:44:30.644Z",
   text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
   imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
   tags: ["business", "experience"],
   isFeatured: true,
-  authorId: 1,
+  user: {
+    id: 1,
+    firstName: "John",
+    lastName: "Doe",
+    imageUrl: "",
+    profession: "",
+    company: "",
+    representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+    userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
+  },
 };
 
 export const BlogHeader: React.FC = () => {
@@ -36,8 +43,8 @@ export const BlogHeader: React.FC = () => {
             <span className={cs.metadataItem}>
               By
               <Link
-                href={`/users/${post.authorId}`}
-                className={cs.metadataName}>{` ${post.firstName} ${post.lastName}`}</Link>
+                href={`/users/${post.user.id}`}
+                className={cs.metadataName}>{` ${post.user.firstName} ${post.user.lastName}`}</Link>
             </span>
             <span className={cs.metadataItem}>{formatDate(post.createdAt)}</span>
           </div>

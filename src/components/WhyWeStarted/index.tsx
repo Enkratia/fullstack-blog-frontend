@@ -4,6 +4,13 @@ import Link from "next/link";
 import cs from "../../scss/helpers.module.scss";
 import s from "./WhyWeStarted.module.scss";
 
+const data: WhyWeStartedType = {
+  subtitle: "Why we started",
+  title: "It started out as a simple idea and evolved into our passion",
+  description:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
+};
+
 export const WhyWeStarted: React.FC = () => {
   return (
     <section className={s.root}>
@@ -16,13 +23,9 @@ export const WhyWeStarted: React.FC = () => {
         <div className={s.imageWrapper} aria-hidden="true"></div>
 
         <div className={s.content}>
-          <span className={s.subtitle}>Why we started</span>
-          <p className={s.title}>It started out as a simple idea and evolved into our passion</p>
-          <p className={s.descr}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip.
-          </p>
+          <span className={s.subtitle}>{data.subtitle}</span>
+          <p className={s.title}>{data.title}</p>
+          <p className={s.descr}>{data.description}</p>
 
           <Link href="" className={`${s.btn} ${cs.btn}`}>{`Discover our story >`}</Link>
         </div>

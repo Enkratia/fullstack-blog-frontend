@@ -15,16 +15,24 @@
 
   // **
   --yellow-hover-color: #edc14a;
+  --black06-color: rgb(33 35 51 / 60%);
   --black07-color: rgb(33 35 51 / 70%);
   --mediumgray06-color: rgb(110 111 120 / 60%);
+  --mediumgray05-color: rgb(110 111 120 / 50%);
   --mediumgray04-color: rgb(110 111 120 / 40%);
   --mediumgray03-color: rgb(110 111 120 / 30%);
   --mediumgray01-color: rgb(110 111 120 / 10%);
   --light005-color: rgb(255 255 255 / 5%);
+  --light010-color: rgb(255 255 255 / 10%);
   --light070-color: rgb(255 255 255 / 70%);
   --featured-color: #282938;
   --post-marker-color: #494a53;
   --grayborder-color: #c1c1c3;
+
+  // **
+  --success-color: #03cea5;
+  --danger-color: #ff4242;
+  --overlay-color: rgb(0 0 0 / 60%);
 
   // Filters
   --featured-filter: invert(14%) sepia(7%) saturate(2165%) hue-rotate(198deg) brightness(89%) contrast(90%);
@@ -52,6 +60,9 @@
   --btn-font: 700 1.125rem / 133% "Sen", sans-serif; // 18
   --btn2-font: 700 1.125rem / 177% "Sen", sans-serif; // 18
   --tag-font: 700 0.875rem / 228% "Sen", sans-serif; // 14
+
+  // **
+  --validation-font: 500 0.75rem / 228% "Sen", sans-serif; // 14
 
   // Z-indexes
   --z-modal: 1000;
