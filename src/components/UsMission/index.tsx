@@ -1,23 +1,27 @@
 import React from "react";
 import Link from "next/link";
 
+import { fetchUsMissionQuery } from "../../fetchApi/fetchApi";
+
 import cs from "../../scss/helpers.module.scss";
 import s from "./UsMission.module.scss";
 
-const data: UsMissionType = {
-  about: {
-    title: "We are a community of content writers who share their learnings",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  mission: {
-    title: "Creating valuable content for creatives all around the world",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-};
+// const data: UsMissionType = {
+//   about: {
+//     title: "We are a community of content writers who share their learnings",
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+//   },
+//   mission: {
+//     title: "Creating valuable content for creatives all around the world",
+//     description:
+//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+//   },
+// };
 
-export const UsMission: React.FC = () => {
+export const UsMission: React.FC = async () => {
+  let { data, isError } = await fetchUsMissionQuery();
+
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>Our mission and information about us.</h2>

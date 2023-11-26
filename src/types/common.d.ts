@@ -32,7 +32,6 @@ type UserType = {
 
 // **
 type CategoryDescription = {
-  title: string;
   description: string;
 };
 
