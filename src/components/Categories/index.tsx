@@ -46,7 +46,6 @@ const categoryIcons = [
 
 export const Categories: React.FC = async () => {
   const { data, isError } = await fetchCategoryHeaderQuery();
-  console.log(data);
 
   return (
     <ul className={s.root}>

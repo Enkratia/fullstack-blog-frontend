@@ -11,6 +11,7 @@ type UsMissionType = {
 
 // **
 type WhyWeStartedType = {
+  imageUrl: string;
   subtitle: string;
   title: string;
   description: string;
@@ -25,9 +26,9 @@ type FeaturedCompanyType = {
 };
 
 type TestimonialStaticType = {
-  subtitle: strig;
-  title: strig;
-  description: strig;
+  subtitle: string;
+  title: string;
+  description: string;
 };
 
 // **

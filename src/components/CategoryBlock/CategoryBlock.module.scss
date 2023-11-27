@@ -44,6 +44,7 @@
   position: absolute;
   right: rem(16);
   top: rem(16);
+  display: none;
   border: none;
   padding: 0;
   background-color: transparent;
@@ -60,5 +61,9 @@
     svg {
       fill: var(--black-color);
     }
+  }
+
+  @include bp-down("1024") {
+    display: block;
   }
 }

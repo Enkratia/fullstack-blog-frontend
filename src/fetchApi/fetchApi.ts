@@ -23,8 +23,40 @@ export const fetchCategoryHeaderQuery = async () => {
   return { isError: res.isError, data: res.data as CategoryDescription[] };
 };
 
+export const fetchJoinQuery = async () => {
+  const res = await fetchApi("join");
+  return { isError: res.isError, data: res.data[0] as JoinType };
+};
+
 // HomePage
 export const fetchUsMissionQuery = async () => {
   const res = await fetchApi("us-mission");
   return { isError: res.isError, data: res.data[0] as UsMissionType };
+};
+
+export const fetchWhyWeStartedQuery = async () => {
+  const res = await fetchApi("why-we-started");
+  return { isError: res.isError, data: res.data[0] as WhyWeStartedType };
+};
+
+export const fetchTestimonialStaticQuery = async () => {
+  const res = await fetchApi("testimonial-static");
+  return { isError: res.isError, data: res.data[0] as TestimonialStaticType };
+};
+
+// AboutUsPage
+export const fetchWhyThisBlogQuery = async () => {
+  const res = await fetchApi("why-this-blog");
+  return { isError: res.isError, data: res.data[0] as WhyThisBlogType };
+};
+
+export const fetchKnowMoreQuery = async () => {
+  const res = await fetchApi("know-more");
+  return { isError: res.isError, data: res.data[0] as KnowMoreType };
+};
+
+// ContactUsPage
+export const fetchContactUsQuery = async () => {
+  const res = await fetchApi("contact-us");
+  return { isError: res.isError, data: res.data[0] as ContactUsType };
 };

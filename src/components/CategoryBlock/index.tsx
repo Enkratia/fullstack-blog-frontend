@@ -1,5 +1,5 @@
 import React from "react";
-import { notFound, useParams } from "next/navigation";
+// import { notFound, useParams } from "next/navigation";
 
 import { CategoryCategories, CategoryPosts, CategoryTags } from "../../components";
 

@@ -1,20 +1,24 @@
 import React from "react";
 import Image from "next/image";
 
+import { fetchKnowMoreQuery } from "@/fetchApi/fetchApi";
+
 import cs from "../../scss/helpers.module.scss";
 import s from "./KnowMore.module.scss";
 
-const data: KnowMoreType = {
-  title: "Our team of creatives",
-  subtitle:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
-  imageUrl:
-    "https://s3-alpha-sig.figma.com/img/f8e6/8a26/fd526073f07987675c551110d3deb730?Expires=1701648000&Signature=JIe5MnpndtjBX5vKv2~7VYC0YOTk7tmZ2rzazTgszEEWCqJR2ZUFYBJlXop5KJhXDQKFjFedbDxSq73fv0nj9eHLpYuS9mnEQfrIImUpdq76o4h0SFPacohTrzyOWjn~m4VnF3athpO2VFR4RSkALlA83a5OulhxG7jVHBiel0Ky4Xfnfvkc1nUjkVjDrv9mYc838yLGvJk-RT85q12gjGtu-bWSMTwFyMKfogLrxaZBb0Da2HSugIAxKQwM4M2UGdfvaa5vBUfvg3hDLesCMw97gUh~p7XRXPRU8XaBJV5ko5cVWb1lFgsZNtCxAn-WQjp2HT3Z6CZ6cFeZFYTY7Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
-};
+// const data: KnowMoreType = {
+//   title: "Our team of creatives",
+//   subtitle:
+//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+//   description:
+//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+//   imageUrl: "http://localhost:3001/api/images/1701100182001-1852x1500.png",
+// };
 
-export const KnowMore: React.FC = () => {
+export const KnowMore: React.FC = async () => {
+  const { data, isError } = await fetchKnowMoreQuery();
+  console.log(data, isError);
+
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>Creativity of our team.</h2>

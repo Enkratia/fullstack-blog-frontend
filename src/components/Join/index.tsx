@@ -1,16 +1,20 @@
 import React from "react";
 import Link from "next/link";
 
+import { fetchJoinQuery } from "@/fetchApi/fetchApi";
+
 import cs from "../../scss/helpers.module.scss";
 import s from "./Join.module.scss";
 
-const data: JoinType = {
-  title: "Join our team to be a part of our story",
-  description:
-    " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
-};
+// const data: JoinType = {
+//   title: "Join our team to be a part of our story",
+//   description:
+//     " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+// };
 
-export const Join: React.FC = () => {
+export const Join: React.FC = async () => {
+  const { isError, data } = await fetchJoinQuery();
+
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
