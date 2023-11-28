@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { fetchCategoryHeaderQuery } from "@/fetchApi/fetchApi";
 
-import s from "./Categories.module.scss";
+import s from "./categories.module.scss";
 
 import Business from "../../../public/img/business.svg";
 import Startup from "../../../public/img/startup.svg";

@@ -5,7 +5,7 @@ import Slider from "react-slick";
 
 import { AuthorCard } from "../../../components";
 
-import s from "./ListAuthorsSlider.module.scss";
+import s from "./listAuthorsSlider.module.scss";
 
 const authorsList: UserType[] = [
   {

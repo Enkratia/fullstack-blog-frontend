@@ -4,7 +4,7 @@ import { TestimonialsSlider } from "../../components";
 
 import { fetchTestimonialStaticQuery } from "@/fetchApi/fetchApi";
 
-import s from "./Testimonials.module.scss";
+import s from "./testimonials.module.scss";
 import cs from "../../scss/helpers.module.scss";
 
 // const data: TestimonialStaticType = {

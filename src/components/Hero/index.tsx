@@ -5,7 +5,7 @@ import Image from "next/image";
 import { formatDate } from "@/utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./Hero.module.scss";
+import s from "./hero.module.scss";
 
 const post: PostType = {
   id: 1,

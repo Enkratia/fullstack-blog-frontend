@@ -8,7 +8,7 @@ import "overlayscrollbars/overlayscrollbars.css";
 import { useValidateForm } from "../../../utils/customHooks";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./ContactUsForm.module.scss";
+import s from "./contactUsForm.module.scss";
 
 import AngleDown from "../../../../public/img/angle-down.svg";
 

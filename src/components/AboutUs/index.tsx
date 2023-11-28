@@ -3,7 +3,7 @@ import React from "react";
 import { AboutUsHeader, AboutUsOverview, AboutUsVision } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./AboutUs.module.scss";
+import s from "./aboutUs.module.scss";
 
 const data: AboutUsStaticType = {
   header: {

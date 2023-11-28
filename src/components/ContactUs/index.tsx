@@ -5,7 +5,7 @@ import { fetchContactUsQuery } from "@/fetchApi/fetchApi";
 import { ContactUsForm } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./ContactUs.module.scss";
+import s from "./contactUs.module.scss";
 
 // const data: ContactUsType = {
 //   header: {

@@ -1,7 +1,7 @@
 import React from "react";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./AboutUsOverview.module.scss";
+import s from "./aboutUsOverview.module.scss";
 
 const aboutUsOverview: AboutUsOverviewType[] = [
   {

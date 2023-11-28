@@ -1,7 +1,7 @@
 import React from "react";
 import { FooterTop, FooterMid, FooterBottom } from "../../components";
 
-import s from "./Footer.module.scss";
+import s from "./footer.module.scss";
 import cs from "../../scss/helpers.module.scss";
 
 export const Footer: React.FC = () => {

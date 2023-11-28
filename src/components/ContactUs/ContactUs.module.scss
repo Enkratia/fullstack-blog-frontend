@@ -5,6 +5,11 @@
   padding-bottom: rem(128);
   text-align: center;
   color: var(--black-color);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(34.46) + 6.73vw); // 126>56(1360>320)
+    padding-bottom: calc(rem(36.46) + 6.73vw); // 128>58(1360>320)
+  }
 }
 
 // Header
@@ -24,12 +29,21 @@
     margin-bottom: rem(24);
     font: var(--h1-font);
     letter-spacing: rem(-2);
+
+    @include bp-down("container") {
+      margin-bottom: calc(rem(12.23) + 0.86vw); // 24>15(1360>320)
+      font-size: calc(rem(40.15) + 0.57vw); // 48>42(1360>320)
+    }
   }
 
   &Descr {
     margin: 0;
     font: var(--body01-font);
     color: var(--mediumgray-color);
+  }
+
+  @include bp-down("container") {
+    margin-bottom: calc(rem(37.84) + 1.92vw); // 64>44(1360>320)
   }
 }
 
@@ -42,6 +56,12 @@
   text-align: left;
   color: var(--light-color);
   background-color: var(--purple-color);
+
+  @include bp-down("576") {
+    flex-direction: column;
+    padding-block: calc(rem(18.75) + 5.07vw); // 48>35(576>320)
+    padding-inline: calc(rem(-23.75) + 15.23vw) // 64>25(576>320)
+  }
 }
 
 .box {
@@ -61,6 +81,11 @@
     padding-bottom: rem(16);
     font: var(--body02-font);
     opacity: 0.6;
+
+    @include bp-down("576") {
+      margin-bottom: rem(8);
+      padding-bottom: rem(12);
+    }
   }
 
   &Item {
@@ -76,5 +101,10 @@
 
   &:first-child {
     margin-right: rem(42);
+
+    @include bp-down("576") {
+      margin-right: 0;
+      margin-bottom: rem(40);
+    }
   }
 }

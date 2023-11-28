@@ -9,5 +9,9 @@
 .item {
   &:not(:last-child) {
     margin-bottom: rem(28);
+
+    @include bp-down("1024") {
+      margin-bottom: rem(40);
+    }
   }
 }

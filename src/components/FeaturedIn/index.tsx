@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import Slider from "react-slick";
 
-import s from "./FeaturedIn.module.scss";
+import s from "./featuredIn.module.scss";
 import cs from "../../scss/helpers.module.scss";
 
 const featuredCompanies: FeaturedCompanyType[] = [

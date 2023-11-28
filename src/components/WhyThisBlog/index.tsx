@@ -4,7 +4,7 @@ import Image from "next/image";
 import { fetchWhyThisBlogQuery } from "@/fetchApi/fetchApi";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./WhyThisBlog.module.scss";
+import s from "./whyThisBlog.module.scss";
 
 // const data: WhyThisBlogType = {
 //   title: "Why we started this Blog",

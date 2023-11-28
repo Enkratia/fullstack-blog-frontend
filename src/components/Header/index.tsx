@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import Logo from "../../../public/img/logo.svg";
 import cs from "../../scss/helpers.module.scss";
-import s from "./Header.module.scss";
+import s from "./header.module.scss";
 
 const basicLinks = [
   {
@@ -38,6 +38,10 @@ export const Header: React.FC = () => {
               {link.linkName}
             </Link>
           ))}
+
+          <Link href="#" className={s.link}>
+            Sign-in/up
+          </Link>
         </nav>
 
         <Link href="#subscribe-form" className={`${cs.btn} ${cs.btnWhite}`}>

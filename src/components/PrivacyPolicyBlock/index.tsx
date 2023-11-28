@@ -1,7 +1,7 @@
 import React from "react";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./PrivacyPolicyBlock.module.scss";
+import s from "./privacyPolicyBlock.module.scss";
 
 const policy: PrivacyPolicyType = {
   message: "",

@@ -2,8 +2,7 @@ import React from "react";
 
 import { Article } from "@/components";
 
-import cs from "../../../scss/helpers.module.scss";
-import s from "./CategoryPosts.module.scss";
+import s from "./categoryPosts.module.scss";
 
 const posts: PostType[] = [
   {

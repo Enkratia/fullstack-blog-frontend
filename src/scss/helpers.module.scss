@@ -283,7 +283,7 @@
   outline: none;
   border: rem(1) solid var(--mediumgray05-color);
   border-radius: rem(2);
-  padding-right: rem(60);
+  padding-right: rem(86);
   padding-left: rem(24);
   padding-block: rem(23);
   width: 100%;
@@ -304,7 +304,7 @@
 
     &::after {
       position: absolute;
-      right: rem(50);
+      right: rem(66);
       top: 50%;
       z-index: var(--z-up);
       display: block;
@@ -313,7 +313,16 @@
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      transform: translateY(-50%);
+      transform: translate(50%, -50%);
+    }
+
+    svg {
+      position: absolute;
+      right: rem(66);
+      top: 50%;
+      z-index: var(--z-up);
+      display: block;
+      transform: translate(50%, -50%);
     }
 
     &:not(:last-child) {
@@ -409,6 +418,22 @@
   &:focus {
     border: rem(1) solid var(--black-color);
   }
+
+  // ****
+  @include bp-down("container") {
+    padding-right: calc(rem(33.96) + 3.82vw); // 86>56(1360>576)
+    padding-left: calc(rem(8) + 3.12vw); // 26>18(576>320)
+
+    &Wrapper {
+      &::after {
+        right: calc(rem(13.96) + 3.82vw); // 66>36(1320>576)
+      }
+
+      svg {
+        right: calc(rem(13.96) + 3.82vw); // 66>36(1320>576)
+      }
+    }
+  }
 }
 
 // **
@@ -456,7 +481,7 @@
     position: absolute;
     right: 0;
     top: calc(100% + rem(4));
-    z-index: var(--z-up);
+    z-index: var(--z-postup);
     border: rem(1) solid var(--mediumgray-color);
     border-radius: rem(4);
     padding-right: rem(10); // Для каст. скроллбара
@@ -470,7 +495,7 @@
 
     // &Dark {
     //   padding: rem(10) rem(20);
-    //   width: 200%;
+    //   width: 200%; 
     // }
 
     &Active {
@@ -484,7 +509,7 @@
     overflow: auto;
     margin: 0;
     padding: 0;
-    max-height: rem(180);
+    max-height: rem(160);
     background-color: var(--light-color);
   }
 

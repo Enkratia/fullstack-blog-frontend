@@ -1,9 +1,9 @@
 import React from "react";
 
-import { ListAuthorsSlider } from "./ListAuthorsSlider";
+import { ListAuthorsSlider } from "./listAuthorsSlider";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./ListAuthors.module.scss";
+import s from "./listAuthors.module.scss";
 
 export const ListAuthors: React.FC = () => {
   return (

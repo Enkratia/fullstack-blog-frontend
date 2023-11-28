@@ -8,7 +8,7 @@ import Link from "next/link";
 import { capitalize, formatDate2 } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./Post.module.scss";
+import s from "./post.module.scss";
 
 import Business from "../../../public/img/business.svg";
 import Startup from "../../../public/img/startup.svg";

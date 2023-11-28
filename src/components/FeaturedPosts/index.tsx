@@ -5,7 +5,7 @@ import Image from "next/image";
 import { formatDate } from "@/utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./FeaturedPosts.module.scss";
+import s from "./featuredPosts.module.scss";
 
 const allPosts: PostType[] = [
   {

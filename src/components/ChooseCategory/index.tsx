@@ -3,7 +3,7 @@ import React from "react";
 import { Categories } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./ChooseCategory.module.scss";
+import s from "./chooseCategory.module.scss";
 
 export const ChooseCategory: React.FC = () => {
   return (

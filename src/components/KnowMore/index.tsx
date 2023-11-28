@@ -4,7 +4,7 @@ import Image from "next/image";
 import { fetchKnowMoreQuery } from "@/fetchApi/fetchApi";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./KnowMore.module.scss";
+import s from "./knowMore.module.scss";
 
 // const data: KnowMoreType = {
 //   title: "Our team of creatives",

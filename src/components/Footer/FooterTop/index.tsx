@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import s from "./FooterTop.module.scss";
+import s from "./footerTop.module.scss";
 import Logo from "../../../../public/img/logo.svg";
 
 const basicLinks = [

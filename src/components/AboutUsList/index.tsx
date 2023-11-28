@@ -1,9 +1,9 @@
 import React from "react";
 
-import { AuthorCard } from ".././../components";
+import { AuthorCard } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./AboutUsList.module.scss";
+import s from "./aboutUsList.module.scss";
 
 const authorsList: UserType[] = [
   {

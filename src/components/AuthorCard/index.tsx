@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./AuthorCard.module.scss";
+import s from "./authorCard.module.scss";
 
 import Facebook from "../../../public/img/facebook.svg";
 import Twitter from "../../../public/img/twitter.svg";

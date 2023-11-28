@@ -5,6 +5,10 @@
   text-align: center;
   color: var(--black-color);
   background-color: var(--lavender-color);
+
+  @include bp-down("container") {
+    padding-block: calc(rem(44) + 1.87vw); // 80>50(1360>320)
+  }
 }
 
 .title {
@@ -12,6 +16,10 @@
   margin-bottom: rem(3);
   font: var(--h1-font);
   letter-spacing: rem(-2);
+
+  @include bp-down("container") {
+    font-size: calc(rem(40.15) + 0.57vw); // 48>42(1360>320)
+  }
 }
 
 .update {

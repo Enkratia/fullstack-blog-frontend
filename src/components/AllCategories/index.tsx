@@ -3,7 +3,7 @@ import React from "react";
 import { Categories } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./AllCategories.module.scss";
+import s from "./allCategories.module.scss";
 
 export const AllCategories: React.FC = () => {
   return (

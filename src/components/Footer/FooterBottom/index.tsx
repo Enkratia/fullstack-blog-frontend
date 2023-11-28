@@ -1,6 +1,6 @@
 import React from "react";
 
-import s from "./FooterBottom.module.scss";
+import s from "./footerBottom.module.scss";
 import cs from "../../../scss/helpers.module.scss";
 
 import Facebook from "../../../../public/img/facebook.svg";

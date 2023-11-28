@@ -1,11 +1,7 @@
 import React from "react";
-// import { notFound, useParams } from "next/navigation";
 
-import { CategoryCategories, CategoryPosts, CategoryTags } from "../../components";
-
-import cs from "../../scss/helpers.module.scss";
-import s from "./CategoryBlock.module.scss";
-import Close from "../../../public/img/close.svg";
+import s from "./categoryBlock.module.scss";
+import { CategoryLayer } from "./categoryLayer";
 
 const categories = ["startup", "business", "economy", "technology"];
 
@@ -120,20 +116,7 @@ const posts: PostType[] = [
 export const CategoryBlock: React.FC = () => {
   return (
     <section className={s.root}>
-      <div className={`${s.container} ${cs.container}`}>
-        <CategoryPosts />
-
-        <div className={s.sidebarWrapper}>
-          <aside className={s.sidebar}>
-            <CategoryCategories />
-            <CategoryTags />
-
-            <button className={s.close} aria-label="Close the modal window.">
-              <Close aria-hidden="true" />
-            </button>
-          </aside>
-        </div>
-      </div>
+      <CategoryLayer />
     </section>
   );
 };

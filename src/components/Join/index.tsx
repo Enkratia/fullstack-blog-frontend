@@ -4,7 +4,7 @@ import Link from "next/link";
 import { fetchJoinQuery } from "@/fetchApi/fetchApi";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./Join.module.scss";
+import s from "./join.module.scss";
 
 // const data: JoinType = {
 //   title: "Join our team to be a part of our story",

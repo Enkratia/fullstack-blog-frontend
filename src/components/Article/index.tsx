@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./Article.module.scss";
+import s from "./article.module.scss";
 
 type ArticleType = {
   obj: PostType;

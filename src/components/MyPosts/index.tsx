@@ -3,7 +3,7 @@ import React from "react";
 import { Article } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./MyPosts.module.scss";
+import s from "./myPosts.module.scss";
 
 const posts: PostType[] = [
   {

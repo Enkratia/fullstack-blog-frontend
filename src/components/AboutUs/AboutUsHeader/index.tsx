@@ -1,7 +1,7 @@
 import React from "react";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./AboutUsHeader.module.scss";
+import s from "./aboutUsHeader.module.scss";
 
 type AboutUsHeaderProps = {
   data: AboutUsStaticType;

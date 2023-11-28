@@ -9,7 +9,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { formatDate3 } from "@/utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./WhatToReadNextSlider.module.scss";
+import s from "./whatToReadNextSlider.module.scss";
 
 type WhatToReadNextSliderProps = {
   nextPosts: PostType[];

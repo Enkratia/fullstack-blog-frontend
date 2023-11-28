@@ -5,7 +5,7 @@ import Image from "next/image";
 import { fetchWhyWeStartedQuery } from "@/fetchApi/fetchApi";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./WhyWeStarted.module.scss";
+import s from "./whyWeStarted.module.scss";
 
 // const data: WhyWeStartedType = {
 //   imageUrl: "http://localhost:3001/api/images/1701100182000-1789x1006.png",

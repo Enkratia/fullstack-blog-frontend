@@ -1,74 +1,74 @@
 // Common sections
-export * from "./Join";
+export * from "./join";
 
 // Commons components
-export * from "./SizeImage";
-export * from "./Categories";
-export * from "./AuthorCard";
-export * from "./Article";
+export * from "./sizeImage";
+export * from "./categories";
+export * from "./authorCard";
+export * from "./article";
 
 // Layout
-export * from "./Header";
-export * from "./Footer";
+export * from "./header";
+export * from "./footer";
 
 // **
-export * from "./Footer/FooterTop";
-export * from "./Footer/FooterMid";
-export * from "./Footer/FooterBottom";
+export * from "./footer/footerTop";
+export * from "./footer/footerMid";
+export * from "./footer/footerBottom";
 
 // Home
-export * from "./Hero";
-export * from "./FeaturedPosts";
-export * from "./UsMission";
-export * from "./ChooseCategory";
-export * from "./WhyWeStarted";
-export * from "./ListAuthors";
-export * from "./FeaturedIn";
-export * from "./Testimonials";
+export * from "./hero";
+export * from "./featuredPosts";
+export * from "./usMission";
+export * from "./chooseCategory";
+export * from "./whyWeStarted";
+export * from "./listAuthors";
+export * from "./featuredIn";
+export * from "./testimonials";
 
 // **
-export * from "./Testimonials/TestimonialsSlider";
+export * from "./testimonials/testimonialsSlider";
 // export * from "./ListAuthors/ListAuthorsSlider";
 
 // BlogPage
-export * from "./BlogHeader";
-export * from "./AllPosts";
-export * from "./AllCategories";
+export * from "./blogHeader";
+export * from "./allPosts";
+export * from "./allCategories";
 
 // BlogPostPage
-export * from "./Post";
-export * from "./WhatToReadNext";
+export * from "./post";
+export * from "./whatToReadNext";
 
 // AboutUsPage
-export * from "./AboutUs";
-export * from "./KnowMore";
-export * from "./WhyThisBlog";
-export * from "./AboutUsList";
+export * from "./aboutUs";
+export * from "./knowMore";
+export * from "./whyThisBlog";
+export * from "./aboutUsList";
 
 // **
-export * from "./AboutUs/AboutUsHeader";
-export * from "./AboutUs/AboutUsOverview";
-export * from "./AboutUs/AboutUsVision";
+export * from "./aboutUs/aboutUsHeader";
+export * from "./aboutUs/aboutUsOverview";
+export * from "./aboutUs/aboutUsVision";
 
 // BlogCategoryPage
-export * from "./CategoryHeader";
-export * from "./CategoryBlock";
+export * from "./categoryHeader";
+export * from "./categoryBlock";
 
 // **
-export * from "./CategoryBlock/CategoryPosts";
-export * from "./CategoryBlock/CategoryCategories";
-export * from "./CategoryBlock/CategoryTags";
+export * from "./categoryBlock/categoryPosts";
+export * from "./categoryBlock/categoryCategories";
+export * from "./categoryBlock/categoryTags";
 
 // AuthorPage
-export * from "./AuthorHeader";
-export * from "./MyPosts";
+export * from "./authorHeader";
+export * from "./myPosts";
 
 // ContactUsPage
-export * from "./ContactUs";
+export * from "./contactUs";
 
 // **
-export * from "./ContactUs/ContactUsForm";
+export * from "./contactUs/contactUsForm";
 
 // PrivacyPolicyPage
-export * from "./PrivacyPolicyHeader";
-export * from "./PrivacyPolicyBlock";
+export * from "./privacyPolicyHeader";
+export * from "./privacyPolicyBlock";

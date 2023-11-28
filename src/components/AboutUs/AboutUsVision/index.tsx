@@ -1,7 +1,7 @@
 import React from "react";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./AboutUsVision.module.scss";
+import s from "./aboutUsVision.module.scss";
 
 type AboutUsVisionProps = {
   data: AboutUsStaticType;

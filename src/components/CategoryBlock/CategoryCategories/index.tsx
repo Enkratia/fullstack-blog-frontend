@@ -4,7 +4,7 @@ import Link from "next/link";
 import { capitalize } from "@/utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./CategoryCategories.module.scss";
+import s from "./categoryCategories.module.scss";
 
 import Business from "../../../../public/img/business.svg";
 import Startup from "../../../../public/img/startup.svg";

@@ -12,6 +12,16 @@
   grid-template-columns: minmax(0, rem(251)) minmax(0, rem(669));
   padding-top: rem(128);
   padding-bottom: rem(126);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(49.54) + 5.76vw); // 128>68(1360>320)
+    padding-bottom: calc(rem(47.54) + 5.77vw); // 126>66(1360>320)
+  }
+
+  @include bp-down("678") {
+    grid-template-columns: 1fr;
+    row-gap: rem(25);
+  }
 }
 
 // **
@@ -25,6 +35,10 @@
       position: relative;
       padding-top: 117%;
     }
+
+    @include bp-down("678") {
+      max-width: rem(400);
+    }
   }
 }
 
@@ -34,6 +48,10 @@
   margin-bottom: rem(24);
   font: var(--h1-font);
   letter-spacing: rem(-2);
+
+  @include bp-down("container") {
+    font-size: calc(rem(40.15) + 0.57vw); // 48>42(1360>320)
+  }
 }
 
 .descr {

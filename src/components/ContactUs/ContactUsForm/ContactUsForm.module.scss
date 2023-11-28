@@ -3,6 +3,10 @@
 .root {
   color: var(--black-color);
   background-color: var(--light-color);
+
+  li {
+    word-break: break-all;
+  }
 }
 
 .inputWrapper {

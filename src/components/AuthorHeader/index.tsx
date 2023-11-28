@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./AuthorHeader.module.scss";
+import s from "./authorHeader.module.scss";
 
 import Facebook from "../../../public/img/facebook.svg";
 import Twitter from "../../../public/img/twitter.svg";

@@ -3,6 +3,11 @@
 .root {
   padding-top: rem(128);
   padding-bottom: rem(128);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(23.38) + 7.69vw); // 128>48(1360>320)
+    padding-bottom: calc(rem(36.46) + 6.73vw); // 128>58(1360>320)
+  }
 }
 
 .article {
@@ -10,9 +15,21 @@
 
   &Title1 {
     margin: 0;
-    margin-bottom: rem(32);
+    margin-bottom: rem(16);
     font: var(--h1-font);
     letter-spacing: rem(-2);
+
+    &:not(:first-child) {
+      margin-top: rem(48);
+
+      @include bp-down("container") {
+        margin-top: calc(rem(27.08) + 1.54vw); // 48>32(1360>320)
+      }
+    }
+
+    @include bp-down("container") {
+      font-size: calc(rem(40.15) + 0.57vw); // 48>42(1360>320)
+    }
   }
 
   &Title2 {
@@ -21,6 +38,14 @@
     margin-bottom: rem(16);
     font: var(--h2-font);
     letter-spacing: rem(-2);
+
+    &:not(:first-child) {
+      margin-top: rem(48);
+
+      @include bp-down("container") {
+        margin-top: calc(rem(27.08) + 1.54vw); // 48>32(1360>320)
+      }
+    }
 
     @include bp-down("container") {
       margin-top: calc(rem(27.08) + 1.54vw); // 48>32(1360>320)

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Article } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./AllPosts.module.scss";
+import s from "./allPosts.module.scss";
 
 const posts: PostType[] = [
   {

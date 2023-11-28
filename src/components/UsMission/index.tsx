@@ -4,7 +4,7 @@ import Link from "next/link";
 import { fetchUsMissionQuery } from "../../fetchApi/fetchApi";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./UsMission.module.scss";
+import s from "./usMission.module.scss";
 
 // const data: UsMissionType = {
 //   about: {

@@ -7,7 +7,7 @@ import { notFound, useParams } from "next/navigation";
 import { capitalize } from "@/utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./CategoryHeader.module.scss";
+import s from "./categoryHeader.module.scss";
 
 const categories = ["startup", "business", "economy", "technology"];
 

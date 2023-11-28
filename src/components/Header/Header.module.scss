@@ -1,6 +1,11 @@
 @use "../../scss/utils/" as *;
 
 .root {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: var(--z-modal);
+  width: 100%;
   background-color: var(--black-color);
 }
 
