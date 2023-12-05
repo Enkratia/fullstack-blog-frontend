@@ -1,0 +1,30 @@
+@use "../../scss//utils/" as *;
+
+.root {
+  border-radius: rem(4);
+  padding: rem(48);
+  width: 100%;
+  color: var(--black-color);
+  background-color: var(--light-color);
+}
+
+.title {
+  margin-bottom: rem(60);
+  text-align: center;
+}
+
+.btn {
+  margin-bottom: rem(16);
+}
+
+.descr {
+  font: var(--body01-font);
+
+  &Text {
+    margin-right: rem(6);
+  }
+
+  &Link {
+    color: var(--purple-color);
+  }
+}

@@ -159,7 +159,7 @@ export const ContactUsForm: React.FC = () => {
           name="contact-us-message"></textarea>
       </div>
 
-      <button type="submit" className={`${s.submit} ${cs.btn}`}>
+      <button type="submit" className={`${s.submit} ${cs.btn} ${cs.btnLg}`}>
         Send Message
       </button>
     </form>

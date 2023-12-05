@@ -18,6 +18,13 @@ export const CategoryLayer: React.FC = () => {
   const { isMQ1024 } = useMediaQuery();
   const [isVisible, setIsVisible] = React.useState(false);
 
+  React.useEffect(() => {
+    if (isMQ1024) {
+      setIsVisible(false);
+      setOverflowHidden(false);
+    }
+  }, [isMQ1024]);
+
   // **
   const onSidebarClick = () => {
     setIsVisible((b) => !b);

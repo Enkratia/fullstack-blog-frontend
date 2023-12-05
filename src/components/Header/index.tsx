@@ -1,9 +1,11 @@
 import React from "react";
 import Link from "next/link";
 
-import Logo from "../../../public/img/logo.svg";
+import { SignBtn } from "../../components";
+
 import cs from "../../scss/helpers.module.scss";
 import s from "./header.module.scss";
+import Logo from "../../../public/img/logo.svg";
 
 const basicLinks = [
   {
@@ -39,9 +41,7 @@ export const Header: React.FC = () => {
             </Link>
           ))}
 
-          <Link href="#" className={s.link}>
-            Sign-in/up
-          </Link>
+          <SignBtn className={s.link} />
         </nav>
 
         <Link href="#subscribe-form" className={`${cs.btn} ${cs.btnWhite}`}>

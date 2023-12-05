@@ -17,7 +17,6 @@ import s from "./knowMore.module.scss";
 
 export const KnowMore: React.FC = async () => {
   const { data, isError } = await fetchKnowMoreQuery();
-  console.log(data, isError);
 
   return (
     <section className={s.root}>

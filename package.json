@@ -13,6 +13,7 @@
     "@svgr/webpack": "^8.1.0",
     "embla-carousel-react": "^8.0.0-rc14",
     "next": "^14.0.3",
+    "next-auth": "^4.24.5",
     "next-mdx-remote": "^4.4.1",
     "normalize.css": "^8.0.1",
     "overlayscrollbars-react": "^0.5.3",

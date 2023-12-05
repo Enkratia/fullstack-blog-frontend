@@ -1,17 +1,22 @@
+export * from "./_authProvider";
+export * from "./_routesProtector";
+
 // Common sections
 export * from "./join";
 
-// Commons components
+// Common components
 export * from "./sizeImage";
 export * from "./categories";
 export * from "./authorCard";
 export * from "./article";
+export * from "./signinBlock";
 
 // Layout
 export * from "./header";
 export * from "./footer";
 
 // **
+export * from "./header/signBtn";
 export * from "./footer/footerTop";
 export * from "./footer/footerMid";
 export * from "./footer/footerBottom";

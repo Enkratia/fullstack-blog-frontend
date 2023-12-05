@@ -139,6 +139,12 @@
     background-color: var(--light-color);
   }
 
+  &Lg {
+    padding-block: rem(15);
+    width: 100%;
+    font: var(--h4-font);
+  }
+
   &:hover {
     border: rem(1) solid var(--yellow-hover-color);
     background-color: var(--yellow-hover-color);
