@@ -36,6 +36,6 @@ type TestimonialType = {
   id: number;
   text: type;
   imageUrl: type;
-  fullName: type;
+  fullname: type;
   address: type;
 };

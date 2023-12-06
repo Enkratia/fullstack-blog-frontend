@@ -13,21 +13,21 @@ const testimonials: TestimonialType[] = [
     id: 0,
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporliqua eius tempor dipiscing elit.",
     imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
-    fullName: "Jonathan Vallem",
+    fullname: "Jonathan Vallem",
     address: "New york, USA",
   },
   {
     id: 2,
     text: "Lorem ipsum t dolore magna aliqua dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ed  sed do eiusmod tempor incididunt, t dolore magna aliqua dolor sit.",
     imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
-    fullName: "Winston Leski",
+    fullname: "Winston Leski",
     address: "New york, USA",
   },
   {
     id: 3,
     text: "Lorem adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo aliquid beatae aperiam, sed ullam odio incidunt suscipit quidem quam error in. Beatae rerum quae modi ullam, ipsam commodi doloremque veniam excepturi est. Consequuntur quibusdam ratione numquam fugiat id molestias. Doloremque debitis eius, ullam voluptatum sapiente soluta suscipit excepturi inventore explicabo laudantium nulla quibusdam architecto ipsa impedit rerum laboriosam dolorem in eveniet nobis magni sequi eligendi amet voluptatem? Ullam minus nostrum id in culpa tempora sapiente ipsa rem eveniet. Odio, dolorum minima quisquam quos accusantium vitae fuga incidunt aut illo suscipit nemo molestiae dolore ab porro, asperiores impedit deleniti eveniet ea!",
     imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
-    fullName: "William Bradly",
+    fullname: "William Bradly",
     address: "New york, USA",
   },
 ];
@@ -143,7 +143,7 @@ export const TestimonialsSlider: React.FC = () => {
               </div>
               <div className={s.bottom}>
                 <div className={s.metadata}>
-                  <span className={s.fullname}>{obj.fullName}</span>
+                  <span className={s.fullname}>{obj.fullname}</span>
                   <span className={s.address}>{obj.address}</span>
                 </div>
               </div>

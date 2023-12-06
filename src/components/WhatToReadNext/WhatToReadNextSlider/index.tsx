@@ -32,7 +32,7 @@ export const WhatToReadNextSlider: React.FC<WhatToReadNextSliderProps> = ({ next
                 By
                 <Link
                   href={`/users/${obj.user.id}`}
-                  className={cs.metadataName}>{` ${obj.user.firstName} ${obj.user.lastName}`}</Link>
+                  className={cs.metadataName}>{` ${obj.user.fullname}`}</Link>
               </span>
 
               <span className={cs.metadataItem}>{formatDate3(obj.createdAt)}</span>

@@ -20,8 +20,7 @@ const allPosts: PostType[] = [
     isFeatured: false,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "John Doe",
       imageUrl: "",
       profession: "",
       company: "",
@@ -41,8 +40,7 @@ const allPosts: PostType[] = [
     isFeatured: false,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "John Doe",
       imageUrl: "",
       profession: "",
       company: "",
@@ -62,8 +60,7 @@ const allPosts: PostType[] = [
     isFeatured: false,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "John Doe",
       imageUrl: "",
       profession: "",
       company: "",
@@ -83,8 +80,7 @@ const allPosts: PostType[] = [
     isFeatured: false,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "John Doe",
       imageUrl: "",
       profession: "",
       company: "",
@@ -106,8 +102,7 @@ const post: PostType = {
   isFeatured: true,
   user: {
     id: 1,
-    firstName: "John",
-    lastName: "Doe",
+    fullname: "John Doe",
     imageUrl: "",
     profession: "",
     company: "",
@@ -135,9 +130,7 @@ export const FeaturedPosts: React.FC = () => {
                 By
                 <Link
                   href={`/users/${post.user.id}`}
-                  className={
-                    cs.metadataName
-                  }>{` ${post.user.firstName} ${post.user.lastName}`}</Link>
+                  className={cs.metadataName}>{` ${post.user.fullname}`}</Link>
               </span>
               <span className={cs.metadataItem}>{formatDate(post.createdAt)}</span>
             </div>
@@ -169,9 +162,7 @@ export const FeaturedPosts: React.FC = () => {
                       By
                       <Link
                         href={`/users/${obj.user.id}`}
-                        className={
-                          cs.metadataName
-                        }>{` ${post.user.firstName} ${obj.user.lastName}`}</Link>
+                        className={cs.metadataName}>{` ${post.user.fullname}`}</Link>
                     </span>
                     <span className={cs.metadataItem}>{formatDate(obj.createdAt)}</span>
                   </div>

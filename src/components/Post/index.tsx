@@ -27,8 +27,7 @@ const post: PostType = {
   isFeatured: false,
   user: {
     id: 1,
-    firstName: "Andrew",
-    lastName: "Jonson",
+    fullname: "John Doe",
     imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
     profession: "",
     company: "",
@@ -64,9 +63,9 @@ export const Post: React.FC = () => {
             </div>
 
             <div className={s.userData}>
-              <Link
-                href=""
-                className={s.userFullname}>{`${post.user.firstName} ${post.user.lastName}`}</Link>
+              <Link href="" className={s.userFullname}>
+                {post.user.fullname}
+              </Link>
               <span className={s.userDate}>{`Posted on ${formatDate2(post.createdAt)}`}</span>
             </div>
           </div>

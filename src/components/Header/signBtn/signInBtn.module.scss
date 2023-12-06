@@ -1,0 +1,84 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  position: relative;
+  z-index: var(--z-tooltip);
+}
+
+.btn {
+  position: relative;
+  margin-right: 0;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: rem(2);
+    background-color: var(--light-color);
+    transform: scale(1);
+    transform-origin: center;
+    transition: transform 0.3s;
+  }
+
+  &:not(:last-child) {
+    margin-right: 0;
+  }
+
+  &:focus-within {
+    &::before {
+      transform: scale(0);
+    }
+  }
+
+  &:hover {
+    &::before {
+      transform: scale(0);
+    }
+  }
+}
+
+.list {
+  position: absolute;
+  left: rem(-10);
+  top: calc(100% + rem(8));
+  list-style: none;
+  margin: 0;
+  border: rem(1) solid var(--mediumgray-color);
+  border-radius: rem(4);
+  padding: 0;
+  padding-block: rem(8);
+  background-color: var(--light-color);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s;
+
+  &Active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.item {
+  padding-block: rem(6);
+  padding-inline: rem(12);
+  font: var(--body02-font);
+  white-space: nowrap;
+  color: var(--black-color);
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: var(--yellow-hover-color);
+  }
+}
+
+.link {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}

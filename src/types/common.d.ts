@@ -22,8 +22,7 @@ type UserLinksType = [
 type UserType = {
   id: number;
   imageUrl: string;
-  firstName: string;
-  lastName: string;
+  fullname: string;
   profession: string;
   company: string;
   representation: string;

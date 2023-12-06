@@ -30,7 +30,7 @@ type AuthorCardProps = {
 };
 
 export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
-  const fullname = `${author.firstName} ${author.lastName}`;
+  const fullname = `${author.fullname}`;
 
   return (
     <article className={s.root}>
@@ -41,7 +41,7 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
       </div>
 
       <Link href="">
-        <p className={s.fullname}>{`${author.firstName} ${author.lastName}`}</p>
+        <p className={s.fullname}>{`${author.fullname}`}</p>
       </Link>
       <span className={s.info}>{`${author.profession} @${author.company}`}</span>
 

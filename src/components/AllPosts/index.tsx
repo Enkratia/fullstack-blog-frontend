@@ -19,8 +19,7 @@ const posts: PostType[] = [
     isFeatured: true,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "Floyd Miles",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
       profession: "",
       company: "",
@@ -40,8 +39,7 @@ const posts: PostType[] = [
     isFeatured: true,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "Floyd Miles",
       imageUrl: "",
       profession: "",
       company: "",
@@ -61,8 +59,7 @@ const posts: PostType[] = [
     isFeatured: true,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "Floyd Miles",
       imageUrl: "",
       profession: "",
       company: "",
@@ -82,8 +79,7 @@ const posts: PostType[] = [
     isFeatured: true,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "Floyd Miles",
       imageUrl: "",
       profession: "",
       company: "",
@@ -103,8 +99,7 @@ const posts: PostType[] = [
     isFeatured: true,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "Floyd Miles",
       imageUrl: "",
       profession: "",
       company: "",

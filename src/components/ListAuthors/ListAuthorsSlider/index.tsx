@@ -11,8 +11,7 @@ const authorsList: UserType[] = [
   {
     id: 1,
     imageUrl: "https://i.postimg.cc/7YBBcBS5/5b103af032f344457c097e10aa7ebd86.png",
-    firstName: "Floyd",
-    lastName: "Miles",
+    fullname: "John Doe",
     profession: "Content Writer",
     company: "Company",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
@@ -21,8 +20,7 @@ const authorsList: UserType[] = [
   {
     id: 2,
     imageUrl: "https://i.postimg.cc/c419Fqtq/94c1db47acb8141c7502d8724bd28fbd.png",
-    firstName: "Dianne",
-    lastName: "Russell",
+    fullname: "John Doe",
     profession: "Content Writer",
     company: "Company",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
@@ -31,8 +29,7 @@ const authorsList: UserType[] = [
   {
     id: 3,
     imageUrl: "https://i.postimg.cc/QNJYgNtk/e2521d1f9982ee7c506948d0020e937f.png",
-    firstName: "Jenny",
-    lastName: "Wilson",
+    fullname: "John Doe",
     profession: "Content Writer",
     company: "Company",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
@@ -41,8 +38,7 @@ const authorsList: UserType[] = [
   {
     id: 4,
     imageUrl: "https://i.postimg.cc/zGVd1nk0/f310490df993fe9cb9b6b77f5e1512cb.png",
-    firstName: "Leslie",
-    lastName: "Alexander",
+    fullname: "John Doe",
     profession: "Content Writer",
     company: "Company",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
@@ -51,8 +47,7 @@ const authorsList: UserType[] = [
   {
     id: 5,
     imageUrl: "https://i.postimg.cc/zGVd1nk0/f310490df993fe9cb9b6b77f5e1512cb.png",
-    firstName: "Leslie",
-    lastName: "Alexander",
+    fullname: "John Doe",
     profession: "Content Writer",
     company: "Company",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",

@@ -19,8 +19,7 @@ const post: PostType = {
   isFeatured: true,
   user: {
     id: 1,
-    firstName: "John",
-    lastName: "Doe",
+    fullname: "John Doe",
     imageUrl: "",
     profession: "",
     company: "",
@@ -51,7 +50,7 @@ export const Hero: React.FC = () => {
               By
               <Link
                 href={`/users/${post.user.id}`}
-                className={`${cs.metadataName} ${cs.metadataNameGold}`}>{` ${post.user.firstName} ${post.user.lastName}`}</Link>
+                className={`${cs.metadataName} ${cs.metadataNameGold}`}>{` ${post.user.fullname}`}</Link>
             </span>
             <span className={`${s.metadataItem} ${cs.metadataItem} ${cs.metadataItemGold}`}>
               {formatDate(post.createdAt)}

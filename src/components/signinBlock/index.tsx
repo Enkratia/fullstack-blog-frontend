@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
 
+import { useValidateForm } from "../../utils/customHooks";
 import { FRONTEND_URL } from "../../utils/constants";
 
 import cs from "../../scss/helpers.module.scss";
@@ -16,14 +17,26 @@ type SigninBlockProps = {
 };
 
 export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl }) => {
+  const callback = callbackUrl ? `?callbackUrl=${callbackUrl}` : "";
+
   const router = useRouter();
   const [fields, setFields] = useImmer({ email: "", password: "" });
 
+  const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();
+
+  // **
+  const validateForm = () => {
+    return [isValidEmail, isValidPassLength].every((el) => el.includes("inputWrapperSuccess"));
+  };
+
+  // **
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFields((o) => {
       o.email = e.target.value;
       return o;
     });
+
+    validateEmail(e.target.value);
   };
 
   const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,12 +44,16 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl }) => {
       o.password = e.target.value;
       return o;
     });
+
+    validatePassLength(e.target.value);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const data = await signIn("credentials", {
+    if (!validateForm()) return;
+
+    await signIn("credentials", {
       email: fields.email,
       password: fields.password,
       redirect: false,
@@ -46,10 +63,12 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl }) => {
   };
 
   return (
-    <form className={`${s.root} ${cs.container} ${cs.container768}`}>
+    <form onClick={(e) => e.preventDefault} className={s.root}>
       <p className={`${s.title} ${cs.title}`}>Sign-in</p>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`}>
+      <div
+        className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidEmail]}`}
+        data-validity="email">
         <input
           onChange={onEmailChange}
           className={`${s.input} ${cs.input}`}
@@ -59,7 +78,9 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl }) => {
         />
       </div>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`}>
+      <div
+        className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidPassLength]}`}
+        data-validity="pass-length">
         <input
           onChange={onPasswordChange}
           className={`${s.input} ${cs.input}`}
@@ -75,7 +96,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl }) => {
 
       <div className={s.descr}>
         <span className={s.descrText}>Don't have an account?</span>
-        <Link href="/signup" className={s.descrLink}>
+        <Link href={`/signup${callback}`} className={s.descrLink} scroll={false}>
           Sign-up
         </Link>
       </div>

@@ -5,11 +5,13 @@ export * from "./_routesProtector";
 export * from "./join";
 
 // Common components
+export * from "./modalPC";
 export * from "./sizeImage";
 export * from "./categories";
 export * from "./authorCard";
 export * from "./article";
 export * from "./signinBlock";
+export * from "./signupBlock";
 
 // Layout
 export * from "./header";

@@ -4,6 +4,12 @@ import { JWT } from "next-auth/jwt";
 
 import { BACKEND_URL } from "./constants";
 
+type BodyType = {
+  email: string;
+  password: string;
+  fullname?: string;
+};
+
 const refreshToken = async (token: JWT): Promise<JWT> => {
   const res = await fetch(BACKEND_URL + "/auth/refresh", {
     method: "POST",
@@ -37,23 +43,32 @@ export const authOptions: NextAuthOptions = {
           label: "Password",
           type: "password",
         },
+        fullname: {
+          label: "Fullname",
+          type: "text",
+        },
       },
       async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) return null;
-        const { email, password } = credentials;
+        const { email, password, fullname = null } = credentials;
 
-        const res = await fetch(BACKEND_URL + "/auth/login", {
+        const pathname = fullname ? "/auth/register" : "/auth/login";
+
+        const body: BodyType = {
+          email,
+          password,
+        };
+
+        if (fullname) body.fullname = fullname;
+
+        const res = await fetch(BACKEND_URL + pathname, {
           method: "POST",
-          body: JSON.stringify({
-            email,
-            password,
-          }),
+          body: JSON.stringify(body),
           headers: {
             "Content-Type": "application/json",
           },
         });
 
-        console.log(res.status);
         if (!res.status.toString().startsWith("2")) {
           return null;
         }

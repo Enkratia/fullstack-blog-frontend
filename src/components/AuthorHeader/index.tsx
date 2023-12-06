@@ -27,8 +27,7 @@ const socialIcons = [
 const user: UserType = {
   id: 1,
   imageUrl: "https://i.postimg.cc/7YBBcBS5/5b103af032f344457c097e10aa7ebd86.png",
-  firstName: "Floyd",
-  lastName: "Miles",
+  fullname: "Floyd Miles",
   profession: "Content Writer",
   company: "Company",
   representation:
@@ -37,7 +36,7 @@ const user: UserType = {
 };
 
 export const AuthorHeader: React.FC = () => {
-  const fullname = `${user.firstName} ${user.lastName}`;
+  const fullname = `${user.fullname}`;
 
   return (
     <section className={s.root}>

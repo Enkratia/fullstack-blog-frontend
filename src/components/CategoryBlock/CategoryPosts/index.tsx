@@ -17,8 +17,7 @@ const posts: PostType[] = [
     isFeatured: true,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "John Doe",
       imageUrl: "",
       profession: "",
       company: "",
@@ -38,8 +37,7 @@ const posts: PostType[] = [
     isFeatured: true,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "John Doe",
       imageUrl: "",
       profession: "",
       company: "",
@@ -59,8 +57,7 @@ const posts: PostType[] = [
     isFeatured: true,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "John Doe",
       imageUrl: "",
       profession: "",
       company: "",
@@ -80,8 +77,7 @@ const posts: PostType[] = [
     isFeatured: true,
     user: {
       id: 1,
-      firstName: "John",
-      lastName: "Doe",
+      fullname: "John Doe",
       imageUrl: "",
       profession: "",
       company: "",

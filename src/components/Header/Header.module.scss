@@ -5,7 +5,11 @@
   left: 0;
   top: 0;
   z-index: var(--z-modal);
+  padding-right: var(--scrollbar-offset);
   width: 100%;
+}
+
+.wrapper {
   background-color: var(--black-color);
 }
 
