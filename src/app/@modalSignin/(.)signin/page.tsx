@@ -3,7 +3,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 
-import { ModalPC, SigninBlock } from "../../../components";
+import { ModalPA, SigninBlock } from "../../../components";
 
 type ModalSigninPageProps = {
   searchParams: Record<"callbackUrl", string>;
@@ -17,9 +17,9 @@ const ModalSigninPage: React.FC<ModalSigninPageProps> = ({ searchParams }) => {
   }
 
   return (
-    <ModalPC callbackUrl={searchParams.callbackUrl}>
+    <ModalPA callbackUrl={searchParams.callbackUrl}>
       <SigninBlock callbackUrl={searchParams.callbackUrl} />
-    </ModalPC>
+    </ModalPA>
   );
 };
 

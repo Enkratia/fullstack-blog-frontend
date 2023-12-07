@@ -1,20 +1,30 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from "react-redux";
 
 // import { backendApi } from "./backendApi";
-// import auth from "./authSlice/slice";
+import menuBtn from "./menuBtnSlice/slice";
 
-export const store = configureStore({
-  reducer: {
-    // auth,
-    // [backendApi.reducerPath]: backendApi.reducer,
-  },
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(backendApi.middleware),
-});
+export const makeStore = () => {
+  return configureStore({
+    reducer: {
+      menuBtn,
+      // [backendApi.reducerPath]: backendApi.reducer,
+    },
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(backendApi.middleware),
+  });
+};
 
-export type RootState = ReturnType<typeof store.getState>;
+export type AppStore = ReturnType<typeof makeStore>;
 
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];
+
 export const useAppDispatch: () => AppDispatch = useDispatch;
-
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppStore: () => AppStore = useStore;
+
+// OLD
+// export type RootState = ReturnType<typeof store.getState>;
+// export type AppDispatch = typeof store.dispatch;
+// export const useAppDispatch: () => AppDispatch = useDispatch;
+// export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

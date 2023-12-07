@@ -10,10 +10,12 @@ import { useValidateForm } from "../../utils/customHooks";
 import { FRONTEND_URL } from "../../utils/constants";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./signupBlock.module.scss";
+import s from "../signinBlock/signinBlock.module.scss";
+import Close from "../../../public/img/close.svg";
 
 type SignupBlockProps = {
   callbackUrl: string;
+  onModalCloseClick?: () => void;
 };
 
 const initialFields = {
@@ -23,7 +25,7 @@ const initialFields = {
   passwordConfirm: "",
 };
 
-export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl }) => {
+export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
   const callback = callbackUrl ? `?callbackUrl=${callbackUrl}` : "";
 
   const router = useRouter();
@@ -39,6 +41,13 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl }) => {
     isValidPassConfirm,
     validatePassConfirm,
   } = useValidateForm();
+
+  // **
+  const onCloseClick = () => {
+    if (onModalCloseClick) {
+      onModalCloseClick();
+    }
+  };
 
   // **
   const validateForm = () => {
@@ -157,6 +166,14 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl }) => {
           Sign-in
         </Link>
       </div>
+
+      <button
+        onClick={onCloseClick}
+        className={s.close}
+        aria-label="Close the modal window."
+        type="button">
+        <Close aria-hidden={true} />
+      </button>
     </form>
   );
 };

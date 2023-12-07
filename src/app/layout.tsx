@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { Footer, Header, RoutesProtector, AuthProvider } from "../components";
+import { Footer, Header, RoutesProtector, AuthProvider, StoreProvider } from "../components";
 
 import "./globals.scss";
 
@@ -20,14 +20,16 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children, modalSignin, modalSig
   return (
     <html lang="en">
       <body>
-        <AuthProvider>
-          <RoutesProtector />
-          <Header />
-          {children}
-          {modalSignin}
-          {modalSignup}
-          <Footer />
-        </AuthProvider>
+        <StoreProvider>
+          <AuthProvider>
+            <RoutesProtector />
+            <Header />
+            {children}
+            {modalSignin}
+            {modalSignup}
+            <Footer />
+          </AuthProvider>
+        </StoreProvider>
       </body>
     </html>
   );

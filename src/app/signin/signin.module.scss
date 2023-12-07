@@ -1,0 +1,11 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(40);
+  padding-bottom: rem(60);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(0.77) + 2.88vw); // 40>10(1360>320)
+    padding-bottom: calc(rem(14.23) + 3.36vw); // 60>25(1360>320)
+  }
+}

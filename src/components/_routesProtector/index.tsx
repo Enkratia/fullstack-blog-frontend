@@ -15,9 +15,9 @@ export const RoutesProtector: React.FC = () => {
   const sP = useSearchParams().toString();
   const searchParams = sP ? "?" + sP : "";
 
-  const isForbidden = status === "unauthenticated" && !!pathname.match(/^(\/dddd)/);
+  const isForbidden = status === "unauthenticated" && !!pathname.match(/^(\/account)/);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (isForbidden) {
       router.replace(`/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`);
     }

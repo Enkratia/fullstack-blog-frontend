@@ -4,14 +4,14 @@ import { useRouter } from "next/navigation";
 import { setOverflowHidden } from "../../utils/customFunctions";
 import { FRONTEND_URL } from "../../utils/constants";
 
-import s from "./modalPC.module.scss";
+import s from "./modalPA.module.scss";
 
-type ModalPCProps = {
-  children: React.ReactNode;
+type ModalPAProps = {
+  children: any;
   callbackUrl: string;
 };
 
-export const ModalPC: React.FC<ModalPCProps> = ({ children, callbackUrl }) => {
+export const ModalPA: React.FC<ModalPAProps> = ({ children, callbackUrl }) => {
   const router = useRouter();
 
   React.useEffect(() => {
@@ -23,7 +23,7 @@ export const ModalPC: React.FC<ModalPCProps> = ({ children, callbackUrl }) => {
   }, []);
 
   // **
-  const onCloseClick = () => {
+  const onModalCloseClick = () => {
     router.push(callbackUrl || FRONTEND_URL);
   };
 
@@ -32,7 +32,7 @@ export const ModalPC: React.FC<ModalPCProps> = ({ children, callbackUrl }) => {
     if (!e.currentTarget.hasAttribute("data-modal-exit")) return;
     e.currentTarget.removeAttribute("data-modal-exit");
 
-    onCloseClick();
+    onModalCloseClick();
   };
 
   const onModalPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -43,9 +43,17 @@ export const ModalPC: React.FC<ModalPCProps> = ({ children, callbackUrl }) => {
     }
   };
 
+  const newChildren = React.cloneElement(children, {
+    onModalCloseClick,
+  });
+
   return (
-    <div onPointerDown={onModalPointerDown} onClick={onModalOutsideClick} className={s.root}>
-      <div className={s.wrapper}>{children}</div>
+    <div
+      onPointerDown={onModalPointerDown}
+      onClick={onModalOutsideClick}
+      className={s.root}
+      data-modal-auth>
+      <div className={s.wrapper}>{newChildren}</div>
     </div>
   );
 };

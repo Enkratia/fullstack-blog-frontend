@@ -1,0 +1,68 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  overflow: hidden;
+  padding: rem(20);
+}
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  border: none;
+  padding: 0;
+  width: rem(28);
+  height: rem(21);
+  background-color: transparent;
+  cursor: pointer;
+
+  &Show {
+    .line:nth-child(1) {
+      top: 50%;
+      opacity: 1;
+      transform: translateY(-50%) rotate(45deg);
+      transform-origin: center;
+    }
+
+    .line:nth-child(2) {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-100%);
+    }
+
+    .line:nth-child(3) {
+      top: 50%;
+      opacity: 1;
+      transform: translateY(-50%) rotate(-45deg);
+      transform-origin: center;
+    }
+  }
+}
+
+.line {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: rem(2);
+  background-color: var(--light-color);
+  transition: transform 0.2s ease-in-out, opacity 0.2s;
+
+  &:nth-child(1) {
+    left: 0;
+    top: 0;
+    transform: rotate(0);
+    transform-origin: center;
+  }
+
+  &:nth-child(2) {
+    left: 0;
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+
+  &:nth-child(3) {
+    left: 0;
+    bottom: 0;
+    transform: rotate(0);
+    transform-origin: center;
+  }
+}

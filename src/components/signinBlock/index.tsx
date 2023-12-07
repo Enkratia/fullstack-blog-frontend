@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
@@ -10,19 +11,27 @@ import { FRONTEND_URL } from "../../utils/constants";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./signinBlock.module.scss";
-import Link from "next/link";
+import Close from "../../../public/img/close.svg";
 
 type SigninBlockProps = {
   callbackUrl: string;
+  onModalCloseClick?: () => void;
 };
 
-export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl }) => {
+export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
   const callback = callbackUrl ? `?callbackUrl=${callbackUrl}` : "";
 
   const router = useRouter();
   const [fields, setFields] = useImmer({ email: "", password: "" });
 
   const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();
+
+  // **
+  const onCloseClick = () => {
+    if (onModalCloseClick) {
+      onModalCloseClick();
+    }
+  };
 
   // **
   const validateForm = () => {
@@ -100,6 +109,14 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl }) => {
           Sign-up
         </Link>
       </div>
+
+      <button
+        onClick={onCloseClick}
+        className={s.close}
+        aria-label="Close the modal window."
+        type="button">
+        <Close aria-hidden={true} />
+      </button>
     </form>
   );
 };

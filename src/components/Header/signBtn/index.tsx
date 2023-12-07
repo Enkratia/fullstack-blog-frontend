@@ -2,8 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 
 import { FRONTEND_URL } from "../../../utils/constants";
 
@@ -14,12 +14,21 @@ type SignBtnProps = {
 };
 
 export const SignBtn: React.FC<SignBtnProps> = ({ className }) => {
+  const router = useRouter();
+
   const { data: session } = useSession();
   const pathname = usePathname();
   const sP = useSearchParams().toString();
   const searchParams = sP ? "?" + sP : "";
 
   const [isActive, setIsActive] = React.useState(false);
+
+  // **
+  const onSignClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!!pathname.match(/(\/signin|\/signup)/)) {
+      e.preventDefault();
+    }
+  };
 
   // **
   const onDropdownClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -55,6 +64,13 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className }) => {
     document.documentElement.addEventListener("click", hideDropdown);
   };
 
+  const onExitClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const data = await signOut({ redirect: false });
+
+    router.push(data?.url || FRONTEND_URL);
+  };
+
   return session ? (
     <div onClick={onDropdownClick} onKeyDown={onDropdownKeyDown} className={s.root}>
       <button className={`${s.btn} ${className}`}>{session.user.fullname}</button>
@@ -71,7 +87,7 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className }) => {
           </Link>
         </li>
         <li className={s.item}>
-          <Link href="/" className={s.link}>
+          <Link onClick={onExitClick} href="/" className={s.link}>
             Exit
           </Link>
         </li>
@@ -79,9 +95,10 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className }) => {
     </div>
   ) : (
     <Link
+      onClick={onSignClick}
+      className={className}
       href={`/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`}
-      scroll={false}
-      className={className}>
+      scroll={false}>
       Sign-in/up
     </Link>
   );

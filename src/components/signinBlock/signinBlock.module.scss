@@ -16,6 +16,10 @@
 .title {
   margin-bottom: rem(60);
   text-align: center;
+
+  @include bp-down("container") {
+    margin-bottom: calc(rem(33.84) + 1.92vw); // (60>40)1360>320
+  }
 }
 
 .btn {
@@ -24,17 +28,49 @@
 
 .descr {
   font: var(--body01-font);
+  text-align: initial;
 
   &Text {
     margin-right: rem(6);
   }
 
   &Link {
+    white-space: nowrap;
     color: var(--purple-color);
     transition: opacity 0.3s;
 
     &:hover {
       opacity: 0.85;
     }
+  }
+}
+
+.close {
+  position: absolute;
+  right: rem(36);
+  top: rem(36);
+  display: none;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  cursor: pointer;
+
+  svg {
+    width: rem(36);
+    height: rem(36);
+    fill: var(--black-color);
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// **
+[data-modal-auth] {
+  .close {
+    display: block;
   }
 }

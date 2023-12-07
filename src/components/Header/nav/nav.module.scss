@@ -1,0 +1,68 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-right: rem(32);
+  text-align: revert;
+  transition: transform 0.3s;
+
+  &::before {
+    content: none;
+    position: sticky;
+    top: 0;
+    display: block;
+    margin-bottom: rem(12);
+    border-bottom: rem(1) solid var(--grayborder-color);
+    padding: rem(24);
+    padding-bottom: rem(12);
+    width: 100%;
+    font: var(--h2-font);
+    text-align: center;
+    background-color: var(--light-color);
+
+    @include bp-down("896") {
+      content: "Menu";
+    }
+  }
+
+  // &Wrapper {
+  //   @include bp-down("896") {
+  //     position: fixed;
+  //     left: 0;
+  //     top: 0;
+  //     z-index: var(--z-modal);
+  //     width: 100%;
+  //     height: 100%;
+  //     text-align: right;
+  //     background-color: transparent;
+  //     visibility: hidden;
+  //     transition: all 0.3s;
+  //   }
+
+  //   &Active {
+  //     background-color: var(--overlay-color);
+  //     visibility: visible;
+
+  //     >nav {
+  //       transform: translateX(0);
+  //     }
+  //   }
+  // }
+
+  @include bp-down("896") {
+    flex-direction: column;
+    overflow-y: auto;
+    margin-right: 0;
+    border-top-left-radius: rem(4);
+    border-bottom-left-radius: rem(4);
+    padding-bottom: rem(16);
+    width: 100%;
+    height: 100%;
+    max-width: rem(280);
+    max-height: 100vh;
+    background-color: var(--light-color);
+    transform: translateX(100%);
+  }
+}

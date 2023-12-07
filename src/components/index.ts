@@ -1,11 +1,13 @@
 export * from "./_authProvider";
 export * from "./_routesProtector";
+export * from "./_storeProvider";
 
 // Common sections
 export * from "./join";
 
 // Common components
-export * from "./modalPC";
+export * from "./modalPA";
+export * from "./modalR";
 export * from "./sizeImage";
 export * from "./categories";
 export * from "./authorCard";
@@ -18,7 +20,9 @@ export * from "./header";
 export * from "./footer";
 
 // **
+export * from "./header/nav";
 export * from "./header/signBtn";
+export * from "./header/openMenuBtn";
 export * from "./footer/footerTop";
 export * from "./footer/footerMid";
 export * from "./footer/footerBottom";
