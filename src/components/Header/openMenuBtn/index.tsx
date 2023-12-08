@@ -1,12 +1,12 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { toggleMenu } from "@/redux/menuBtnSlice/slice";
+import { useAppDispatch, useAppSelector } from "../../../redux/store";
+import { selectMenuBtn } from "../../../redux/menuBtnSlice/selectors";
+import { toggleMenu } from "../../../redux/menuBtnSlice/slice";
 
-import { setOverflowHidden } from "@/utils/customFunctions";
+import { setOverflowHidden } from "../../../utils/customFunctions";
 
 import s from "./openMenuBtn.module.scss";
-import { selectMenuBtn } from "@/redux/menuBtnSlice/selectors";
 
 export const OpenMenuBtn: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,16 +18,14 @@ export const OpenMenuBtn: React.FC = () => {
   };
 
   return (
-    <div className={s.root}>
-      <button
-        onClick={onBtnClick}
-        className={`${s.btn} ${isModalOpen ? s.btnShow : ""}`}
-        aria-label="Open menu."
-        aria-pressed={isModalOpen ? "true" : "false"}>
-        <span className={s.line} aria-hidden="true"></span>
-        <span className={s.line} aria-hidden="true"></span>
-        <span className={s.line} aria-hidden="true"></span>
-      </button>
-    </div>
+    <button
+      onClick={onBtnClick}
+      className={`${s.root} ${isModalOpen ? s.rootShow : ""}`}
+      aria-label="Open menu."
+      aria-pressed={isModalOpen ? "true" : "false"}>
+      <span className={s.line} aria-hidden="true"></span>
+      <span className={s.line} aria-hidden="true"></span>
+      <span className={s.line} aria-hidden="true"></span>
+    </button>
   );
 };

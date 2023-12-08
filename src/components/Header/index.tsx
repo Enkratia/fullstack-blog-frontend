@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { ModalR, Nav, OpenMenuBtn } from "../../components";
+import { ModalNav, Nav, OpenMenuBtn } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./header.module.scss";
@@ -18,9 +18,9 @@ export const Header: React.FC = () => {
 
           <OpenMenuBtn />
 
-          <ModalR>
+          <ModalNav>
             <Nav />
-          </ModalR>
+          </ModalNav>
 
           <Link href="#subscribe-form" className={`${cs.btn} ${cs.btnWhite}`}>
             Subscribe

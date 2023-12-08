@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { fetchWhyWeStartedQuery } from "@/fetchApi/fetchApi";
+import { fetchWhyWeStartedQuery } from "../../fetchApi/fetchApi";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./whyWeStarted.module.scss";

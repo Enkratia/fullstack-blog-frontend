@@ -2,32 +2,47 @@
 
 import React from "react";
 
-import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { selectMenuBtn } from "@/redux/menuBtnSlice/selectors";
-import { closeMenu, toggleMenu } from "@/redux/menuBtnSlice/slice";
+import { useAppDispatch, useAppSelector } from "../../../redux/store";
+import { selectMenuBtn } from "../../../redux/menuBtnSlice/selectors";
+import { closeMenu, toggleMenu } from "../../../redux/menuBtnSlice/slice";
 
-import { setOverflowHidden } from "../../utils/customFunctions";
+import { useMediaQuery } from "../../../utils/customHooks";
+import { setOverflowHidden } from "../../../utils/customFunctions";
 
-import s from "./modalR.module.scss";
+import s from "./modalNav.module.scss";
 
-type ModalRProps = {
+type ModalNavProps = {
   children: any;
 };
 
-export const ModalR: React.FC<ModalRProps> = ({ children }) => {
+export const ModalNav: React.FC<ModalNavProps> = ({ children }) => {
+  const { isMQ896 } = useMediaQuery();
+
   const dispatch = useAppDispatch();
   const { isModalOpen } = useAppSelector(selectMenuBtn);
 
   React.useEffect(() => {
+    if (isMQ896) {
+      cancelModal();
+    }
+
     return () => {
+      cancelModal();
+    };
+  }, [isMQ896]);
+
+  // **
+  const cancelModal = () => {
+    if (isModalOpen) {
       setOverflowHidden(false);
       dispatch(closeMenu());
-    };
-  }, []);
+    }
+  };
 
+  // **
   const onModalCloseClick = () => {
-    setOverflowHidden(isModalOpen);
     dispatch(toggleMenu());
+    setOverflowHidden(!isModalOpen);
   };
 
   const onModalOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -44,7 +59,7 @@ export const ModalR: React.FC<ModalRProps> = ({ children }) => {
   };
 
   const newChildren = React.cloneElement(children, {
-    onModalOutsideClick,
+    onModalCloseClick,
     isModalOpen,
   });
 

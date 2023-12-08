@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { fetchCategoryHeaderQuery } from "@/fetchApi/fetchApi";
+import { fetchCategoryHeaderQuery } from "../../fetchApi/fetchApi";
 
 import s from "./categories.module.scss";
 

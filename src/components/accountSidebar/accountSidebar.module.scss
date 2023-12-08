@@ -1,0 +1,53 @@
+/* stylelint-disable order/order */
+@use "../../scss/utils/" as *;
+
+.root {
+  border: rem(1) solid var(--grayborder-color);
+  border-radius: rem(4);
+  padding-block: rem(24);
+  height: max-content;
+  color: var(--black-color);
+}
+
+.title {
+  margin-bottom: rem(30);
+  padding: rem(24);
+  padding-top: rem(0);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  &:first-child {
+    border-top: rem(1) solid var(--grayborder-color);
+  }
+
+  &Active {
+    background-color: var(--yellow-color);
+
+    &:first-child {
+      border-color: var(--yellow-color);
+    }
+  }
+
+  &:hover {
+    background-color: var(--yellow-hover-color);
+
+    &:first-child {
+      border-color: var(--yellow-hover-color);
+    }
+  }
+}
+
+.link {
+  display: block;
+  padding-block: rem(8);
+  padding-inline: rem(24);
+  width: 100%;
+  height: 100%;
+  font: var(--body01-font);
+}

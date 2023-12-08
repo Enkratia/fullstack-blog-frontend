@@ -1,7 +1,7 @@
 import React from "react";
 
-import s from "./footerMid.module.scss";
 import cs from "../../../scss/helpers.module.scss";
+import s from "./footerMid.module.scss";
 
 export const FooterMid: React.FC = () => {
   return (

@@ -2,7 +2,7 @@ import React from "react";
 
 import { TestimonialsSlider } from "../../components";
 
-import { fetchTestimonialStaticQuery } from "@/fetchApi/fetchApi";
+import { fetchTestimonialStaticQuery } from "../../fetchApi/fetchApi";
 
 import s from "./testimonials.module.scss";
 import cs from "../../scss/helpers.module.scss";

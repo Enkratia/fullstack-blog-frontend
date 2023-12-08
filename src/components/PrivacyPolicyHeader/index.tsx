@@ -1,6 +1,6 @@
 import React from "react";
 
-import { formatDate2 } from "@/utils/customFunctions";
+import { formatDate2 } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./privacyPolicyHeader.module.scss";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Article } from "@/components";
+import { Article } from "../../../components";
 
 import s from "./categoryPosts.module.scss";
 

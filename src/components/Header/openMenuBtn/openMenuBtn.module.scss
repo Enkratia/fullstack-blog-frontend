@@ -1,17 +1,15 @@
 @use "../../../scss/utils/" as *;
 
 .root {
-  overflow: hidden;
-  padding: rem(20);
-}
-
-.btn {
   position: relative;
-  display: inline-flex;
+  display: none;
+  overflow: hidden;
+  margin-right: rem(20);
   border: none;
   padding: 0;
   width: rem(28);
   height: rem(21);
+  color: var(--black-color);
   background-color: transparent;
   cursor: pointer;
 
@@ -35,6 +33,10 @@
       transform: translateY(-50%) rotate(-45deg);
       transform-origin: center;
     }
+  }
+
+  @include bp-down("896") {
+    display: inline-flex;
   }
 }
 

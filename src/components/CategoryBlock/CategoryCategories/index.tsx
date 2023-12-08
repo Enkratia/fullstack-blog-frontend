@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { capitalize } from "@/utils/customFunctions";
+import { capitalize } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./categoryCategories.module.scss";

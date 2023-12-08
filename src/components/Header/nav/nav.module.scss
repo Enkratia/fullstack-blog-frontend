@@ -1,68 +1,108 @@
 @use "../../../scss/utils/" as *;
 
 .root {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  margin-right: rem(32);
-  text-align: revert;
-  transition: transform 0.3s;
 
-  &::before {
-    content: none;
-    position: sticky;
-    top: 0;
-    display: block;
-    margin-bottom: rem(12);
-    border-bottom: rem(1) solid var(--grayborder-color);
-    padding: rem(24);
-    padding-bottom: rem(12);
-    width: 100%;
-    font: var(--h2-font);
-    text-align: center;
-    background-color: var(--light-color);
+  &Wrapper {
+    position: relative;
+    display: inline-flex;
+    margin-right: rem(32);
+    color: var(--black-color);
 
     @include bp-down("896") {
-      content: "Menu";
+      flex-direction: column;
+      overflow-y: auto;
+      margin-right: 0;
+      border-top-left-radius: rem(4);
+      border-bottom-left-radius: rem(4);
+      padding-bottom: rem(16);
+      width: 100%;
+      height: 100%;
+      max-width: rem(280);
+      max-height: 100vh;
+      text-align: revert;
+      background-color: var(--light-color);
+      transform: translateX(100%);
+      transition: transform 0.3s;
     }
   }
 
-  // &Wrapper {
-  //   @include bp-down("896") {
-  //     position: fixed;
-  //     left: 0;
-  //     top: 0;
-  //     z-index: var(--z-modal);
-  //     width: 100%;
-  //     height: 100%;
-  //     text-align: right;
-  //     background-color: transparent;
-  //     visibility: hidden;
-  //     transition: all 0.3s;
-  //   }
-
-  //   &Active {
-  //     background-color: var(--overlay-color);
-  //     visibility: visible;
-
-  //     >nav {
-  //       transform: translateX(0);
-  //     }
-  //   }
-  // }
-
   @include bp-down("896") {
     flex-direction: column;
-    overflow-y: auto;
-    margin-right: 0;
-    border-top-left-radius: rem(4);
-    border-bottom-left-radius: rem(4);
-    padding-bottom: rem(16);
     width: 100%;
     height: 100%;
-    max-width: rem(280);
-    max-height: 100vh;
-    background-color: var(--light-color);
-    transform: translateX(100%);
+  }
+}
+
+// **
+.head {
+  position: sticky;
+  top: 0;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: rem(18);
+  border-bottom: rem(1) solid var(--grayborder-color);
+  padding-block: rem(18);
+  padding-inline: rem(24);
+  width: 100%;
+  background-color: var(--light-color);
+
+  @include bp-down("896") {
+    display: flex;
+  }
+}
+
+.title {
+  font: var(--h2-font);
+}
+
+.close {
+  display: inline-flex;
+  border: none;
+  padding: 0;
+  color: var(--black-color);
+  background-color: transparent;
+  transition: opacity 0.3s;
+  cursor: pointer;
+
+  svg {
+    width: rem(24);
+    height: rem(24);
+    fill: currentcolor;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// **
+.link {
+  font: var(--body01-font);
+  color: var(--light-color);
+
+  &:not(:last-child) {
+    margin-right: rem(24);
+  }
+
+  &:hover {
+    color: var(--yellow-hover-color);
+    transition: color 0.3s;
+  }
+
+  @include bp-down("896") {
+    padding-inline: rem(24);
+    color: var(--black-color);
+
+    &:not(:last-child) {
+      margin-right: 0;
+      margin-bottom: rem(12);
+    }
+
+    &:hover {
+      color: var(--purple-color);
+    }
   }
 }

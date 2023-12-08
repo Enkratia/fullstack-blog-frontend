@@ -10,7 +10,6 @@ import {
   WhyWeStarted,
 } from "../components";
 
-import s from "./page.module.scss";
 import cs from "../scss/helpers.module.scss";
 
 export default function Home() {

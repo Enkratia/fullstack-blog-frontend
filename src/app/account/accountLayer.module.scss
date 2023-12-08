@@ -1,0 +1,21 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-block: rem(120);
+}
+
+.container {
+  display: grid;
+  column-gap: rem(60);
+  grid-template-columns: rem(280) 1fr;
+}
+
+.title {
+  margin-bottom: rem(60);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

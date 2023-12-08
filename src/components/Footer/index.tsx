@@ -1,8 +1,8 @@
 import React from "react";
 import { FooterTop, FooterMid, FooterBottom } from "../../components";
 
-import s from "./footer.module.scss";
 import cs from "../../scss/helpers.module.scss";
+import s from "./footer.module.scss";
 
 export const Footer: React.FC = () => {
   return (

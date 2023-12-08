@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
 
-import { capitalize } from "@/utils/customFunctions";
+import { capitalize } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./categoryHeader.module.scss";

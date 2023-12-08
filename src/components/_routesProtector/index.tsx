@@ -15,7 +15,7 @@ export const RoutesProtector: React.FC = () => {
   const sP = useSearchParams().toString();
   const searchParams = sP ? "?" + sP : "";
 
-  const isForbidden = status === "unauthenticated" && !!pathname.match(/^(\/account)/);
+  const isForbidden = status === "unauthenticated" && !!pathname.match(/^(\/ddd)/);
 
   React.useLayoutEffect(() => {
     if (isForbidden) {

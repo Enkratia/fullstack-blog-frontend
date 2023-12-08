@@ -1,6 +1,6 @@
 import React from "react";
 
-import { fetchContactUsQuery } from "@/fetchApi/fetchApi";
+import { fetchContactUsQuery } from "../../fetchApi/fetchApi";
 
 import { ContactUsForm } from "../../components";
 

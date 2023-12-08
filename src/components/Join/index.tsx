@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { fetchJoinQuery } from "@/fetchApi/fetchApi";
+import { fetchJoinQuery } from "../../fetchApi/fetchApi";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./join.module.scss";

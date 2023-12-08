@@ -7,7 +7,6 @@ export * from "./join";
 
 // Common components
 export * from "./modalPA";
-export * from "./modalR";
 export * from "./sizeImage";
 export * from "./categories";
 export * from "./authorCard";
@@ -23,6 +22,7 @@ export * from "./footer";
 export * from "./header/nav";
 export * from "./header/signBtn";
 export * from "./header/openMenuBtn";
+export * from "./header/modalNav";
 export * from "./footer/footerTop";
 export * from "./footer/footerMid";
 export * from "./footer/footerBottom";
@@ -83,3 +83,8 @@ export * from "./contactUs/contactUsForm";
 // PrivacyPolicyPage
 export * from "./privacyPolicyHeader";
 export * from "./privacyPolicyBlock";
+
+// Account
+export * from "./accountLayer";
+export * from "./accountSidebar";
+export * from "./profileBlock";

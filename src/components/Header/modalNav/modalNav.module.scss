@@ -1,4 +1,4 @@
-@use "../../scss/utils/" as *;
+@use "../../../scss/utils/" as *;
 
 .root {
   @include bp-down("896") {
@@ -17,8 +17,9 @@
       background-color: var(--overlay-color);
       visibility: visible;
 
-      >nav {
-        transform: translateX(0);
+      >div {
+        margin-right: var(--scrollbar-offset);
+        transform: translateX(var(--scrollbar-offset));
       }
     }
   }

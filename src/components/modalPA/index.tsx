@@ -12,10 +12,12 @@ type ModalPAProps = {
 };
 
 export const ModalPA: React.FC<ModalPAProps> = ({ children, callbackUrl }) => {
+  const modalRef = React.useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   React.useEffect(() => {
     setOverflowHidden(true);
+    modalRef.current?.querySelector("input")?.focus();
 
     return () => {
       setOverflowHidden(false);
@@ -49,6 +51,7 @@ export const ModalPA: React.FC<ModalPAProps> = ({ children, callbackUrl }) => {
 
   return (
     <div
+      ref={modalRef}
       onPointerDown={onModalPointerDown}
       onClick={onModalOutsideClick}
       className={s.root}

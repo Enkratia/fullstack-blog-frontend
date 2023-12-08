@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import { fetchKnowMoreQuery } from "@/fetchApi/fetchApi";
+import { fetchKnowMoreQuery } from "../../fetchApi/fetchApi";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./knowMore.module.scss";
