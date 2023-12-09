@@ -22,6 +22,13 @@ export const ModalNav: React.FC<ModalNavProps> = ({ children }) => {
   const { isModalOpen } = useAppSelector(selectMenuBtn);
 
   React.useEffect(() => {
+    const cancelModal = () => {
+      if (isModalOpen) {
+        setOverflowHidden(false);
+        dispatch(closeMenu());
+      }
+    };
+
     if (isMQ896) {
       cancelModal();
     }
@@ -30,14 +37,6 @@ export const ModalNav: React.FC<ModalNavProps> = ({ children }) => {
       cancelModal();
     };
   }, [isMQ896]);
-
-  // **
-  const cancelModal = () => {
-    if (isModalOpen) {
-      setOverflowHidden(false);
-      dispatch(closeMenu());
-    }
-  };
 
   // **
   const onModalCloseClick = () => {

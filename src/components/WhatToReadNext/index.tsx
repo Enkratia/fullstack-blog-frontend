@@ -2,7 +2,7 @@ import React from "react";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./whatToReadNext.module.scss";
-import { WhatToReadNextSlider } from "./whatToReadNextSlider";
+import { WhatToReadNextSlider } from "../../components";
 
 const nextPosts: PostType[] = [
   {

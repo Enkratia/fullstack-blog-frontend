@@ -1,3 +1,4 @@
+/* stylelint-disable order/order */
 @use "../../scss/utils/" as *;
 
 .root {
@@ -8,4 +9,160 @@
     padding-top: calc(rem(36.46) + 6.73vw); // 128>58(1360>320)
     padding-bottom: calc(rem(29.92) + 7.21vw); // 123>53(1360>320)
   }
+}
+
+// **
+.container {
+  display: grid;
+  column-gap: rem(60);
+  grid-template-columns: 1fr minmax(0, rem(296));
+
+  @include bp-down("1024") {
+    grid-template-columns: 1fr;
+  }
+}
+
+// **
+.sidebar {
+  position: relative;
+  max-width: 100vw;
+
+  &Head {
+    position: relative;
+    display: none;
+    border-bottom: rem(1) solid var(--mediumgray05-color);
+    padding-block: rem(25);
+    padding-inline: rem(20);
+    width: 100%;
+
+    @include bp-down("1024") {
+      display: flex;
+    }
+  }
+
+  &Title {
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  &Close {
+    position: absolute;
+    right: rem(16);
+    top: rem(16);
+    display: none;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+
+    svg {
+      width: rem(24);
+      height: rem(24);
+      fill: var(--mediumgray-color);
+      transition: fill 0.3s;
+    }
+
+    &:hover {
+      svg {
+        fill: var(--black-color);
+      }
+    }
+
+    @include bp-down("1024") {
+      display: block;
+    }
+  }
+
+  &Wrapper {
+    transition: all 0.5s;
+
+    &Inner {
+      display: inline-flex;
+      flex-direction: column;
+      height: 100%;
+      max-width: rem(296 + 40);
+      text-align: left;
+      background-color: var(--light-color);
+    }
+
+    @include bp-down("1024") {
+      position: fixed;
+      right: rem(- 296 - 40);
+      top: 0;
+      z-index: var(--z-modal);
+      width: calc(100% + rem(296 + 40));
+      height: calc(100vh - (100vh - 100%));
+      text-align: right;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &Active {
+      right: 0;
+      background-color: var(--overlay-color);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  @include bp-down("1024") {
+    display: inline-flex;
+    flex-direction: column;
+    padding-block: rem(25);
+    padding-inline: rem(20);
+    height: 100%;
+    background-color: var(--light-color);
+  }
+}
+
+// **
+.show {
+  border-top-left-radius: rem(4);
+  border-top-right-radius: rem(4);
+  width: 100%;
+
+  &Wrapper {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: var(--z-tooltip);
+    display: none;
+    padding-right: var(--scrollbar-offset);
+    width: 100%;
+
+    @include bp-down("1024") {
+      display: block;
+    }
+  }
+}
+
+// OS-sidebar theme
+.osThemeSidebar {
+  --os-size: 3px;
+  --os-padding-perpendicular: 0;
+  --os-padding-axis: 0;
+
+  // **
+  --os-track-border-radius: 0;
+  --os-track-bg: var(--gray300-color);
+  --os-track-bg-hover: var(--gray300-color);
+  --os-track-bg-active: var(--gray300-color);
+  --os-track-border: none;
+  --os-track-border-hover: none;
+  --os-track-border-active: none;
+
+  // **
+  --os-handle-border-radius: 4px;
+  --os-handle-bg: var(--mediumgray06-color);
+  --os-handle-bg-hover: var(--black-color);
+  --os-handle-bg-active: var(--mediumgray-color);
+  --os-handle-border: none;
+  --os-handle-border-hover: none;
+  --os-handle-border-active: none;
+  --os-handle-min-size: 80px;
+  --os-handle-max-size: 240px;
+  --os-handle-perpendicular-size: 100%;
+  --os-handle-perpendicular-size-hover: 100%;
+  --os-handle-perpendicular-size-active: 100%;
+  --os-handle-interactive-area-offset: 0;
 }

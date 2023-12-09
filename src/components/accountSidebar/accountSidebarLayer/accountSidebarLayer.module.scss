@@ -1,5 +1,5 @@
 /* stylelint-disable order/order */
-@use "../../scss/utils/" as *;
+@use "../../../scss/utils/" as *;
 
 .root {
   border: rem(1) solid var(--grayborder-color);
@@ -10,7 +10,6 @@
 }
 
 .title {
-  margin-bottom: rem(30);
   padding: rem(24);
   padding-top: rem(0);
 }

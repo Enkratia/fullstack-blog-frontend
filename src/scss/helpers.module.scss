@@ -331,10 +331,6 @@
       transform: translate(50%, -50%);
     }
 
-    &:not(:last-child) {
-      margin-bottom: rem(16);
-    }
-
     &Warning {
       &::before {
         color: var(--danger-color);

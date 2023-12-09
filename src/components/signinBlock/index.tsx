@@ -104,7 +104,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       </button>
 
       <div className={s.descr}>
-        <span className={s.descrText}>Don't have an account?</span>
+        <span className={s.descrText}>Don&apos;t have an account?</span>
         <Link href={`/signup${callback}`} className={s.descrLink} scroll={false}>
           Sign-up
         </Link>

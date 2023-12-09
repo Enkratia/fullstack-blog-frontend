@@ -12,6 +12,10 @@
 .inputWrapper {
   display: flex;
   text-align: left;
+
+  &:not(:last-child) {
+    margin-bottom: rem(16);
+  }
 }
 
 .textarea {

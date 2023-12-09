@@ -22,6 +22,12 @@
   }
 }
 
+.inputWrapper {
+  &:not(:last-child) {
+    margin-bottom: rem(16);
+  }
+}
+
 .btn {
   margin-bottom: rem(16);
 }

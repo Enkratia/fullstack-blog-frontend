@@ -39,7 +39,7 @@ export * from "./testimonials";
 
 // **
 export * from "./testimonials/testimonialsSlider";
-// export * from "./ListAuthors/ListAuthorsSlider";
+export * from "./listAuthors/listAuthorsSlider";
 
 // BlogPage
 export * from "./blogHeader";
@@ -49,6 +49,9 @@ export * from "./allCategories";
 // BlogPostPage
 export * from "./post";
 export * from "./whatToReadNext";
+
+// **
+export * from "./whatToReadNext/whatToReadNextSlider";
 
 // AboutUsPage
 export * from "./aboutUs";
@@ -66,6 +69,7 @@ export * from "./categoryHeader";
 export * from "./categoryBlock";
 
 // **
+export * from "./categoryBlock/categoryLayer";
 export * from "./categoryBlock/categoryPosts";
 export * from "./categoryBlock/categoryCategories";
 export * from "./categoryBlock/categoryTags";
@@ -85,6 +89,8 @@ export * from "./privacyPolicyHeader";
 export * from "./privacyPolicyBlock";
 
 // Account
-export * from "./accountLayer";
 export * from "./accountSidebar";
 export * from "./profileBlock";
+
+// **
+export * from "./accountSidebar/accountSidebarLayer";
