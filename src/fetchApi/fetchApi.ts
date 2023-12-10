@@ -60,3 +60,10 @@ export const fetchContactUsQuery = async () => {
   const res = await fetchApi("contact-us");
   return { isError: res.isError, data: res.data[0] as ContactUsType };
 };
+
+// Account
+// ProfilePage
+export const fetchUserByIdQuery = async (id: number) => {
+  const res = await fetchApi(`users/${id}`);
+  return { isError: res.isError, data: res.data as UserType };
+};

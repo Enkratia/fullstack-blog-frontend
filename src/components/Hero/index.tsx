@@ -22,6 +22,7 @@ const post: PostType = {
     fullname: "John Doe",
     imageUrl: "",
     profession: "",
+    email: "email@email.com",
     company: "",
     representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
     userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],

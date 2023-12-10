@@ -26,7 +26,7 @@ const initialFields = {
 };
 
 export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
-  const callback = callbackUrl ? `?callbackUrl=${callbackUrl}` : "";
+  const callback = `?callbackUrl=${callbackUrl}`;
 
   const router = useRouter();
   const [fields, setFields] = useImmer(initialFields);
@@ -103,7 +103,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
       redirect: false,
     });
 
-    router.push(callbackUrl || FRONTEND_URL);
+    router.push(callbackUrl);
   };
 
   return (

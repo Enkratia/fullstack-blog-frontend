@@ -20,6 +20,7 @@ const posts: PostType[] = [
     user: {
       id: 1,
       fullname: "Floyd Miles",
+      email: "email@email.com",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
       profession: "",
       company: "",
@@ -40,6 +41,7 @@ const posts: PostType[] = [
     user: {
       id: 1,
       fullname: "Floyd Miles",
+      email: "email@email.com",
       imageUrl: "",
       profession: "",
       company: "",
@@ -60,6 +62,7 @@ const posts: PostType[] = [
     user: {
       id: 1,
       fullname: "Floyd Miles",
+      email: "email@email.com",
       imageUrl: "",
       profession: "",
       company: "",
@@ -83,6 +86,7 @@ const posts: PostType[] = [
       imageUrl: "",
       profession: "",
       company: "",
+      email: "email@email.com",
       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
       userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
     },
@@ -102,6 +106,7 @@ const posts: PostType[] = [
       fullname: "Floyd Miles",
       imageUrl: "",
       profession: "",
+      email: "email@email.com",
       company: "",
       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
       userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],

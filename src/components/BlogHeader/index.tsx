@@ -21,6 +21,7 @@ const post: PostType = {
     id: 1,
     fullname: "John Doe",
     imageUrl: "",
+    email: "email@email.com",
     profession: "",
     company: "",
     representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",

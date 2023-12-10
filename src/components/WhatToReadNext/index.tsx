@@ -17,6 +17,7 @@ const nextPosts: PostType[] = [
     isFeatured: false,
     user: {
       id: 1,
+      email: "email@email.com",
       fullname: "John Doe",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
       profession: "",
@@ -38,6 +39,7 @@ const nextPosts: PostType[] = [
     user: {
       id: 1,
       fullname: "John Doe",
+      email: "email@email.com",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
       profession: "",
       company: "",
@@ -58,6 +60,7 @@ const nextPosts: PostType[] = [
     user: {
       id: 1,
       fullname: "John Doe",
+      email: "email@email.com",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
       profession: "",
       company: "",
@@ -78,6 +81,7 @@ const nextPosts: PostType[] = [
     user: {
       id: 1,
       fullname: "John Doe",
+      email: "email@email.com",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
       profession: "",
       company: "",
@@ -98,6 +102,7 @@ const nextPosts: PostType[] = [
     user: {
       id: 1,
       fullname: "John Doe",
+      email: "email@email.com",
       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
       profession: "",
       company: "",

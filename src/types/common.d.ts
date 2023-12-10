@@ -21,6 +21,8 @@ type UserLinksType = [
 
 type UserType = {
   id: number;
+  email: string;
+  password?: string;
   imageUrl: string;
   fullname: string;
   profession: string;

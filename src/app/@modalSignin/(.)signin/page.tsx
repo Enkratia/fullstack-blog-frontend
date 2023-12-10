@@ -1,15 +1,13 @@
 "use client";
 
 import React from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
+import { FRONTEND_URL } from "../../../utils/constants";
 import { ModalPA, SigninBlock } from "../../../components";
 
-type ModalSigninPageProps = {
-  searchParams: Record<"callbackUrl", string>;
-};
-
-const ModalSigninPage: React.FC<ModalSigninPageProps> = ({ searchParams }) => {
+const ModalSigninPage: React.FC = () => {
+  const callbackUrl = useSearchParams().get("callbackUrl") || FRONTEND_URL;
   const pathname = usePathname();
 
   if (!pathname.startsWith("/signin")) {
@@ -17,8 +15,8 @@ const ModalSigninPage: React.FC<ModalSigninPageProps> = ({ searchParams }) => {
   }
 
   return (
-    <ModalPA callbackUrl={searchParams.callbackUrl}>
-      <SigninBlock callbackUrl={searchParams.callbackUrl} />
+    <ModalPA callbackUrl={callbackUrl}>
+      <SigninBlock callbackUrl={callbackUrl} />
     </ModalPA>
   );
 };

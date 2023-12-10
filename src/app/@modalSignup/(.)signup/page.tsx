@@ -1,15 +1,13 @@
 "use client";
 
 import React from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
+import { FRONTEND_URL } from "../../../utils/constants";
 import { ModalPA, SignupBlock } from "../../../components";
 
-type ModalSignupPageProps = {
-  searchParams: Record<"callbackUrl", string>;
-};
-
-const ModalSignupPage: React.FC<ModalSignupPageProps> = ({ searchParams }) => {
+const ModalSignupPage: React.FC = () => {
+  const callbackUrl = useSearchParams().get("callbackUrl") || FRONTEND_URL;
   const pathname = usePathname();
 
   if (!pathname.startsWith("/signup")) {
@@ -17,8 +15,8 @@ const ModalSignupPage: React.FC<ModalSignupPageProps> = ({ searchParams }) => {
   }
 
   return (
-    <ModalPA callbackUrl={searchParams.callbackUrl}>
-      <SignupBlock callbackUrl={searchParams.callbackUrl} />
+    <ModalPA callbackUrl={callbackUrl}>
+      <SignupBlock callbackUrl={callbackUrl} />
     </ModalPA>
   );
 };

@@ -28,6 +28,7 @@ const post: PostType = {
   user: {
     id: 1,
     fullname: "John Doe",
+    email: "email@email.com",
     imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
     profession: "",
     company: "",

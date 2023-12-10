@@ -94,3 +94,4 @@ export * from "./profileBlock";
 
 // **
 export * from "./accountSidebar/accountSidebarLayer";
+export * from "./profileBlock/profileForm";

@@ -26,7 +26,7 @@ export const ModalPA: React.FC<ModalPAProps> = ({ children, callbackUrl }) => {
 
   // **
   const onModalCloseClick = () => {
-    router.push(callbackUrl || FRONTEND_URL);
+    router.push(callbackUrl);
   };
 
   // **

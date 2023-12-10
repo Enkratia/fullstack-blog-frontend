@@ -30,6 +30,7 @@ const user: UserType = {
   fullname: "Floyd Miles",
   profession: "Content Writer",
   company: "Company",
+  email: "email@email.com",
   representation:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus.",
   userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],

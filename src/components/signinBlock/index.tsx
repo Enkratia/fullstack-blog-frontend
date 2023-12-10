@@ -19,7 +19,7 @@ type SigninBlockProps = {
 };
 
 export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
-  const callback = callbackUrl ? `?callbackUrl=${callbackUrl}` : "";
+  const callback = `?callbackUrl=${callbackUrl}`;
 
   const router = useRouter();
   const [fields, setFields] = useImmer({ email: "", password: "" });
@@ -68,7 +68,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       redirect: false,
     });
 
-    router.push(callbackUrl || FRONTEND_URL);
+    router.push(callbackUrl);
   };
 
   return (

@@ -1,4 +1,4 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { JWT } from "next-auth/jwt";
 
@@ -114,3 +114,5 @@ export const authOptions: NextAuthOptions = {
     signIn: "/signin",
   },
 };
+
+export const getAuthSession = () => getServerSession(authOptions);
