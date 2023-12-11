@@ -12,12 +12,14 @@ type PostType = {
 };
 
 // **
-type UserLinksType = [
-  Record<"facebook", string | null>,
-  Record<"twitter", string | null>,
-  Record<"instagram", string | null>,
-  Record<"linkedin", string | null>,
-];
+// type UserLinksType = [
+//   Record<"facebook", string>,
+//   Record<"twitter", string>,
+//   Record<"instagram", string>,
+//   Record<"linkedin", string>,
+// ];
+
+type UserLinksType = Record<"facebook" | "twitter" | "instagram" | "linkedin", string>;
 
 type UserType = {
   id: number;

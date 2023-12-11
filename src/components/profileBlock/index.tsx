@@ -1,24 +1,29 @@
-import React from "react";
-import { revalidatePath, revalidateTag } from "next/cache";
+"use client";
 
-import { fetchUserByIdQuery } from "../../fetchApi/fetchApi";
+import React from "react";
+import { useSession } from "next-auth/react";
+
+import { useGetUserByIdQuery } from "../../redux/backendApi";
 import { ProfileForm } from "../../components";
-import { getAuthSession } from "../../utils/authOptions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./profileBlock.module.scss";
 
-export const ProfileBlock: React.FC = async () => {
-  const session = await getAuthSession();
+export const ProfileBlock: React.FC = () => {
+  const { data: session } = useSession();
 
-  if (!session) return;
+  const { data: user, isError } = useGetUserByIdQuery(session?.user.id!, {
+    skip: typeof session?.user.id !== "number",
+  });
 
-  const { data, isError } = await fetchUserByIdQuery(session.user.id);
+  if (!user) {
+    return;
+  }
 
   return (
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Profile</h2>
-      <ProfileForm user={data} />
+      <ProfileForm user={user} />
     </section>
   );
 };

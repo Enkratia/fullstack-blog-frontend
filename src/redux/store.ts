@@ -1,16 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from "react-redux";
 
-// import { backendApi } from "./backendApi";
+import { backendApi } from "./backendApi";
 import menuBtn from "./menuBtnSlice/slice";
+import auth from "./authSlice/slice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
+      auth,
       menuBtn,
-      // [backendApi.reducerPath]: backendApi.reducer,
+      [backendApi.reducerPath]: backendApi.reducer,
     },
-    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(backendApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(backendApi.middleware),
   });
 };
 
@@ -22,9 +24,3 @@ export type AppDispatch = AppStore["dispatch"];
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppStore: () => AppStore = useStore;
-
-// OLD
-// export type RootState = ReturnType<typeof store.getState>;
-// export type AppDispatch = typeof store.dispatch;
-// export const useAppDispatch: () => AppDispatch = useDispatch;
-// export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
