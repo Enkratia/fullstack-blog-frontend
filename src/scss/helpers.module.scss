@@ -133,6 +133,7 @@
   font: var(--btn-font);
   color: var(--black-color);
   background-color: var(--yellow-color);
+  transition: opacity 0.3s;
   cursor: pointer;
 
   &White {
@@ -143,6 +144,11 @@
     padding-block: rem(15);
     width: 100%;
     font: var(--h4-font);
+  }
+
+  &Disabled {
+    opacity: 0.8;
+    pointer-events: none;
   }
 
   &:hover {

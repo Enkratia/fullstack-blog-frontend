@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import { useSession } from "next-auth/react";
 import { useImmer } from "use-immer";
 
-import { useGetUserByIdQuery } from "../../../redux/backendApi";
+import { useLazyUpdateUserQuery } from "../../../redux/backendApi";
 import { useValidateForm } from "../../../utils/customHooks";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -49,7 +48,11 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
     };
   };
 
+  const formRef = React.useRef(null);
+  const [isMount, setIsMount] = React.useState(true);
   const [fields, setFields] = useImmer(setInitialsFields());
+
+  const [updateUser] = useLazyUpdateUserQuery();
 
   const {
     isValidText,
@@ -62,6 +65,62 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
     validatePassConfirm,
   } = useValidateForm();
 
+  // **
+  const isValidForm = () => {
+    return [isValidText[0], isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
+      !el ? !el : !el.includes("inputWrapperWarning"),
+    );
+  };
+
+  // **
+  const onUploadChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files);
+  };
+
+  // **
+  const onUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const fileInput = e.currentTarget?.nextElementSibling as HTMLInputElement;
+    if (fileInput) fileInput.click();
+  };
+
+  // **
+  const onSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!isValidForm()) return;
+
+    const formData = new FormData(formRef.current);
+    // for (var [key, value] of formData) {
+    //   console.log(key, value);
+    // }
+    Array.from(formData).forEach(([key, value]) => {
+      console.log(key, value);
+    });
+
+    const body: Partial<UserType> = {
+      fullname: fields.fullname,
+      email: fields.email,
+      company: fields.company,
+      profession: fields.profession,
+      representation: fields.representation,
+      userLinks: {
+        facebook: fields.facebook,
+        twitter: fields.twitter,
+        instagram: fields.instagram,
+        linkedin: fields.linkedin,
+      },
+    };
+
+    if (fields.password !== "") {
+      body.password = fields.password;
+    }
+
+    updateUser({
+      id: user.id,
+      body: body,
+    });
+  };
+
+  // **
   const onFullnameChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
     setFields((o) => {
       o.fullname = e.target.value;
@@ -69,6 +128,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
     });
 
     validateText(e.target.value, idx);
+    setIsMount(false);
   };
 
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,6 +138,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
     });
 
     validateEmail(e.target.value);
+    setIsMount(false);
   };
 
   const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +147,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
       return o;
     });
 
-    validatePassLength(e.target.value);
+    validatePassLength(e.target.value, { resetWhenEmpty: true });
+    setIsMount(false);
   };
 
   const onPaswordConfirmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +157,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
       return o;
     });
 
-    validatePassConfirm(e.target.value);
+    validatePassConfirm(e.target.value, { resetWhenEmpty: true });
+    setIsMount(false);
   };
 
   // **
@@ -104,10 +167,12 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
       o[e.target.name] = e.target.value;
       return o;
     });
+
+    setIsMount(false);
   };
 
   return (
-    <form className={s.root}>
+    <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef} name="profile">
       <div className={s.inputs}>
         <div className={`${cs.inputWrapper} ${cs[isValidText[0]]}`}>
           <input
@@ -131,7 +196,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           />
         </div>
 
-        <div className={`${cs.inputWrapper} ${cs[isValidPassLength]}`} data-validity="pass">
+        <div className={`${cs.inputWrapper} ${cs[isValidPassLength]}`} data-validity="pass-length">
           <input
             onChange={onPasswordChange}
             type="password"
@@ -173,8 +238,16 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
         />
 
         <div className={s.uploadWrapper}>
-          <button className={`${s.upload} ${cs.btn}`}>Upload picture</button>
-          <input type="file" hidden />
+          <button onClick={onUploadClick} type="button" className={`${s.upload} ${cs.btn}`}>
+            Upload picture
+          </button>
+          <input
+            onChange={onUploadChange}
+            type="file"
+            accept=".png, .jpg, .jpeg, .webp, .avif, .gif"
+            name="upload"
+            hidden
+          />
         </div>
       </div>
 
@@ -221,7 +294,10 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
         {fields.representation}
       </textarea>
 
-      <button type="button" className={`${s.submit} ${cs.btn}`}>
+      <button
+        onClick={onSubmitClick}
+        type="button"
+        className={`${s.submit} ${`${cs.btn} ${!isMount && isValidForm() ? "" : cs.btnDisabled}`}`}>
         Submit
       </button>
     </form>

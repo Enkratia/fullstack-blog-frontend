@@ -1,6 +1,15 @@
 import React from "react";
 import { useImmer } from "use-immer";
 
+// Types
+type validatePassOptions = {
+  length?: number;
+  resetWhenEmpty?: boolean;
+};
+
+type validatePassLengthProps = (value: string, options?: validatePassOptions) => void;
+
+// ****
 const mailRegExp = /^\S+@\S+\.\S+$/;
 
 export const useValidateForm = () => {
@@ -140,21 +149,34 @@ export const useValidateForm = () => {
   };
 
   // ***
-  const validatePassLength = (value: string) => {
+  const validatePassLength: validatePassLengthProps = (value, options) => {
+    options = options ?? {};
+    options.length = options.length ?? 5;
+    options.resetWhenEmpty = options.resetWhenEmpty ?? false;
+
+    const comparison = options.resetWhenEmpty
+      ? value.length > options.length || value.length === 0
+      : value.length > options.length;
+
     passLengthRef.current.value = value;
-    passLengthRef.current.comparison = value.length > 5;
-    validateDeep();
+    passLengthRef.current.comparison = comparison;
+    validateDeep(options.resetWhenEmpty);
   };
 
   // ***
-  const validatePassConfirm = (value: string) => {
+  const validatePassConfirm: validatePassLengthProps = (value, options) => {
+    options = options ?? {};
+    options.resetWhenEmpty = options.resetWhenEmpty ?? false;
+
     passConfirmRef.current.value = value;
-    validateDeep();
+    validateDeep(options.resetWhenEmpty);
   };
 
   // *
-  function validateDeep() {
-    if (passLengthRef.current.comparison) {
+  function validateDeep(resetWhenEmpty: boolean) {
+    if (resetWhenEmpty && passLengthRef.current.comparison) {
+      setIsValidPassLength("");
+    } else if (passLengthRef.current.comparison) {
       setIsValidPassLength("inputWrapperSuccess");
     } else {
       setIsValidPassLength("inputWrapperWarning");
@@ -172,7 +194,9 @@ export const useValidateForm = () => {
       passLengthRef.current.comparison &&
       passLengthRef.current.value !== passConfirmRef.current.value;
 
-    if (passConfirmRef.current.comparison1) {
+    if (resetWhenEmpty && passConfirmRef.current.comparison1) {
+      setIsValidPassConfirm("");
+    } else if (passConfirmRef.current.comparison1) {
       setIsValidPassConfirm("inputWrapperSuccess");
     } else if (passConfirmRef.current.comparison2) {
       setIsValidPassConfirm("");
@@ -200,3 +224,8 @@ export const useValidateForm = () => {
     validateContent,
   };
 };
+
+// validateForm example
+// const validateForm = () => {
+//   return [isValidEmail, isValidPassLength].every((el) => el.includes("inputWrapperSuccess"));
+// };
