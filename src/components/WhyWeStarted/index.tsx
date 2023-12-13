@@ -29,7 +29,8 @@ export const WhyWeStarted: React.FC = async () => {
 
         <div className={s.imageWrapper} aria-hidden="true">
           <Image
-            src={data.imageUrl}
+            src="http://localhost:3001/api/images/1702497236440-1789x1006.webp"
+            // {data.imageUrl}
             alt="Background image."
             className={s.image}
             aria-hidden="true"

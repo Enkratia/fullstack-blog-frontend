@@ -24,7 +24,7 @@ export const backendApi = createApi({
     }),
 
     // **
-    updateUser: builder.query<string, UpdateUserType>({
+    updateUser: builder.query<Record<string, string>, UpdateUserType>({
       query: ({ id, body }) => {
         return {
           url: `users/${id}`,

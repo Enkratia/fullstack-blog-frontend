@@ -9,11 +9,7 @@ import { useValidateForm } from "../../../utils/customHooks";
 import cs from "../../../scss/helpers.module.scss";
 import s from "./profileForm.module.scss";
 
-interface IObjectKeys {
-  [key: string]: string;
-}
-
-interface IinitialFields extends IObjectKeys {
+interface IProfileFields {
   fullname: string;
   email: string;
   password: string;
@@ -32,7 +28,7 @@ type ProfileFormProps = {
 };
 
 export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
-  const setInitialsFields = (): IinitialFields => {
+  const setInitialsFields = (): IProfileFields => {
     return {
       fullname: user.fullname,
       email: user.email,
@@ -48,7 +44,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
     };
   };
 
-  const formRef = React.useRef(null);
+  const formRef = React.useRef<HTMLFormElement>(null);
   const [isMount, setIsMount] = React.useState(true);
   const [fields, setFields] = useImmer(setInitialsFields());
 
@@ -86,37 +82,36 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   // **
   const onSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (!isValidForm()) return;
+    if (!isValidForm() || !formRef.current) return;
 
     const formData = new FormData(formRef.current);
-    // for (var [key, value] of formData) {
-    //   console.log(key, value);
+
+    formData.delete("passwordConfirm");
+    formData.get("password") === "" && formData.delete("password");
+
+    formData.delete("image"); // TEMP
+
+    // const body: Partial<UserType> = {
+    //   fullname: fields.fullname,
+    //   email: fields.email,
+    //   company: fields.company,
+    //   profession: fields.profession,
+    //   representation: fields.representation,
+    //   userLinks: {
+    //     facebook: fields.facebook,
+    //     twitter: fields.twitter,
+    //     instagram: fields.instagram,
+    //     linkedin: fields.linkedin,
+    //   },
+    // };
+
+    // if (fields.password !== "") {
+    //   body.password = fields.password;
     // }
-    Array.from(formData).forEach(([key, value]) => {
-      console.log(key, value);
-    });
-
-    const body: Partial<UserType> = {
-      fullname: fields.fullname,
-      email: fields.email,
-      company: fields.company,
-      profession: fields.profession,
-      representation: fields.representation,
-      userLinks: {
-        facebook: fields.facebook,
-        twitter: fields.twitter,
-        instagram: fields.instagram,
-        linkedin: fields.linkedin,
-      },
-    };
-
-    if (fields.password !== "") {
-      body.password = fields.password;
-    }
 
     updateUser({
       id: user.id,
-      body: body,
+      body: formData,
     });
   };
 
@@ -132,30 +127,30 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   };
 
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields((o) => {
-      o.email = e.target.value;
-      return o;
-    });
+    // setFields((o) => {
+    //   o.email = e.target.value;
+    //   return o;
+    // });
 
     validateEmail(e.target.value);
     setIsMount(false);
   };
 
   const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields((o) => {
-      o.password = e.target.value;
-      return o;
-    });
+    // setFields((o) => {
+    //   o.password = e.target.value;
+    //   return o;
+    // });
 
     validatePassLength(e.target.value, { resetWhenEmpty: true });
     setIsMount(false);
   };
 
   const onPaswordConfirmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields((o) => {
-      o.passwordConfirm = e.target.value;
-      return o;
-    });
+    // setFields((o) => {
+    //   o.passwordConfirm = e.target.value;
+    //   return o;
+    // });
 
     validatePassConfirm(e.target.value, { resetWhenEmpty: true });
     setIsMount(false);
@@ -163,10 +158,10 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
 
   // **
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFields((o) => {
-      o[e.target.name] = e.target.value;
-      return o;
-    });
+    // setFields((o) => {
+    //   o[e.target.name] = e.target.value;
+    //   return o;
+    // });
 
     setIsMount(false);
   };
@@ -181,7 +176,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
             placeholder="Fullname"
             name="fullname"
             className={`${s.input} ${cs.input}`}
-            value={fields.fullname}
+            defaultValue={fields.fullname}
           />
         </div>
 
@@ -192,7 +187,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
             placeholder="Email"
             name="email"
             className={`${s.input} ${cs.input}`}
-            value={fields.email}
+            defaultValue={fields.email}
           />
         </div>
 
@@ -203,7 +198,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
             placeholder="Password"
             name="password"
             className={`${s.input} ${cs.input}`}
-            value={fields.password}
+            defaultValue={fields.password}
           />
         </div>
 
@@ -216,7 +211,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
             placeholder="Confirm password"
             name="passwordConfirm"
             className={`${s.input} ${cs.input}`}
-            value={fields.passwordConfirm}
+            defaultValue={fields.passwordConfirm}
           />
         </div>
 
@@ -226,7 +221,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           placeholder="Profession"
           name="profession"
           className={`${s.input} ${cs.input}`}
-          value={fields.profession}
+          defaultValue={fields.profession}
         />
         <input
           onChange={onInputChange}
@@ -234,7 +229,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           placeholder="Company"
           name="company"
           className={`${s.input} ${cs.input}`}
-          value={fields.company}
+          defaultValue={fields.company}
         />
 
         <div className={s.uploadWrapper}>
@@ -245,7 +240,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
             onChange={onUploadChange}
             type="file"
             accept=".png, .jpg, .jpeg, .webp, .avif, .gif"
-            name="upload"
+            name="file"
             hidden
           />
         </div>
@@ -258,7 +253,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           placeholder="Facebook link"
           name="facebook"
           className={`${s.input} ${cs.input}`}
-          value={fields.facebook}
+          defaultValue={fields.facebook}
         />
         <input
           onChange={onInputChange}
@@ -266,7 +261,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           placeholder="Twitter link"
           name="twitter"
           className={`${s.input} ${cs.input}`}
-          value={fields.twitter}
+          defaultValue={fields.twitter}
         />
         <input
           onChange={onInputChange}
@@ -274,7 +269,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           placeholder="Instagram link"
           name="instagram"
           className={`${s.input} ${cs.input}`}
-          value={fields.instagram}
+          defaultValue={fields.instagram}
         />
         <input
           onChange={onInputChange}
@@ -282,7 +277,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           placeholder="LinkedIn link"
           name="linkedin"
           className={`${s.input} ${cs.input}`}
-          value={fields.linkedin}
+          defaultValue={fields.linkedin}
         />
       </div>
 
