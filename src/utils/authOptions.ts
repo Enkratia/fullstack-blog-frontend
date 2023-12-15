@@ -18,7 +18,7 @@ const refreshToken = async (token: JWT): Promise<JWT> => {
     },
   });
 
-  if (!res.status.toString().startsWith("2")) {
+  if (!res.ok) {
     throw Error("Failed to refresh token");
   }
 
@@ -98,7 +98,7 @@ export const authOptions: NextAuthOptions = {
         return { ...token, ...user };
       }
 
-      if (new Date().getTime() < token.backendTokens.expiresIn) return token;
+      if (Date.now() < token.backendTokens.expiresIn) return token;
 
       return await refreshToken(token);
     },

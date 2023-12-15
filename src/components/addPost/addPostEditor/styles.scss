@@ -1,0 +1,58 @@
+/* stylelint-disable selector-combinator-space-after */
+/* stylelint-disable selector-combinator-space-before */
+/* Basic editor styles */
+.tiptap {
+  >*+* {
+    margin-top: 0.75em;
+  }
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
+
+  code {
+    color: #616161;
+    background-color: rgba(#616161, 0.1);
+  }
+
+  pre {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-family: "JetBrainsMono", monospace;
+    color: #fff;
+    background: #0d0d0d;
+
+    code {
+      padding: 0;
+      font-size: 0.8rem;
+      color: inherit;
+      background: none;
+    }
+  }
+
+  img {
+    height: auto;
+    max-width: 100%;
+  }
+
+  blockquote {
+    border-left: 2px solid rgba(#0d0d0d, 0.1);
+    padding-left: 1rem;
+  }
+
+  hr {
+    margin: 2rem 0;
+    border: none;
+    border-top: 2px solid rgba(#0d0d0d, 0.1);
+  }
+}

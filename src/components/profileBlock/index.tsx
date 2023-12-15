@@ -13,7 +13,7 @@ export const ProfileBlock: React.FC = () => {
   const { data: session } = useSession();
 
   const { data: user, isError } = useGetUserByIdQuery(session?.user.id!, {
-    skip: typeof session?.user.id !== "number",
+    skip: typeof session?.user?.id !== "number",
   });
 
   if (!user) {

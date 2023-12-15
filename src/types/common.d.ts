@@ -2,22 +2,14 @@ type PostType = {
   id: number;
   title: string;
   category: string;
-  createdAt: string;
-  updatedAt: string;
   text: string;
   imageUrl: string;
   tags: string[];
-  isFeatured: boolean;
   user: UserType;
+  isFeatured: boolean;
+  createdAt: string;
+  updatedAt: string;
 };
-
-// **
-// type UserLinksType = [
-//   Record<"facebook", string>,
-//   Record<"twitter", string>,
-//   Record<"instagram", string>,
-//   Record<"linkedin", string>,
-// ];
 
 type UserLinksType = Record<"facebook" | "twitter" | "instagram" | "linkedin", string>;
 
@@ -43,3 +35,6 @@ type JoinType = {
   title: string;
   description: string;
 };
+
+// **
+type CategoriesNames = ["startup", "business", "economy", "technology"];

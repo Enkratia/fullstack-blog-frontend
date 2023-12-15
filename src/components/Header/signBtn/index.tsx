@@ -55,7 +55,6 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
   const onExitClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const data = await signOut({ redirect: false });
-
     router.push(data?.url || FRONTEND_URL);
   };
 
@@ -66,12 +65,12 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
 
         <ul className={`${s.list} ${isActive ? s.listActive : ""}`}>
           <li className={s.item}>
-            <Link href="/account/profile" className={s.link}>
+            <Link href="/account/profile" className={s.link} prefetch={false}>
               Profile
             </Link>
           </li>
           <li className={s.item}>
-            <Link href="/account/add-post" className={s.link}>
+            <Link href="/account/add-post" className={s.link} prefetch={false}>
               Add post
             </Link>
           </li>
@@ -87,6 +86,7 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
         onClick={onSignClick}
         className={`${s.btn} ${className}`}
         href="/account/profile"
+        prefetch={false}
         scroll={false}>
         {session.user.fullname}
       </Link>

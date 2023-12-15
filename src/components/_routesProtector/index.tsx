@@ -12,6 +12,7 @@ import { FRONTEND_URL } from "../../utils/constants";
 
 export const RoutesProtector: React.FC = () => {
   const dispatch = useAppDispatch();
+  const prevStatus = React.useRef("");
 
   const { data: session, status } = useSession();
   const pathname = usePathname();
@@ -22,13 +23,24 @@ export const RoutesProtector: React.FC = () => {
 
   const isForbidden = status === "unauthenticated" && !!pathname.match(/^(\/account)/);
 
-  React.useLayoutEffect(() => {
-    if (isForbidden) {
+  const isExit = prevStatus.current === "authenticated" && status === "unauthenticated";
+
+  React.useEffect(() => {
+    if (isForbidden && !isExit) {
       router.replace(`/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`);
     }
   }, [isForbidden]);
 
-  // RTK QUERY
+  // Перезагрузка (сброс данных) при: невозможности обновить токен / выходе через кнопку (чтобы данные прежнего пользователя не сохранились в кэше у нового)
+  React.useEffect(() => {
+    if (isExit) {
+      window.location.reload();
+    }
+
+    prevStatus.current = status;
+  }, [isExit, status]);
+
+  // Add token to RTK Query
   React.useEffect(() => {
     if (session) {
       dispatch(setToken(session?.backendTokens.accessToken));
@@ -37,5 +49,5 @@ export const RoutesProtector: React.FC = () => {
     }
   }, [status]);
 
-  return <></>;
+  return <span></span>;
 };

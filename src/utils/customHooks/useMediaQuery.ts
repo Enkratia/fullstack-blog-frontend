@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 export const useMediaQuery = () => {
@@ -13,8 +15,8 @@ export const useMediaQuery = () => {
     mdq896 = window.matchMedia("(min-width: 896px)");
   }
 
-  const [isMQ1024, setIsMQ1024] = React.useState(isWU ? true : mdq1024?.matches);
-  const [isMQ896, setIsMQ896] = React.useState(isWU ? true : mdq896?.matches);
+  const [isMQ1024, setIsMQ1024] = React.useState(mdq1024?.matches);
+  const [isMQ896, setIsMQ896] = React.useState(mdq896?.matches);
 
   React.useEffect(() => {
     mdq1024?.addEventListener("change", checkMQ1024);
@@ -30,7 +32,7 @@ export const useMediaQuery = () => {
   };
 
   const checkMQ896 = () => {
-    if (mdq1024?.matches) {
+    if (mdq896?.matches) {
       setIsMQ896(true);
     } else {
       setIsMQ896(false);

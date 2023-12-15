@@ -151,6 +151,38 @@
     pointer-events: none;
   }
 
+  &Wrapper {
+    position: relative;
+
+    &::before {
+      content: none;
+      position: absolute;
+      left: 0;
+      top: calc(100% - rem(6));
+      font: var(--validation-font);
+    }
+
+    &Success {
+      &::before {
+        content: "Data sent";
+        color: var(--success-color);
+      }
+    }
+
+    &Warning {
+      &::before {
+        content: "Failed to send data";
+        color: var(--danger-color);
+      }
+    }
+
+    &Process {
+      &::before {
+        content: "Data is sent...";
+      }
+    }
+  }
+
   &:hover {
     border: rem(1) solid var(--yellow-hover-color);
     background-color: var(--yellow-hover-color);

@@ -88,10 +88,21 @@ export * from "./contactUs/contactUsForm";
 export * from "./privacyPolicyHeader";
 export * from "./privacyPolicyBlock";
 
-// Account
+// AccountLayout
 export * from "./accountSidebar";
-export * from "./profileBlock";
 
 // **
 export * from "./accountSidebar/accountSidebarLayer";
+
+// ProfilePage
+export * from "./profileBlock";
+
+// **
 export * from "./profileBlock/profileForm";
+
+// AddPostPage
+export * from "./addPost";
+
+// **
+export * from "./addPost/addPostForm";
+export * from "./addPost/addPostEditor";

@@ -1,0 +1,21 @@
+@use "../../../scss/utils/" as *;
+
+.input {
+  &Wrapper {
+    &:not(:last-child) {
+      margin-bottom: rem(20);
+    }
+  }
+}
+
+.upload {
+  &Wrapper {
+    margin-bottom: rem(20);
+  }
+}
+
+.btn {
+  &Wrapper {
+    margin-bottom: rem(20);
+  }
+}
