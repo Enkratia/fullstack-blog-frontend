@@ -4,10 +4,10 @@ import cs from "../../../scss/helpers.module.scss";
 
 const ProfilePage: React.FC = () => {
   return (
-    <main>
+    <div>
       <h1 className={cs.srOnly}>Profile os user</h1>
       <ProfileBlock />
-    </main>
+    </div>
   );
 };
 

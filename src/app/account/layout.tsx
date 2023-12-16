@@ -12,8 +12,6 @@ type AccountLayoutProps = {
 const AccountLayout: React.FC<AccountLayoutProps> = ({ children }) => {
   return (
     <main className={s.root}>
-      <h1 className={cs.srOnly}>Account</h1>
-
       <div className={`${s.container} ${cs.container}`}>
         <AccountSidebar />
         {children}

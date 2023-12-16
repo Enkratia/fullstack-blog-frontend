@@ -1,21 +1,33 @@
 @use "../../../scss/utils/" as *;
 
-.input {
-  &Wrapper {
-    &:not(:last-child) {
-      margin-bottom: rem(20);
+.root {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: rem(20);
+
+  >div {
+    &:nth-last-child(2) {
+      margin-bottom: rem(10);
     }
   }
 }
 
-.upload {
-  &Wrapper {
-    margin-bottom: rem(20);
-  }
-}
+// .input {
+//   &Wrapper {
+//     &:last-child {
+//       margin-bottom: rem(30);
+//     }
+//   }
+// }
 
-.btn {
-  &Wrapper {
-    margin-bottom: rem(20);
-  }
-}
+// .upload {
+//   &Wrapper {
+//     margin-bottom: rem(20);
+//   }
+// }
+
+// .btn {
+//   &Wrapper {
+//     margin-bottom: rem(20);
+//   }
+// }

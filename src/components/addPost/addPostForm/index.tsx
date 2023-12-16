@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { JSONContent } from "@tiptap/react";
 
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
@@ -18,6 +19,8 @@ const categoriesNames: CategoriesNames = ["startup", "business", "economy", "tec
 const categories = [categoriesPlaceholder, ...categoriesNames];
 
 export const AddPostForm: React.FC = () => {
+  const [text, setText] = React.useState<JSONContent>();
+
   const [isOpen, setIsOpen] = React.useState(false);
   const [active, setActive] = React.useState(0);
 
@@ -25,6 +28,12 @@ export const AddPostForm: React.FC = () => {
     useValidateForm();
 
   // **
+  const onSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    console.log("TEXT: ", text);
+  };
+
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
     validateText(e.target.value, idx);
   };
@@ -143,7 +152,7 @@ export const AddPostForm: React.FC = () => {
         <input type="file" accept=".png, .jpg, .jpeg, .svg" name="file" hidden />
       </div>
 
-      <AddPostEditor />
+      <AddPostEditor setText={(text: JSONContent | undefined) => setText(text)} />
 
       <div className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidText[1]]}`}>
         <input
@@ -153,6 +162,12 @@ export const AddPostForm: React.FC = () => {
           placeholder="Tags"
           name="tags"
         />
+      </div>
+
+      <div>
+        <button onClick={onSubmitClick} type="submit" className={`${s.submit} ${cs.btn}`}>
+          Submit
+        </button>
       </div>
     </form>
   );

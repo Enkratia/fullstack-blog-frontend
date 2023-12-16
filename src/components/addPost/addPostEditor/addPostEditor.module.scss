@@ -1,1 +1,121 @@
+/* stylelint-disable order/order */
+/* stylelint-disable selector-combinator-space-after */
+/* stylelint-disable selector-combinator-space-before */
 @use "../../../scss/utils/" as *;
+
+.root {
+  border: rem(1) solid #ccc;
+  border-radius: rem(4);
+  transition: all 0.3s;
+
+  &:focus-within {
+    border-color: var(--mediumgray-color);
+
+    .content {
+      border-color: var(--mediumgray-color);
+    }
+  }
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  border-bottom-right-radius: revert;
+  border-bottom-left-radius: revert;
+  padding-block: rem(19);
+  padding-inline: rem(24);
+
+  >div {
+    display: inline-flex;
+  }
+
+  button {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    outline: none;
+    border: none;
+    border-radius: rem(4);
+    padding: rem(8);
+    background-color: transparent;
+    transition: background-color 0.3s;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: rem(12);
+    }
+
+    >svg {
+      width: rem(20);
+      height: rem(20);
+      stroke: var(--black-color);
+    }
+
+    &[class*="is-active"] {
+      background-color: #ececec;
+    }
+
+    &:hover {
+      background-color: #ececec;
+    }
+
+    &:focus {
+      background-color: #d3d3d3;
+    }
+
+    &:active {
+      background-color: #d3d3d3;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  }
+}
+
+/* Basic editor styles */
+.content {
+  outline: none;
+  border-right: revert;
+  border-bottom: revert;
+  border-left: revert;
+  border-top-left-radius: revert;
+  border-top-right-radius: revert;
+  padding-inline: rem(24);
+  min-height: rem(380);
+  word-break: break-all;
+  transition: inherit;
+  cursor: text;
+
+  >div {
+    outline: none;
+  }
+
+  >*+* {
+    margin-top: 0.75em;
+  }
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  h1,
+  h2 {
+    line-height: 1.1;
+  }
+
+  blockquote {
+    border-left: 2px solid rgba(#0d0d0d, 0.1);
+    padding-left: 1rem;
+  }
+
+  &:focus {
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+  }
+}
