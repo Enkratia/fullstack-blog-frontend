@@ -14,7 +14,7 @@ const authorsList: UserType[] = [
     profession: "Content Writer",
     company: "Company",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
-    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const authorsList: UserType[] = [
     email: "email@email.com",
     company: "Company",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
-    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const authorsList: UserType[] = [
     email: "email@email.com",
     company: "Company",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
-    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
   },
   {
     id: 4,
@@ -44,7 +44,7 @@ const authorsList: UserType[] = [
     email: "email@email.com",
     company: "Company",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
-    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
   },
   {
     id: 5,
@@ -54,7 +54,7 @@ const authorsList: UserType[] = [
     company: "Company",
     email: "email@email.com",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
-    userLinks: [{ facebook: null }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
   },
   {
     id: 6,
@@ -64,7 +64,7 @@ const authorsList: UserType[] = [
     company: "Company",
     email: "email@email.com",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
-    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
   },
   {
     id: 7,
@@ -74,7 +74,7 @@ const authorsList: UserType[] = [
     company: "Company",
     email: "email@email.com",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
-    userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
   },
   {
     id: 8,
@@ -84,7 +84,7 @@ const authorsList: UserType[] = [
     company: "Company",
     email: "email@email.com",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
-    userLinks: [{ facebook: null }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
   },
 ];
 

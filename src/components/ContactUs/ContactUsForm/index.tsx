@@ -96,29 +96,27 @@ export const ContactUsForm: React.FC = () => {
 
   return (
     <form className={s.root}>
-      <div className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidText[0]]}`}>
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
         <input
           type="text"
           onChange={(e) => validateText(e.target.value, 0)}
           placeholder="Full Name"
-          name="contact-us-fullname"
+          name="Fullname"
           className={cs.input}
         />
       </div>
 
-      <div
-        className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidEmail]}`}
-        data-validity="email">
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
         <input
           type="text"
           onChange={(e) => validateEmail(e.target.value)}
           placeholder="Your Email"
-          name="contact-us-email"
+          name="Email"
           className={cs.input}
         />
       </div>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidSelect[0]]}`}>
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidSelect[0]}>
         <div
           className={`${cs.select} ${cs.input}`}
           role="listbox"
@@ -127,7 +125,7 @@ export const ContactUsForm: React.FC = () => {
           onClick={(e) => onSelectClick(e, 0)}>
           <div className={`${cs.selectHead} ${active === 0 ? "" : cs.selectHeadActive}`}>
             <span className={cs.selectSelected}>{queries[active]}</span>
-            <input type="hidden" name="contact-us-input-hidden" value={queries[active]} />
+            <input type="hidden" name="Select" value={queries[active]} />
 
             <AngleDown aria-hidden="true" />
           </div>
@@ -151,12 +149,12 @@ export const ContactUsForm: React.FC = () => {
         </div>
       </div>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidText[1]]}`}>
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
         <textarea
           onChange={(e) => validateText(e.target.value, 1)}
           className={`${s.textarea} ${cs.input}`}
           placeholder="Message"
-          name="contact-us-message"></textarea>
+          name="Message"></textarea>
       </div>
 
       <button type="submit" className={`${s.submit} ${cs.btn} ${cs.btnLg}`}>

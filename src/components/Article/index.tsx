@@ -39,7 +39,7 @@ export const Article: React.FC<ArticleType> = ({
           <Link href="">{obj.title}</Link>
         </h3>
         <p className={`${s.dataText} ${isCategoryPage ? s.dataTextCategoryPage : ""}`}>
-          {obj.text}
+          {obj.content}
         </p>
       </div>
     </article>

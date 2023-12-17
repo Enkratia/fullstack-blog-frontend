@@ -360,17 +360,18 @@
       transform: translate(50%, -50%);
     }
 
-    svg {
-      position: absolute;
-      right: rem(66);
-      top: 50%;
-      z-index: var(--z-up);
-      display: block;
-      transform: translate(50%, -50%);
-    }
+    // .inputSvg {
+    //   position: absolute;
+    //   right: rem(66);
+    //   top: 50%;
+    //   z-index: var(--z-up);
+    //   display: block;
+    //   transform: translate(50%, -50%);
+    // }
 
-    &Warning {
+    &[data-validity-warning] {
       &::before {
+        content: attr(data-validity-warning);
         color: var(--danger-color);
         opacity: 1;
         visibility: visible;
@@ -378,7 +379,7 @@
 
       &::after {
         content: "";
-        background-image: url("../../public/img/warning.svg");
+        background-image: url("../../public/img/validity/warning.svg");
         opacity: 1;
         visibility: visible;
       }
@@ -386,49 +387,35 @@
       >.input {
         border-color: var(--danger-color);
 
-        svg {
+        &Svg {
           display: none;
-        }
-      }
-
-      &[data-validity="email"] {
-        &::before {
-          content: "Email must contain «@» and «.»";
-        }
-      }
-
-      &[data-validity="pass-length"] {
-        &::before {
-          content: "Password must contain at least 6 characters.";
-        }
-
-        &::after {
-          content: none;
-        }
-      }
-
-      &[data-validity="pass-confirm"] {
-        &::before {
-          content: "Passwords do not match.";
-        }
-
-        &::after {
-          content: none;
         }
       }
     }
 
-    &Success {
+    &[data-validity-warning-pass] {
+      @extend .inputWrapper, [data-validity-warning];
+
       &::before {
-        content: "Looks good!";
-        color: var(--success-color);
-        opacity: 1;
-        visibility: visible;
+        content: attr(data-validity-warning-pass);
       }
 
       &::after {
+        content: none;
+      }
+    }
+
+    &[data-validity-success] {
+      // &::before {
+      //   content: "Looks good!";
+      //   color: var(--success-color);
+      //   opacity: 1;
+      //   visibility: visible;
+      // }
+
+      &::after {
         content: "";
-        background-image: url("../../public/img/success.svg");
+        background-image: url("../../public/img/validity/success.svg");
         opacity: 1;
         visibility: visible;
       }
@@ -436,15 +423,17 @@
       >.input {
         border-color: var(--success-color);
 
-        svg {
+        &Svg {
           display: none;
         }
       }
+    }
 
-      &[data-validity^="pass-"] {
-        &::after {
-          content: none;
-        }
+    &[data-validity-success-pass] {
+      @extend .inputWrapper, [data-validity-success];
+
+      &::after {
+        content: none;
       }
     }
   }
@@ -491,21 +480,6 @@
       color: var(--mediumgray-color);
     }
 
-    // &Dark {
-    //   color: inherit;
-
-    //   svg {
-    //     width: rem(8);
-    //     height: rem(8);
-    //     fill: currentcolor;
-    //     transition: fill 0.3s;
-    //   }
-
-    //   &:hover {
-    //     color: var(--white-color);
-    //   }
-    // }
-
     &Active {
       color: var(--darkgray-color);
     }
@@ -518,6 +492,7 @@
   }
 
   &Wrapper {
+    // box-shadow: var(--small-shadow);
     position: absolute;
     right: 0;
     top: calc(100% + rem(4));
@@ -526,17 +501,11 @@
     border-radius: rem(4);
     padding-right: rem(10); // Для каст. скроллбара
     width: 100%;
-    // box-shadow: var(--small-shadow);
     background-color: var(--light-color);
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s;
     cursor: default;
-
-    // &Dark {
-    //   padding: rem(10) rem(20);
-    //   width: 200%; 
-    // }
 
     &Active {
       opacity: 1;

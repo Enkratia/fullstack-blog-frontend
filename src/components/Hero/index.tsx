@@ -13,7 +13,8 @@ const post: PostType = {
   category: "startup",
   createdAt: "2023-11-03T17:44:30.644Z",
   updatedAt: "2023-11-03T17:44:30.644Z",
-  text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+  content:
+    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
   imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
   tags: ["business", "experience"],
   isFeatured: true,
@@ -25,7 +26,7 @@ const post: PostType = {
     email: "email@email.com",
     company: "",
     representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-    userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
+    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
   },
 };
 
@@ -58,7 +59,7 @@ export const Hero: React.FC = () => {
             </span>
           </div>
 
-          <p className={s.descr}>{post.text}</p>
+          <p className={s.descr}>{post.content}</p>
 
           <Link href="" className={`${s.btn} ${cs.btn}`}>{`Read More >`}</Link>
         </div>

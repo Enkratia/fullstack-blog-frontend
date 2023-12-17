@@ -21,7 +21,7 @@ const post: PostType = {
   category: "startup",
   createdAt: "2023-11-03T17:44:30.644Z",
   updatedAt: "2023-11-03T17:44:30.644Z",
-  text: "### Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
+  content: "### Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
   imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
   tags: ["business, startup"],
   isFeatured: false,
@@ -33,7 +33,7 @@ const post: PostType = {
     profession: "",
     company: "",
     representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-    userLinks: [{ facebook: "" }, { twitter: "" }, { instagram: "" }, { linkedin: "" }],
+    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
   },
 };
 

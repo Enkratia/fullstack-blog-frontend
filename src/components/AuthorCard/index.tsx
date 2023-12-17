@@ -12,16 +12,16 @@ import Linkedin from "../../../public/img/linkedin.svg";
 
 const socialIcons = [
   {
-    icon: <Facebook aria-label="hidden" />,
+    icon: <Facebook aria-hidden="true" />,
   },
   {
-    icon: <Twitter aria-label="hidden" />,
+    icon: <Twitter aria-hidden="true" />,
   },
   {
-    icon: <Instagram aria-label="hidden" />,
+    icon: <Instagram aria-hidden="true" />,
   },
   {
-    icon: <Linkedin aria-label="hidden" />,
+    icon: <Linkedin aria-hidden="true" />,
   },
 ];
 
@@ -46,12 +46,8 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
       <span className={s.info}>{`${author.profession} @${author.company}`}</span>
 
       <ul className={s.social}>
-        {author.userLinks.map((obj, i) => {
-          const socialLinkInfo = Object.entries(obj)[0];
-          const socialTitle = socialLinkInfo[0];
-          const socialLink = socialLinkInfo[1];
-
-          if (socialLink === null) return;
+        {Object.entries(author.userLinks).map(([socialTitle, socialLink], i) => {
+          if (socialLink === "") return;
 
           return (
             <li key={i} className={s.socialItem}>

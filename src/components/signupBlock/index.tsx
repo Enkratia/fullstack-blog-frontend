@@ -51,8 +51,8 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
 
   // **
   const validateForm = () => {
-    return [isValidText, isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
-      el.includes("inputWrapperSuccess"),
+    return [isValidText[0], isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
+      Object.keys(el)[0].includes("data-validity-success"),
     );
   };
 
@@ -110,7 +110,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     <form className={s.root}>
       <p className={`${s.title} ${cs.title}`}>Sign-up</p>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidText[0]]}`}>
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
         <input
           onChange={(e) => onFullnameChange(e, 0)}
           className={`${s.input} ${cs.input}`}
@@ -120,9 +120,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
         />
       </div>
 
-      <div
-        className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidEmail]}`}
-        data-validity="email">
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
         <input
           onChange={onEmailChange}
           className={`${s.input} ${cs.input}`}
@@ -132,9 +130,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
         />
       </div>
 
-      <div
-        className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidPassLength]}`}
-        data-validity="pass-length">
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassLength}>
         <input
           onChange={onPasswordChange}
           className={`${s.input} ${cs.input}`}
@@ -144,9 +140,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
         />
       </div>
 
-      <div
-        className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidPassConfirm]}`}
-        data-validity="pass-confirm">
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassConfirm}>
         <input
           onChange={onPasswordConfirmChange}
           className={`${s.input} ${cs.input}`}

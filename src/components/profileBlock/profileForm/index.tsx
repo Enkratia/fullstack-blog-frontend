@@ -66,7 +66,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   // **
   const validateForm = () => {
     return [isValidText[0], isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
-      !el ? !el : !el.includes("inputWrapperWarning"),
+      !el ? !el : !Object.keys(el)[0].includes("data-validity-warning"),
     );
   };
 
@@ -121,7 +121,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   return (
     <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef} name="profile">
       <div className={s.inputs}>
-        <div className={`${cs.inputWrapper} ${cs[isValidText[0]]}`}>
+        <div className={`${cs.inputWrapper}`} {...isValidText[0]}>
           <input
             onChange={(e) => onFullnameChange(e, 0)}
             type="text"
@@ -132,7 +132,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           />
         </div>
 
-        <div className={`${cs.inputWrapper} ${cs[isValidEmail]}`} data-validity="email">
+        <div className={`${cs.inputWrapper}`} {...isValidEmail}>
           <input
             onChange={onEmailChange}
             type="text"
@@ -143,7 +143,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           />
         </div>
 
-        <div className={`${cs.inputWrapper} ${cs[isValidPassLength]}`} data-validity="pass-length">
+        <div className={`${cs.inputWrapper}`} {...isValidPassLength}>
           <input
             onChange={onPasswordChange}
             type="password"
@@ -154,9 +154,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           />
         </div>
 
-        <div
-          className={`${cs.inputWrapper} ${cs[isValidPassConfirm]}`}
-          data-validity="pass-confirm">
+        <div className={`${cs.inputWrapper}`} {...isValidPassConfirm}>
           <input
             onChange={onPaswordConfirmChange}
             type="password"

@@ -35,7 +35,9 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
   // **
   const validateForm = () => {
-    return [isValidEmail, isValidPassLength].every((el) => el.includes("inputWrapperSuccess"));
+    return [isValidEmail, isValidPassLength].every((el) =>
+      Object.keys(el)[0].includes("data-validity-success"),
+    );
   };
 
   // **
@@ -75,9 +77,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
     <form onClick={(e) => e.preventDefault} className={s.root}>
       <p className={`${s.title} ${cs.title}`}>Sign-in</p>
 
-      <div
-        className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidEmail]}`}
-        data-validity="email">
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
         <input
           onChange={onEmailChange}
           className={`${s.input} ${cs.input}`}
@@ -87,9 +87,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
         />
       </div>
 
-      <div
-        className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidPassLength]}`}
-        data-validity="pass-length">
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassLength}>
         <input
           onChange={onPasswordChange}
           className={`${s.input} ${cs.input}`}

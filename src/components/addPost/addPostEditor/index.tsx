@@ -38,49 +38,58 @@ const EditorBar: React.FC<EditorBarProps> = ({ editor }) => {
     <div className={`${s.bar} ${cs.input}`}>
       <div>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
           className={editor.isActive("heading", { level: 1 }) ? "is-active" : ""}>
           <H1SVG />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
           className={editor.isActive("heading", { level: 2 }) ? "is-active" : ""}>
           <H2SVG />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
           className={editor.isActive("bold") ? "is-active" : ""}>
           <BoldSVG />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleItalic().run()}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
           className={editor.isActive("italic") ? "is-active" : ""}>
           <ItalicSVG />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           className={editor.isActive("underline") ? "is-active" : ""}>
           <UnderlineSVG />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleStrike().run()}
           disabled={!editor.can().chain().focus().toggleStrike().run()}
           className={editor.isActive("strike") ? "is-active" : ""}>
           <StrikeSVG />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={editor.isActive("bulletList") ? "is-active" : ""}>
           <UlistSVG />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           className={editor.isActive("orderedList") ? "is-active" : ""}>
           <OlistSVG />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           className={editor.isActive("blockquote") ? "is-active" : ""}>
           <BlockQuoteSVG />
@@ -88,11 +97,13 @@ const EditorBar: React.FC<EditorBarProps> = ({ editor }) => {
       </div>
       <div>
         <button
+          type="button"
           onClick={() => editor.chain().focus().undo().run()}
           disabled={!editor.can().chain().focus().undo().run()}>
           <UndoSVG />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().redo().run()}
           disabled={!editor.can().chain().focus().redo().run()}>
           <RedoSVG />
@@ -103,31 +114,33 @@ const EditorBar: React.FC<EditorBarProps> = ({ editor }) => {
 };
 
 type AddPostEditorProps = {
-  setText: (text: JSONContent | undefined) => void;
+  setContent: (text: string, json: JSONContent) => void;
+  isValidText: Record<string, string>;
 };
 
-export const AddPostEditor: React.FC<AddPostEditorProps> = ({ setText }) => {
+export const AddPostEditor: React.FC<AddPostEditorProps> = ({ setContent, isValidText }) => {
   const editor = useEditor({
     extensions: [StarterKit, Document, Paragraph, Text, Underline, ListItem],
     content: "",
 
     onUpdate: ({ editor }) => {
       const json = editor.getJSON();
-      setText(json);
+      const text = editor.getText();
+      setContent(text, json);
     },
   });
 
-  const onContentClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onContentFocus = (e: React.FocusEvent<HTMLDivElement>) => {
     const focusable = e.currentTarget.querySelector("[tabindex='0']") as HTMLElement;
     focusable?.focus();
   };
 
   return (
-    <div className={s.root}>
+    <div className={`${s.root} ${cs.inputWrapper}`} {...isValidText}>
       <EditorBar editor={editor} />
       <EditorContent
         editor={editor}
-        onClick={onContentClick}
+        onFocus={onContentFocus}
         className={`${s.content} ${cs.input}`}
         tabIndex={0}
       />

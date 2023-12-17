@@ -11,16 +11,16 @@ import Linkedin from "../../../public/img/linkedin.svg";
 
 const socialIcons = [
   {
-    icon: <Facebook aria-label="hidden" />,
+    icon: <Facebook aria-hidden="true" />,
   },
   {
-    icon: <Twitter aria-label="hidden" />,
+    icon: <Twitter aria-hidden="true" />,
   },
   {
-    icon: <Instagram aria-label="hidden" />,
+    icon: <Instagram aria-hidden="true" />,
   },
   {
-    icon: <Linkedin aria-label="hidden" />,
+    icon: <Linkedin aria-hidden="true" />,
   },
 ];
 
@@ -33,7 +33,7 @@ const user: UserType = {
   email: "email@email.com",
   representation:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus.",
-  userLinks: [{ facebook: "#" }, { twitter: "#" }, { instagram: "#" }, { linkedin: "#" }],
+  userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
 };
 
 export const AuthorHeader: React.FC = () => {
@@ -56,12 +56,8 @@ export const AuthorHeader: React.FC = () => {
           <p className={s.descr}>{user.representation}</p>
 
           <ul className={s.social}>
-            {user.userLinks.map((obj, i) => {
-              const socialLinkInfo = Object.entries(obj)[0];
-              const socialTitle = socialLinkInfo[0];
-              const socialLink = socialLinkInfo[1];
-
-              if (socialLink === null) return;
+            {Object.entries(user.userLinks).map(([socialTitle, socialLink], i) => {
+              if (socialLink === "") return;
 
               return (
                 <li key={i} className={s.socialItem}>

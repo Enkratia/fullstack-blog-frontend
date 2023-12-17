@@ -4,16 +4,10 @@
 @use "../../../scss/utils/" as *;
 
 .root {
-  border: rem(1) solid #ccc;
-  border-radius: rem(4);
-  transition: all 0.3s;
+  border-color: var(--mediumgray05-color);
 
   &:focus-within {
-    border-color: var(--mediumgray-color);
-
-    .content {
-      border-color: var(--mediumgray-color);
-    }
+    border-color: var(--black-color);
   }
 }
 
@@ -21,11 +15,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: none;
-  border-bottom-right-radius: revert;
-  border-bottom-left-radius: revert;
-  padding-block: rem(19);
-  padding-inline: rem(24);
+  border-color: inherit;
+  border-bottom: 0;
+  border-bottom-right-radius: initial;
+  border-bottom-left-radius: initial;
+  transition: border-color 0.3s;
 
   >div {
     display: inline-flex;
@@ -61,10 +55,6 @@
       background-color: #ececec;
     }
 
-    &:focus {
-      background-color: #d3d3d3;
-    }
-
     &:active {
       background-color: #d3d3d3;
     }
@@ -76,27 +66,22 @@
   }
 }
 
-/* Basic editor styles */
 .content {
-  outline: none;
-  border-right: revert;
-  border-bottom: revert;
-  border-left: revert;
-  border-top-left-radius: revert;
-  border-top-right-radius: revert;
-  padding-inline: rem(24);
-  min-height: rem(380);
+  border-color: inherit;
+  border-top-left-radius: initial;
+  border-top-right-radius: initial;
+  min-height: rem(280);
   word-break: break-all;
-  transition: inherit;
+  transition: border-color 0.3s;
   cursor: text;
 
   >div {
     outline: none;
   }
 
-  >*+* {
-    margin-top: 0.75em;
-  }
+  // >*+* {
+  //   margin-top: 0.75em;
+  // }
 
   ul,
   ol {
@@ -111,11 +96,5 @@
   blockquote {
     border-left: 2px solid rgba(#0d0d0d, 0.1);
     padding-left: 1rem;
-  }
-
-  &:focus {
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
   }
 }

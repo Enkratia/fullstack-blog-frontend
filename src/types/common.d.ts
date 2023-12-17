@@ -2,7 +2,7 @@ type PostType = {
   id: number;
   title: string;
   category: string;
-  text: string;
+  content: string;
   imageUrl: string;
   tags: string[];
   user: UserType;

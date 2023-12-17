@@ -11,22 +11,22 @@ import Linkedin from "../../../../public/img/linkedin.svg";
 const socialLinks = [
   {
     title: "Facebook",
-    icon: <Facebook aria-label="hidden" />,
+    icon: <Facebook aria-hidden="true" />,
     linkUrl: "#",
   },
   {
     title: "Twitter",
-    icon: <Twitter aria-label="hidden" />,
+    icon: <Twitter aria-hidden="true" />,
     linkUrl: "#",
   },
   {
     title: "Instagram",
-    icon: <Instagram aria-label="hidden" />,
+    icon: <Instagram aria-hidden="true" />,
     linkUrl: "#",
   },
   {
     title: "Linkedin",
-    icon: <Linkedin aria-label="hidden" />,
+    icon: <Linkedin aria-hidden="true" />,
     linkUrl: "#",
   },
 ];

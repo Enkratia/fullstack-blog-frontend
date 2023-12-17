@@ -42,7 +42,7 @@ export const WhatToReadNextSlider: React.FC<WhatToReadNextSliderProps> = ({ next
               <Link href="">{obj.title}</Link>
             </h3>
 
-            <p className={s.descr}>{obj.text}</p>
+            <p className={s.descr}>{obj.content}</p>
           </div>
         ))}
       </div>

@@ -1,10 +1,14 @@
 "use client";
 
 import React from "react";
+import { useSession } from "next-auth/react";
+import { useImmer } from "use-immer";
 import { JSONContent } from "@tiptap/react";
 
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
+
+import { useLazyCreatePostQuery } from "../../../redux/backendApi";
 
 import { AddPostEditor } from "../../../components";
 import { useValidateForm } from "../../../utils/customHooks";
@@ -18,27 +22,53 @@ const categoriesPlaceholder = "choose category";
 const categoriesNames: CategoriesNames = ["startup", "business", "economy", "technology"];
 const categories = [categoriesPlaceholder, ...categoriesNames];
 
+type ContentType = { text: string; json: JSONContent };
+
 export const AddPostForm: React.FC = () => {
-  const [text, setText] = React.useState<JSONContent>();
+  const { data: session } = useSession();
+  const [createPost] = useLazyCreatePostQuery();
+  const [content, setContent] = useImmer<ContentType>({ text: "", json: {} });
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [active, setActive] = React.useState(0);
 
-  const { isValidText, validateText, isValidEmail, validateEmail, isValidSelect, validateSelect } =
-    useValidateForm();
+  const formRef = React.useRef<HTMLFormElement>(null);
+  const { isValidText, validateText, isValidSelect, validateSelect } = useValidateForm();
 
   // **
+  const validateForm = () => {
+    return [isValidText[0], isValidText[1], isValidText[2], isValidSelect[0]].every((el) => {
+      const attributeKey = Object.keys(el)[0];
+      return !!attributeKey && attributeKey.includes("data-validity-success");
+    });
+  };
+
+  // **
+  const onEditorChange = ({ text, json }: ContentType) => {
+    setContent((o) => {
+      o.json = json;
+      return o;
+    });
+
+    validateText(text, 1);
+  };
+
   const onSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (!validateForm() || !formRef?.current) return;
 
-    console.log("TEXT: ", text);
+    if (!session?.user) return;
+
+    const formData = new FormData(formRef.current);
+    formData.append("content", JSON.stringify(content.json));
+
+    createPost({ id: session.user.id, body: formData });
   };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
     validateText(e.target.value, idx);
   };
 
-  // **
   const onUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const fileInput = e.currentTarget?.nextElementSibling as HTMLInputElement;
     if (fileInput) fileInput.click();
@@ -101,8 +131,8 @@ export const AddPostForm: React.FC = () => {
   };
 
   return (
-    <form className={s.root} onSubmit={(e) => e.preventDefault()}>
-      <div className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidText[0]]}`}>
+    <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
         <input
           onChange={(e) => onInputChange(e, 0)}
           type="text"
@@ -112,7 +142,7 @@ export const AddPostForm: React.FC = () => {
         />
       </div>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidSelect[0]]}`}>
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidSelect[0]}>
         <div
           className={`${cs.select} ${cs.input}`}
           role="listbox"
@@ -123,7 +153,7 @@ export const AddPostForm: React.FC = () => {
             <span className={cs.selectSelected}>{capitalize(categories[active])}</span>
             <input type="hidden" name="category" value={categories[active]} />
 
-            <AngleDown aria-hidden="true" />
+            <AngleDown aria-hidden="true" className={cs.inputSvg} />
           </div>
           <div
             className={`${cs.selectWrapper} ${cs.input} ${isOpen ? cs.selectWrapperActive : ""}`}>
@@ -152,11 +182,14 @@ export const AddPostForm: React.FC = () => {
         <input type="file" accept=".png, .jpg, .jpeg, .svg" name="file" hidden />
       </div>
 
-      <AddPostEditor setText={(text: JSONContent | undefined) => setText(text)} />
+      <AddPostEditor
+        isValidText={isValidText[1]}
+        setContent={(text: string, json: JSONContent) => onEditorChange({ text, json })}
+      />
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper} ${cs[isValidText[1]]}`}>
+      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
         <input
-          onChange={(e) => onInputChange(e, 1)}
+          onChange={(e) => onInputChange(e, 2)}
           type="text"
           className={`${s.input} ${cs.input}`}
           placeholder="Tags"

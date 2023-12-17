@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { UpdateUserType } from "./types";
+import { CreatePostType, UpdateUserType } from "./types";
 import { RootState } from "../store";
 
 import { BACKEND_URL } from "../../utils/constants";
@@ -19,12 +19,24 @@ export const backendApi = createApi({
     },
   }),
   endpoints: (builder) => ({
+    // GET
     getUserById: builder.query<UserType, number>({
       query: (id) => `users/${id}`,
     }),
 
-    // **
-    updateUser: builder.query<Record<string, string>, UpdateUserType>({
+    // CREATE
+    createPost: builder.query<any, CreatePostType>({
+      query: ({ id, body }) => {
+        return {
+          url: `posts/${id}`,
+          method: "POST",
+          body: body,
+        };
+      },
+    }),
+
+    // UPDATE
+    updateUser: builder.query<any, UpdateUserType>({
       query: ({ id, body }) => {
         return {
           url: `users/${id}`,
@@ -36,4 +48,4 @@ export const backendApi = createApi({
   }),
 });
 
-export const { useGetUserByIdQuery, useLazyUpdateUserQuery } = backendApi;
+export const { useGetUserByIdQuery, useLazyUpdateUserQuery, useLazyCreatePostQuery } = backendApi;
