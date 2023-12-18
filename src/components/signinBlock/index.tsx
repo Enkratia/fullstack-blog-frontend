@@ -36,7 +36,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
   // **
   const validateForm = () => {
     return [isValidEmail, isValidPassLength].every((el) =>
-      Object.keys(el)[0].includes("data-validity-success"),
+      !el ? !!el : Object.keys(el)[0].includes("data-validity-success"),
     );
   };
 
@@ -61,6 +61,8 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    console.log(validateForm());
 
     if (!validateForm()) return;
 

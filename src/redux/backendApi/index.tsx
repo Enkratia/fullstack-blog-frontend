@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { CreatePostType, UpdateUserType } from "./types";
+import { UpdateUserType } from "./types";
 import { RootState } from "../store";
 
 import { BACKEND_URL } from "../../utils/constants";
@@ -25,10 +25,10 @@ export const backendApi = createApi({
     }),
 
     // CREATE
-    createPost: builder.query<any, CreatePostType>({
-      query: ({ id, body }) => {
+    createPost: builder.query<any, FormData>({
+      query: (body) => {
         return {
-          url: `posts/${id}`,
+          url: "posts",
           method: "POST",
           body: body,
         };

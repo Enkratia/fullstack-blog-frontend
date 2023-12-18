@@ -66,7 +66,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   // **
   const validateForm = () => {
     return [isValidText[0], isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
-      !el ? !el : !Object.keys(el)[0].includes("data-validity-warning"),
+      !el ? !!el : !Object.keys(el)[0].includes("data-validity-warning"),
     );
   };
 

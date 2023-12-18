@@ -34,6 +34,7 @@ const user: UserType = {
   representation:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus.",
   userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+  posts: [],
 };
 
 export const AuthorHeader: React.FC = () => {

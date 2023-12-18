@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useSession } from "next-auth/react";
 import { useImmer } from "use-immer";
 import { JSONContent } from "@tiptap/react";
 
@@ -25,7 +24,6 @@ const categories = [categoriesPlaceholder, ...categoriesNames];
 type ContentType = { text: string; json: JSONContent };
 
 export const AddPostForm: React.FC = () => {
-  const { data: session } = useSession();
   const [createPost] = useLazyCreatePostQuery();
   const [content, setContent] = useImmer<ContentType>({ text: "", json: {} });
 
@@ -37,10 +35,9 @@ export const AddPostForm: React.FC = () => {
 
   // **
   const validateForm = () => {
-    return [isValidText[0], isValidText[1], isValidText[2], isValidSelect[0]].every((el) => {
-      const attributeKey = Object.keys(el)[0];
-      return !!attributeKey && attributeKey.includes("data-validity-success");
-    });
+    return [isValidText[0], isValidText[1], isValidText[2], isValidSelect[0]].every((el) =>
+      !el ? !!el : Object.keys(el)[0].includes("data-validity-success"),
+    );
   };
 
   // **
@@ -57,12 +54,10 @@ export const AddPostForm: React.FC = () => {
     e.preventDefault();
     if (!validateForm() || !formRef?.current) return;
 
-    if (!session?.user) return;
-
     const formData = new FormData(formRef.current);
     formData.append("content", JSON.stringify(content.json));
 
-    createPost({ id: session.user.id, body: formData });
+    createPost(formData);
   };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {

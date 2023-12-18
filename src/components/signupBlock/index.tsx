@@ -52,7 +52,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
   // **
   const validateForm = () => {
     return [isValidText[0], isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
-      Object.keys(el)[0].includes("data-validity-success"),
+      !el ? !!el : Object.keys(el)[0].includes("data-validity-success"),
     );
   };
 

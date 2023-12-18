@@ -17,6 +17,7 @@ const authorsList: UserType[] = [
     email: "email@email.com",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+    posts: [],
   },
   {
     id: 2,
@@ -27,6 +28,7 @@ const authorsList: UserType[] = [
     email: "email@email.com",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+    posts: [],
   },
   {
     id: 3,
@@ -37,6 +39,7 @@ const authorsList: UserType[] = [
     email: "email@email.com",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+    posts: [],
   },
   {
     id: 4,
@@ -47,6 +50,7 @@ const authorsList: UserType[] = [
     company: "Company",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+    posts: [],
   },
   {
     id: 5,
@@ -57,6 +61,7 @@ const authorsList: UserType[] = [
     email: "email@email.com",
     representation: "Lorem ipsum dolor sit amet consectetur adstin.",
     userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+    posts: [],
   },
 ];
 

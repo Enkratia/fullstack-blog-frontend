@@ -235,14 +235,13 @@ export const useValidateForm = () => {
 //  ==== VALIDATEFORM #1 (ALL SUCCESS) ==== //
 // const validateForm = () => {
 //   return [isValidEmail, isValidPassLength].every((el) =>
-//    const attributeKey = Object.keys(el)[0];
-//    return !!attributeKey && attributeKey.includes("data-validity-success");
+//     !el ? !!el : Object.keys(el)[0].includes("data-validity-success"),
 //   );
 // };
 
 //  ==== VALIDATEFORM #2 (NO WARNING) ==== //
 // const validateForm = () => {
 //   return [isValidText[0], isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
-//     !el ? !el : !Object.keys(el)[0].includes("data-validity-warning"),
+//     !el ? !!el : !Object.keys(el)[0].includes("data-validity-warning"),
 //   );
 // };
