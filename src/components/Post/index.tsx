@@ -1,10 +1,11 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useParams, useSearchParams } from "next/navigation";
 
-// import { MDXRemote } from 'next-mdx-remote'
-// import ReactMarkdown from "react-markdown";
-
+import { useGetPostByIdQuery } from "../../redux/backendApi";
 import { capitalize, formatDate2 } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
@@ -14,6 +15,7 @@ import Business from "../../../public/img/business.svg";
 import Startup from "../../../public/img/startup.svg";
 import Economy from "../../../public/img/economy.svg";
 import Technology from "../../../public/img/technology.svg";
+import DefaultAvatar from "../../../public/img/default/user.png";
 
 const post: PostType = {
   id: 6,
@@ -49,6 +51,15 @@ const icons: IIcons = {
 };
 
 export const Post: React.FC = () => {
+  const { id } = useParams();
+  const { data: post, isError } = useGetPostByIdQuery(+id, { skip: !id });
+
+  if (!post) {
+    return;
+  }
+
+  console.log(DefaultAvatar);
+
   return (
     <section className={s.root}>
       <div className={s.container}>
@@ -56,7 +67,7 @@ export const Post: React.FC = () => {
           <div className={s.user}>
             <div className={s.userImageWrapper}>
               <Image
-                src={post.user.imageUrl}
+                src={!!post.user.imageUrl ? post.user.imageUrl : DefaultAvatar}
                 alt="Author's picture."
                 className={s.userImage}
                 fill

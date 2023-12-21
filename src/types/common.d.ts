@@ -23,7 +23,7 @@ type UserType = {
   company: string;
   representation: string;
   userLinks: UserLinksType;
-  posts: PostType[];
+  posts?: PostType[];
 };
 
 // **

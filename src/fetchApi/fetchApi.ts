@@ -61,6 +61,12 @@ export const fetchContactUsQuery = async () => {
   return { isError: res.isError, data: res.data[0] as ContactUsType };
 };
 
+// PostPage
+export const fetchPostByIdQuery = async (id: number) => {
+  const res = await fetchApi(`posts/${id}`);
+  return { isError: res.isError, data: res.data as PostType };
+};
+
 // Account
 // ProfilePage
 export const fetchUserByIdQuery = async (id: number) => {

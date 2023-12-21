@@ -4,7 +4,7 @@ import React from "react";
 
 import { useLazyUpdateUserQuery } from "../../../redux/backendApi";
 
-import { checkRequestStatus } from "../../../utils/customFunctions/checkRequestStatus";
+import { checkRequestStatus } from "../../../utils/customFunctions";
 import { useValidateForm } from "../../../utils/customHooks";
 
 import cs from "../../../scss/helpers.module.scss";

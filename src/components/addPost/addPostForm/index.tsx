@@ -11,7 +11,7 @@ import { useLazyCreatePostQuery } from "../../../redux/backendApi";
 
 import { AddPostEditor } from "../../../components";
 import { useValidateForm } from "../../../utils/customHooks";
-import { capitalize } from "../../../utils/customFunctions";
+import { capitalize, checkRequestStatus } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./addPostForm.module.scss";
@@ -24,7 +24,9 @@ const categories = [categoriesPlaceholder, ...categoriesNames];
 type ContentType = { text: string; json: JSONContent };
 
 export const AddPostForm: React.FC = () => {
-  const [createPost] = useLazyCreatePostQuery();
+  const [createPost, { isError, isLoading, isFetching, isSuccess }] = useLazyCreatePostQuery();
+  const requestStatus = checkRequestStatus(isError, isSuccess, isFetching, isLoading);
+
   const [content, setContent] = useImmer<ContentType>({ text: "", json: {} });
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -192,7 +194,7 @@ export const AddPostForm: React.FC = () => {
         />
       </div>
 
-      <div>
+      <div className={`${cs.btnWrapper} ${cs[requestStatus]}`}>
         <button onClick={onSubmitClick} type="submit" className={`${s.submit} ${cs.btn}`}>
           Submit
         </button>

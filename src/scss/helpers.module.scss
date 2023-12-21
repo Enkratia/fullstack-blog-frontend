@@ -386,10 +386,10 @@
 
       >.input {
         border-color: var(--danger-color);
+      }
 
-        &Svg {
-          display: none;
-        }
+      .inputSvg {
+        display: none;
       }
     }
 
@@ -422,10 +422,10 @@
 
       >.input {
         border-color: var(--success-color);
+      }
 
-        &Svg {
-          display: none;
-        }
+      .inputSvg {
+        display: none;
       }
     }
 
