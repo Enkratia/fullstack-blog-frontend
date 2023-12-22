@@ -65,13 +65,18 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
 
         <ul className={`${s.list} ${isActive ? s.listActive : ""}`}>
           <li className={s.item}>
-            <Link href="/account/profile" className={s.link} prefetch={false}>
+            <Link href="/account/profile" className={s.link}>
               Profile
             </Link>
           </li>
           <li className={s.item}>
-            <Link href="/account/add-post" className={s.link} prefetch={false}>
+            <Link href="/account/add-post" className={s.link}>
               Add post
+            </Link>
+          </li>
+          <li className={s.item}>
+            <Link href="/account/my-posts" className={s.link}>
+              My posts
             </Link>
           </li>
           <li className={s.item}>
@@ -86,7 +91,6 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
         onClick={onSignClick}
         className={`${s.btn} ${className}`}
         href="/account/profile"
-        prefetch={false}
         scroll={false}>
         {session.user.fullname}
       </Link>

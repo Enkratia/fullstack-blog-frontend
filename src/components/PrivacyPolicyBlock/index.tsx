@@ -12,10 +12,10 @@ const policy: PrivacyPolicyType = {
 export const PrivacyPolicyBlock: React.FC = () => {
   return (
     <section className={s.root}>
-      <div className={`${s.container} ${cs.container} ${cs.container768}`}>
-        <h1 className={s.articleTitle1}>Lorem ipsum dolor sit amet</h1>
+      <article className={`${cs.article} ${cs.container} ${cs.container768}`}>
+        <h1 className={cs.articleTitle1}>Lorem ipsum dolor sit amet</h1>
 
-        <p className={s.articleParagraph}>
+        <p className={cs.articleParagraph}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
           ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
@@ -31,11 +31,11 @@ export const PrivacyPolicyBlock: React.FC = () => {
           neque vitae tempus quam.
         </p>
 
-        <h2 className={s.articleTitle2}>
+        <h2 className={cs.articleTitle2}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
         </h2>
 
-        <p className={s.articleParagraph}>
+        <p className={cs.articleParagraph}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque viverra mauris
           in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque penatibus et
@@ -47,7 +47,7 @@ export const PrivacyPolicyBlock: React.FC = () => {
           semper auctor neque vitae tempus quam.
         </p>
 
-        <p className={s.articleParagraph}>
+        <p className={cs.articleParagraph}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque viverra mauris
           in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque penatibus et
@@ -58,7 +58,7 @@ export const PrivacyPolicyBlock: React.FC = () => {
           suspendisse ultrices gravida dictum fusce ut placerat orci nulla. Neque convallis a cras
           semper auctor neque vitae tempus quam.
         </p>
-      </div>
+      </article>
     </section>
   );
 };

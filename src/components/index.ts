@@ -76,7 +76,7 @@ export * from "./categoryBlock/categoryTags";
 
 // AuthorPage
 export * from "./authorHeader";
-export * from "./myPosts";
+export * from "./authorPosts";
 
 // ContactUsPage
 export * from "./contactUs";
@@ -88,7 +88,7 @@ export * from "./contactUs/contactUsForm";
 export * from "./privacyPolicyHeader";
 export * from "./privacyPolicyBlock";
 
-// AccountLayout
+// ===== AccountLayout ===== //
 export * from "./accountSidebar";
 
 // **
@@ -106,3 +106,6 @@ export * from "./addPost";
 // **
 export * from "./addPost/addPostForm";
 export * from "./addPost/addPostEditor";
+
+// MyPostsPage
+export * from "./myPosts";

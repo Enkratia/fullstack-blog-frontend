@@ -1,41 +1,7 @@
 @use "../../scss//utils/" as *;
 
-.root {
-  padding-top: rem(128);
-  padding-bottom: rem(124);
-  color: var(--black-color);
-
-  @include bp-down("container") {
-    padding-top: calc(rem(36.46) + 6.73vw); // 128>58(1360>320)
-    padding-bottom: calc(rem(32.46) + 6.73vw); // 124>54(1360>320)
-  }
-}
-
-.title {
-  margin: 0;
-  margin-bottom: rem(65);
-  font: var(--h1-font);
-  letter-spacing: rem(-2);
-
-  @include bp-down("container") {
-    margin-bottom: calc(rem(12.69) + 3.84vw); // 65>25(1360>320)
-    font-size: calc(rem(40.15) + 0.57vw); // 48>42(1360>320)
-  }
-}
-
-// **
 .list {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.item {
-  &:not(:last-child) {
-    margin-bottom: rem(59);
-
-    @include bp-down("576") {
-      margin-bottom: rem(50);
-    }
-  }
 }

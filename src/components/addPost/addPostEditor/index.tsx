@@ -141,7 +141,7 @@ export const AddPostEditor: React.FC<AddPostEditorProps> = ({ setContent, isVali
       <EditorContent
         editor={editor}
         onFocus={onContentFocus}
-        className={`${s.content} ${cs.input}`}
+        className={`${s.content} ${cs.article} ${cs.input}`}
         tabIndex={0}
       />
     </div>

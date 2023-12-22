@@ -21,7 +21,7 @@ export const WhatToReadNextSlider: React.FC<WhatToReadNextSliderProps> = ({ next
   return (
     <div className={s.root} ref={emblaRef}>
       <div className={s.slider}>
-        {nextPosts.map((obj) => (
+        {nextPosts.map((obj, i) => (
           <div key={obj.id} className={s.slide}>
             <Link href="" className={s.imageWrapper}>
               <Image src={obj.imageUrl} alt={obj.title} className={s.image} fill />

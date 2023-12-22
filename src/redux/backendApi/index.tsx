@@ -26,6 +26,9 @@ export const backendApi = createApi({
     getPostById: builder.query<PostType, number>({
       query: (id) => `posts/${id}`,
     }),
+    getPosts: builder.query<PostType, string>({
+      query: (request) => `posts/${request}`,
+    }),
 
     // CREATE
     createPost: builder.query<any, FormData>({
@@ -56,4 +59,5 @@ export const {
   useLazyUpdateUserQuery,
   useLazyCreatePostQuery,
   useGetPostByIdQuery,
+  useGetPostsQuery,
 } = backendApi;

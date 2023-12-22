@@ -25,6 +25,11 @@ export const RoutesProtector: React.FC = () => {
 
   const isExit = prevStatus.current === "authenticated" && status === "unauthenticated";
 
+  console.log("EXPIRES_IN1", new Date(session?.backendTokens?.expiresIn || 0));
+  console.log("EXPIRES_IN2", new Date(session?.backendTokens?.refreshExpiresIn || 0));
+  console.log("TOKEN1", session?.backendTokens.accessToken);
+  console.log("TOKEN2", session?.backendTokens.refreshToken);
+
   React.useEffect(() => {
     if (isForbidden && !isExit) {
       router.replace(`/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`);
@@ -47,7 +52,7 @@ export const RoutesProtector: React.FC = () => {
     } else {
       dispatch(removeToken());
     }
-  }, [status]);
+  }, [session]);
 
   return <span></span>;
 };

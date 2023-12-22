@@ -537,3 +537,211 @@
     }
   }
 }
+
+// .article {
+//   color: var(--black-color);
+
+//   &Title1 {
+//     margin: 0;
+//     margin-bottom: rem(16);
+//     font: var(--h1-font);
+//     letter-spacing: rem(-2);
+
+//     &:not(:first-child) {
+//       margin-top: rem(48);
+
+//       @include bp-down("container") {
+//         margin-top: calc(rem(27.08) + 1.54vw); // 48>32(1360>320)
+//       }
+//     }
+
+//     @include bp-down("container") {
+//       font-size: calc(rem(40.15) + 0.57vw); // 48>42(1360>320)
+//     }
+//   }
+
+//   &Title2 {
+//     margin: 0;
+//     margin-bottom: rem(16);
+//     font: var(--h2-font);
+//     letter-spacing: rem(-2);
+
+//     &:not(:first-child) {
+//       margin-top: rem(48);
+
+//       @include bp-down("container") {
+//         margin-top: calc(rem(27.08) + 1.54vw); // 48>32(1360>320)
+//       }
+//     }
+
+//     @include bp-down("container") {
+//       margin-top: calc(rem(27.08) + 1.54vw); // 48>32(1360>320)
+//       font-size: calc(rem(30.77) + 0.38vw); // 36>32(1360>320)
+//     }
+//   }
+
+//   &Paragraph {
+//     margin: 0;
+//     font: var(--body01-font);
+//     color: var(--mediumgray-color);
+
+//     &:not(:last-child) {
+//       margin-bottom: rem(24);
+//     }
+//   }
+
+//   &List {
+//     list-style: none;
+//     margin: 0;
+//     padding: 0;
+
+//     &:not(:last-child) {
+//       margin-bottom: rem(24);
+//     }
+//   }
+
+//   &Item {
+//     display: flex;
+//     align-items: center;
+//     font: var(--h4-font);
+//     opacity: 0.78;
+
+//     &::before {
+//       content: "";
+//       position: relative;
+//       top: rem(2);
+//       display: inline-block;
+//       margin-right: rem(12);
+//       margin-bottom: rem(2);
+//       border-radius: 50%;
+//       width: rem(5);
+//       height: rem(5);
+//       background-color: var(--post-marker-color);
+//     }
+
+//     &:not(:last-child) {
+//       margin-bottom: rem(2);
+//     }
+//   }
+// }
+
+.article {
+  word-break: break-word;
+  color: var(--black-color);
+
+  // H
+  h1 {
+    margin: 0;
+    margin-bottom: rem(16);
+    font: var(--h1-font);
+    letter-spacing: rem(-2);
+
+    &:not(:first-child) {
+      margin-top: rem(48);
+
+      @include bp-down("container") {
+        margin-top: calc(rem(27.08) + 1.54vw); // 48>32(1360>320)
+      }
+    }
+
+    @include bp-down("container") {
+      font-size: calc(rem(40.15) + 0.57vw); // 48>42(1360>320)
+    }
+  }
+
+  h2 {
+    margin: 0;
+    margin-bottom: rem(16);
+    font: var(--h2-font);
+    letter-spacing: rem(-2);
+
+    &:not(:first-child) {
+      margin-top: rem(48);
+
+      @include bp-down("container") {
+        margin-top: calc(rem(27.08) + 1.54vw); // 48>32(1360>320)
+      }
+    }
+
+    @include bp-down("container") {
+      margin-top: calc(rem(27.08) + 1.54vw); // 48>32(1360>320)
+      font-size: calc(rem(30.77) + 0.38vw); // 36>32(1360>320)
+    }
+  }
+
+  // P
+  p {
+    margin: 0;
+    font: var(--body01-font);
+    color: var(--mediumgray-color);
+
+    &:not(:last-child) {
+      margin-bottom: rem(24);
+    }
+  }
+
+  li p {
+    all: revert;
+    display: inline-block;
+    margin: 0;
+  }
+
+  // UL, OL, LI
+  ul,
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &:not(:last-child) {
+      margin-bottom: rem(24);
+    }
+  }
+
+  ol {
+    counter-reset: editor-counter 0;
+  }
+
+  li {
+    display: flex;
+    font: var(--h4-font);
+    opacity: 0.78;
+
+    &:not(:last-child) {
+      margin-bottom: rem(2);
+    }
+  }
+
+  ul li {
+    align-items: center;
+
+    &::before {
+      content: "";
+      position: relative;
+      top: rem(2);
+      display: inline-block;
+      margin-right: rem(12);
+      margin-bottom: rem(2);
+      border-radius: 50%;
+      width: rem(5);
+      height: rem(5);
+      background-color: var(--post-marker-color);
+    }
+  }
+
+  ol li {
+    counter-increment: editor-counter;
+
+    &::before {
+      content: counter(editor-counter) ".";
+      margin-right: rem(12);
+      white-space: nowrap;
+    }
+  }
+
+  // BLOCKQUOTE
+  blockquote {
+    border-left: 2px solid rgba(#0d0d0d, 0.1);
+    padding-left: 1rem;
+  }
+}

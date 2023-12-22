@@ -3,7 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
+
+import StarterKit from "@tiptap/starter-kit";
+import { generateHTML } from "@tiptap/html";
+import Document from "@tiptap/extension-document";
+import Paragraph from "@tiptap/extension-paragraph";
+import Text from "@tiptap/extension-text";
+import ListItem from "@tiptap/extension-list-item";
+import Underline from "@tiptap/extension-underline";
 
 import { useGetPostByIdQuery } from "../../redux/backendApi";
 import { capitalize, formatDate2 } from "../../utils/customFunctions";
@@ -50,15 +57,29 @@ const icons: IIcons = {
   technology: <Technology aria-hidden="true" />,
 };
 
-export const Post: React.FC = () => {
-  const { id } = useParams();
-  const { data: post, isError } = useGetPostByIdQuery(+id, { skip: !id });
+type PostProps = {
+  id: number;
+};
+
+export const Post: React.FC<PostProps> = ({ id }) => {
+  const { data: post, isError } = useGetPostByIdQuery(id, { skip: typeof +id !== "number" });
+
+  const html = React.useMemo(() => {
+    if (!post) return "";
+
+    return generateHTML(JSON.parse(post.content), [
+      StarterKit,
+      Document,
+      Paragraph,
+      Text,
+      Underline,
+      ListItem,
+    ]);
+  }, [post]);
 
   if (!post) {
     return;
   }
-
-  console.log(DefaultAvatar);
 
   return (
     <section className={s.root}>
@@ -84,7 +105,9 @@ export const Post: React.FC = () => {
 
           <p className={s.title}>{post.title}</p>
 
-          <Link href="" className={s.category}>
+          <Link
+            href=""
+            className={`${s.category} ${post.category === "business" ? s.categoryBusiness : ""}`}>
             {icons[post.category]}
             {capitalize(post.category)}
           </Link>
@@ -94,71 +117,75 @@ export const Post: React.FC = () => {
           <Image src={post.imageUrl} alt={post.title} className={s.image} fill />
         </div>
 
-        <div className={`${s.article} ${cs.container} ${cs.container836}`}>
-          <h2 className={s.articleTitle2}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-          </h2>
-
-          <p className={s.articleParagraph}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque
-            viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque
-            penatibus et magnis dis parturient montes. Ridiculus mus mauris vitae ultricies leo.
-            Neque egestas congue quisque egestas diam. Risus in hendrerit gravida rutrum quisque
-            non.
-          </p>
-
-          <h2 className={s.articleTitle2}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-          </h2>
-
-          <p className={s.articleParagraph}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque
-            viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque
-            penatibus et magnis dis parturient montes. Ridiculus mus mauris vitae ultricies leo.
-            Neque egestas congue quisque egestas diam. Risus in hendrerit gravida rutrum quisque
-            non.
-          </p>
-
-          <p className={s.articleParagraph}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque
-            viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque
-            penatibus et magnis dis parturient montes. Ridiculus mus mauris vitae ultricies leo.
-            Neque egestas congue quisque egestas diam. Risus in hendrerit gravida rutrum quisque
-            non.
-          </p>
-
-          <ul className={s.articleList}>
-            <li className={s.articleItem}>Lorem ipsum dolor sit amet</li>
-            <li className={s.articleItem}>Non blandit massa enim nec scelerisque</li>
-            <li className={s.articleItem}>Neque egestas congue quisque egestas</li>
-          </ul>
-
-          <p className={s.articleParagraph}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque
-            viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque
-            penatibus et magnis dis parturient montes. Ridiculus mus mauris vitae ultricies leo.
-            Neque egestas congue quisque egestas diam. Risus in hendrerit gravida rutrum quisque
-            non.
-          </p>
-
-          <h2 className={s.articleTitle2}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-          </h2>
-
-          <p className={s.articleParagraph}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque
-            viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque
-            penatibus et magnis dis parturient montes. Ridiculus mus mauris vitae ultricies leo.
-            Neque egestas congue quisque egestas diam. Risus in hendrerit gravida rutrum quisque
-            non.
-          </p>
-        </div>
+        <div
+          className={`${cs.article} ${cs.container} ${cs.container836}`}
+          dangerouslySetInnerHTML={{ __html: html }}></div>
       </div>
     </section>
   );
 };
+
+{
+  /* <h2 className={cs.articleTitle2}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+          </h2>
+
+          <p className={cs.articleParagraph}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque
+            viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque
+            penatibus et magnis dis parturient montes. Ridiculus mus mauris vitae ultricies leo.
+            Neque egestas congue quisque egestas diam. Risus in hendrerit gravida rutrum quisque
+            non.
+          </p>
+
+          <h2 className={cs.articleTitle2}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+          </h2>
+
+          <p className={cs.articleParagraph}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque
+            viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque
+            penatibus et magnis dis parturient montes. Ridiculus mus mauris vitae ultricies leo.
+            Neque egestas congue quisque egestas diam. Risus in hendrerit gravida rutrum quisque
+            non.
+          </p>
+
+          <p className={cs.articleParagraph}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque
+            viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque
+            penatibus et magnis dis parturient montes. Ridiculus mus mauris vitae ultricies leo.
+            Neque egestas congue quisque egestas diam. Risus in hendrerit gravida rutrum quisque
+            non.
+          </p>
+
+          <ul className={cs.articleList}>
+            <li className={cs.articleItem}>Lorem ipsum dolor sit amet</li>
+            <li className={cs.articleItem}>Non blandit massa enim nec scelerisque</li>
+            <li className={cs.articleItem}>Neque egestas congue quisque egestas</li>
+          </ul>
+
+          <p className={cs.articleParagraph}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque
+            viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque
+            penatibus et magnis dis parturient montes. Ridiculus mus mauris vitae ultricies leo.
+            Neque egestas congue quisque egestas diam. Risus in hendrerit gravida rutrum quisque
+            non.
+          </p>
+
+          <h2 className={cs.articleTitle2}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+          </h2>
+
+          <p className={cs.articleParagraph}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque
+            viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus. Sociis natoque
+            penatibus et magnis dis parturient montes. Ridiculus mus mauris vitae ultricies leo.
+            Neque egestas congue quisque egestas diam. Risus in hendrerit gravida rutrum quisque
+            non.
+          </p> */
+}

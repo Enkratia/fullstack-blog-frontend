@@ -14,6 +14,10 @@ const links = [
     segment: "add-post",
     title: "Add post",
   },
+  {
+    segment: "my-posts",
+    title: "My posts",
+  },
 ];
 
 export const AccountSidebarLayer: React.FC = () => {

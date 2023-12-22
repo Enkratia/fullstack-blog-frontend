@@ -2,15 +2,21 @@ import { Join, Post, WhatToReadNext } from "../../../../components";
 
 import cs from "../../../../scss/helpers.module.scss";
 
-export default function BlogPostPage() {
+type BlogPostPageProps = {
+  params: {
+    id: number;
+  };
+};
+
+const BlogPostPage: React.FC<BlogPostPageProps> = ({ params: { id } }) => {
   return (
     <main>
-      {/* Change to title post */}
       <h1 className={cs.srOnly}>Post</h1>
-
-      <Post />
+      <Post id={id} />
       <WhatToReadNext />
       <Join />
     </main>
   );
-}
+};
+
+export default BlogPostPage;
