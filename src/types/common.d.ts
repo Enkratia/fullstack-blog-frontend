@@ -2,7 +2,8 @@ type PostType = {
   id: number;
   title: string;
   category: string;
-  content: string;
+  contentJson: string;
+  contentText: string;
   imageUrl: string;
   tags: string[];
   user: UserType;

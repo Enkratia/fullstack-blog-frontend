@@ -126,6 +126,7 @@ export const AddPostEditor: React.FC<AddPostEditorProps> = ({ setContent, isVali
     onUpdate: ({ editor }) => {
       const json = editor.getJSON();
       const text = editor.getText();
+
       setContent(text, json);
     },
   });

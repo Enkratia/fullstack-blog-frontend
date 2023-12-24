@@ -46,6 +46,7 @@ export const AddPostForm: React.FC = () => {
   const onEditorChange = ({ text, json }: ContentType) => {
     setContent((o) => {
       o.json = json;
+      o.text = text;
       return o;
     });
 
@@ -57,7 +58,8 @@ export const AddPostForm: React.FC = () => {
     if (!validateForm() || !formRef?.current) return;
 
     const formData = new FormData(formRef.current);
-    formData.append("content", JSON.stringify(content.json));
+    formData.append("contentJson", JSON.stringify(content.json));
+    formData.append("contentText", content.text);
 
     createPost(formData);
   };

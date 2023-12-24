@@ -14,8 +14,9 @@ const allPosts: PostType[] = [
     category: "startup",
     createdAt: "2023-11-03T17:44:30.644Z",
     updatedAt: "2023-11-03T17:44:30.644Z",
-    content:
+    contentText:
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+    contentJson: "",
     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
     tags: ["business", "experience"],
     isFeatured: false,
@@ -36,8 +37,9 @@ const allPosts: PostType[] = [
     category: "startup",
     createdAt: "2023-11-03T17:44:30.644Z",
     updatedAt: "2023-11-03T17:44:30.644Z",
-    content:
+    contentText:
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+    contentJson: "",
     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
     tags: ["business", "experience"],
     isFeatured: false,
@@ -58,8 +60,9 @@ const allPosts: PostType[] = [
     category: "startup",
     createdAt: "2023-11-03T17:44:30.644Z",
     updatedAt: "2023-11-03T17:44:30.644Z",
-    content:
+    contentText:
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+    contentJson: "",
     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
     tags: ["business", "experience"],
     isFeatured: false,
@@ -80,8 +83,9 @@ const allPosts: PostType[] = [
     category: "startup",
     createdAt: "2023-11-03T17:44:30.644Z",
     updatedAt: "2023-11-03T17:44:30.644Z",
-    content:
+    contentText:
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+    contentJson: "",
     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
     tags: ["business", "experience"],
     isFeatured: false,
@@ -104,8 +108,9 @@ const post: PostType = {
   category: "startup",
   createdAt: "2023-11-03T17:44:30.644Z",
   updatedAt: "2023-11-03T17:44:30.644Z",
-  content:
+  contentText:
     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+  contentJson: "",
   imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
   tags: ["business", "experience"],
   isFeatured: true,
@@ -149,7 +154,7 @@ export const FeaturedPosts: React.FC = () => {
               <h3 className={s.featuredTitleSecond}>{post.title}</h3>
             </Link>
 
-            <p className={s.featuredDescr}>{post.content}</p>
+            <p className={s.featuredDescr}>{post.contentText}</p>
 
             <Link href="" className={`${s.btn} ${cs.btn}`}>{`Read More >`}</Link>
           </div>
