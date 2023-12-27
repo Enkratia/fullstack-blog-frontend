@@ -1,7 +1,17 @@
 @use "../../scss//utils/" as *;
 
+.title {
+  margin-bottom: rem(30);
+}
+
 .list {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.item {
+  &:not(:last-child) {
+    margin-bottom: rem(20);
+  }
 }

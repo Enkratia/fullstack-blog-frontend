@@ -40,8 +40,21 @@ export const useValidateForm = () => {
   // **
   const [isValidContent, setIsValidContent] = useImmer<Record<string, string>>({ "": "" });
 
+  // **
+  const [isValidFile, setIsValidFile] = useImmer<Record<string, string>>({ "": "" });
+
+  const validateFile = (files: FileList | null) => {
+    const filesCount = files && files.length === 1;
+
+    if (filesCount) {
+      setIsValidFile({ "data-validity-success-file": "" });
+    } else {
+      setIsValidFile({ "data-validity-warning-file": "File not selected" });
+    }
+  };
+
   // ***
-  const validateContent = (text: string | null) => {
+  const validateContent = (text: string | undefined) => {
     // **
     if (text === null) {
       setIsValidContent({ "": "" });
@@ -49,7 +62,7 @@ export const useValidateForm = () => {
     }
 
     // **
-    const isNotEmpty = text.trim();
+    const isNotEmpty = text?.trim();
 
     if (isNotEmpty) {
       setIsValidContent({ "data-validity-success": "" });
@@ -229,6 +242,8 @@ export const useValidateForm = () => {
     validateSelect,
     isValidContent,
     validateContent,
+    isValidFile,
+    validateFile,
   };
 };
 

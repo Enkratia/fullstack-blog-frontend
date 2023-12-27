@@ -33,13 +33,26 @@ export const AddPostForm: React.FC = () => {
   const [active, setActive] = React.useState(0);
 
   const formRef = React.useRef<HTMLFormElement>(null);
-  const { isValidText, validateText, isValidSelect, validateSelect } = useValidateForm();
+  const { isValidText, validateText, isValidSelect, validateSelect, isValidFile, validateFile } =
+    useValidateForm();
 
   // **
   const validateForm = () => {
-    return [isValidText[0], isValidText[1], isValidText[2], isValidSelect[0]].every((el) =>
-      !el ? !!el : Object.keys(el)[0].includes("data-validity-success"),
+    return [isValidText[0], isValidText[1], isValidText[2], isValidSelect[0], isValidFile].every(
+      (el) => (!el ? !!el : Object.keys(el)[0].includes("data-validity-success")),
     );
+  };
+
+  // **
+  const onSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!validateForm() || !formRef?.current) return;
+
+    const formData = new FormData(formRef.current);
+    formData.append("contentJson", JSON.stringify(content.json));
+    formData.append("contentText", content.text);
+
+    createPost(formData);
   };
 
   // **
@@ -53,15 +66,8 @@ export const AddPostForm: React.FC = () => {
     validateText(text, 1);
   };
 
-  const onSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (!validateForm() || !formRef?.current) return;
-
-    const formData = new FormData(formRef.current);
-    formData.append("contentJson", JSON.stringify(content.json));
-    formData.append("contentText", content.text);
-
-    createPost(formData);
+  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    validateFile(e.target.files);
   };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
@@ -174,11 +180,18 @@ export const AddPostForm: React.FC = () => {
         </div>
       </div>
 
-      <div className={s.uploadWrapper}>
+      <div className={`${s.uploadWrapper} ${cs.inputWrapper}`} {...isValidFile}>
         <button onClick={onUploadClick} type="button" className={`${s.upload} ${cs.btn}`}>
           Upload picture
         </button>
-        <input type="file" accept=".png, .jpg, .jpeg, .svg" name="file" hidden />
+
+        <input
+          onChange={onFileChange}
+          type="file"
+          accept=".png, .jpg, .jpeg, .svg"
+          name="file"
+          hidden
+        />
       </div>
 
       <AddPostEditor

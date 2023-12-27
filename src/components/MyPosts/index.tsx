@@ -2,22 +2,36 @@
 
 import React from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
 
-import { Article } from "../../components";
+import { Article, Pagination } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./myPosts.module.scss";
 
+const limit = 4;
+
 export const MyPosts: React.FC = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
-  const request = `?user.id=${session?.user?.id}`;
+  const [page, setPage] = React.useState(1);
+
+  const request = `?user.id=${session?.user?.id}&_limit=${limit}&_page=${page}`;
+
   const { data, isError } = useGetPostsQuery(request, { skip: session?.user?.id === undefined });
-
   const posts = data?.data;
-  const count = data?.totalCount;
+  const totalCount = data?.totalCount;
+
+  const totalPages = Math.ceil((totalCount || 1) / limit);
+
+  // **
+  const onPageChange = ({ selected }: Record<string, number>) => {
+    setPage(selected + 1);
+    router.replace(request, { scroll: false });
+  };
 
   if (!posts) {
     return;
@@ -29,9 +43,15 @@ export const MyPosts: React.FC = () => {
 
       <ul className={s.list}>
         {posts.map((obj) => (
-          <Article key={obj.id} obj={obj} />
+          <li key={obj.id} className={s.item}>
+            <Article obj={obj} />
+          </li>
         ))}
       </ul>
+
+      {totalCount && totalCount > limit && (
+        <Pagination page={page} totalPages={totalPages} onPageChange={onPageChange} />
+      )}
     </div>
   );
 };

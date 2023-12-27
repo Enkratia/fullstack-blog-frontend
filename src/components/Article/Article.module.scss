@@ -34,6 +34,7 @@
   transition: 0.3s ease;
 
   &Wrapper {
+    display: flex;
     align-self: center;
     overflow: hidden;
     width: 100%;

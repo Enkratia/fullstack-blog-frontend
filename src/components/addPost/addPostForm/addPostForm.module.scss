@@ -11,3 +11,13 @@
     }
   }
 }
+
+.upload {
+  &Wrapper {
+    width: max-content;
+
+    >&::after {
+      content: none;
+    }
+  }
+}
