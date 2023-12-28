@@ -1,8 +1,10 @@
 "use client";
 
+import qs from "qs";
+
 import React from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
 
@@ -14,23 +16,61 @@ import s from "./myPosts.module.scss";
 const limit = 4;
 
 export const MyPosts: React.FC = () => {
+  const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
+  const isMount = React.useRef(true);
+  const searchParams = useSearchParams();
+
   const { data: session } = useSession();
   const router = useRouter();
 
-  const [page, setPage] = React.useState(1);
+  const getInitialURL = () => {
+    const searchQS = qs.parse(window.location.search.substring(1));
+    const initialPage = searchQS._page || "";
 
-  const request = `?user.id=${session?.user?.id}&_limit=${limit}&_page=${page}`;
+    return { initialPage };
+  };
+  const { initialPage } = getInitialURL();
+
+  const [page, setPage] = React.useState(Number(initialPage) || 1);
+
+  const requestObjQS = {
+    _page: page,
+    _limit: limit,
+  };
+
+  const requestObj = {
+    "user.id": session?.user?.id,
+    _page: page,
+    _limit: limit,
+  };
+
+  let requestQS = `?${qs.stringify(requestObjQS, { encode: true })}`;
+  let request = `?${qs.stringify(requestObj, { encode: true })}`;
 
   const { data, isError } = useGetPostsQuery(request, { skip: session?.user?.id === undefined });
   const posts = data?.data;
   const totalCount = data?.totalCount;
-
   const totalPages = Math.ceil((totalCount || 1) / limit);
+
+  React.useEffect(() => {
+    // const searchQS = qs.parse(window.location.search.substring(1));
+    // const initialPage = searchQS._page || "";
+
+    initialPage && +initialPage !== page && setPage(+initialPage);
+  }, [searchParams]);
+
+  console.log("rere");
+
+  React.useEffect(() => {
+    if (isNavigate) {
+      router.push(requestQS);
+    }
+  }, [isNavigate]);
 
   // **
   const onPageChange = ({ selected }: Record<string, number>) => {
     setPage(selected + 1);
-    router.replace(request, { scroll: false });
+    setIsNavigate({});
   };
 
   if (!posts) {
