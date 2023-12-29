@@ -12,7 +12,15 @@ type PostType = {
   updatedAt: string;
 };
 
-type UserLinksType = Record<"facebook" | "twitter" | "instagram" | "linkedin", string>;
+interface IObjKeys {
+  [key: string]: string;
+}
+
+type userLinksName = "facebook" | "twitter" | "instagram" | "linkedin";
+
+interface UserLinksType extends IObjKeys {
+  [key: userLinksName]: string;
+}
 
 type UserType = {
   id: number;

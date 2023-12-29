@@ -4,7 +4,7 @@ import qs from "qs";
 
 import React from "react";
 import { useSession } from "next-auth/react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
 
@@ -13,39 +13,41 @@ import { Article, Pagination } from "../../components";
 import cs from "../../scss/helpers.module.scss";
 import s from "./myPosts.module.scss";
 
-const limit = 4;
+const limit = 3;
 
 export const MyPosts: React.FC = () => {
+  const isRouter = React.useRef(true);
   const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
-  const isMount = React.useRef(true);
-  const searchParams = useSearchParams();
 
   const { data: session } = useSession();
+  const searchParams = useSearchParams().toString();
   const router = useRouter();
 
-  const getInitialURL = () => {
-    const searchQS = qs.parse(window.location.search.substring(1));
-    const initialPage = searchQS._page || "";
+  const getUrlSearch = () => {
+    const urlSearch = qs.parse(searchParams);
+    const urlPage = Number(urlSearch._page || "1");
 
-    return { initialPage };
+    return { urlPage };
   };
-  const { initialPage } = getInitialURL();
+  const { urlPage } = getUrlSearch();
 
-  const [page, setPage] = React.useState(Number(initialPage) || 1);
+  const [page, setPage] = React.useState(urlPage);
 
-  const requestObjQS = {
-    _page: page,
-    _limit: limit,
-  };
+  class Request {
+    _page = page;
+    _limit = limit;
 
-  const requestObj = {
-    "user.id": session?.user?.id,
-    _page: page,
-    _limit: limit,
-  };
+    "user.id";
 
-  let requestQS = `?${qs.stringify(requestObjQS, { encode: true })}`;
-  let request = `?${qs.stringify(requestObj, { encode: true })}`;
+    constructor(isExtend: boolean) {
+      if (isExtend) {
+        this["user.id"] = session?.user?.id as number;
+      }
+    }
+  }
+
+  let requestLocal = `?${qs.stringify(new Request(false), { encode: true })}`;
+  let request = `?${qs.stringify(new Request(true), { encode: true })}`;
 
   const { data, isError } = useGetPostsQuery(request, { skip: session?.user?.id === undefined });
   const posts = data?.data;
@@ -53,17 +55,17 @@ export const MyPosts: React.FC = () => {
   const totalPages = Math.ceil((totalCount || 1) / limit);
 
   React.useEffect(() => {
-    // const searchQS = qs.parse(window.location.search.substring(1));
-    // const initialPage = searchQS._page || "";
+    if (!isRouter.current) {
+      urlPage !== page && setPage(urlPage);
+    }
 
-    initialPage && +initialPage !== page && setPage(+initialPage);
+    isRouter.current = false;
   }, [searchParams]);
-
-  console.log("rere");
 
   React.useEffect(() => {
     if (isNavigate) {
-      router.push(requestQS);
+      router.push(requestLocal, { scroll: false });
+      isRouter.current = true;
     }
   }, [isNavigate]);
 
@@ -89,7 +91,7 @@ export const MyPosts: React.FC = () => {
         ))}
       </ul>
 
-      {totalCount && totalCount > limit && (
+      {totalPages > 1 && (
         <Pagination page={page} totalPages={totalPages} onPageChange={onPageChange} />
       )}
     </div>

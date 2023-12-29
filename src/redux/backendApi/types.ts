@@ -5,6 +5,12 @@ export type UpdateUserType = {
 };
 
 // **
+export type GetUsersType = {
+  data: UserType[];
+  totalCount: number;
+};
+
+// **
 export type GetPostsType = {
   data: PostType[];
   totalCount: number;

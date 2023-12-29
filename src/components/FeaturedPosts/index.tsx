@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+import { fetchPostsQuery } from "../../fetchApi/fetchApi";
 import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
@@ -126,7 +127,20 @@ const post: PostType = {
   },
 };
 
-export const FeaturedPosts: React.FC = () => {
+export const FeaturedPosts: React.FC = async () => {
+  const requestFeatured = "?isFeatured=true";
+  const requestAllPosts = "?_sort=createdAt&_order=DESC&_limit=4&_page=1";
+
+  const { data: featuredData, isError: isErrorFeatured } = await fetchPostsQuery(requestFeatured);
+  const { data: allPostsData, isError: isErrorAllPosts } = await fetchPostsQuery(requestAllPosts);
+
+  const featuredPost = featuredData?.data[0];
+  const allPosts = allPostsData?.data;
+
+  if (!featuredPost || !allPosts) {
+    return;
+  }
+
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
@@ -136,7 +150,12 @@ export const FeaturedPosts: React.FC = () => {
           <div className={s.featuredContent}>
             <div className={s.featuredImageWrapper}>
               <div className={s.featuredImageWrapperInner}>
-                <Image src={post.imageUrl} alt={post.title} fill className={s.featuredImage} />
+                <Image
+                  src={featuredPost.imageUrl}
+                  alt={featuredPost.title}
+                  fill
+                  className={s.featuredImage}
+                />
               </div>
             </div>
 
@@ -144,17 +163,17 @@ export const FeaturedPosts: React.FC = () => {
               <span className={cs.metadataItem}>
                 By
                 <Link
-                  href={`/users/${post.user.id}`}
-                  className={cs.metadataName}>{` ${post.user.fullname}`}</Link>
+                  href={`/users/${featuredPost.user.id}`}
+                  className={cs.metadataName}>{` ${featuredPost.user.fullname}`}</Link>
               </span>
-              <span className={cs.metadataItem}>{formatDate(post.createdAt)}</span>
+              <span className={cs.metadataItem}>{formatDate(featuredPost.createdAt)}</span>
             </div>
 
             <Link href="" className={s.featuredTitleSecondLink}>
-              <h3 className={s.featuredTitleSecond}>{post.title}</h3>
+              <h3 className={s.featuredTitleSecond}>{featuredPost.title}</h3>
             </Link>
 
-            <p className={s.featuredDescr}>{post.contentText}</p>
+            <p className={s.featuredDescr}>{featuredPost.contentText}</p>
 
             <Link href="" className={`${s.btn} ${cs.btn}`}>{`Read More >`}</Link>
           </div>

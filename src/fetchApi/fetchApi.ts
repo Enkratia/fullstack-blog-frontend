@@ -1,3 +1,5 @@
+import { GetPostsType } from "../redux/backendApi/types";
+
 const baseUrl = "http://localhost:3001/api";
 
 const fetchApi = async (query: string) => {
@@ -26,6 +28,11 @@ export const fetchCategoryHeaderQuery = async () => {
 export const fetchJoinQuery = async () => {
   const res = await fetchApi("join");
   return { isError: res.isError, data: res.data[0] as JoinType };
+};
+
+export const fetchPostsQuery = async (request: string) => {
+  const res = await fetchApi(`posts${request}`);
+  return { isError: res.isError, data: res.data as GetPostsType };
 };
 
 // HomePage

@@ -6,14 +6,12 @@ import Link from "next/link";
 
 import StarterKit from "@tiptap/starter-kit";
 import { generateHTML } from "@tiptap/html";
-import Document from "@tiptap/extension-document";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
-import ListItem from "@tiptap/extension-list-item";
 import Underline from "@tiptap/extension-underline";
 
 import { useGetPostByIdQuery } from "../../redux/backendApi";
 import { capitalize, formatDate2 } from "../../utils/customFunctions";
+
+import { PostNotFound } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./post.module.scss";
@@ -69,15 +67,20 @@ export const Post: React.FC<PostProps> = ({ id }) => {
   const html = React.useMemo(() => {
     if (!post) return "";
 
-    return generateHTML(JSON.parse(post.contentJson), [
-      StarterKit,
-      Document,
-      Paragraph,
-      Text,
-      Underline,
-      ListItem,
-    ]);
+    return generateHTML(JSON.parse(post.contentJson), [StarterKit, Underline]);
   }, [post]);
+
+  if (isError || post === null) {
+    return (
+      <section className={s.root}>
+        <div className={s.container}>
+          <div className={`${s.head} ${cs.container}`}>
+            <PostNotFound />
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (!post) {
     return;

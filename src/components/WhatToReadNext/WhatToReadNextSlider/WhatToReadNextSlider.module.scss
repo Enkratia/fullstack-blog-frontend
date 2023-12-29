@@ -15,9 +15,11 @@
 }
 
 .slide {
-  flex: 0 0 calc(100% / 3);
-  padding-left: rem(32);
-  min-width: 0;
+  &Wrapper {
+    flex: 0 0 calc(100% / 3);
+    padding-left: rem(32);
+    min-width: 0;
+  }
 
   &:hover {
     img {
@@ -70,6 +72,14 @@
   font: var(--h3-font);
   letter-spacing: rem(-1);
   transition: color 0.3s;
+
+  &Link {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 
   &:hover {
     color: var(--darkgray-color);

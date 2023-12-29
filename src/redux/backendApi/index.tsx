@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { GetPostsType, UpdateUserType } from "./types";
+import { GetPostsType, GetUsersType, UpdateUserType } from "./types";
 import { RootState } from "../store";
 
 import { BACKEND_URL } from "../../utils/constants";
@@ -22,6 +22,9 @@ export const backendApi = createApi({
     // GET
     getUserById: builder.query<UserType, number>({
       query: (id) => `users/${id}`,
+    }),
+    getUsers: builder.query<GetUsersType, string>({
+      query: (request) => `users/${request}`,
     }),
     getPostById: builder.query<PostType, number>({
       query: (id) => `posts/${id}`,
@@ -60,4 +63,5 @@ export const {
   useLazyCreatePostQuery,
   useGetPostByIdQuery,
   useGetPostsQuery,
+  useGetUsersQuery,
 } = backendApi;

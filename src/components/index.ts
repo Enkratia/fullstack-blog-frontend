@@ -15,6 +15,9 @@ export * from "./article";
 export * from "./signinBlock";
 export * from "./signupBlock";
 
+// NotFound(all)
+export * from "./notFound";
+
 // Layout
 export * from "./header";
 export * from "./footer";

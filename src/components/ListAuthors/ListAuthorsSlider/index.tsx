@@ -3,6 +3,7 @@
 import React from "react";
 import Slider from "react-slick";
 
+import { useGetUsersQuery } from "../../../redux/backendApi";
 import { AuthorCard } from "../../../components";
 
 import s from "./listAuthorsSlider.module.scss";
@@ -68,6 +69,14 @@ const authorsList: UserType[] = [
 export const ListAuthorsSlider = () => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
+
+  const request = "?_sort_createdAt&_order=DESC&_limit=10&_page=1";
+  const { data, isError } = useGetUsersQuery(request);
+  const authorsList = data?.data;
+
+  if (!authorsList || authorsList.length < 4) {
+    return;
+  }
 
   // **
   const createSliderExit = (e: React.FocusEvent) => {

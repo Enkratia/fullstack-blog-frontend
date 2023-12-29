@@ -66,7 +66,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   // **
   const validateForm = () => {
     return [isValidText[0], isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
-      !el ? !!el : !Object.keys(el)[0].includes("data-validity-warning"),
+      !el ? !el : !Object.keys(el)[0].includes("data-validity-warning"),
     );
   };
 
@@ -74,6 +74,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   const onUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const fileInput = e.currentTarget?.nextElementSibling as HTMLInputElement;
     if (fileInput) fileInput.click();
+
+    setIsMount(false);
   };
 
   // **
@@ -117,6 +119,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   const onInputChange = () => {
     setIsMount(false);
   };
+
+  // console.log(isMount, validateForm());
 
   return (
     <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef} name="profile">

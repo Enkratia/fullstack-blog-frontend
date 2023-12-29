@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+import { fetchPostsQuery } from "../../fetchApi/fetchApi";
 import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
@@ -31,7 +32,16 @@ const post: PostType = {
   },
 };
 
-export const Hero: React.FC = () => {
+export const Hero: React.FC = async () => {
+  const request = "?isFeatured=true";
+
+  const { data, isError } = await fetchPostsQuery(request);
+  const post = data.data[0];
+
+  if (!post) {
+    return;
+  }
+
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>{post.title}</h2>

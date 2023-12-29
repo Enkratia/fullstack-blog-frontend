@@ -257,6 +257,6 @@ export const useValidateForm = () => {
 //  ==== VALIDATEFORM #2 (NO WARNING) ==== //
 // const validateForm = () => {
 //   return [isValidText[0], isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
-//     !el ? !!el : !Object.keys(el)[0].includes("data-validity-warning"),
+//     !el ? !el : !Object.keys(el)[0].includes("data-validity-warning"),
 //   );
 // };
