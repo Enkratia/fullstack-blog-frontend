@@ -44,9 +44,14 @@
   width: 100%;
   transition: background-color 0.3s, border-color 0.3s;
 
-  &:hover {
+  &Active {
     border-color: var(--yellow-color);
     background-color: var(--yellow-color);
+  }
+
+  &:hover {
+    border-color: var(--yellow-hover-color);
+    background-color: var(--yellow-hover-color);
   }
 }
 

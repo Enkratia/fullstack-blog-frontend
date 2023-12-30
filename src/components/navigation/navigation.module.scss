@@ -1,0 +1,40 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  position: relative;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  margin-top: rem(60);
+  width: max-content;
+  transform: translateX(-42%);
+
+  @include bp-down("container") {
+    margin-top: calc(rem(20.59) + 2.94vw); // 60>30(1340>320)
+    transform: translateX(-50%);
+  }
+}
+
+.link {
+  font: var(--h3-font);
+  letter-spacing: rem(-1);
+
+  &Inactive {
+    font: var(--h4-font);
+    letter-spacing: normal;
+    color: var(--mediumgray-color);
+    pointer-events: none;
+  }
+
+  &:first-child {
+    margin-right: rem(17);
+  }
+
+  @include bp-down("678") {
+    font: var(--h4-font);
+
+    &Inactive {
+      font: var(--h5-font);
+    }
+  }
+}

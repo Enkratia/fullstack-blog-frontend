@@ -1,22 +1,68 @@
 "use client";
 
-import React from "react";
+import qs from "qs";
+
+import React, { AnchorHTMLAttributes } from "react";
 
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
 
-import { CategoryCategories, CategoryPosts, CategoryTags } from "../../../components";
+import { useGetPostsQuery } from "../../../redux/backendApi";
 
+import { CategoryCategories, CategoryPosts, CategoryTags, Navigation } from "../../../components";
 import { useMediaQuery } from "../../../utils/customHooks";
 import { setOverflowHidden } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./categoryLayer.module.scss";
 import Close from "../../../../public/img/close.svg";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 export const CategoryLayer: React.FC = () => {
+  const limit = 1;
+
+  const isRouter = React.useRef(false);
+  const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
+  const router = useRouter();
+  const { category: urlCategory } = useParams();
+  const searchParams = useSearchParams().toString();
+
   const { isMQ1024 } = useMediaQuery();
   const [isVisible, setIsVisible] = React.useState(false);
+
+  const getUrlSearch = () => {
+    const urlSearch = qs.parse(searchParams);
+    const urlPage = Number(urlSearch._page || "1");
+
+    return { urlPage };
+  };
+  const { urlPage } = getUrlSearch();
+
+  const [page, setPage] = React.useState(urlPage);
+  const [category, setCategory] = React.useState(urlCategory);
+
+  class Request {
+    _page = page;
+    _limit = limit;
+    _sort = "createdAt";
+    _order = "DESC";
+
+    category;
+
+    constructor(isExtend: boolean) {
+      if (isExtend) {
+        this.category = category;
+      }
+    }
+  }
+
+  const requestLocal = `?${qs.stringify(new Request(false))}`;
+  const request = `?${qs.stringify(new Request(true))}`;
+
+  const { data, isError } = useGetPostsQuery(request);
+  const posts = data?.data;
+  const totalCount = data?.totalCount;
+  const totalPages = Math.ceil((totalCount || 1) / limit);
 
   React.useEffect(() => {
     if (isMQ1024) {
@@ -25,10 +71,51 @@ export const CategoryLayer: React.FC = () => {
     }
   }, [isMQ1024]);
 
+  React.useEffect(() => {
+    if (!isRouter.current) {
+      urlPage !== page && setPage(urlPage);
+    }
+
+    isRouter.current = false;
+  }, [searchParams]);
+
+  React.useEffect(() => {
+    if (isNavigate) {
+      router.push(`/blog/${category}${requestLocal}`, { scroll: false });
+      isRouter.current = true;
+    }
+  }, [isNavigate]);
+
+  // **
+  const onCategoryClick = (e: React.MouseEvent<HTMLAnchorElement>, ctg: string) => {
+    e.preventDefault();
+    setCategory(ctg);
+    setPage(1);
+
+    setIsNavigate({});
+  };
+
   // **
   const onSidebarClick = () => {
     setIsVisible((b) => !b);
     setOverflowHidden(!isVisible);
+  };
+
+  // **
+  const onPrevClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (page === 1) return;
+
+    setPage((n) => n - 1);
+    setIsNavigate({});
+  };
+
+  const onNextClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (page === totalPages) return;
+
+    setPage((n) => n + 1);
+    setIsNavigate({});
   };
 
   // **
@@ -55,9 +142,19 @@ export const CategoryLayer: React.FC = () => {
     },
   };
 
+  if (!posts) {
+    return;
+  }
+
   return (
     <div className={`${s.container} ${cs.container}`}>
-      <CategoryPosts />
+      <CategoryPosts
+        posts={posts}
+        onNextClick={onNextClick}
+        onPrevClick={onPrevClick}
+        page={page}
+        totalPages={totalPages}
+      />
 
       <div
         onClick={onModalOutsideClick}
@@ -80,7 +177,7 @@ export const CategoryLayer: React.FC = () => {
             options={scrollbarOptions}
             defer
             className={s.sidebar}>
-            <CategoryCategories />
+            <CategoryCategories onCategoryClick={onCategoryClick} />
             <CategoryTags />
           </OverlayScrollbarsComponent>
         </div>

@@ -8,6 +8,7 @@ export * from "./join";
 // Common components
 export * from "./modalPA";
 export * from "./pagination";
+export * from "./navigation";
 export * from "./sizeImage";
 export * from "./categories";
 export * from "./authorCard";

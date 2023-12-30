@@ -6,32 +6,46 @@ import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./blogHeader.module.scss";
+import { fetchPostsQuery } from "@/fetchApi/fetchApi";
 
-const post: PostType = {
-  id: 1,
-  title: "Step-by-step guide to choosing great font pairs",
-  category: "startup",
-  createdAt: "2023-11-03T17:44:30.644Z",
-  updatedAt: "2023-11-03T17:44:30.644Z",
-  contentText:
-    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-  contentJson: "",
-  imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-  tags: ["business", "experience"],
-  isFeatured: true,
-  user: {
-    id: 1,
-    fullname: "John Doe",
-    imageUrl: "",
-    email: "email@email.com",
-    profession: "",
-    company: "",
-    representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-  },
-};
+// const post: PostType = {
+//   id: 1,
+//   title: "Step-by-step guide to choosing great font pairs",
+//   category: "startup",
+//   createdAt: "2023-11-03T17:44:30.644Z",
+//   updatedAt: "2023-11-03T17:44:30.644Z",
+//   contentText:
+//     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+//   contentJson: "",
+//   imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
+//   tags: ["business", "experience"],
+//   isFeatured: true,
+//   user: {
+//     id: 1,
+//     fullname: "John Doe",
+//     imageUrl: "",
+//     email: "email@email.com",
+//     profession: "",
+//     company: "",
+//     representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+//     userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+//   },
+// };
 
-export const BlogHeader: React.FC = () => {
+export const BlogHeader: React.FC = async () => {
+  const request = "?isFeatured=true";
+
+  const { data, isError } = await fetchPostsQuery(request);
+  const post = data?.data[0];
+
+  if (isError) {
+    console.warn("Failed to load featured post");
+  }
+
+  if (!post) {
+    return;
+  }
+
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>{`Featured post: ${post.title}`}</h2>

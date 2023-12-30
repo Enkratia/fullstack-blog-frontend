@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 import { capitalize } from "../../../utils/customFunctions";
 
@@ -14,23 +17,29 @@ import Technology from "../../../../public/img/technology.svg";
 const categories = [
   {
     icon: <Startup aria-hidden="true" />,
-    title: "Startup",
+    title: "startup",
   },
   {
     icon: <Business aria-hidden="true" />,
-    title: "Business",
+    title: "business",
   },
   {
     icon: <Economy aria-hidden="true" />,
-    title: "Economy",
+    title: "economy",
   },
   {
     icon: <Technology aria-hidden="true" />,
-    title: "Technology",
+    title: "technology",
   },
 ];
 
-export const CategoryCategories: React.FC = () => {
+type CategoryCategoriesProps = {
+  onCategoryClick: (e: React.MouseEvent<HTMLAnchorElement>, ctg: string) => void;
+};
+
+export const CategoryCategories: React.FC<CategoryCategoriesProps> = ({ onCategoryClick }) => {
+  const { category: categorySegment } = useParams();
+
   return (
     <div className={s.root}>
       <h3 className={`${s.title} ${cs.title}`}>Categories</h3>
@@ -38,7 +47,10 @@ export const CategoryCategories: React.FC = () => {
       <ul className={s.list}>
         {categories.map((category, i) => (
           <li key={i} className={s.item}>
-            <Link href="" className={s.link}>
+            <Link
+              onClick={(e) => onCategoryClick(e, category.title)}
+              href=""
+              className={`${s.link} ${category.title === categorySegment ? s.linkActive : ""}`}>
               {category.icon}
               <span className={s.category}>{capitalize(category.title)}</span>
             </Link>
