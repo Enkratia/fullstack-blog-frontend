@@ -1,3 +1,8 @@
+type ContentType = {
+  id: number;
+  content: string;
+};
+
 type PostType = {
   id: number;
   title: string;

@@ -2,9 +2,9 @@
 
 import qs from "qs";
 
-import React, { AnchorHTMLAttributes } from "react";
+import React from "react";
 
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { OverlayScrollbarsComponent, OverlayScrollbarsComponentRef } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
 
 import { useGetPostsQuery } from "../../../redux/backendApi";
@@ -19,6 +19,7 @@ import Close from "../../../../public/img/close.svg";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 export const CategoryLayer: React.FC = () => {
+  const sidebarRef = React.useRef<OverlayScrollbarsComponentRef<"aside">>(null);
   const limit = 1;
 
   const isRouter = React.useRef(false);
@@ -85,6 +86,16 @@ export const CategoryLayer: React.FC = () => {
       isRouter.current = true;
     }
   }, [isNavigate]);
+
+  React.useEffect(() => {
+    if (isMQ1024) {
+      sidebarRef.current?.osInstance()?.destroy();
+      console.log("destroy");
+    } else {
+      sidebarRef.current?.osInstance()?.update(true);
+      console.log("update");
+    }
+  }, [isMQ1024]);
 
   // **
   const onCategoryClick = (e: React.MouseEvent<HTMLAnchorElement>, ctg: string) => {
@@ -176,6 +187,7 @@ export const CategoryLayer: React.FC = () => {
             element="aside"
             options={scrollbarOptions}
             defer
+            ref={sidebarRef}
             className={s.sidebar}>
             <CategoryCategories onCategoryClick={onCategoryClick} />
             <CategoryTags />

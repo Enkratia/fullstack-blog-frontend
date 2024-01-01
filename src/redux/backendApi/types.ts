@@ -1,4 +1,3 @@
-// **
 export type UpdateUserType = {
   id: number;
   body: FormData;
@@ -13,5 +12,11 @@ export type GetUsersType = {
 // **
 export type GetPostsType = {
   data: PostType[];
+  totalCount: number;
+};
+
+// **
+export type GetTagsType = {
+  data: ContentType[];
   totalCount: number;
 };
