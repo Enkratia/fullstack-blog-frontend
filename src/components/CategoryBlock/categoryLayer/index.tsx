@@ -3,50 +3,62 @@
 import qs from "qs";
 
 import React from "react";
+import { useImmer } from "use-immer";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
-import { OverlayScrollbarsComponent, OverlayScrollbarsComponentRef } from "overlayscrollbars-react";
+import { useOverlayScrollbars } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
 
 import { useGetPostsQuery } from "../../../redux/backendApi";
 
-import { CategoryCategories, CategoryPosts, CategoryTags, Navigation } from "../../../components";
+import { CategoryCategories, CategoryPosts, CategoryTags } from "../../../components";
 import { useMediaQuery } from "../../../utils/customHooks";
 import { setOverflowHidden } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./categoryLayer.module.scss";
 import Close from "../../../../public/img/close.svg";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 export const CategoryLayer: React.FC = () => {
-  const sidebarRef = React.useRef<OverlayScrollbarsComponentRef<"aside">>(null);
-  const limit = 1;
+  const limit = 3;
+
+  const osOptions = {
+    scrollbars: {
+      theme: s.osThemeSidebar,
+    },
+  };
+
+  const sidebarRef = React.useRef<HTMLElement>(null);
+  const [initialize, instance] = useOverlayScrollbars({ options: osOptions, defer: true });
 
   const isRouter = React.useRef(false);
   const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
   const router = useRouter();
-  const { category: urlCategory } = useParams();
   const searchParams = useSearchParams().toString();
+  const { category: urlCategory } = useParams();
 
   const { isMQ1024 } = useMediaQuery();
   const [isVisible, setIsVisible] = React.useState(false);
 
   const getUrlSearch = () => {
-    const urlSearch = qs.parse(searchParams);
+    const urlSearch = qs.parse(searchParams, { arrayLimit: 1000 });
     const urlPage = Number(urlSearch._page || "1");
+    const urlTags = (urlSearch.tags_have as string[]) || [];
 
-    return { urlPage };
+    return { urlPage, urlTags };
   };
-  const { urlPage } = getUrlSearch();
+  const { urlPage, urlTags } = getUrlSearch();
 
-  const [page, setPage] = React.useState(urlPage);
-  const [category, setCategory] = React.useState(urlCategory);
+  const [category, setCategory] = React.useState(urlCategory as string);
+  const [tags, setTags] = useImmer<string[]>(urlTags);
+  const [page, setPage] = React.useState<number>(urlPage);
 
   class Request {
     _page = page;
     _limit = limit;
     _sort = "createdAt";
     _order = "DESC";
+    tags_have = tags;
 
     category;
 
@@ -70,10 +82,15 @@ export const CategoryLayer: React.FC = () => {
       setIsVisible(false);
       setOverflowHidden(false);
     }
+
+    return () => {
+      setOverflowHidden(false);
+    };
   }, [isMQ1024]);
 
   React.useEffect(() => {
     if (!isRouter.current) {
+      urlTags !== tags && setTags(urlTags);
       urlPage !== page && setPage(urlPage);
     }
 
@@ -89,15 +106,43 @@ export const CategoryLayer: React.FC = () => {
 
   React.useEffect(() => {
     if (isMQ1024) {
-      sidebarRef.current?.osInstance()?.destroy();
-      console.log("destroy");
+      instance()?.destroy();
+      return;
     } else {
-      sidebarRef.current?.osInstance()?.update(true);
-      console.log("update");
+      if (sidebarRef.current) {
+        initialize(sidebarRef.current);
+      }
     }
-  }, [isMQ1024]);
+  }, [isMQ1024, initialize, posts]);
 
   // **
+  const resetFilters = () => {
+    setTags([]);
+    setPage(1);
+
+    setIsNavigate({});
+  };
+
+  const onTagClick = (e: React.MouseEvent<HTMLAnchorElement>, tag: string) => {
+    e.preventDefault();
+
+    setTags((tags) => {
+      if (!tags.includes(tag)) {
+        if (tags.length > 30) return;
+
+        tags.push(tag);
+        return tags;
+      }
+
+      const idx = tags.indexOf(tag);
+      tags.splice(idx, 1);
+      return tags;
+    });
+
+    setPage(1);
+    setIsNavigate({});
+  };
+
   const onCategoryClick = (e: React.MouseEvent<HTMLAnchorElement>, ctg: string) => {
     e.preventDefault();
     setCategory(ctg);
@@ -146,13 +191,6 @@ export const CategoryLayer: React.FC = () => {
     }
   };
 
-  // **
-  const scrollbarOptions = {
-    scrollbars: {
-      theme: s.osThemeSidebar,
-    },
-  };
-
   if (!posts) {
     return;
   }
@@ -165,6 +203,7 @@ export const CategoryLayer: React.FC = () => {
         onPrevClick={onPrevClick}
         page={page}
         totalPages={totalPages}
+        resetFilters={resetFilters}
       />
 
       <div
@@ -183,15 +222,10 @@ export const CategoryLayer: React.FC = () => {
             </button>
           </div>
 
-          <OverlayScrollbarsComponent
-            element="aside"
-            options={scrollbarOptions}
-            defer
-            ref={sidebarRef}
-            className={s.sidebar}>
+          <aside ref={sidebarRef} className={s.sidebar}>
             <CategoryCategories onCategoryClick={onCategoryClick} />
-            <CategoryTags />
-          </OverlayScrollbarsComponent>
+            <CategoryTags onTagClick={onTagClick} />
+          </aside>
         </div>
       </div>
 

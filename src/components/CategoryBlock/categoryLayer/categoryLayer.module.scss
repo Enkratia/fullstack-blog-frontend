@@ -68,10 +68,6 @@
     &Inner {
       display: inline-flex;
       flex-direction: column;
-      // transform: translateX(100%);
-      // display: grid;
-      // grid-template-columns: 1fr;
-      // grid-template-rows: repeat(2, minmax(0, auto));
       height: 100%;
       max-width: rem(296 + 40);
       text-align: left;

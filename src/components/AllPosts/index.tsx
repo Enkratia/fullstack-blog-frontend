@@ -139,7 +139,7 @@ export const AllPosts: React.FC = () => {
   const searchParams = useSearchParams().toString();
 
   const getUrlSearch = () => {
-    const urlSearch = qs.parse(searchParams);
+    const urlSearch = qs.parse(searchParams, { arrayLimit: 1000 });
     const urlPage = Number(urlSearch._page || "1");
 
     return { urlPage };

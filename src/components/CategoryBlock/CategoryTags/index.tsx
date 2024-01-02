@@ -1,27 +1,47 @@
 "use client";
 
+import qs from "qs";
+
 import React from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import { useGetTagsQuery } from "../../../redux/backendApi";
+
+import { toArray } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./categoryTags.module.scss";
 
-const tags: CategoryTags = [
-  "Business",
-  "Experience",
-  "Screen",
-  "Technology",
-  "Marketing",
-  "Life",
-  "Technology",
-  "Marketing",
-  "Life",
-];
+// const tags: CategoryTags = [
+//   "Business",
+//   "Experience",
+//   "Screen",
+//   "Technology",
+//   "Marketing",
+//   "Life",
+//   "Technology",
+//   "Marketing",
+//   "Life",
+// ];
 
-export const CategoryTags: React.FC = () => {
+type CategoryTagsProps = {
+  onTagClick: (e: React.MouseEvent<HTMLAnchorElement>, tag: string) => void;
+};
+
+export const CategoryTags: React.FC<CategoryTagsProps> = ({ onTagClick }) => {
   const limit = 8;
+  const searchParams = useSearchParams().toString();
+
+  const getUrlSearch = () => {
+    const urlSearch = qs.parse(searchParams, { arrayLimit: 1000 });
+    const urlTags = (urlSearch.tags_have as string[]) || [];
+
+    return { urlTags };
+  };
+  const { urlTags } = getUrlSearch();
+
+  const [prevUrlTags, setPrevUrlTags] = React.useState(urlTags);
   const [tagPage, setTagePage] = React.useState(1);
 
   const request = `?_page=${tagPage}&_limit=${limit}`;
@@ -30,28 +50,43 @@ export const CategoryTags: React.FC = () => {
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
 
+  React.useEffect(() => {
+    if (!urlTags.length) {
+      setPrevUrlTags([]);
+    }
+  }, [urlTags.length]);
+
   if (!tags) {
     return;
   }
 
   const onPrevClick = () => {
     if (tagPage === 1) return;
+
     setTagePage((n) => n - 1);
+    setPrevUrlTags(urlTags);
   };
 
   const onNextlick = () => {
     if (tagPage === totalPages) return;
+
     setTagePage((n) => n + 1);
+    setPrevUrlTags(urlTags);
   };
+
+  const currentTags = Array.from(new Set([...prevUrlTags, ...toArray(tags || [])]));
 
   return (
     <div className={s.root}>
       <h3 className={`${s.title} ${cs.title}`}>All Tags</h3>
 
       <ul className={s.list}>
-        {tags.map(({ content: tag }, i) => (
-          <li key={i} className={s.item}>
-            <Link href="" className={s.tag}>
+        {currentTags.map((tag) => (
+          <li key={tag} className={s.item}>
+            <Link
+              onClick={(e) => onTagClick(e, tag)}
+              href=""
+              className={`${s.tag} ${urlTags.includes(tag) ? s.tagActive : ""}`}>
               {tag}
             </Link>
           </li>

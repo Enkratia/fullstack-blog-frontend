@@ -24,7 +24,7 @@ export const MyPosts: React.FC = () => {
   const router = useRouter();
 
   const getUrlSearch = () => {
-    const urlSearch = qs.parse(searchParams);
+    const urlSearch = qs.parse(searchParams, { arrayLimit: 1000 });
     const urlPage = Number(urlSearch._page || "1");
 
     return { urlPage };

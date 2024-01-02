@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Article, Navigation, NavigationProps, PostsNotFound } from "../../../components";
+import { Article, Navigation, NavigationProps, CategoryNotFound } from "../../../components";
 
 import s from "./categoryPosts.module.scss";
 
@@ -101,6 +101,7 @@ import s from "./categoryPosts.module.scss";
 
 interface CategoryPostsProps extends NavigationProps {
   posts: PostType[];
+  resetFilters: () => void;
 }
 
 export const CategoryPosts: React.FC<CategoryPostsProps> = ({
@@ -109,11 +110,12 @@ export const CategoryPosts: React.FC<CategoryPostsProps> = ({
   onNextClick,
   page,
   totalPages,
+  resetFilters,
 }) => {
   if (!posts.length) {
     return (
       <div className={s.rootWrapper}>
-        <PostsNotFound />
+        <CategoryNotFound resetFilters={resetFilters} />
       </div>
     );
   }

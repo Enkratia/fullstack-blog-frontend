@@ -1,4 +1,5 @@
 export * from "./capitalize";
+export * from "./toArray";
 
 // **
 export * from "./formatDate";

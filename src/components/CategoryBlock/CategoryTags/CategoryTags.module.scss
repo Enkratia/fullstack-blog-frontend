@@ -1,3 +1,4 @@
+/* stylelint-disable order/order */
 @use "../../../scss/utils/" as *;
 
 .root {
@@ -18,21 +19,38 @@
   gap: rem(16);
 }
 
-.tag {
+.item {
   display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  text-align: center;
+}
+
+.tag {
+  display: inline;
   border: rem(2) solid var(--mediumgray-color);
   border-radius: rem(28);
   padding-top: rem(5);
   padding-bottom: rem(5);
   padding-inline: rem(20);
-  width: max-content;
+  width: 100%;
   font: var(--tag-font);
-  transition: border-color 0.3s, background-color 0.3s;
+  transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
   user-select: none;
 
   &:hover {
+    border-color: var(--yellow-hover-color);
+    background-color: var(--yellow-hover-color);
+  }
+
+  &Active {
     border-color: var(--yellow-color);
     background-color: var(--yellow-color);
+
+    &:hover {
+      border-color: var(--yellow-color);
+      background-color: var(--yellow-color);
+    }
   }
 }
 
