@@ -35,6 +35,15 @@ export const backendApi = createApi({
     getTags: builder.query<GetTagsType, string>({
       query: (request) => `posts/tags${request}`,
     }),
+    getFeaturedIn: builder.query<FeaturedCompanyType[], void>({
+      query: () => "featured-in",
+    }),
+    getTestimonial: builder.query<TestimonialType[], void>({
+      query: () => "testimonial",
+    }),
+    getAboutUsStatic: builder.query<AboutUsStaticType, void>({
+      query: () => "about-us-static",
+    }),
 
     // CREATE
     createPost: builder.query<any, FormData>({
@@ -46,6 +55,8 @@ export const backendApi = createApi({
         };
       },
     }),
+
+    // TMP
 
     // UPDATE
     updateUser: builder.query<any, UpdateUserType>({
@@ -68,4 +79,7 @@ export const {
   useGetPostsQuery,
   useGetUsersQuery,
   useGetTagsQuery,
+  useGetFeaturedInQuery,
+  useGetTestimonialQuery,
+  useGetAboutUsStaticQuery,
 } = backendApi;

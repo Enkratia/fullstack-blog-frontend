@@ -18,6 +18,10 @@ import s from "./whyWeStarted.module.scss";
 export const WhyWeStarted: React.FC = async () => {
   const { isError, data } = await fetchWhyWeStartedQuery();
 
+  if (!data) {
+    return;
+  }
+
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>The reason for starting this project.</h2>
@@ -29,8 +33,7 @@ export const WhyWeStarted: React.FC = async () => {
 
         <div className={s.imageWrapper} aria-hidden="true">
           <Image
-            src="http://localhost:3001/api/images/1702497236440-1789x1006.webp"
-            // {data.imageUrl}
+            src={data.imageUrl}
             alt="Background image."
             className={s.image}
             aria-hidden="true"

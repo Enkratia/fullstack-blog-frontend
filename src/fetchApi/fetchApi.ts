@@ -6,6 +6,7 @@ const fetchApi = async (query: string) => {
   try {
     const response = await fetch(`${baseUrl}/${query}`, {
       next: { tags: [query] },
+      cache: "no-store",
     });
     const data = await response.json();
 
@@ -52,6 +53,11 @@ export const fetchTestimonialStaticQuery = async () => {
 };
 
 // AboutUsPage
+export const fetchAboutUsStaticQuery = async () => {
+  const res = await fetchApi("about-us-static");
+  return { isError: res.isError, data: res.data[0] as AboutUsStaticType };
+};
+
 export const fetchWhyThisBlogQuery = async () => {
   const res = await fetchApi("why-this-blog");
   return { isError: res.isError, data: res.data[0] as WhyThisBlogType };

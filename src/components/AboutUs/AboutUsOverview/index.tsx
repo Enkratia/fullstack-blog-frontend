@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./aboutUsOverview.module.scss";
@@ -18,7 +19,11 @@ const aboutUsOverview: AboutUsOverviewType[] = [
   },
 ];
 
-export const AboutUsOverview: React.FC = () => {
+type AboutUsOverviewProps = {
+  data: AboutUsStaticType;
+};
+
+export const AboutUsOverview: React.FC<AboutUsOverviewProps> = ({ data }) => {
   const formatData = (count: number) => {
     let formattedCount = "";
 
@@ -38,6 +43,8 @@ export const AboutUsOverview: React.FC = () => {
 
   return (
     <div className={`${s.root} ${cs.containerAboutUs}`}>
+      <Image className={s.image} src={data.imageUrl} fill alt="Picture for 'About Us' section." />
+
       <ul className={s.overview}>
         {aboutUsOverview.map((obj, i) => (
           <li key={i} className={s.overviewItem}>
@@ -47,7 +54,7 @@ export const AboutUsOverview: React.FC = () => {
         ))}
       </ul>
 
-      <div className={cs.decoration}>
+      <div className={`${s.decoration} ${cs.decoration}`}>
         <span className={`${cs.decorationItem} ${cs.decorationItemPurple}`}></span>
         <span className={`${cs.decorationItem} ${cs.decorationItemPurple}`}></span>
         <span className={`${cs.decorationItem} ${cs.decorationItemPurple}`}></span>

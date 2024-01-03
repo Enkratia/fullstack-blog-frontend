@@ -12,14 +12,14 @@ export const AboutUsVision: React.FC<AboutUsVisionProps> = ({ data }) => {
     <div className={`${s.root} ${cs.containerAboutUs}`}>
       <div className={s.box}>
         <span className={s.subtitle}>Our mission</span>
-        <p className={s.title}>{data.mission.title}</p>
-        <p className={s.descr}>{data.mission.description}</p>
+        <p className={s.title}>{data.missionTitle}</p>
+        <p className={s.descr}>{data.missionDescription}</p>
       </div>
 
       <div className={s.box}>
         <span className={s.subtitle}>Our Vision</span>
-        <p className={s.title}>{data.vision.title}</p>
-        <p className={s.descr}>{data.vision.description}</p>
+        <p className={s.title}>{data.visionTitle}</p>
+        <p className={s.descr}>{data.visionDescription}</p>
       </div>
     </div>
   );

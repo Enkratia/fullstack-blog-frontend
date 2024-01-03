@@ -54,7 +54,10 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
       <Link href="">
         <p className={s.fullname}>{`${author.fullname}`}</p>
       </Link>
-      <span className={s.info}>{`${author.profession} @${author.company}`}</span>
+
+      <span className={s.info}>{`${author.profession} ${
+        author.company ? "@" + author.company : ""
+      }`}</span>
 
       <ul className={s.social}>
         {socialIcons.map(({ title, icon }, i) => {

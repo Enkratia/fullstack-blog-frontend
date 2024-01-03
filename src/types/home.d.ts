@@ -34,8 +34,8 @@ type TestimonialStaticType = {
 // **
 type TestimonialType = {
   id: number;
-  text: type;
-  imageUrl: type;
-  fullname: type;
-  address: type;
+  text: string;
+  imageUrl: string;
+  fullname: string;
+  address: string;
 };

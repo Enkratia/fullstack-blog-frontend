@@ -6,45 +6,53 @@ import Image from "next/image";
 
 import Slider from "react-slick";
 
+import { useGetFeaturedInQuery } from "../../redux/backendApi";
+
 import s from "./featuredIn.module.scss";
 import cs from "../../scss/helpers.module.scss";
 
-const featuredCompanies: FeaturedCompanyType[] = [
-  {
-    id: 0,
-    title: "logoIpsum",
-    imageUrl: "https://i.postimg.cc/3dh8PYqS/Logo-1.png",
-    linkUrl: "#",
-  },
-  {
-    id: 1,
-    title: "logoIpsum",
-    imageUrl: "https://i.postimg.cc/Z0pY7Cwv/Logo-2.png",
-    linkUrl: "#",
-  },
-  {
-    id: 2,
-    title: "logoIpsum",
-    imageUrl: "https://i.postimg.cc/MnKWptq1/Logo-3.png",
-    linkUrl: "#",
-  },
-  {
-    id: 3,
-    title: "logoIpsum",
-    imageUrl: "https://i.postimg.cc/XrHnGFYm/Logo-4.png",
-    linkUrl: "#",
-  },
-  {
-    id: 4,
-    title: "logoIpsum",
-    imageUrl: "https://i.postimg.cc/KR5GbCSZ/Logo-5.png",
-    linkUrl: "#",
-  },
-];
+// const featuredCompanies: FeaturedCompanyType[] = [
+//   {
+//     id: 0,
+//     title: "logoIpsum",
+//     imageUrl: "https://i.postimg.cc/3dh8PYqS/Logo-1.png",
+//     linkUrl: "#",
+//   },
+//   {
+//     id: 1,
+//     title: "logoIpsum",
+//     imageUrl: "https://i.postimg.cc/Z0pY7Cwv/Logo-2.png",
+//     linkUrl: "#",
+//   },
+//   {
+//     id: 2,
+//     title: "logoIpsum",
+//     imageUrl: "https://i.postimg.cc/MnKWptq1/Logo-3.png",
+//     linkUrl: "#",
+//   },
+//   {
+//     id: 3,
+//     title: "logoIpsum",
+//     imageUrl: "https://i.postimg.cc/XrHnGFYm/Logo-4.png",
+//     linkUrl: "#",
+//   },
+//   {
+//     id: 4,
+//     title: "logoIpsum",
+//     imageUrl: "https://i.postimg.cc/KR5GbCSZ/Logo-5.png",
+//     linkUrl: "#",
+//   },
+// ];
 
 export const FeaturedIn: React.FC = () => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
+
+  const { data: featuredCompanies, isError } = useGetFeaturedInQuery();
+
+  if (!featuredCompanies) {
+    return;
+  }
 
   // **
   const createSliderExit = (e: React.FocusEvent) => {
@@ -272,7 +280,7 @@ export const FeaturedIn: React.FC = () => {
             autoplay>
             {featuredCompanies.map((obj) => (
               <Link key={obj.id} href={obj.linkUrl} className={s.link}>
-                <Image src={obj.imageUrl} alt={obj.title} className={s.image} unoptimized fill />
+                <Image src={obj.imageUrl} alt={obj.title} className={s.image} fill />
               </Link>
             ))}
           </Slider>

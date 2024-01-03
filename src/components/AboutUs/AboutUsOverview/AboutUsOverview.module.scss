@@ -1,18 +1,22 @@
 @use "../../../scss/utils/" as *;
 
 .root {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto min-content;
   height: rem(444);
   color: var(--black-color);
-  background-image: url("http://localhost:3001/api/images/1701100182000-1789x1006.png");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
 }
 
 .overview {
+  position: relative;
+  z-index: var(--z-up);
   display: flex;
   align-self: self-end;
   list-style: none;
@@ -65,4 +69,9 @@
   @include bp-down("414") {
     flex-direction: column;
   }
+}
+
+.decoration {
+  position: relative;
+  z-index: var(--z-up);
 }

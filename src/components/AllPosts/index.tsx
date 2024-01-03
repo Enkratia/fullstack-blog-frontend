@@ -201,12 +201,14 @@ export const AllPosts: React.FC = () => {
           ))}
         </div>
 
-        <Navigation
-          onPrevClick={onPrevClick}
-          onNextClick={onNextClick}
-          page={page}
-          totalPages={totalPages}
-        />
+        {totalPages > 1 && (
+          <Navigation
+            onPrevClick={onPrevClick}
+            onNextClick={onNextClick}
+            page={page}
+            totalPages={totalPages}
+          />
+        )}
       </div>
     </section>
   );
