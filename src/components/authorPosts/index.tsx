@@ -18,6 +18,7 @@ const posts: PostType[] = [
     imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
     tags: ["business", "experience"],
     isFeatured: true,
+    views: 0,
     user: {
       id: 1,
       fullname: "John Doe",
@@ -41,6 +42,7 @@ const posts: PostType[] = [
     imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
     tags: ["business", "experience"],
     isFeatured: true,
+    views: 0,
     user: {
       id: 1,
       fullname: "John Doe",

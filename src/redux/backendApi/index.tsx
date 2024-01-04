@@ -44,6 +44,12 @@ export const backendApi = createApi({
     getAboutUsStatic: builder.query<AboutUsStaticType, void>({
       query: () => "about-us-static",
     }),
+    getCategoryHeader: builder.query<CategoryHeaderType[], void>({
+      query: () => "category-header",
+    }),
+    getContactUs: builder.query<ContactUsType[], void>({
+      query: () => "contact-us",
+    }),
 
     // CREATE
     createPost: builder.query<any, FormData>({
@@ -82,4 +88,6 @@ export const {
   useGetFeaturedInQuery,
   useGetTestimonialQuery,
   useGetAboutUsStaticQuery,
+  useGetCategoryHeaderQuery,
+  useGetContactUsQuery,
 } = backendApi;

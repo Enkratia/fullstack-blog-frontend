@@ -1,6 +1,8 @@
+"use client";
+
 import React from "react";
 
-import { fetchContactUsQuery } from "../../fetchApi/fetchApi";
+import { useGetContactUsQuery } from "../../redux/backendApi";
 
 import { ContactUsForm } from "../../components";
 
@@ -25,8 +27,13 @@ import s from "./contactUs.module.scss";
 //   },
 // };
 
-export const ContactUs: React.FC = async () => {
-  const { data, isError } = await fetchContactUsQuery();
+export const ContactUs: React.FC = () => {
+  const { data, isError } = useGetContactUsQuery();
+  const info = data?.[0];
+
+  if (!info) {
+    return;
+  }
 
   return (
     <section className={s.root}>
@@ -34,27 +41,27 @@ export const ContactUs: React.FC = async () => {
 
       <div className={`${s.container} ${cs.container} ${cs.container768}`}>
         <div className={s.header}>
-          <span className={s.headerSubtitle}>{data.header.subtitle}</span>
-          <p className={s.headerTitle}>{data.header.title}</p>
-          <p className={s.headerDescr}>{data.header.description}</p>
+          <span className={s.headerSubtitle}>{info.header.subtitle}</span>
+          <p className={s.headerTitle}>{info.header.title}</p>
+          <p className={s.headerDescr}>{info.header.description}</p>
         </div>
 
         <div className={s.info}>
           <div className={s.box}>
             <h3 className={s.boxTitle}>Working hours</h3>
-            <span className={s.boxItem}>{data.time.days}</span>
-            <span className={s.boxItem}>{data.time.hours}</span>
-            <span className={`${s.boxItem} ${s.boxItemMuted}`}>{data.time.description}</span>
+            <span className={s.boxItem}>{info.time.days}</span>
+            <span className={s.boxItem}>{info.time.hours}</span>
+            <span className={`${s.boxItem} ${s.boxItemMuted}`}>{info.time.description}</span>
           </div>
 
           <div className={s.box}>
             <h3 className={s.boxTitle}>Contact Us</h3>
-            <a href={`tel:${data.data.phone.replace(/\s/g, "")}`} className={s.boxItem}>
-              {data.data.phone}
+            <a href={`tel:${info.contact.phone.replace(/\s/g, "")}`} className={s.boxItem}>
+              {info.contact.phone}
             </a>
 
-            <a href={`mailto:${data.data.email}`} className={`${s.boxItem} ${s.boxItemMuted}`}>
-              {data.data.email}
+            <a href={`mailto:${info.contact.email}`} className={`${s.boxItem} ${s.boxItemMuted}`}>
+              {info.contact.email}
             </a>
           </div>
         </div>

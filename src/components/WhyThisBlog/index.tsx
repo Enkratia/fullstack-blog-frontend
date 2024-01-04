@@ -18,6 +18,10 @@ import s from "./whyThisBlog.module.scss";
 export const WhyThisBlog: React.FC = async () => {
   const { data, isError } = await fetchWhyThisBlogQuery();
 
+  if (!data) {
+    return;
+  }
+
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>Creativity of our team.</h2>

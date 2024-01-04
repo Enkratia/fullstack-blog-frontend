@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
 
-import { fetchCategoryHeaderQuery } from "../../fetchApi/fetchApi";
+import { fetchCategoryDescriptionQuery } from "../../fetchApi/fetchApi";
+
+import { capitalize } from "../../utils/customFunctions";
 
 import s from "./categories.module.scss";
-
 import Business from "../../../public/img/business.svg";
 import Startup from "../../../public/img/startup.svg";
 import Economy from "../../../public/img/economy.svg";
@@ -25,36 +26,40 @@ import Technology from "../../../public/img/technology.svg";
 //   },
 // ];
 
-const categoryIcons = [
+const icons = [
   {
-    title: "Business",
+    title: "business",
     icon: <Business aria-hidden="true" />,
   },
   {
-    title: "Startup",
+    title: "startup",
     icon: <Startup aria-hidden="true" />,
   },
   {
-    title: "Economy",
+    title: "economy",
     icon: <Economy aria-hidden="true" />,
   },
   {
-    title: "Technology",
+    title: "technology",
     icon: <Technology aria-hidden="true" />,
   },
 ];
 
 export const Categories: React.FC = async () => {
-  const { data, isError } = await fetchCategoryHeaderQuery();
+  const { data, isError } = await fetchCategoryDescriptionQuery();
+
+  if (!data) {
+    return;
+  }
 
   return (
     <ul className={s.root}>
-      {data.map((obj, i) => (
+      {icons.map(({ title, icon }, i) => (
         <li key={i} className={s.category}>
           <Link href="">
-            {categoryIcons[i].icon}
-            <h3 className={s.title}>{categoryIcons[i].title}</h3>
-            <p className={s.descr}>{obj.description}</p>
+            {icon}
+            <h3 className={s.title}>{capitalize(title)}</h3>
+            <p className={s.descr}>{data[title]}</p>
           </Link>
         </li>
       ))}

@@ -2,7 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import { notFound, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
+
+import { useGetCategoryHeaderQuery } from "../../redux/backendApi";
 
 import { capitalize } from "../../utils/customFunctions";
 
@@ -11,28 +13,23 @@ import s from "./categoryHeader.module.scss";
 
 const categories = ["startup", "business", "economy", "technology"];
 
-type ParamsType = {
-  category: string;
-};
-
-const data: CategoryHeaderType = {
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
-};
-
 export const CategoryHeader: React.FC = () => {
-  const params: ParamsType = useParams();
-  const category = params.category;
+  const category = useParams().category as string;
 
-  if (!categories.includes(category)) {
-    notFound();
+  const { data, isError } = useGetCategoryHeaderQuery();
+  const info = data?.[0];
+
+  if (!categories.includes(category)) return;
+
+  if (!info) {
+    return;
   }
 
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
         <p className={s.title}>{capitalize(category)}</p>
-        <p className={s.descr}>{data.description}</p>
+        <p className={s.descr}>{info[category]}</p>
 
         <ul className={s.breadcrumbs}>
           <li className={s.item}>

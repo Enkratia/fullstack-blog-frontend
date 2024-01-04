@@ -9,7 +9,7 @@ type ContactUsType = {
     hours: string;
     description: string;
   };
-  data: {
+  contact: {
     phone: string;
     email: string;
   };

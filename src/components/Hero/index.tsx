@@ -20,6 +20,7 @@ const post: PostType = {
   imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
   tags: ["business", "experience"],
   isFeatured: true,
+  views: 0,
   user: {
     id: 1,
     fullname: "John Doe",

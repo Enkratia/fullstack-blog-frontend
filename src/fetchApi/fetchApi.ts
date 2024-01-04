@@ -21,9 +21,9 @@ const fetchApi = async (query: string) => {
 };
 
 // Common
-export const fetchCategoryHeaderQuery = async () => {
+export const fetchCategoryDescriptionQuery = async () => {
   const res = await fetchApi("category-description");
-  return { isError: res.isError, data: res.data as CategoryDescription[] };
+  return { isError: res.isError, data: res.data[0] as CategoryDescription };
 };
 
 export const fetchJoinQuery = async () => {
@@ -58,6 +58,11 @@ export const fetchAboutUsStaticQuery = async () => {
   return { isError: res.isError, data: res.data[0] as AboutUsStaticType };
 };
 
+export const fetchAboutUsStatisticQuery = async () => {
+  const res = await fetchApi("about-us-statistic");
+  return { isError: res.isError, data: res.data as AboutUsOverviewType[] };
+};
+
 export const fetchWhyThisBlogQuery = async () => {
   const res = await fetchApi("why-this-blog");
   return { isError: res.isError, data: res.data[0] as WhyThisBlogType };
@@ -69,10 +74,10 @@ export const fetchKnowMoreQuery = async () => {
 };
 
 // ContactUsPage
-export const fetchContactUsQuery = async () => {
-  const res = await fetchApi("contact-us");
-  return { isError: res.isError, data: res.data[0] as ContactUsType };
-};
+// export const fetchContactUsQuery = async () => {
+//   const res = await fetchApi("contact-us");
+//   return { isError: res.isError, data: res.data[0] as ContactUsType };
+// };
 
 // PostPage
 export const fetchPostByIdQuery = async (id: number) => {

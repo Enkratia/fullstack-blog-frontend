@@ -18,6 +18,10 @@ import s from "./knowMore.module.scss";
 export const KnowMore: React.FC = async () => {
   const { data, isError } = await fetchKnowMoreQuery();
 
+  if (!data) {
+    return;
+  }
+
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>Creativity of our team.</h2>

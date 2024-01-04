@@ -13,6 +13,7 @@ type PostType = {
   tags: string[];
   user: UserType;
   isFeatured: boolean;
+  views: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -41,9 +42,11 @@ type UserType = {
 };
 
 // **
-type CategoryDescription = {
-  description: string;
-};
+type CategoryNames = "business" | "startup" | "economy" | "technology";
+
+interface CategoryDescription extends IObjKeys {
+  [key: CategoryNames]: string;
+}
 
 // **
 type JoinType = {
