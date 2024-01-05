@@ -1,6 +1,13 @@
-import React from "react";
+"use client";
 
-import { Article } from "../../components";
+import qs from "qs";
+
+import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { useGetPostsQuery } from "../../redux/backendApi";
+
+import { Article, Navigation } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./authorPosts.module.scss";
@@ -57,6 +64,65 @@ const posts: PostType[] = [
 ];
 
 export const AuthorPosts: React.FC = () => {
+  const limit = 2;
+
+  const isRouter = React.useRef(false);
+  const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
+  const router = useRouter();
+  const searchParams = useSearchParams().toString();
+
+  const getUrlSearch = () => {
+    const urlSearch = qs.parse(searchParams, { arrayLimit: 1000 });
+    const urlPage = Number(urlSearch._page || "1");
+
+    return { urlPage };
+  };
+  const { urlPage } = getUrlSearch();
+
+  const [page, setPage] = React.useState(urlPage);
+
+  const request = `?_page=${page}&_limit=${limit}&_sort=createdAt&_order=DESC`;
+
+  const { data, isError } = useGetPostsQuery(request);
+  const posts = data?.data;
+  const totalCount = data?.totalCount;
+  const totalPages = (totalCount || 1) / limit;
+
+  React.useEffect(() => {
+    if (!isRouter.current) {
+      urlPage !== page && setPage(urlPage);
+    }
+
+    isRouter.current = false;
+  }, [searchParams]);
+
+  React.useEffect(() => {
+    if (isNavigate) {
+      router.push(request, { scroll: false });
+      isRouter.current = true;
+    }
+  }, [isNavigate]);
+
+  if (!posts || !totalCount) {
+    return;
+  }
+
+  const onPrevClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (page === 1) return;
+
+    setPage((n) => n - 1);
+    setIsNavigate({});
+  };
+
+  const onNextClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (page === totalPages) return;
+
+    setPage((n) => n + 1);
+    setIsNavigate({});
+  };
+
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container} ${cs.container1024}`}>
@@ -69,6 +135,15 @@ export const AuthorPosts: React.FC = () => {
             </li>
           ))}
         </ul>
+
+        {totalPages > 1 && (
+          <Navigation
+            page={page}
+            totalPages={totalPages}
+            onPrevClick={onPrevClick}
+            onNextClick={onNextClick}
+          />
+        )}
       </div>
     </section>
   );

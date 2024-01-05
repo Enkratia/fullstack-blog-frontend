@@ -23,6 +23,16 @@
 
   >div {
     display: inline-flex;
+    column-gap: rem(12);
+    flex-wrap: wrap;
+
+    &:first-child {
+      margin-right: rem(30);
+    }
+
+    &:last-child {
+      justify-content: flex-end;
+    }
   }
 
   button {
@@ -36,10 +46,6 @@
     background-color: transparent;
     transition: background-color 0.3s;
     cursor: pointer;
-
-    &:not(:last-child) {
-      margin-right: rem(12);
-    }
 
     >svg {
       width: rem(20);
@@ -63,6 +69,10 @@
       opacity: 0.6;
       pointer-events: none;
     }
+  }
+
+  @include bp-down("678") {
+    padding-right: rem(24);
   }
 }
 

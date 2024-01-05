@@ -471,7 +471,6 @@
   // ****
   @include bp-down("container") {
     padding-right: calc(rem(33.96) + 3.82vw); // 86>56(1360>576)
-    padding-left: calc(rem(8) + 3.12vw); // 26>18(576>320)
 
     &Wrapper {
       &::after {
@@ -482,6 +481,10 @@
         right: calc(rem(13.96) + 3.82vw); // 66>36(1320>576)
       }
     }
+  }
+
+  @include bp-down("576") {
+    padding-left: calc(rem(10.5) + 2.34vw); // 24>18(576>320)
   }
 }
 

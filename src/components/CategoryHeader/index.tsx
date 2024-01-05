@@ -17,11 +17,11 @@ export const CategoryHeader: React.FC = () => {
   const category = useParams().category as string;
 
   const { data, isError } = useGetCategoryHeaderQuery();
-  const info = data?.[0];
+  const header = data?.[0];
 
   if (!categories.includes(category)) return;
 
-  if (!info) {
+  if (!header) {
     return;
   }
 
@@ -29,7 +29,7 @@ export const CategoryHeader: React.FC = () => {
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
         <p className={s.title}>{capitalize(category)}</p>
-        <p className={s.descr}>{info[category]}</p>
+        <p className={s.descr}>{header.description}</p>
 
         <ul className={s.breadcrumbs}>
           <li className={s.item}>

@@ -23,11 +23,37 @@ const links = [
 export const AccountSidebarLayer: React.FC = () => {
   const segment = useSelectedLayoutSegment();
 
+  const ulRef = React.useRef<HTMLUListElement>(null);
+  const [isActive, setIsActive] = React.useState(false);
+
+  React.useEffect(() => {
+    const ul = ulRef.current;
+    if (!ul) return;
+
+    if (ul.hasAttribute("style")) {
+      ul.removeAttribute("style");
+      return;
+    }
+
+    const listSH = ul.scrollHeight;
+    ul.style.height = listSH + "px";
+  }, [isActive]);
+
+  const onMenuBtnClick = () => {
+    setIsActive((b) => !b);
+  };
+
   return (
-    <aside className={s.root}>
+    <aside className={`${s.root} ${isActive ? s.rootActive : ""}`}>
       <p className={`${s.title} ${cs.title}`}>Account</p>
 
-      <ul className={s.list}>
+      <div className={s.accountMenuBtnWrapper}>
+        <button onClick={onMenuBtnClick} className={`${s.accountMenuBtn} ${cs.btn}`}>
+          Account Menu
+        </button>
+      </div>
+
+      <ul className={`${s.list} ${isActive ? s.listActive : ""}`} ref={ulRef}>
         {links.map((link, i) => (
           <li key={i} className={`${s.item} ${link.segment === segment ? s.itemActive : ""}`}>
             <Link className={s.link} href={`/account/${link.segment}`}>

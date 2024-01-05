@@ -1,6 +1,6 @@
 interface CategoryHeaderType extends IObjKeys {
-  id: number;
-  [key: CategoryNames]: string;
+  category: CategoryNames;
+  description: string;
 }
 
 // **

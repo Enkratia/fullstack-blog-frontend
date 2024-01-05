@@ -5,6 +5,10 @@
   grid-template-columns: repeat(2, 1fr);
   margin-bottom: rem(50);
   gap: rem(20);
+
+  @include bp-down("576") {
+    grid-template-columns: 1fr;
+  }
 }
 
 .upload {

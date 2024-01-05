@@ -12,23 +12,27 @@ import s from "./contactUsForm.module.scss";
 
 import AngleDown from "../../../../public/img/angle-down.svg";
 
-const data: ContactUsQueryType = [
-  "Query1",
-  "Query2",
-  "Query3",
-  "Query4",
-  "Query5",
-  "Query6",
-  "Query7",
-  "Query8",
-  "Query9",
-  "Query10",
-  "Query11",
-];
+// const data: ContactUsQueryType = [
+//   "Query1",
+//   "Query2",
+//   "Query3",
+//   "Query4",
+//   "Query5",
+//   "Query6",
+//   "Query7",
+//   "Query8",
+//   "Query9",
+//   "Query10",
+//   "Query11",
+// ];
 
 const selectPlaceholder = "Query Related";
 
-export const ContactUsForm: React.FC = () => {
+type ContactUsFormProps = {
+  queries: ContactUsQueryType;
+};
+
+export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [active, setActive] = React.useState(0);
 
@@ -92,7 +96,7 @@ export const ContactUsForm: React.FC = () => {
   };
 
   // **
-  const queries = [selectPlaceholder, ...data];
+  queries = [selectPlaceholder, ...queries];
 
   return (
     <form className={s.root}>

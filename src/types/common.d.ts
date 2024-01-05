@@ -56,3 +56,18 @@ type JoinType = {
 
 // **
 type CategoriesNames = ["startup", "business", "economy", "technology"];
+
+// **
+interface SocialLinksType extends IObjKeys {
+  twitter: string;
+  facebook: string;
+  instagram: string;
+  linkedin: string;
+}
+
+type FooterBottomType = {
+  address: string;
+  phone: string;
+  email: string;
+  socialLinks: SocialLinksType;
+};

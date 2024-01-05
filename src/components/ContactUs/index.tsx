@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { useGetContactUsQuery } from "../../redux/backendApi";
+import { useGetContactUsQueriesQuery, useGetContactUsQuery } from "../../redux/backendApi";
 
 import { ContactUsForm } from "../../components";
 
@@ -28,10 +28,12 @@ import s from "./contactUs.module.scss";
 // };
 
 export const ContactUs: React.FC = () => {
-  const { data, isError } = useGetContactUsQuery();
+  const { data, isError: isInfoError } = useGetContactUsQuery();
+  const { data: queries, isError: isQueryError } = useGetContactUsQueriesQuery();
+
   const info = data?.[0];
 
-  if (!info) {
+  if (!info || !queries) {
     return;
   }
 
@@ -66,7 +68,7 @@ export const ContactUs: React.FC = () => {
           </div>
         </div>
 
-        <ContactUsForm />
+        <ContactUsForm queries={queries} />
       </div>
     </section>
   );

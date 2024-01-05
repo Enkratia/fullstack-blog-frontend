@@ -50,6 +50,9 @@ export const backendApi = createApi({
     getContactUs: builder.query<ContactUsType[], void>({
       query: () => "contact-us",
     }),
+    getContactUsQueries: builder.query<ContactUsQueryType, void>({
+      query: () => "contact-us-queries",
+    }),
 
     // CREATE
     createPost: builder.query<any, FormData>({
@@ -90,4 +93,5 @@ export const {
   useGetAboutUsStaticQuery,
   useGetCategoryHeaderQuery,
   useGetContactUsQuery,
+  useGetContactUsQueriesQuery,
 } = backendApi;

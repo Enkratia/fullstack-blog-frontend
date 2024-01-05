@@ -7,7 +7,16 @@
 .container {
   display: grid;
   column-gap: rem(60);
-  grid-template-columns: rem(280) 1fr;
+  grid-template-columns: minmax(0, rem(280)) minmax(rem(670), 1fr);
+
+  @include bp-down("1290") {
+    column-gap: rem(45);
+  }
+
+  @include bp-down("1024") {
+    grid-template-columns: 1fr;
+    row-gap: rem(45);
+  }
 }
 
 .title {

@@ -36,6 +36,11 @@ export const fetchPostsQuery = async (request: string) => {
   return { isError: res.isError, data: res.data as GetPostsType };
 };
 
+export const fetchFooterBottomQuery = async () => {
+  const res = await fetchApi("footer-bottom");
+  return { isError: res.isError, data: res.data[0] as FooterBottomType };
+};
+
 // HomePage
 export const fetchUsMissionQuery = async () => {
   const res = await fetchApi("us-mission");

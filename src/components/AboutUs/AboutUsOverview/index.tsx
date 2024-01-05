@@ -51,7 +51,13 @@ export const AboutUsOverview: React.FC<AboutUsOverviewProps> = async ({ data }) 
 
   return (
     <div className={`${s.root} ${cs.containerAboutUs}`}>
-      <Image className={s.image} src={data.imageUrl} fill alt="Picture for 'About Us' section." />
+      <Image
+        className={s.image}
+        src={data.imageUrl}
+        fill
+        alt="Picture for 'About Us' section."
+        aria-hidden="true"
+      />
 
       <ul className={s.overview}>
         {statistic.map((obj, i) => (

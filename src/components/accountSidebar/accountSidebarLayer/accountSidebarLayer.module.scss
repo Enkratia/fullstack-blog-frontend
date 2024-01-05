@@ -7,17 +7,56 @@
   padding-block: rem(24);
   height: max-content;
   color: var(--black-color);
+  transition: padding-bottom 0.3s;
+
+  @include bp-down("1024") {
+    padding-block: revert;
+  }
+
+  &Active {
+    padding-bottom: rem(12);
+  }
 }
 
 .title {
   padding: rem(24);
   padding-top: rem(0);
+
+  @include bp-down("1024") {
+    display: none;
+  }
 }
 
+// **
+.accountMenuBtn {
+  width: 100%;
+
+  &Wrapper {
+    display: none;
+    padding: rem(24);
+
+    @include bp-down("1024") {
+      display: block;
+    }
+  }
+}
+
+// **
 .list {
   list-style: none;
   margin: 0;
   padding: 0;
+  transition: all 0.3s ease;
+
+  @include bp-down("1024") {
+    overflow: hidden;
+    height: 0;
+    visibility: hidden;
+  }
+
+  &Active {
+    visibility: visible;
+  }
 }
 
 .item {
