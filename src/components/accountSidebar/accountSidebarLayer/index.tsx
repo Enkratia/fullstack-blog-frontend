@@ -30,13 +30,13 @@ export const AccountSidebarLayer: React.FC = () => {
     const ul = ulRef.current;
     if (!ul) return;
 
-    if (ul.hasAttribute("style")) {
-      ul.removeAttribute("style");
+    if (isActive) {
+      const listSH = ul.scrollHeight;
+      ul.style.height = listSH + "px";
       return;
     }
 
-    const listSH = ul.scrollHeight;
-    ul.style.height = listSH + "px";
+    ul.removeAttribute("style");
   }, [isActive]);
 
   const onMenuBtnClick = () => {

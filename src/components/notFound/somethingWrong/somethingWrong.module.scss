@@ -5,11 +5,13 @@
   flex-direction: column;
   align-items: center;
   grid-column: 1 / -1;
+  padding-top: rem(120);
+  padding-bottom: rem(120);
   text-align: center;
 
   svg {
-    width: rem(260);
-    height: rem(260);
+    max-width: rem(400);
+    max-height: rem(400);
   }
 }
 
@@ -21,7 +23,7 @@
 
 .subtitle {
   display: inline-block;
-  margin-bottom: rem(20);
+  margin-bottom: rem(30);
   font: var(--cap03-font);
   color: var(--mediumgray-color);
 }

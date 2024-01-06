@@ -4,7 +4,7 @@ import React from "react";
 
 import { useGetContactUsQueriesQuery, useGetContactUsQuery } from "../../redux/backendApi";
 
-import { ContactUsForm } from "../../components";
+import { ContactUsForm, SomethingWrong } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./contactUs.module.scss";
@@ -32,6 +32,10 @@ export const ContactUs: React.FC = () => {
   const { data: queries, isError: isQueryError } = useGetContactUsQueriesQuery();
 
   const info = data?.[0];
+
+  if (isInfoError || isQueryError) {
+    return <SomethingWrong />;
+  }
 
   if (!info || !queries) {
     return;

@@ -64,8 +64,24 @@ export const backendApi = createApi({
         };
       },
     }),
-
-    // TMP
+    createSubscribe: builder.query<any, FormData>({
+      query: (body) => {
+        return {
+          url: "subscribe",
+          method: "POST",
+          body: body,
+        };
+      },
+    }),
+    createContactUsMessage: builder.query<any, FormData>({
+      query: (body) => {
+        return {
+          url: "contact-us-messages",
+          method: "POST",
+          body: body,
+        };
+      },
+    }),
 
     // UPDATE
     updateUser: builder.query<any, UpdateUserType>({
@@ -94,4 +110,6 @@ export const {
   useGetCategoryHeaderQuery,
   useGetContactUsQuery,
   useGetContactUsQueriesQuery,
+  useLazyCreateSubscribeQuery,
+  useLazyCreateContactUsMessageQuery,
 } = backendApi;

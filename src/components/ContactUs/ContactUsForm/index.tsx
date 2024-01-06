@@ -5,7 +5,10 @@ import React from "react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
 
+import { useLazyCreateContactUsMessageQuery } from "../../../redux/backendApi";
+
 import { useValidateForm } from "../../../utils/customHooks";
+import { checkRequestStatus } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./contactUsForm.module.scss";
@@ -33,11 +36,32 @@ type ContactUsFormProps = {
 };
 
 export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
+  const formRef = React.useRef<HTMLFormElement>(null);
+
   const [isOpen, setIsOpen] = React.useState(false);
   const [active, setActive] = React.useState(0);
 
+  const [createMessage, { isError, isSuccess, isFetching, isLoading }] =
+    useLazyCreateContactUsMessageQuery();
+  const requestStatus = checkRequestStatus(isError, isSuccess, isFetching, isLoading);
+
   const { isValidText, validateText, isValidEmail, validateEmail, isValidSelect, validateSelect } =
     useValidateForm();
+
+  const validateForm = () => {
+    return [isValidEmail, isValidText[0], isValidText[1], isValidSelect[0]].every((el) =>
+      !el ? !!el : Object.keys(el)[0].includes("data-validity-success"),
+    );
+  };
+
+  // **
+  const onSubmit = () => {
+    const form = formRef.current;
+    if (!form || !validateForm()) return;
+
+    const formData = new FormData(form);
+    createMessage(formData);
+  };
 
   // **
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
@@ -99,13 +123,13 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
   queries = [selectPlaceholder, ...queries];
 
   return (
-    <form className={s.root}>
+    <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
       <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
         <input
           type="text"
           onChange={(e) => validateText(e.target.value, 0)}
           placeholder="Full Name"
-          name="Fullname"
+          name="fullname"
           className={cs.input}
         />
       </div>
@@ -115,7 +139,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
           type="text"
           onChange={(e) => validateEmail(e.target.value)}
           placeholder="Your Email"
-          name="Email"
+          name="email"
           className={cs.input}
         />
       </div>
@@ -129,7 +153,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
           onClick={(e) => onSelectClick(e, 0)}>
           <div className={`${cs.selectHead} ${active === 0 ? "" : cs.selectHeadActive}`}>
             <span className={cs.selectSelected}>{queries[active]}</span>
-            <input type="hidden" name="Select" value={queries[active]} />
+            <input type="hidden" name="query" value={queries[active]} />
 
             <AngleDown aria-hidden="true" />
           </div>
@@ -158,12 +182,14 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
           onChange={(e) => validateText(e.target.value, 1)}
           className={`${s.textarea} ${cs.input}`}
           placeholder="Message"
-          name="Message"></textarea>
+          name="message"></textarea>
       </div>
 
-      <button type="submit" className={`${s.submit} ${cs.btn} ${cs.btnLg}`}>
-        Send Message
-      </button>
+      <div className={`${cs.btnWrapper} ${cs[requestStatus]}`}>
+        <button onClick={onSubmit} type="button" className={`${s.submit} ${cs.btn} ${cs.btnLg}`}>
+          Send Message
+        </button>
+      </div>
     </form>
   );
 };

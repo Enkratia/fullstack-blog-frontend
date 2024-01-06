@@ -61,6 +61,18 @@
   background-color: transparent;
   transition: box-shadow 0.3s;
 
+  &Wrapper[data-validity-warning] {
+    &::after {
+      content: none;
+    }
+  }
+
+  &Wrapper[data-validity-success] {
+    &::after {
+      content: none;
+    }
+  }
+
   &::placeholder {
     font: inherit;
     color: var(--darkgray-color);

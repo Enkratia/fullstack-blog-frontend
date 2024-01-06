@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 
 import s from "./categoryNotFound.module.scss";
 import cs from "../../../scss/helpers.module.scss";
