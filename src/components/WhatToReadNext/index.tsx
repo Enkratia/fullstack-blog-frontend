@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useParams, useSelectedLayoutSegment } from "next/navigation";
+import { useParams } from "next/navigation";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
 

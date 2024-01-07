@@ -65,6 +65,8 @@ type PostProps = {
 export const Post: React.FC<PostProps> = ({ id }) => {
   const { data: post, isError } = useGetPostByIdQuery(id, { skip: typeof +id !== "number" });
 
+  console.log(id);
+
   const html = React.useMemo(() => {
     if (!post) return "";
 

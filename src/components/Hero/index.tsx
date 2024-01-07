@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { fetchPostsQuery } from "../../fetchApi/fetchApi";
+
 import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
@@ -54,7 +55,7 @@ export const Hero: React.FC = async () => {
             Posted on<Link href="" className={s.category}>{` ${post.category}`}</Link>
           </span>
           <p className={`${s.title} ${cs.title}`}>
-            <Link href="" className={s.titleLink}>
+            <Link href={`blog/${post.category}/${post.id}`} className={s.titleLink}>
               {post.title}
             </Link>
           </p>
