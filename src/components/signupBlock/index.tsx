@@ -6,7 +6,10 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
 
-import { useValidateForm } from "../../utils/customHooks";
+import { useLazyCreateUserQuery } from "../../redux/backendApi";
+
+import { ConfirmEmail } from "../../components";
+import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
 import { FRONTEND_URL } from "../../utils/constants";
 
 import cs from "../../scss/helpers.module.scss";
@@ -26,6 +29,12 @@ const initialFields = {
 };
 
 export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
+  const formRef = React.useRef<HTMLFormElement>(null);
+
+  const [createUser] = useLazyCreateUserQuery();
+  const { authMessage, setAuthError } = useAuthErrorMessage();
+  const [isRegistered, setIsRegistered] = React.useState(false);
+
   const callback = `?callbackUrl=${callbackUrl}`;
 
   const router = useRouter();
@@ -98,67 +107,109 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
 
     if (!validateForm()) return;
 
-    await signIn("credentials", {
-      ...fields,
-      redirect: false,
-    });
+    const form = formRef.current;
+    if (!form) return;
 
-    router.push(callbackUrl);
+    const formData = new FormData(form);
+    formData.delete("confirmPassword");
+
+    const { error } = await createUser(formData);
+
+    if (error) {
+      if ("status" in error) {
+        if (error.status.toString().startsWith("4")) {
+          setAuthError("EmailRegistered");
+          return;
+        }
+      }
+
+      setAuthError("ServerError");
+      return;
+    }
+
+    setIsRegistered(true);
+    // const res = await signIn("credentials", {
+    //   ...fields,
+    //   redirect: false,
+    // });
+
+    // if (res && !res.ok) {
+    //   setAuthError(res.error || "");
+    //   return;
+    // }
+
+    // router.push(callbackUrl);
   };
 
+  // console.log(result.error);
+  // if ("data" in error) {
+  // }
+
+  console.log(isRegistered);
+
   return (
-    <form className={s.root}>
+    <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
       <p className={`${s.title} ${cs.title}`}>Sign-up</p>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-        <input
-          onChange={(e) => onFullnameChange(e, 0)}
-          className={`${s.input} ${cs.input}`}
-          type="text"
-          placeholder="Fullname"
-          value={fields.fullname}
-        />
-      </div>
+      <div className={s.content}>
+        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
+          <input
+            onChange={(e) => onFullnameChange(e, 0)}
+            className={`${s.input} ${cs.input}`}
+            type="text"
+            name="fullname"
+            placeholder="Fullname"
+            value={fields.fullname}
+          />
+        </div>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
-        <input
-          onChange={onEmailChange}
-          className={`${s.input} ${cs.input}`}
-          type="text"
-          placeholder="Email"
-          value={fields.email}
-        />
-      </div>
+        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
+          <input
+            onChange={onEmailChange}
+            className={`${s.input} ${cs.input}`}
+            type="text"
+            name="email"
+            placeholder="Email"
+            value={fields.email}
+          />
+        </div>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassLength}>
-        <input
-          onChange={onPasswordChange}
-          className={`${s.input} ${cs.input}`}
-          type="password"
-          placeholder="Password"
-          value={fields.password}
-        />
-      </div>
+        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassLength}>
+          <input
+            onChange={onPasswordChange}
+            className={`${s.input} ${cs.input}`}
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={fields.password}
+          />
+        </div>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassConfirm}>
-        <input
-          onChange={onPasswordConfirmChange}
-          className={`${s.input} ${cs.input}`}
-          type="password"
-          placeholder="Password"
-          value={fields.passwordConfirm}
-        />
-      </div>
+        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassConfirm}>
+          <input
+            onChange={onPasswordConfirmChange}
+            className={`${s.input} ${cs.input}`}
+            type="password"
+            name="confirmPassword"
+            placeholder="Password"
+            value={fields.passwordConfirm}
+          />
+        </div>
 
-      <button onClick={onSubmit} className={`${s.btn} ${cs.btn} ${cs.btnLg}`} type="submit">
-        Submit
-      </button>
+        <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>
+          <button onClick={onSubmit} className={`${s.btn} ${cs.btn} ${cs.btnLg}`} type="submit">
+            Submit
+          </button>
+        </div>
 
-      <div className={s.descr}>
-        <span className={s.descrText}>Already have an account?</span>
-        <Link href={`/signin${callback}`} className={s.descrLink} scroll={false}>
-          Sign-in
-        </Link>
+        <div className={s.descr}>
+          <span className={s.descrText}>Already have an account?</span>
+          <Link href={`/signin${callback}`} className={s.descrLink} scroll={false}>
+            Sign-in
+          </Link>
+        </div>
+
+        <ConfirmEmail email={fields.email} isRegistered={isRegistered} />
       </div>
 
       <button

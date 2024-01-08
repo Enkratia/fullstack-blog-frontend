@@ -162,6 +162,14 @@
       font: var(--validation-font);
     }
 
+    &[data-auth-message] {
+      &::before {
+        content: attr(data-auth-message);
+        color: var(--danger-color);
+      }
+    }
+
+    // Перевtсти в data-**?
     &Success {
       &::before {
         content: "Data sent";

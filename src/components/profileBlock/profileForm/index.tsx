@@ -120,8 +120,6 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
     setIsMount(false);
   };
 
-  // console.log(isMount, validateForm());
-
   return (
     <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef} name="profile">
       <div className={s.inputs}>

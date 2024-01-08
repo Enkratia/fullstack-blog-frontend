@@ -6,8 +6,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
 
-import { useValidateForm } from "../../utils/customHooks";
-import { FRONTEND_URL } from "../../utils/constants";
+import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./signinBlock.module.scss";
@@ -19,6 +18,8 @@ type SigninBlockProps = {
 };
 
 export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
+  const { authMessage, setAuthError } = useAuthErrorMessage();
+
   const callback = `?callbackUrl=${callbackUrl}`;
 
   const router = useRouter();
@@ -62,17 +63,20 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    console.log(validateForm());
-
     if (!validateForm()) return;
 
-    await signIn("credentials", {
-      email: fields.email,
-      password: fields.password,
-      redirect: false,
-    });
+    // const res = await signIn("credentials", {
+    //   email: fields.email,
+    //   password: fields.password,
+    //   redirect: false,
+    // });
 
-    router.push(callbackUrl);
+    // if (res && !res.ok) {
+    //   setAuthError(res.error || "");
+    //   return;
+    // }
+
+    // router.push(callbackUrl);
   };
 
   return (
@@ -99,9 +103,11 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
         />
       </div>
 
-      <button onClick={onSubmit} className={`${s.btn} ${cs.btn} ${cs.btnLg}`} type="submit">
-        Submit
-      </button>
+      <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>
+        <button onClick={onSubmit} className={`${s.btn} ${cs.btn} ${cs.btnLg}`} type="submit">
+          Submit
+        </button>
+      </div>
 
       <div className={s.descr}>
         <span className={s.descrText}>Don&apos;t have an account?</span>

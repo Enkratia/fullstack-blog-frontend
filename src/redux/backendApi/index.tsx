@@ -55,6 +55,15 @@ export const backendApi = createApi({
     }),
 
     // CREATE
+    createUser: builder.query<any, FormData>({
+      query: (body) => {
+        return {
+          url: "auth/register",
+          method: "POST",
+          body: body,
+        };
+      },
+    }),
     createPost: builder.query<any, FormData>({
       query: (body) => {
         return {
@@ -112,4 +121,5 @@ export const {
   useGetContactUsQueriesQuery,
   useLazyCreateSubscribeQuery,
   useLazyCreateContactUsMessageQuery,
+  useLazyCreateUserQuery,
 } = backendApi;

@@ -22,16 +22,22 @@
   }
 }
 
+.content {
+  position: relative;
+}
+
+// **
 .inputWrapper {
   &:not(:last-child) {
     margin-bottom: rem(16);
   }
 }
 
-.btn {
+.btnWrapper {
   margin-bottom: rem(16);
 }
 
+// **
 .descr {
   font: var(--body01-font);
   text-align: initial;

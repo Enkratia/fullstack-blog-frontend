@@ -61,6 +61,9 @@ export const authOptions: NextAuthOptions = {
 
         if (fullname) body.fullname = fullname;
 
+        // let res;
+
+        // try {
         const res = await fetch(BACKEND_URL + pathname, {
           method: "POST",
           body: JSON.stringify(body),
@@ -69,11 +72,27 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-        if (!res.status.toString().startsWith("2")) {
+        if (!res.ok) {
           return null;
         }
+        // } catch (error) {
+        //   throw Error("ServerNotRespond");
+        // }
+
+        // if (!res.ok && fullname) {
+        //   throw Error("EmailRegistered");
+        // }
+
+        // if (!res.ok) {
+        //   throw Error("AccountNotExist");
+        // }
 
         const user = await res.json();
+
+        // if (!user.emailVerified && !fullname) {
+        //   throw Error("EmailNotVerfied");
+        // }
+
         return user;
       },
     }),
@@ -98,7 +117,7 @@ export const authOptions: NextAuthOptions = {
         return { ...token, ...user };
       }
 
-      if (Date.now() < token.backendTokens.expiresIn) return token;
+      if (Date.now() < token?.backendTokens?.expiresIn) return token;
 
       return await refreshToken(token);
     },
