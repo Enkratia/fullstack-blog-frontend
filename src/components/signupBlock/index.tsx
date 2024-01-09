@@ -145,72 +145,72 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
   // if ("data" in error) {
   // }
 
-  console.log(isRegistered);
-
   return (
     <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
       <p className={`${s.title} ${cs.title}`}>Sign-up</p>
 
-      <div className={s.content}>
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-          <input
-            onChange={(e) => onFullnameChange(e, 0)}
-            className={`${s.input} ${cs.input}`}
-            type="text"
-            name="fullname"
-            placeholder="Fullname"
-            value={fields.fullname}
-          />
-        </div>
+      {isRegistered ? (
+        <ConfirmEmail email={fields.email} />
+      ) : (
+        <div className={s.content}>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
+            <input
+              onChange={(e) => onFullnameChange(e, 0)}
+              className={`${s.input} ${cs.input}`}
+              type="text"
+              name="fullname"
+              placeholder="Fullname"
+              value={fields.fullname}
+            />
+          </div>
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
-          <input
-            onChange={onEmailChange}
-            className={`${s.input} ${cs.input}`}
-            type="text"
-            name="email"
-            placeholder="Email"
-            value={fields.email}
-          />
-        </div>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
+            <input
+              onChange={onEmailChange}
+              className={`${s.input} ${cs.input}`}
+              type="text"
+              name="email"
+              placeholder="Email"
+              value={fields.email}
+            />
+          </div>
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassLength}>
-          <input
-            onChange={onPasswordChange}
-            className={`${s.input} ${cs.input}`}
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={fields.password}
-          />
-        </div>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassLength}>
+            <input
+              onChange={onPasswordChange}
+              className={`${s.input} ${cs.input}`}
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={fields.password}
+            />
+          </div>
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassConfirm}>
-          <input
-            onChange={onPasswordConfirmChange}
-            className={`${s.input} ${cs.input}`}
-            type="password"
-            name="confirmPassword"
-            placeholder="Password"
-            value={fields.passwordConfirm}
-          />
-        </div>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassConfirm}>
+            <input
+              onChange={onPasswordConfirmChange}
+              className={`${s.input} ${cs.input}`}
+              type="password"
+              name="confirmPassword"
+              placeholder="Password"
+              value={fields.passwordConfirm}
+            />
+          </div>
 
-        <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>
-          <button onClick={onSubmit} className={`${s.btn} ${cs.btn} ${cs.btnLg}`} type="submit">
-            Submit
-          </button>
-        </div>
+          <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>
+            <button onClick={onSubmit} className={`${s.btn} ${cs.btn} ${cs.btnLg}`} type="submit">
+              Submit
+            </button>
+          </div>
 
-        <div className={s.descr}>
-          <span className={s.descrText}>Already have an account?</span>
-          <Link href={`/signin${callback}`} className={s.descrLink} scroll={false}>
-            Sign-in
-          </Link>
+          <div className={s.descr}>
+            <span className={s.descrText}>Already have an account?</span>
+            <Link href={`/signin${callback}`} className={s.descrLink} scroll={false}>
+              Sign-in
+            </Link>
+          </div>
         </div>
-
-        <ConfirmEmail email={fields.email} isRegistered={isRegistered} />
-      </div>
+      )}
 
       <button
         onClick={onCloseClick}

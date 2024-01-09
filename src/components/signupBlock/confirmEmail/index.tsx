@@ -6,12 +6,11 @@ import Email from "../../../../public/img/default/email.svg";
 
 type ConfirmEmailProps = {
   email: string;
-  isRegistered: boolean;
 };
 
-export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ email, isRegistered = false }) => {
+export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ email }) => {
   return (
-    <div className={`${s.root} ${isRegistered ? s.rootActive : ""}`}>
+    <div className={s.root}>
       <Email />
 
       <div className={s.content}>
@@ -19,7 +18,8 @@ export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ email, isRegistered 
           <p className={`${s.title} ${cs.title}`}>Confirm your email</p>
 
           <p className={s.descr}>
-            Confirm your email address by clicking the link in the email we sent to:
+            Confirm your email address by&nbsp;clicking the link in&nbsp;the email
+            we&nbsp;sent&nbsp;to:
           </p>
 
           <strong className={s.email}>{email}</strong>

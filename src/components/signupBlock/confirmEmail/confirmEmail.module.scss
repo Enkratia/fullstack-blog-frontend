@@ -1,11 +1,6 @@
 @use "../../../scss//utils/" as *;
 
 .root {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: var(--z-tooltip);
-  // display: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,19 +10,9 @@
   color: var(--black-color);
   background-color: var(--light-color);
 
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
   svg {
     margin-bottom: rem(25);
     max-width: rem(120);
-  }
-
-  &Active {
-    // display: flex;
-    opacity: 1;
-    visibility: visible;
   }
 }
 
