@@ -16,6 +16,7 @@ export * from "./article";
 export * from "./signinBlock";
 export * from "./signupBlock";
 export * from "./signupBlock/confirmEmail";
+export * from "./activationBlock";
 
 // NotFound(all)
 export * from "./notFound";

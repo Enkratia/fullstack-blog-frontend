@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { GetPostsType, GetTagsType, GetUsersType, UpdateUserType } from "./types";
+import { ActivateUserType, GetPostsType, GetTagsType, GetUsersType, UpdateUserType } from "./types";
 import { RootState } from "../store";
 
 import { BACKEND_URL } from "../../utils/constants";
@@ -64,6 +64,15 @@ export const backendApi = createApi({
         };
       },
     }),
+    activateUser: builder.query<any, ActivateUserType>({
+      query: (body) => {
+        return {
+          url: "auth/activate",
+          method: "POST",
+          body: body,
+        };
+      },
+    }),
     createPost: builder.query<any, FormData>({
       query: (body) => {
         return {
@@ -122,4 +131,5 @@ export const {
   useLazyCreateSubscribeQuery,
   useLazyCreateContactUsMessageQuery,
   useLazyCreateUserQuery,
+  useActivateUserQuery,
 } = backendApi;
