@@ -2,7 +2,7 @@ type MonthOptionsType = {
   month: "long";
 };
 
-export const monthOptions: MonthOptionsType = {
+const monthOptions: MonthOptionsType = {
   month: "long",
 };
 

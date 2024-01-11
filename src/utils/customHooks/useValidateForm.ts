@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useImmer } from "use-immer";
 
@@ -16,17 +18,17 @@ export const useValidateForm = () => {
   const [isValidText, setIsValidText] = useImmer<Record<string, string>[]>([]);
 
   // **
-  const [isValidEmail, setIsValidEmail] = useImmer<Record<string, string>>({ "": "" });
+  const [isValidEmail, setIsValidEmail] = useImmer<Record<string, string>>({});
 
   // **
-  const [isValidPhone, setIsValidPhone] = useImmer<Record<string, string>>({ "": "" });
+  const [isValidPhone, setIsValidPhone] = useImmer<Record<string, string>>({});
 
   // **
   const [isValidSelect, setIsValidSelect] = useImmer<Record<string, string>[]>([]);
 
   // **
   const passLengthRef = React.useRef({ value: "", comparison: false }); // store validation result
-  const [isValidPassLength, setIsValidPassLength] = useImmer<Record<string, string>>({ "": "" }); // store input`s value
+  const [isValidPassLength, setIsValidPassLength] = useImmer<Record<string, string>>({}); // store input`s value
 
   // **
   const passConfirmRef = React.useRef({
@@ -35,13 +37,13 @@ export const useValidateForm = () => {
     comparison2: false,
     comparison3: false,
   });
-  const [isValidPassConfirm, setIsValidPassConfirm] = useImmer<Record<string, string>>({ "": "" });
+  const [isValidPassConfirm, setIsValidPassConfirm] = useImmer<Record<string, string>>({});
 
   // **
-  const [isValidContent, setIsValidContent] = useImmer<Record<string, string>>({ "": "" });
+  const [isValidContent, setIsValidContent] = useImmer<Record<string, string>>({});
 
   // **
-  const [isValidFile, setIsValidFile] = useImmer<Record<string, string>>({ "": "" });
+  const [isValidFile, setIsValidFile] = useImmer<Record<string, string>>({});
 
   const validateFile = (files: FileList | null) => {
     const filesCount = files && files.length === 1;
@@ -57,7 +59,7 @@ export const useValidateForm = () => {
   const validateContent = (text: string | undefined) => {
     // **
     if (text === null) {
-      setIsValidContent({ "": "" });
+      setIsValidContent({});
       return;
     }
 
@@ -75,7 +77,7 @@ export const useValidateForm = () => {
   const validateSelect = (option: HTMLLIElement | null, idx: number) => {
     if (option === null) {
       setIsValidSelect((draft) => {
-        draft[idx] = { "": "" };
+        draft[idx] = {};
         return draft;
       });
       return;
@@ -104,7 +106,7 @@ export const useValidateForm = () => {
 
     // **
     if (value === null) {
-      setIsValidPhone({ "": "" });
+      setIsValidPhone({});
       return;
     }
 
@@ -124,7 +126,7 @@ export const useValidateForm = () => {
     // **
     if (value === null) {
       setIsValidText((draft) => {
-        draft[idx] = { "": "" };
+        draft[idx] = {};
         return draft;
       });
       return;
@@ -152,7 +154,7 @@ export const useValidateForm = () => {
   const validateEmail = (value: string | null) => {
     // **
     if (value === null) {
-      setIsValidEmail({ "": "" });
+      setIsValidEmail({});
       return;
     }
 
@@ -193,7 +195,7 @@ export const useValidateForm = () => {
   // *
   function validateDeep(resetWhenEmpty: boolean) {
     if (resetWhenEmpty && passLengthRef.current.comparison) {
-      setIsValidPassLength({ "": "" });
+      setIsValidPassLength({});
     } else if (passLengthRef.current.comparison) {
       setIsValidPassLength({ "data-validity-success-pass": "" });
     } else {
@@ -215,15 +217,15 @@ export const useValidateForm = () => {
       passLengthRef.current.value !== passConfirmRef.current.value;
 
     if (resetWhenEmpty && passConfirmRef.current.comparison1) {
-      setIsValidPassConfirm({ "": "" });
+      setIsValidPassConfirm({});
     } else if (passConfirmRef.current.comparison1) {
       setIsValidPassConfirm({ "data-validity-success-pass": "" });
     } else if (passConfirmRef.current.comparison2) {
-      setIsValidPassConfirm({ "": "" });
+      setIsValidPassConfirm({});
     } else if (passConfirmRef.current.comparison3) {
       setIsValidPassConfirm({ "data-validity-warning-pass": "Passwords do not match." });
     } else {
-      setIsValidPassConfirm({ "": "" });
+      setIsValidPassConfirm({});
     }
   }
 

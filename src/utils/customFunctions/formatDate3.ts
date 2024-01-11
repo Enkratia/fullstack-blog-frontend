@@ -1,4 +1,10 @@
-import { monthOptions } from "../customFunctions";
+type MonthOptionsType = {
+  month: "long";
+};
+
+const monthOptions: MonthOptionsType = {
+  month: "long",
+};
 
 export const formatDate3 = (date: string) => {
   const newDate = new Date(date);

@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { ActivateUserType, GetPostsType, GetTagsType, GetUsersType, UpdateUserType } from "./types";
-import { RootState } from "../store";
+import type { RootState } from "../store";
 
 import { BACKEND_URL } from "../../utils/constants";
 
-export const backendApi = createApi({
+const backendApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BACKEND_URL,
     prepareHeaders: (headers, { getState }) => {
@@ -133,3 +133,5 @@ export const {
   useLazyCreateUserQuery,
   useActivateUserQuery,
 } = backendApi;
+
+export default backendApi;

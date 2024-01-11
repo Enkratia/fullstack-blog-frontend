@@ -14,8 +14,11 @@ export * from "./categories";
 export * from "./authorCard";
 export * from "./article";
 export * from "./signinBlock";
+
 export * from "./signupBlock";
 export * from "./signupBlock/confirmEmail";
+
+// ***
 export * from "./activationBlock";
 
 // NotFound(all)

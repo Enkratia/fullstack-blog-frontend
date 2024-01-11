@@ -10,13 +10,11 @@ type ActivationPageProps = {
   };
 };
 
-const ActivationPage: React.FC<ActivationPageProps> = ({ params: { token } }) => {
+export default function ActivationPage({ params: { token } }: ActivationPageProps) {
   return (
     <main>
       <h1 className={cs.srOnly}>Activation page</h1>
       <ActivationBlock token={token} />
     </main>
   );
-};
-
-export default ActivationPage;
+}
