@@ -4,11 +4,6 @@ import React from "react";
 
 import { useEditor, EditorContent, Editor, JSONContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-
-import Document from "@tiptap/extension-document";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
-import ListItem from "@tiptap/extension-list-item";
 import Underline from "@tiptap/extension-underline";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -120,7 +115,7 @@ type AddPostEditorProps = {
 
 export const AddPostEditor: React.FC<AddPostEditorProps> = ({ setContent, isValidText }) => {
   const editor = useEditor({
-    extensions: [StarterKit, Document, Paragraph, Text, Underline, ListItem],
+    extensions: [StarterKit, Underline],
     content: "",
 
     onUpdate: ({ editor }) => {

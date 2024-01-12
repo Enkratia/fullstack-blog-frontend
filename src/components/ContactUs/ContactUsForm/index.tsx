@@ -5,7 +5,7 @@ import React from "react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
 
-import { useLazyCreateContactUsMessageQuery } from "../../../redux/backendApi";
+import { useCreateContactUsMessageMutation } from "../../../redux/backendApi";
 
 import { useValidateForm } from "../../../utils/customHooks";
 import { checkRequestStatus } from "../../../utils/customFunctions";
@@ -41,16 +41,15 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [active, setActive] = React.useState(0);
 
-  const [createMessage, { isError, isSuccess, isFetching, isLoading }] =
-    useLazyCreateContactUsMessageQuery();
-  const requestStatus = checkRequestStatus(isError, isSuccess, isFetching, isLoading);
+  const [createMessage, { isError, isSuccess, isLoading }] = useCreateContactUsMessageMutation();
+  const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
   const { isValidText, validateText, isValidEmail, validateEmail, isValidSelect, validateSelect } =
     useValidateForm();
 
   const validateForm = () => {
     return [isValidEmail, isValidText[0], isValidText[1], isValidSelect[0]].every((el) =>
-      !el ? !!el : Object.keys(el)[0].includes("data-validity-success"),
+      !el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success"),
     );
   };
 
@@ -155,7 +154,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
             <span className={cs.selectSelected}>{queries[active]}</span>
             <input type="hidden" name="query" value={queries[active]} />
 
-            <AngleDown aria-hidden="true" />
+            <AngleDown aria-hidden="true" className={cs.inputSvg} />
           </div>
           <div
             className={`${cs.selectWrapper} ${cs.input} ${isOpen ? cs.selectWrapperActive : ""}`}>
@@ -186,7 +185,11 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
       </div>
 
       <div className={`${cs.btnWrapper} ${cs[requestStatus]}`}>
-        <button onClick={onSubmit} type="button" className={`${s.submit} ${cs.btn} ${cs.btnLg}`}>
+        <button
+          onClick={onSubmit}
+          className={`${s.submit} ${cs.btn} ${cs.btnLg}`}
+          disabled={!validateForm()}
+          type="button">
           Send Message
         </button>
       </div>

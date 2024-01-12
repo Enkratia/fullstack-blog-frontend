@@ -151,6 +151,11 @@
     pointer-events: none;
   }
 
+  &:disabled {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
   &Wrapper {
     position: relative;
 

@@ -59,11 +59,11 @@ const icons: IIcons = {
 };
 
 type PostProps = {
-  id: number;
+  id: string;
 };
 
 export const Post: React.FC<PostProps> = ({ id }) => {
-  const { data: post, isError } = useGetPostByIdQuery(id, { skip: typeof +id !== "number" });
+  const { data: post, isError } = useGetPostByIdQuery(id);
 
   console.log(id);
 

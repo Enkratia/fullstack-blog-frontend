@@ -16,10 +16,11 @@ const refreshToken = async (token: JWT): Promise<JWT> => {
     headers: {
       authorization: `Refresh ${token.backendTokens.refreshToken}`,
     },
+    cache: "no-store",
   });
 
   if (!res.ok) {
-    throw Error("Failed to refresh token");
+    throw Error("RefreshTokenError");
   }
 
   const response = await res.json();
@@ -50,50 +51,38 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) return null;
-        const { email, password, fullname = null } = credentials;
-
-        const pathname = fullname ? "/auth/register" : "/auth/login";
+        const { email, password } = credentials;
 
         const body: BodyType = {
           email,
           password,
         };
 
-        if (fullname) body.fullname = fullname;
+        let res;
 
-        // let res;
-
-        // try {
-        const res = await fetch(BACKEND_URL + pathname, {
-          method: "POST",
-          body: JSON.stringify(body),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!res.ok) {
-          return null;
+        try {
+          res = await fetch(BACKEND_URL + "/auth/login", {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+        } catch (error) {
+          throw Error("FetchError");
         }
-        // } catch (error) {
-        //   throw Error("ServerNotRespond");
-        // }
 
-        // if (!res.ok && fullname) {
-        //   throw Error("EmailRegistered");
-        // }
+        if (res.status === 401) {
+          throw Error("EmailOrPasswordAreIncorrect");
+        }
 
-        // if (!res.ok) {
-        //   throw Error("AccountNotExist");
-        // }
+        const result = await res.json();
 
-        const user = await res.json();
+        if (!result?.user?.emailVerified) {
+          throw Error("EmailNotVerfied");
+        }
 
-        // if (!user.emailVerified && !fullname) {
-        //   throw Error("EmailNotVerfied");
-        // }
-
-        return user;
+        return result;
       },
     }),
 

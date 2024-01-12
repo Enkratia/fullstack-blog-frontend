@@ -7,7 +7,7 @@ import { JSONContent } from "@tiptap/react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
 
-import { useLazyCreatePostQuery } from "../../../redux/backendApi";
+import { useCreatePostMutation } from "../../../redux/backendApi";
 
 import { AddPostEditor } from "../../../components";
 import { useValidateForm } from "../../../utils/customHooks";
@@ -24,8 +24,9 @@ const categories = [categoriesPlaceholder, ...categoriesNames];
 type ContentType = { text: string; json: JSONContent };
 
 export const AddPostForm: React.FC = () => {
-  const [createPost, { isError, isLoading, isFetching, isSuccess }] = useLazyCreatePostQuery();
-  const requestStatus = checkRequestStatus(isError, isSuccess, isFetching, isLoading);
+  const [createPost, { isError, isLoading, isSuccess }] = useCreatePostMutation();
+
+  const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
   const [content, setContent] = useImmer<ContentType>({ text: "", json: {} });
 
@@ -210,7 +211,11 @@ export const AddPostForm: React.FC = () => {
       </div>
 
       <div className={`${cs.btnWrapper} ${cs[requestStatus]}`}>
-        <button onClick={onSubmitClick} type="submit" className={`${s.submit} ${cs.btn}`}>
+        <button
+          onClick={onSubmitClick}
+          className={`${s.submit} ${cs.btn}`}
+          disabled={!validateForm()}
+          type="submit">
           Submit
         </button>
       </div>

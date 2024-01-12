@@ -1,5 +1,5 @@
 export type UpdateUserType = {
-  id: number;
+  id: string;
   body: FormData;
 };
 

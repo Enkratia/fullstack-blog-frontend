@@ -37,7 +37,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
   // **
   const validateForm = () => {
     return [isValidEmail, isValidPassLength].every((el) =>
-      !el ? !!el : Object.keys(el)[0].includes("data-validity-success"),
+      !el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success"),
     );
   };
 
@@ -65,18 +65,23 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
     if (!validateForm()) return;
 
-    // const res = await signIn("credentials", {
-    //   email: fields.email,
-    //   password: fields.password,
-    //   redirect: false,
-    // });
+    const res = await signIn("credentials", {
+      email: fields.email,
+      password: fields.password,
+      redirect: false,
+    });
 
-    // if (res && !res.ok) {
-    //   setAuthError(res.error || "");
-    //   return;
-    // }
+    if (res && !res.ok) {
+      if (res.error === "EmailOrPasswordAreIncorrect" || res.error === "EmailNotVerfied") {
+        setAuthError(res.error);
+        return;
+      }
 
-    // router.push(callbackUrl);
+      setAuthError("FetchError");
+      return;
+    }
+
+    router.push(callbackUrl);
   };
 
   return (
@@ -104,7 +109,11 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       </div>
 
       <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>
-        <button onClick={onSubmit} className={`${s.btn} ${cs.btn} ${cs.btnLg}`} type="submit">
+        <button
+          onClick={onSubmit}
+          className={`${s.btn} ${cs.btn} ${cs.btnLg}`}
+          disabled={!validateForm()}
+          type="submit">
           Submit
         </button>
       </div>

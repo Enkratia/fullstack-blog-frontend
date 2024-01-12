@@ -1,13 +1,3 @@
-// type AboutUsStaticType = {
-//   imageUrl: string;
-//   headerTitle: string;
-//   headerDescription: string;
-//   missionTitle: string;
-//   missionDescription: string;
-//   visionTitle: string;
-//   visionDescription: string;
-// };
-
 type AboutUsStaticType = {
   header: {
     title: string;

@@ -1,6 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { useRouter, useSelectedLayoutSegment } from "next/navigation";
+import { signOut } from "next-auth/react";
+
+import { FRONTEND_URL } from "../../../utils/constants";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./accountSidebarLayer.module.scss";
@@ -22,6 +25,7 @@ const links = [
 
 export const AccountSidebarLayer: React.FC = () => {
   const segment = useSelectedLayoutSegment();
+  const router = useRouter();
 
   const ulRef = React.useRef<HTMLUListElement>(null);
   const [isActive, setIsActive] = React.useState(false);
@@ -38,6 +42,13 @@ export const AccountSidebarLayer: React.FC = () => {
 
     ul.removeAttribute("style");
   }, [isActive]);
+
+  // **
+  const onExitClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const data = await signOut({ redirect: false });
+    router.push(data?.url || FRONTEND_URL);
+  };
 
   const onMenuBtnClick = () => {
     setIsActive((b) => !b);
@@ -63,7 +74,7 @@ export const AccountSidebarLayer: React.FC = () => {
         ))}
 
         <li className={s.item}>
-          <Link className={s.link} href="/">
+          <Link onClick={onExitClick} className={s.link} href="/">
             Exit
           </Link>
         </li>

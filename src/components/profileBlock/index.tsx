@@ -12,8 +12,8 @@ import s from "./profileBlock.module.scss";
 export const ProfileBlock: React.FC = () => {
   const { data: session } = useSession();
 
-  const { data: user, isError } = useGetUserByIdQuery(session?.user.id!, {
-    skip: typeof session?.user?.id !== "number",
+  const { data: user, isError } = useGetUserByIdQuery(session?.user?.id!, {
+    skip: !session?.user?.id,
   });
 
   if (!user) {

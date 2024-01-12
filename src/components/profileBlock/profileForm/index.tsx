@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { useLazyUpdateUserQuery } from "../../../redux/backendApi";
+import { useUpdateUserMutation } from "../../../redux/backendApi";
 
 import { checkRequestStatus } from "../../../utils/customFunctions";
 import { useValidateForm } from "../../../utils/customHooks";
@@ -49,8 +49,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   const [isMount, setIsMount] = React.useState(true);
   const [fields] = React.useState(setInitialsFields());
 
-  const [updateUser, { isError, isSuccess, isFetching, isLoading }] = useLazyUpdateUserQuery();
-  const requestStatus = checkRequestStatus(isError, isSuccess, isFetching, isLoading);
+  const [updateUser, { isError, isSuccess, isLoading }] = useUpdateUserMutation();
+  const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
   const {
     isValidText,
@@ -66,7 +66,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   // **
   const validateForm = () => {
     return [isValidText[0], isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
-      !el ? !el : !Object.keys(el)[0].includes("data-validity-warning"),
+      !el ? !el : !Object.keys(el)?.[0]?.includes("data-validity-warning"),
     );
   };
 
@@ -121,7 +121,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   };
 
   return (
-    <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef} name="profile">
+    <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
       <div className={s.inputs}>
         <div className={`${cs.inputWrapper}`} {...isValidText[0]}>
           <input
@@ -231,17 +231,16 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
         onChange={onInputChange}
         placeholder="Representation"
         name="representation"
-        className={`${s.textarea} ${cs.input}`}>
-        {fields.representation}
-      </textarea>
+        className={`${s.textarea} ${cs.input}`}
+        defaultValue={fields.representation}
+      />
 
       <div className={`${cs.btnWrapper} ${cs[requestStatus]}`}>
         <button
           onClick={onSubmitClick}
           type="button"
-          className={`${s.submit} ${`${cs.btn} ${
-            !isMount && validateForm() ? "" : cs.btnDisabled
-          }`}`}>
+          disabled={isMount || !validateForm()}
+          className={`${s.submit} ${cs.btn}`}>
           Submit
         </button>
       </div>

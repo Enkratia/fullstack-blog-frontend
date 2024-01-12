@@ -1,35 +1,57 @@
 "use client";
 
 import React from "react";
-
 import { useRouter } from "next/navigation";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
 import { useActivateUserQuery } from "../../redux/backendApi";
 
+import { FRONTEND_URL } from "../../utils/constants";
+
 import s from "./activationBlock.module.scss";
 import cs from "../../scss/helpers.module.scss";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+
+const messages = {
+  success: "Email successfuly confirmed",
+  gone: "Email already confirmed",
+  wrong: "Something went wrong...",
+};
 
 type ActivationBlockProps = {
   token: string;
 };
 
 export const ActivationBlock: React.FC<ActivationBlockProps> = ({ token }) => {
+  let message = "";
   const router = useRouter();
 
-  const { data, isError, error, status, isSuccess } = useActivateUserQuery({ token });
+  const { isError, error, isSuccess } = useActivateUserQuery({ token });
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      setTimeout(() => {
+        router.push(`/signin?callbackUrl=${FRONTEND_URL}`);
+      }, 1500);
+    }
+  }, [isSuccess]);
 
   if (isError) {
     if ((error as FetchBaseQueryError)?.status === 410) {
-      console.log("email already activated");
+      message = messages.gone;
     } else {
-      console.log("something went wrong");
+      message = messages.wrong;
     }
   }
 
   if (isSuccess) {
-    console.log("activated");
+    message = messages.success;
   }
 
-  return <div className={`${s.title} ${cs.title}`}>{token}</div>;
+  return (
+    <section className={s.root}>
+      <div className={`${s.container} ${cs.container}`}>
+        <h1 className={`${s.title} ${cs.title} ${isError ? s.titleRed : ""}`}>{message}</h1>
+      </div>
+    </section>
+  );
 };

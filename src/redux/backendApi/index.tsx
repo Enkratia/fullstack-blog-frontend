@@ -5,7 +5,7 @@ import type { RootState } from "../store";
 
 import { BACKEND_URL } from "../../utils/constants";
 
-const backendApi = createApi({
+export const backendApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BACKEND_URL,
     prepareHeaders: (headers, { getState }) => {
@@ -20,13 +20,13 @@ const backendApi = createApi({
   }),
   endpoints: (builder) => ({
     // GET
-    getUserById: builder.query<UserType, number>({
+    getUserById: builder.query<UserType, string>({
       query: (id) => `users/${id}`,
     }),
     getUsers: builder.query<GetUsersType, string>({
       query: (request) => `users/${request}`,
     }),
-    getPostById: builder.query<PostType, number>({
+    getPostById: builder.query<PostType, string>({
       query: (id) => `posts/${id}`,
     }),
     getPosts: builder.query<GetPostsType, string>({
@@ -55,7 +55,7 @@ const backendApi = createApi({
     }),
 
     // CREATE
-    createUser: builder.query<any, FormData>({
+    createUser: builder.mutation<any, FormData>({
       query: (body) => {
         return {
           url: "auth/register",
@@ -64,16 +64,7 @@ const backendApi = createApi({
         };
       },
     }),
-    activateUser: builder.query<any, ActivateUserType>({
-      query: (body) => {
-        return {
-          url: "auth/activate",
-          method: "POST",
-          body: body,
-        };
-      },
-    }),
-    createPost: builder.query<any, FormData>({
+    createPost: builder.mutation<any, FormData>({
       query: (body) => {
         return {
           url: "posts",
@@ -82,7 +73,7 @@ const backendApi = createApi({
         };
       },
     }),
-    createSubscribe: builder.query<any, FormData>({
+    createSubscribe: builder.mutation<any, FormData>({
       query: (body) => {
         return {
           url: "subscribe",
@@ -91,7 +82,7 @@ const backendApi = createApi({
         };
       },
     }),
-    createContactUsMessage: builder.query<any, FormData>({
+    createContactUsMessage: builder.mutation<any, FormData>({
       query: (body) => {
         return {
           url: "contact-us-messages",
@@ -101,8 +92,19 @@ const backendApi = createApi({
       },
     }),
 
+    // **
+    activateUser: builder.query<any, ActivateUserType>({
+      query: (body) => {
+        return {
+          url: "auth/activate",
+          method: "POST",
+          body: body,
+        };
+      },
+    }),
+
     // UPDATE
-    updateUser: builder.query<any, UpdateUserType>({
+    updateUser: builder.mutation<any, UpdateUserType>({
       query: ({ id, body }) => {
         return {
           url: `users/${id}`,
@@ -116,8 +118,6 @@ const backendApi = createApi({
 
 export const {
   useGetUserByIdQuery,
-  useLazyUpdateUserQuery,
-  useLazyCreatePostQuery,
   useGetPostByIdQuery,
   useGetPostsQuery,
   useGetUsersQuery,
@@ -128,10 +128,12 @@ export const {
   useGetCategoryHeaderQuery,
   useGetContactUsQuery,
   useGetContactUsQueriesQuery,
-  useLazyCreateSubscribeQuery,
-  useLazyCreateContactUsMessageQuery,
-  useLazyCreateUserQuery,
   useActivateUserQuery,
-} = backendApi;
 
-export default backendApi;
+  // **
+  useCreateUserMutation,
+  useCreatePostMutation,
+  useUpdateUserMutation,
+  useCreateSubscribeMutation,
+  useCreateContactUsMessageMutation,
+} = backendApi;

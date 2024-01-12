@@ -1,12 +1,7 @@
-export const checkRequestStatus = (
-  isError: boolean,
-  isSuccess: boolean,
-  isFetching: boolean,
-  isLoading: boolean,
-) => {
+export const checkRequestStatus = (isError: boolean, isSuccess: boolean, isLoading: boolean) => {
   let sendingState = "";
 
-  if (isFetching || isLoading) {
+  if (isLoading) {
     sendingState = "btnWrapperProcess";
   } else if (isSuccess) {
     sendingState = "btnWrapperSuccess";

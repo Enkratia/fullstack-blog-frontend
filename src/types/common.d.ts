@@ -4,7 +4,7 @@ type ContentType = {
 };
 
 type PostType = {
-  id: number;
+  id: string;
   title: string;
   category: string;
   contentJson: string;
@@ -29,7 +29,7 @@ interface UserLinksType extends IObjKeys {
 }
 
 type UserType = {
-  id: number;
+  id: string;
   email: string;
   password?: string;
   imageUrl: string;

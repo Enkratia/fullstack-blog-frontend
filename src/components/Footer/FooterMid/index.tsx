@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { useLazyCreateSubscribeQuery } from "../../../redux/backendApi";
+import { useCreateSubscribeMutation } from "../../../redux/backendApi";
 
 import { useValidateForm } from "../../../utils/customHooks";
 import { checkRequestStatus } from "../../../utils/customFunctions";
@@ -15,14 +15,13 @@ export const FooterMid: React.FC = () => {
 
   const { isValidEmail, validateEmail } = useValidateForm();
 
-  const [createSubscribe, { isError, isSuccess, isFetching, isLoading }] =
-    useLazyCreateSubscribeQuery();
-  const requestStatus = checkRequestStatus(isError, isSuccess, isFetching, isLoading);
+  const [createSubscribe, { isError, isSuccess, isLoading }] = useCreateSubscribeMutation();
+  const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
   // **
   const validateForm = () => {
     return [isValidEmail].every((el) =>
-      !el ? !!el : Object.keys(el)[0].includes("data-validity-success"),
+      !el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success"),
     );
   };
 
@@ -57,7 +56,11 @@ export const FooterMid: React.FC = () => {
         </div>
 
         <div className={`${cs.btnWrapper} ${cs[requestStatus]}`}>
-          <button onClick={onSubmit} type="submit" className={`${s.btn} ${cs.btn}`}>
+          <button
+            onClick={onSubmit}
+            className={`${s.btn} ${cs.btn}`}
+            disabled={!validateForm()}
+            type="submit">
             Subscribe
           </button>
         </div>

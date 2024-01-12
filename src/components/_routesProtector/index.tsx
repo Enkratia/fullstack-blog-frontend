@@ -27,7 +27,9 @@ export const RoutesProtector: React.FC = () => {
 
   React.useEffect(() => {
     if (isForbidden && !isExit) {
-      router.replace(`/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`);
+      router.replace(`/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`, {
+        scroll: false,
+      });
     }
   }, [isForbidden]);
 

@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from "react-redux";
 
-import backendApi from "./backendApi";
+import { backendApi } from "./backendApi";
 import menuBtn from "./menuBtnSlice/slice";
 import auth from "./authSlice/slice";
 

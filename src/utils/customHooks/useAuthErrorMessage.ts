@@ -2,13 +2,18 @@
 
 import React from "react";
 
-type ErrorType = "ServerError" | "AccountNotExist" | "EmailNotVerfied" | "EmailRegistered" | "";
+type ErrorType =
+  | "FetchError"
+  | "EmailOrPasswordAreIncorrect"
+  | "EmailNotVerfied"
+  | "EmailRegistered"
+  | "";
 
 export const useAuthErrorMessage = () => {
   const [authMessage, setAuthMessage] = React.useState({});
 
   const messages = {
-    serverNotRespond: {
+    fetchError: {
       "data-auth-message": "Something went wrong",
     },
     accountNotExist: {
@@ -27,10 +32,10 @@ export const useAuthErrorMessage = () => {
 
   const setAuthError = (error: ErrorType) => {
     switch (error) {
-      case "ServerError":
-        setAuthMessage(messages.serverNotRespond);
+      case "FetchError":
+        setAuthMessage(messages.fetchError);
         break;
-      case "AccountNotExist":
+      case "EmailOrPasswordAreIncorrect":
         setAuthMessage(messages.accountNotExist);
         break;
       case "EmailNotVerfied":
