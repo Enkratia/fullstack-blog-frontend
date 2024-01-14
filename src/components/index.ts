@@ -20,6 +20,7 @@ export * from "./signupBlock/confirmEmail";
 
 // ***
 export * from "./activationBlock";
+export * from "./unsubscribeBlock";
 
 // NotFound(all)
 export * from "./notFound";

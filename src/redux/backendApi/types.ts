@@ -11,6 +11,10 @@ export type GetUsersType = {
 
 // **
 export type ActivateUserType = Record<"token", string>;
+
+// **
+export type UnsubscribeType = Record<"token", string>;
+
 // **
 export type GetPostsType = {
   data: PostType[];

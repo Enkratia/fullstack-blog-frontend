@@ -55,7 +55,7 @@ export const FooterMid: React.FC = () => {
           />
         </div>
 
-        <div className={`${cs.btnWrapper} ${cs[requestStatus]}`}>
+        <div className={`${s.btnWrapper} ${cs.btnWrapper} ${cs[requestStatus]}`}>
           <button
             onClick={onSubmit}
             className={`${s.btn} ${cs.btn}`}

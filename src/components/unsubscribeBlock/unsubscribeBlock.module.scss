@@ -1,0 +1,15 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-block: rem(120);
+  min-height: 80vh;
+}
+
+.title {
+  text-align: center;
+  color: var(--success-color);
+
+  &Red {
+    color: var(--danger-color);
+  }
+}
