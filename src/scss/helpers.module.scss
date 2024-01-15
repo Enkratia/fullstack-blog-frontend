@@ -167,6 +167,7 @@
       font: var(--validation-font);
     }
 
+    // **
     &[data-auth-message] {
       &::before {
         content: attr(data-auth-message);
@@ -174,22 +175,22 @@
       }
     }
 
-    // Перевtсти в data-**?
-    &Success {
+    // **
+    &[data-request-success] {
       &::before {
         content: "Data sent";
         color: var(--success-color);
       }
     }
 
-    &Warning {
+    &[data-request-warning] {
       &::before {
         content: "Failed to send data";
         color: var(--danger-color);
       }
     }
 
-    &Process {
+    &[data-request-process] {
       &::before {
         content: "Data is sent...";
       }

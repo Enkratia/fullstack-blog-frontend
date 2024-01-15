@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useImmer } from "use-immer";
+import { useRouter } from "next/navigation";
 
 import { useCreateUserMutation } from "../../redux/backendApi";
 
@@ -26,6 +27,7 @@ const initialFields = {
 };
 
 export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
+  const router = useRouter();
   const callback = `?callbackUrl=${callbackUrl}`;
   const formRef = React.useRef<HTMLFormElement>(null);
 
@@ -34,6 +36,11 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
   const [fields, setFields] = useImmer(initialFields);
+
+  React.useEffect(() => {
+    console.log("history", window.history.state);
+    return router.replace(``);
+  }, []);
 
   const {
     isValidText,
@@ -45,6 +52,14 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     isValidPassConfirm,
     validatePassConfirm,
   } = useValidateForm();
+
+  // **
+  const onSigninLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    // Не сохранять страницу в истории
+    router.replace(`/signin${callback}`);
+  };
 
   // **
   const onCloseClick = () => {
@@ -187,7 +202,11 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
 
           <div className={s.descr}>
             <span className={s.descrText}>Already have an account?</span>
-            <Link href={`/signin${callback}`} className={s.descrLink} scroll={false}>
+            <Link
+              onClick={onSigninLinkClick}
+              href={`/signin${callback}`}
+              className={s.descrLink}
+              scroll={false}>
               Sign-in
             </Link>
           </div>

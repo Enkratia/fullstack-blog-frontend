@@ -51,7 +51,7 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
         </Link>
       </div>
 
-      <Link href="">
+      <Link href="" className={s.fullnameLink}>
         <p className={s.fullname}>{`${author.fullname}`}</p>
       </Link>
 

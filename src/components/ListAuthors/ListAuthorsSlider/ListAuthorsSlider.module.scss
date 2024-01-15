@@ -1,65 +1,69 @@
 @use "../../../scss/utils/" as *;
 
 .root {
-  margin-inline: rem(-16);
-
-  @include bp-down("1120") {
-    margin-inline: rem(-10);
-  }
-
-  @include bp-down("1024") {
-    margin-inline: rem(-16);
-  }
-
-  @include bp-down("876") {
-    margin-inline: rem(-10);
-  }
-
-  @include bp-down("768") {
-    margin-inline: rem(-16);
-  }
-
-  @include bp-down("576") {
-    margin-inline: rem(-10);
-  }
+  overflow: hidden;
 }
 
 .slider {
-  [class*="slick-track"] {
-    display: flex !important;
+  display: flex;
+  margin-left: rem(-32);
+
+  @include bp-down("1120") {
+    margin-left: rem(-20);
   }
 
-  [class*="slick-slide"] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: inherit !important;
+  @include bp-down("1024") {
+    margin-left: rem(-32);
+  }
 
-    >div {
-      display: flex !important;
-      margin-inline: rem(16);
-      width: 100% !important;
-      height: 100% !important;
+  @include bp-down("876") {
+    margin-left: rem(-20);
+  }
 
-      @include bp-down("1120") {
-        margin-inline: rem(10);
-      }
+  @include bp-down("768") {
+    margin-left: rem(-32);
+  }
 
-      @include bp-down("1024") {
-        margin-inline: rem(16);
-      }
+  @include bp-down("576") {
+    margin-left: rem(-20);
+  }
+}
 
-      @include bp-down("876") {
-        margin-inline: rem(10);
-      }
+.slide {
+  flex: 0 0 25%;
+  padding-left: rem(32);
+  min-width: 0;
 
-      @include bp-down("768") {
-        margin-inline: rem(16);
-      }
+  >article {
+    height: 100%;
+  }
 
-      @include bp-down("576") {
-        margin-inline: rem(10);
-      }
-    }
+  @include bp-down("1120") {
+    padding-left: rem(20);
+  }
+
+  @include bp-down("1024") {
+    flex: 0 0 calc(100% / 3);
+  }
+
+  @include bp-down("1024") {
+    padding-left: rem(32);
+  }
+
+  @include bp-down("876") {
+    padding-left: rem(20);
+  }
+
+  @include bp-down("768") {
+    flex: 0 0 50%;
+    padding-left: rem(32);
+  }
+
+  @include bp-down("576") {
+    padding-left: rem(20);
+  }
+
+  @include bp-down("520") {
+    flex: 0 0 100%;
   }
 }

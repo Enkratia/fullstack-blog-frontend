@@ -30,7 +30,7 @@ export const ActivationBlock: React.FC<ActivationBlockProps> = ({ token }) => {
   React.useEffect(() => {
     if (isSuccess) {
       setTimeout(() => {
-        router.push(`/signin?callbackUrl=${FRONTEND_URL}`);
+        router.replace(`/signin?callbackUrl=${FRONTEND_URL}`);
       }, 1500);
     }
   }, [isSuccess]);

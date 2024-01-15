@@ -235,7 +235,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
         defaultValue={fields.representation}
       />
 
-      <div className={`${cs.btnWrapper} ${cs[requestStatus]}`}>
+      <div className={cs.btnWrapper} {...requestStatus}>
         <button
           onClick={onSubmitClick}
           type="button"

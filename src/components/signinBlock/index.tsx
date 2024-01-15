@@ -27,6 +27,19 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
   const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();
 
+  React.useEffect(() => {
+    console.log("history", window.history.state);
+    return router.replace(``);
+  }, []);
+
+  // **
+  const onSignupLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    // Не сохранять страницу в истории
+    router.replace(`/signup${callback}`);
+  };
+
   // **
   const onCloseClick = () => {
     if (onModalCloseClick) {
@@ -81,7 +94,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       return;
     }
 
-    router.push(callbackUrl);
+    router.replace(callbackUrl);
   };
 
   return (
@@ -120,7 +133,11 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
       <div className={s.descr}>
         <span className={s.descrText}>Don&apos;t have an account?</span>
-        <Link href={`/signup${callback}`} className={s.descrLink} scroll={false}>
+        <Link
+          onClick={onSignupLinkClick}
+          href={`/signup${callback}`}
+          className={s.descrLink}
+          scroll={false}>
           Sign-up
         </Link>
       </div>

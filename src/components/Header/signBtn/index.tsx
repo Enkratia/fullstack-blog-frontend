@@ -28,15 +28,18 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
 
   // **
   const onSignClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Чтобы не переходить @modalLogin/@modalSignup, если signup/signin уже открыт
     if (!!pathname.match(/(\/signin|\/signup)/)) {
       e.preventDefault();
     }
 
+    // Чтобы закрывалось модальное окно nav-меню, перед открытием @modalLogin/@modalSignup
     onCloseClick();
   };
 
   // **
   const onDropdownClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    console.log("target", e.target);
     if (e.target === e.currentTarget.lastElementChild) return;
 
     const dropdown = e.currentTarget;
@@ -54,8 +57,7 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
 
   const onExitClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const data = await signOut({ redirect: false });
-    router.push(data?.url || FRONTEND_URL);
+    await signOut({ redirect: false });
   };
 
   return session ? (

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 
 import { useGetUserByIdQuery } from "../../redux/backendApi";
 
@@ -13,6 +13,7 @@ import Facebook from "../../../public/img/facebook.svg";
 import Twitter from "../../../public/img/twitter.svg";
 import Instagram from "../../../public/img/instagram.svg";
 import Linkedin from "../../../public/img/linkedin.svg";
+import DefaultImage from "../../../public/img/default/user.png";
 
 const socialIcons = {
   facebook: <Facebook aria-hidden="true" />,
@@ -37,7 +38,11 @@ const socialIcons = {
 export const AuthorHeader: React.FC = () => {
   const { id } = useParams();
 
-  const { data: user, isError } = useGetUserByIdQuery(+id);
+  const { data: user, isError } = useGetUserByIdQuery(id as string);
+
+  if (isError) {
+    notFound();
+  }
 
   if (!user) {
     return;
@@ -51,7 +56,7 @@ export const AuthorHeader: React.FC = () => {
         <div className={s.imageWrapper}>
           <div className={s.imageWrapperInner}>
             <Image
-              src={user.imageUrl}
+              src={user.imageUrl ? user.imageUrl : DefaultImage}
               alt={`Picture of ${user.fullname}`}
               className={s.image}
               fill

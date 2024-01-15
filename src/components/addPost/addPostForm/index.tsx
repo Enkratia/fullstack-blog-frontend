@@ -210,7 +210,7 @@ export const AddPostForm: React.FC = () => {
         />
       </div>
 
-      <div className={`${cs.btnWrapper} ${cs[requestStatus]}`}>
+      <div className={cs.btnWrapper} {...requestStatus}>
         <button
           onClick={onSubmitClick}
           className={`${s.submit} ${cs.btn}`}
