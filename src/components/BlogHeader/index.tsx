@@ -2,11 +2,11 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+import { fetchPostsQuery } from "../../fetchApi/fetchApi";
 import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./blogHeader.module.scss";
-import { fetchPostsQuery } from "@/fetchApi/fetchApi";
 
 // const post: PostType = {
 //   id: 1,

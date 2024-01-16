@@ -2,8 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
 import { useImmer } from "use-immer";
 
 import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
@@ -27,18 +27,38 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
   const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();
 
-  React.useEffect(() => {
-    console.log("history", window.history.state);
-    return router.replace(``);
-  }, []);
+  // ** TMP
+  const { data: session } = useSession();
+  // React.useEffect(() => {
+  //   console.log("paht change");
+  //   router.refresh();
+  // }, []);
+  // React.useLayoutEffect(() => {
+  //   if (session) {
+  //     console.log(session);
+  //     router.refresh();
+  //   }
+  // }, [session]);
+  // const onSignupLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  //   e.preventDefault();
 
-  // **
-  const onSignupLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
+  //   // Не сохранять страницу в истории
+  //   router.replace(`/signup${callback}`);
+  // };
+  // React.useEffect(() => {
+  //   if (session) {
+  //     console.log(session);
+  //     router.refresh();
+  //   }
 
-    // Не сохранять страницу в истории
-    router.replace(`/signup${callback}`);
-  };
+  //   return () => router.refresh();
+  // }, [session]);
+
+  // console.log("mountin");
+
+  // React.useEffect(() => {
+  //   router.refresh();
+  // }, []);
 
   // **
   const onCloseClick = () => {
@@ -94,7 +114,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       return;
     }
 
-    router.replace(callbackUrl);
+    router.push(callbackUrl);
   };
 
   return (
@@ -134,7 +154,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       <div className={s.descr}>
         <span className={s.descrText}>Don&apos;t have an account?</span>
         <Link
-          onClick={onSignupLinkClick}
+          // onClick={onSignupLinkClick}
           href={`/signup${callback}`}
           className={s.descrLink}
           scroll={false}>

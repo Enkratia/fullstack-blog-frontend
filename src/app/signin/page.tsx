@@ -1,5 +1,11 @@
+"use server";
+
+import { headers } from "next/headers";
+
 import React from "react";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { useSession } from "next-auth/react";
 
 import { getAuthSession } from "../../utils/authOptions";
 import { SigninBlock } from "../../components";
@@ -25,3 +31,23 @@ const SigninPage: React.FC<SigninPageProps> = async ({ searchParams }) => {
 };
 
 export default SigninPage;
+
+// const SigninPage: React.FC<SigninPageProps> = ({ searchParams }) => {
+//   const { data: session } = useSession();
+
+//   if (session) {
+//     redirect("/");
+//   }
+
+//   // if (session) {
+//   //   return null;
+//   // }
+
+//   return (
+//     <div className={s.root}>
+//       <SigninBlock callbackUrl={searchParams.callbackUrl} />
+//     </div>
+//   );
+// };
+
+// export default SigninPage;

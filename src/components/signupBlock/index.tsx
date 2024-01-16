@@ -3,7 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { useImmer } from "use-immer";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import { useCreateUserMutation } from "../../redux/backendApi";
 
@@ -37,10 +38,26 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
 
   const [fields, setFields] = useImmer(initialFields);
 
-  React.useEffect(() => {
-    console.log("history", window.history.state);
-    return router.replace(``);
-  }, []);
+  // React.useEffect(() => {
+  //   console.log("history", window.history.state);
+  //   return router.replace(``);
+  // }, []);
+
+  // const { data: session } = useSession();
+  // React.useEffect(() => {
+  //   console.log("paht change");
+  //   router.refresh();
+  // }, []);
+  // React.useEffect(() => {
+  //   if (session) {
+  //     console.log(session);
+  //     router.refresh();
+  //   }
+
+  //   return () => router.refresh();
+  // }, [session]);
+
+  // console.log("mountup");
 
   const {
     isValidText,
@@ -54,12 +71,12 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
   } = useValidateForm();
 
   // **
-  const onSigninLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
+  // const onSigninLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  //   e.preventDefault();
 
-    // Не сохранять страницу в истории
-    router.replace(`/signin${callback}`);
-  };
+  //   // Не сохранять страницу в истории
+  //   router.replace(`/signin${callback}`);
+  // };
 
   // **
   const onCloseClick = () => {
@@ -203,7 +220,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
           <div className={s.descr}>
             <span className={s.descrText}>Already have an account?</span>
             <Link
-              onClick={onSigninLinkClick}
+              // onClick={onSigninLinkClick}
               href={`/signin${callback}`}
               className={s.descrLink}
               scroll={false}>

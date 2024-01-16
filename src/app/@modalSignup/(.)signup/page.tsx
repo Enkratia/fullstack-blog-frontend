@@ -2,6 +2,7 @@
 
 import React from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import { FRONTEND_URL } from "../../../utils/constants";
 import { ModalPA, SignupBlock } from "../../../components";
@@ -9,6 +10,11 @@ import { ModalPA, SignupBlock } from "../../../components";
 const ModalSignupPage: React.FC = () => {
   const callbackUrl = useSearchParams().get("callbackUrl") || FRONTEND_URL;
   const pathname = usePathname();
+
+  const { data: session } = useSession();
+  if (session) {
+    return null;
+  }
 
   if (!pathname.startsWith("/signup")) {
     return null;

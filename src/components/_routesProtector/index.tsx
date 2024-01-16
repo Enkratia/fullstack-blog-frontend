@@ -19,6 +19,8 @@ export const RoutesProtector: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
 
+  // console.log(pathname);
+
   const sP = useSearchParams().toString();
   const searchParams = sP ? "?" + sP : "";
 

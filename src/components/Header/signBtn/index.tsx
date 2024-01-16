@@ -39,7 +39,6 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
 
   // **
   const onDropdownClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log("target", e.target);
     if (e.target === e.currentTarget.lastElementChild) return;
 
     const dropdown = e.currentTarget;
