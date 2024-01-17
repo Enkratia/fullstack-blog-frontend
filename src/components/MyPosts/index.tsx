@@ -41,7 +41,7 @@ export const MyPosts: React.FC = () => {
 
     constructor(isExtend: boolean) {
       if (isExtend) {
-        this["user.id"] = session?.user?.id as number;
+        this["user.id"] = session?.user?.id as string;
       }
     }
   }

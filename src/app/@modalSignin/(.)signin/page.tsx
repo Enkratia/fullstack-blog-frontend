@@ -13,10 +13,10 @@ const ModalSigninPage: React.FC = () => {
 
   console.log("modalsignin");
 
-  const { data: session } = useSession();
-  if (session) {
-    return null;
-  }
+  // const { data: session } = useSession();
+  // if (session) {
+  //   return null;
+  // }
 
   if (!pathname.startsWith("/signin")) {
     return null;

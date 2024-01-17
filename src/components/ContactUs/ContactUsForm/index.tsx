@@ -184,7 +184,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
           name="message"></textarea>
       </div>
 
-      <div className={`${cs.btnWrapper} ${cs[requestStatus]}`}>
+      <div className={cs.btnWrapper} {...requestStatus}>
         <button
           onClick={onSubmit}
           className={`${s.submit} ${cs.btn} ${cs.btnLg}`}

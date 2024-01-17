@@ -1,5 +1,3 @@
-// "use client";
-
 import React from "react";
 import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -16,10 +14,10 @@ type SignupPageProps = {
 const SignupPage: React.FC<SignupPageProps> = async ({ searchParams }) => {
   const token = await getAuthSession();
 
-  console.log("token2", !!token);
-  if (token) {
-    redirect("/");
-  }
+  // console.log("token2", !!token);
+  // if (token) {
+  //   redirect("/");
+  // }
 
   return (
     <div className={s.root}>
@@ -38,11 +36,11 @@ export default SignupPage;
 //   //   router.push("/");
 //   // }
 
-//   React.useLayoutEffect(() => {
-//     if (session) {
-//       router.push("/");
-//     }
-//   }, [session]);
+//   // React.useLayoutEffect(() => {
+//   //   if (session) {
+//   //     router.push("/");
+//   //   }
+//   // }, [session]);
 
 //   // if (session) {
 //   //   return null;

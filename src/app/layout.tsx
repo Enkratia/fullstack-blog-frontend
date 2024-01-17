@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { Footer, Header, RoutesProtector, AuthProvider, StoreProvider } from "../components";
 
 import "./globals.scss";
+// import { TestProtector } from "../components";
+// import { testRedirect } from "../components/_testProtector/actions/action";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,11 +24,12 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children, modalSignin, modalSig
       <body>
         <StoreProvider>
           <AuthProvider>
-            <RoutesProtector />
             <Header />
-            {children}
-            {modalSignin}
-            {modalSignup}
+            <RoutesProtector>
+              {children}
+              {modalSignin}
+              {modalSignup}
+            </RoutesProtector>
             <Footer />
           </AuthProvider>
         </StoreProvider>

@@ -1,5 +1,3 @@
-"use server";
-
 import { headers } from "next/headers";
 
 import React from "react";
@@ -17,11 +15,14 @@ type SigninPageProps = {
 };
 
 const SigninPage: React.FC<SigninPageProps> = async ({ searchParams }) => {
+  const headersList = headers();
+  const header = headersList.get("x-redirect-me");
+  console.log("x-redirect-me:", header);
   const token = await getAuthSession();
 
-  if (token) {
-    redirect("/");
-  }
+  // if (token) {
+  //   redirect("/");
+  // }
 
   return (
     <div className={s.root}>
@@ -35,9 +36,9 @@ export default SigninPage;
 // const SigninPage: React.FC<SigninPageProps> = ({ searchParams }) => {
 //   const { data: session } = useSession();
 
-//   if (session) {
-//     redirect("/");
-//   }
+//   // if (session) {
+//   //   redirect("/");
+//   // }
 
 //   // if (session) {
 //   //   return null;

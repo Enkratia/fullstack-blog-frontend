@@ -60,6 +60,19 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
   //   router.refresh();
   // }, []);
 
+  // React.useEffect(() => {
+  //   // return () => console.log(window.location.pathname);
+
+  //   const testFunc = () => {
+  //     const t = window.location.pathname;
+  //     if (t.startsWith("/signup")) {
+  //       console.log(t);
+  //       router.replace(t);
+  //     }
+  //   };
+  //   return () => testFunc();
+  // }, []);
+
   // **
   const onCloseClick = () => {
     if (onModalCloseClick) {

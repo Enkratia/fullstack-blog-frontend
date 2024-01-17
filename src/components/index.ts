@@ -2,6 +2,8 @@ export * from "./_authProvider";
 export * from "./_routesProtector";
 export * from "./_storeProvider";
 
+export * from "./_testProtector";
+
 // Common sections
 export * from "./join";
 

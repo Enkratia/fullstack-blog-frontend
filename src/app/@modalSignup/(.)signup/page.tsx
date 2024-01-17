@@ -11,10 +11,10 @@ const ModalSignupPage: React.FC = () => {
   const callbackUrl = useSearchParams().get("callbackUrl") || FRONTEND_URL;
   const pathname = usePathname();
 
-  const { data: session } = useSession();
-  if (session) {
-    return null;
-  }
+  // const { data: session } = useSession();
+  // if (session) {
+  //   return null;
+  // }
 
   if (!pathname.startsWith("/signup")) {
     return null;

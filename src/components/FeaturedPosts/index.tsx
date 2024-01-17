@@ -8,129 +8,129 @@ import { formatDate } from "../../utils/customFunctions";
 import cs from "../../scss/helpers.module.scss";
 import s from "./featuredPosts.module.scss";
 
-const allPosts: PostType[] = [
-  {
-    id: 1,
-    title: "8 Figma design systems that you can download for free today.",
-    category: "startup",
-    createdAt: "2023-11-03T17:44:30.644Z",
-    updatedAt: "2023-11-03T17:44:30.644Z",
-    contentText:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-    contentJson: "",
-    imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-    tags: ["business", "experience"],
-    isFeatured: false,
-    views: 0,
-    user: {
-      id: 1,
-      email: "email@email.com",
-      fullname: "John Doe",
-      imageUrl: "",
-      profession: "",
-      company: "",
-      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-      userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-    },
-  },
-  {
-    id: 2,
-    title: "8 Figma design systems that you can download for free today.",
-    category: "startup",
-    createdAt: "2023-11-03T17:44:30.644Z",
-    updatedAt: "2023-11-03T17:44:30.644Z",
-    contentText:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-    contentJson: "",
-    imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-    tags: ["business", "experience"],
-    isFeatured: false,
-    views: 0,
-    user: {
-      id: 1,
-      fullname: "John Doe",
-      imageUrl: "",
-      email: "email@email.com",
-      profession: "",
-      company: "",
-      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-      userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-    },
-  },
-  {
-    id: 3,
-    title: "8 Figma design systems that you can download for free today.",
-    category: "startup",
-    createdAt: "2023-11-03T17:44:30.644Z",
-    updatedAt: "2023-11-03T17:44:30.644Z",
-    contentText:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-    contentJson: "",
-    imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-    tags: ["business", "experience"],
-    isFeatured: false,
-    views: 0,
-    user: {
-      id: 1,
-      fullname: "John Doe",
-      imageUrl: "",
-      profession: "",
-      email: "email@email.com",
-      company: "",
-      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-      userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-    },
-  },
-  {
-    id: 4,
-    title: "8 Figma design systems that you can download for free today.",
-    category: "startup",
-    createdAt: "2023-11-03T17:44:30.644Z",
-    updatedAt: "2023-11-03T17:44:30.644Z",
-    contentText:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-    contentJson: "",
-    imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-    tags: ["business", "experience"],
-    isFeatured: false,
-    views: 0,
-    user: {
-      id: 1,
-      fullname: "John Doe",
-      imageUrl: "",
-      profession: "",
-      email: "email@email.com",
-      company: "",
-      representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-      userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-    },
-  },
-];
+// const allPosts: PostType[] = [
+//   {
+//     id: 1,
+//     title: "8 Figma design systems that you can download for free today.",
+//     category: "startup",
+//     createdAt: "2023-11-03T17:44:30.644Z",
+//     updatedAt: "2023-11-03T17:44:30.644Z",
+//     contentText:
+//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+//     contentJson: "",
+//     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
+//     tags: ["business", "experience"],
+//     isFeatured: false,
+//     views: 0,
+//     user: {
+//       id: 1,
+//       email: "email@email.com",
+//       fullname: "John Doe",
+//       imageUrl: "",
+//       profession: "",
+//       company: "",
+//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+//     },
+//   },
+//   {
+//     id: 2,
+//     title: "8 Figma design systems that you can download for free today.",
+//     category: "startup",
+//     createdAt: "2023-11-03T17:44:30.644Z",
+//     updatedAt: "2023-11-03T17:44:30.644Z",
+//     contentText:
+//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+//     contentJson: "",
+//     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
+//     tags: ["business", "experience"],
+//     isFeatured: false,
+//     views: 0,
+//     user: {
+//       id: 1,
+//       fullname: "John Doe",
+//       imageUrl: "",
+//       email: "email@email.com",
+//       profession: "",
+//       company: "",
+//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+//     },
+//   },
+//   {
+//     id: 3,
+//     title: "8 Figma design systems that you can download for free today.",
+//     category: "startup",
+//     createdAt: "2023-11-03T17:44:30.644Z",
+//     updatedAt: "2023-11-03T17:44:30.644Z",
+//     contentText:
+//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+//     contentJson: "",
+//     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
+//     tags: ["business", "experience"],
+//     isFeatured: false,
+//     views: 0,
+//     user: {
+//       id: 1,
+//       fullname: "John Doe",
+//       imageUrl: "",
+//       profession: "",
+//       email: "email@email.com",
+//       company: "",
+//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+//     },
+//   },
+//   {
+//     id: 4,
+//     title: "8 Figma design systems that you can download for free today.",
+//     category: "startup",
+//     createdAt: "2023-11-03T17:44:30.644Z",
+//     updatedAt: "2023-11-03T17:44:30.644Z",
+//     contentText:
+//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+//     contentJson: "",
+//     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
+//     tags: ["business", "experience"],
+//     isFeatured: false,
+//     views: 0,
+//     user: {
+//       id: 1,
+//       fullname: "John Doe",
+//       imageUrl: "",
+//       profession: "",
+//       email: "email@email.com",
+//       company: "",
+//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+//     },
+//   },
+// ];
 
-const post: PostType = {
-  id: 1,
-  title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-  category: "startup",
-  createdAt: "2023-11-03T17:44:30.644Z",
-  updatedAt: "2023-11-03T17:44:30.644Z",
-  contentText:
-    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-  contentJson: "",
-  imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-  tags: ["business", "experience"],
-  isFeatured: true,
-  views: 0,
-  user: {
-    id: 1,
-    fullname: "John Doe",
-    imageUrl: "",
-    profession: "",
-    email: "email@email.com",
-    company: "",
-    representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-  },
-};
+// const post: PostType = {
+//   id: 1,
+//   title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+//   category: "startup",
+//   createdAt: "2023-11-03T17:44:30.644Z",
+//   updatedAt: "2023-11-03T17:44:30.644Z",
+//   contentText:
+//     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+//   contentJson: "",
+//   imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
+//   tags: ["business", "experience"],
+//   isFeatured: true,
+//   views: 0,
+//   user: {
+//     id: 1,
+//     fullname: "John Doe",
+//     imageUrl: "",
+//     profession: "",
+//     email: "email@email.com",
+//     company: "",
+//     representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+//     userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+//   },
+// };
 
 export const FeaturedPosts: React.FC = async () => {
   const requestFeatured = "?isFeatured=true";
@@ -201,7 +201,7 @@ export const FeaturedPosts: React.FC = async () => {
                       By
                       <Link
                         href={`/users/${obj.user.id}`}
-                        className={cs.metadataName}>{` ${post.user.fullname}`}</Link>
+                        className={cs.metadataName}>{` ${featuredPost.user?.fullname}`}</Link>
                     </span>
                     <span className={cs.metadataItem}>{formatDate(obj.createdAt)}</span>
                   </div>

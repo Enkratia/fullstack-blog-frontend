@@ -10,7 +10,11 @@ import { removeToken, setToken } from "../../redux/authSlice/slice";
 
 import { FRONTEND_URL } from "../../utils/constants";
 
-export const RoutesProtector: React.FC = () => {
+type RoutesProtectorProps = {
+  children: React.ReactNode;
+};
+
+export const RoutesProtector: React.FC<RoutesProtectorProps> = ({ children }) => {
   const dispatch = useAppDispatch();
   const prevStatus = React.useRef("");
   const prevId = React.useRef<string>();
@@ -19,8 +23,7 @@ export const RoutesProtector: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  // console.log(pathname);
-
+  // оставить searchParams?
   const sP = useSearchParams().toString();
   const searchParams = sP ? "?" + sP : "";
 
@@ -59,5 +62,17 @@ export const RoutesProtector: React.FC = () => {
     }
   }, [session]);
 
-  return <></>;
+  // if (session && pathname.startsWith("/signin")) {
+  //   console.log(session, pathname.startsWith("/signin"));
+  //   const t = window.location.search;
+  //   const callbackUrl = new URLSearchParams(t).get("callbackUrl") || process.env.NEXTAUTH_URL!;
+  //   // // // console.log(callbackUrl);
+  //   // // router.push(callbackUrl);
+  //   // console.log("CHECKING");
+  //   router.push(callbackUrl);
+  // }
+
+  // console.log(session, pathname.startsWith("/signin"));
+
+  return <div>{children}</div>;
 };

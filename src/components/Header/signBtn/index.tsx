@@ -89,7 +89,7 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
       </div>
     ) : (
       <Link
-        onClick={onSignClick}
+        onClick={onCloseClick}
         className={`${s.btn} ${className}`}
         href="/account/profile"
         scroll={false}>

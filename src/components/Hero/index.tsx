@@ -9,30 +9,30 @@ import { formatDate } from "../../utils/customFunctions";
 import cs from "../../scss/helpers.module.scss";
 import s from "./hero.module.scss";
 
-const post: PostType = {
-  id: 1,
-  title: "Step-by-step guide to choosing great font pairs",
-  category: "startup",
-  createdAt: "2023-11-03T17:44:30.644Z",
-  updatedAt: "2023-11-03T17:44:30.644Z",
-  contentText:
-    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-  contentJson: "",
-  imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-  tags: ["business", "experience"],
-  isFeatured: true,
-  views: 0,
-  user: {
-    id: 1,
-    fullname: "John Doe",
-    imageUrl: "",
-    profession: "",
-    email: "email@email.com",
-    company: "",
-    representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-    userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-  },
-};
+// const post: PostType = {
+//   id: 1,
+//   title: "Step-by-step guide to choosing great font pairs",
+//   category: "startup",
+//   createdAt: "2023-11-03T17:44:30.644Z",
+//   updatedAt: "2023-11-03T17:44:30.644Z",
+//   contentText:
+//     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+//   contentJson: "",
+//   imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
+//   tags: ["business", "experience"],
+//   isFeatured: true,
+//   views: 0,
+//   user: {
+//     id: 1,
+//     fullname: "John Doe",
+//     imageUrl: "",
+//     profession: "",
+//     email: "email@email.com",
+//     company: "",
+//     representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
+//     userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
+//   },
+// };
 
 export const Hero: React.FC = async () => {
   const request = "?isFeatured=true";
