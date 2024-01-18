@@ -1,12 +1,9 @@
-import { headers } from "next/headers";
-
 import React from "react";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
-import { useSession } from "next-auth/react";
+
+import { SigninBlock } from "../../components";
 
 import { getAuthSession } from "../../utils/authOptions";
-import { SigninBlock } from "../../components";
 
 import s from "./signin.module.scss";
 
@@ -15,14 +12,7 @@ type SigninPageProps = {
 };
 
 const SigninPage: React.FC<SigninPageProps> = async ({ searchParams }) => {
-  const headersList = headers();
-  const header = headersList.get("x-redirect-me");
-  console.log("x-redirect-me:", header);
   const token = await getAuthSession();
-
-  // if (token) {
-  //   redirect("/");
-  // }
 
   return (
     <div className={s.root}>
@@ -32,6 +22,18 @@ const SigninPage: React.FC<SigninPageProps> = async ({ searchParams }) => {
 };
 
 export default SigninPage;
+
+// import { redirect, useRouter } from "next/navigation";
+// import { revalidatePath } from "next/cache";
+// import { useSession } from "next-auth/react";
+
+// import { getAuthSession } from "../../utils/authOptions";
+
+// const token = await getAuthSession();
+
+// if (token) {
+//   redirect("/");
+// }
 
 // const SigninPage: React.FC<SigninPageProps> = ({ searchParams }) => {
 //   const { data: session } = useSession();

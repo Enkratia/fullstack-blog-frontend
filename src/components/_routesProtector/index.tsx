@@ -23,7 +23,6 @@ export const RoutesProtector: React.FC<RoutesProtectorProps> = ({ children }) =>
   const pathname = usePathname();
   const router = useRouter();
 
-  // оставить searchParams?
   const sP = useSearchParams().toString();
   const searchParams = sP ? "?" + sP : "";
 
@@ -34,13 +33,13 @@ export const RoutesProtector: React.FC<RoutesProtectorProps> = ({ children }) =>
   const id = session?.user?.id;
   const isNewUser = prevId.current && prevId.current !== id;
 
-  React.useEffect(() => {
-    if (isForbidden && !isExit) {
-      router.replace(`/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`, {
-        scroll: false,
-      });
-    }
-  }, [isForbidden]);
+  // React.useEffect(() => {
+  //   if (isForbidden && !isExit) {
+  //     router.replace(`/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`, {
+  //       scroll: false,
+  //     });
+  //   }
+  // }, [isForbidden]);
 
   // Перезагрузка (сброс данных) при: невозможности обновить токен / выходе через кнопку / когда новый пользователь заходит, не выйдя с прежнего аккаунта (чтобы данные прежнего пользователя не сохранились в кэше у нового)
   React.useEffect(() => {
@@ -61,18 +60,6 @@ export const RoutesProtector: React.FC<RoutesProtectorProps> = ({ children }) =>
       dispatch(removeToken());
     }
   }, [session]);
-
-  // if (session && pathname.startsWith("/signin")) {
-  //   console.log(session, pathname.startsWith("/signin"));
-  //   const t = window.location.search;
-  //   const callbackUrl = new URLSearchParams(t).get("callbackUrl") || process.env.NEXTAUTH_URL!;
-  //   // // // console.log(callbackUrl);
-  //   // // router.push(callbackUrl);
-  //   // console.log("CHECKING");
-  //   router.push(callbackUrl);
-  // }
-
-  // console.log(session, pathname.startsWith("/signin"));
 
   return <div>{children}</div>;
 };

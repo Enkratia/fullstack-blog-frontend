@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { useImmer } from "use-immer";
 
@@ -11,6 +11,8 @@ import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
 import cs from "../../scss/helpers.module.scss";
 import s from "./signinBlock.module.scss";
 import Close from "../../../public/img/close.svg";
+
+import { testRedirect } from "../_testProtector/actions/action";
 
 type SigninBlockProps = {
   callbackUrl: string;
@@ -27,51 +29,13 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
   const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();
 
-  // ** TMP
-  const { data: session } = useSession();
-  // React.useEffect(() => {
-  //   console.log("paht change");
-  //   router.refresh();
-  // }, []);
-  // React.useLayoutEffect(() => {
-  //   if (session) {
-  //     console.log(session);
-  //     router.refresh();
-  //   }
-  // }, [session]);
-  // const onSignupLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  // **************************************************************************************
+  // const { data: session } = useSession();
+  // const onSignupClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
   //   e.preventDefault();
-
-  //   // Не сохранять страницу в истории
-  //   router.replace(`/signup${callback}`);
+  //   // testRedirect(`/signup${callback}`);
   // };
-  // React.useEffect(() => {
-  //   if (session) {
-  //     console.log(session);
-  //     router.refresh();
-  //   }
-
-  //   return () => router.refresh();
-  // }, [session]);
-
-  // console.log("mountin");
-
-  // React.useEffect(() => {
-  //   router.refresh();
-  // }, []);
-
-  // React.useEffect(() => {
-  //   // return () => console.log(window.location.pathname);
-
-  //   const testFunc = () => {
-  //     const t = window.location.pathname;
-  //     if (t.startsWith("/signup")) {
-  //       console.log(t);
-  //       router.replace(t);
-  //     }
-  //   };
-  //   return () => testFunc();
-  // }, []);
+  // **************************************************************************************
 
   // **
   const onCloseClick = () => {
@@ -167,7 +131,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       <div className={s.descr}>
         <span className={s.descrText}>Don&apos;t have an account?</span>
         <Link
-          // onClick={onSignupLinkClick}
+          // onClick={onSignupClick}
           href={`/signup${callback}`}
           className={s.descrLink}
           scroll={false}>
@@ -185,3 +149,58 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
     </form>
   );
 };
+
+// ** TMP
+// import { testRedirect } from "../_testProtector/actions/action";
+// const { data: session } = useSession();
+
+// React.useEffect(() => {
+//   console.log("paht change");
+//   router.refresh();
+// }, []);
+// React.useLayoutEffect(() => {
+//   if (session) {
+//     console.log(session);
+//     router.refresh();
+//   }
+// }, [session]);
+// const onSignupLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+//   e.preventDefault();
+
+//   // Не сохранять страницу в истории
+//   router.replace(`/signup${callback}`);
+// };
+// React.useEffect(() => {
+//   if (session) {
+//     console.log(session);
+//     router.refresh();
+//   }
+
+//   return () => router.refresh();
+// }, [session]);
+
+// console.log("mountin");
+
+// React.useEffect(() => {
+//   router.refresh();
+// }, []);
+
+// React.useEffect(() => {
+//   // return () => console.log(window.location.pathname);
+
+//   const testFunc = () => {
+//     const t = window.location.pathname;
+//     if (t.startsWith("/signup")) {
+//       console.log(t);
+//       router.replace(t);
+//     }
+//   };
+//   return () => testFunc();
+// }, []);
+
+// const onSignupLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+//   e.preventDefault();
+
+//   testRedirect(`/signup${callback}`);
+//   // router.push(`/signup${callback}`);
+// };

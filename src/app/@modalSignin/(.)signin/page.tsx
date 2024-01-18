@@ -11,13 +11,6 @@ const ModalSigninPage: React.FC = () => {
   const callbackUrl = useSearchParams().get("callbackUrl") || FRONTEND_URL;
   const pathname = usePathname();
 
-  console.log("modalsignin");
-
-  // const { data: session } = useSession();
-  // if (session) {
-  //   return null;
-  // }
-
   if (!pathname.startsWith("/signin")) {
     return null;
   }
@@ -30,3 +23,8 @@ const ModalSigninPage: React.FC = () => {
 };
 
 export default ModalSigninPage;
+
+// const { data: session } = useSession();
+// if (session) {
+//   return null;
+// }

@@ -2,25 +2,6 @@
 
 const nextConfig = {
   // output: "standalone",
-  async redirects() {
-    return [
-      {
-        source: "/signin",
-        destination: "/signin",
-        permanent: true,
-        has: [
-          {
-            type: "header",
-            key: "x-redirect-me",
-            value: "no-cache",
-            // type: "cookie",
-            // key: "x-redirect-me",
-            // value: "cookie-data",
-          },
-        ],
-      },
-    ];
-  },
   images: {
     remotePatterns: [
       {

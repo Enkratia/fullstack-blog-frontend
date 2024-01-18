@@ -1,7 +1,12 @@
 "use server";
 
-import { permanentRedirect, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
-export const testRedirect = () => {
-  redirect("/");
+enum RedirectType {
+  push = "push",
+  replace = "replace",
+}
+
+export const testRedirect = (url: string) => {
+  redirect(url, RedirectType.replace);
 };
