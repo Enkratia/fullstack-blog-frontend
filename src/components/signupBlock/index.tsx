@@ -3,12 +3,14 @@
 import React from "react";
 import Link from "next/link";
 import { useImmer } from "use-immer";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { useCreateUserMutation } from "../../redux/backendApi";
+import { setAuthLink } from "../../redux/authLinkSlice/slice";
+import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
+import { useAppDispatch } from "../../redux/store";
 
 import { ConfirmEmail } from "../../components";
-import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "../signinBlock/signinBlock.module.scss";
@@ -17,6 +19,7 @@ import Close from "../../../public/img/close.svg";
 type SignupBlockProps = {
   callbackUrl: string;
   onModalCloseClick?: () => void;
+  // onAuthLinkClick?: (url: string) => void;
 };
 
 const initialFields = {
@@ -26,7 +29,11 @@ const initialFields = {
   passwordConfirm: "",
 };
 
-export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
+export const SignupBlock: React.FC<SignupBlockProps> = ({
+  callbackUrl,
+  onModalCloseClick,
+  // onAuthLinkClick,
+}) => {
   const router = useRouter();
   const callback = `?callbackUrl=${callbackUrl}`;
   const formRef = React.useRef<HTMLFormElement>(null);
@@ -54,6 +61,18 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
       onModalCloseClick();
     }
   };
+
+  // **************************************************************************************
+  const dispatch = useAppDispatch();
+  const onSigninLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // console.log(onAuthLinkClick);
+    // if (onAuthLinkClick) {
+    e.preventDefault();
+    dispatch(setAuthLink(`/auth/signin${callback}`));
+    // onAuthLinkClick(`/auth/signin${callback}`);
+    // }
+  };
+  // **************************************************************************************
 
   // **
   const validateForm = () => {
@@ -189,7 +208,11 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
 
           <div className={s.descr}>
             <span className={s.descrText}>Already have an account?</span>
-            <Link href={`/signin${callback}`} className={s.descrLink} scroll={false}>
+            <Link
+              onClick={onSigninLinkClick}
+              href={`/auth/signin${callback}`}
+              className={s.descrLink}
+              scroll={false}>
               Sign-in
             </Link>
           </div>
@@ -206,33 +229,3 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     </form>
   );
 };
-
-// React.useEffect(() => {
-//   return router.refresh();
-// }, []);
-
-// const { data: session } = useSession();
-// React.useEffect(() => {
-//   console.log("paht change");
-//   router.refresh();
-// }, []);
-// React.useEffect(() => {
-//   if (session) {
-//     console.log(session);
-//     router.refresh();
-//   }
-
-//   return () => router.refresh();
-// }, [session]);
-
-// console.log("mountup");
-
-// **
-// const onSigninLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-//   e.preventDefault();
-
-//   testRedirect(`/signin${callback}`);
-
-//   // // Не сохранять страницу в истории
-//   // router.replace(`/signin${callback}`);
-// };

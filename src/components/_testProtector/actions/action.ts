@@ -7,6 +7,10 @@ enum RedirectType {
   replace = "replace",
 }
 
+let count = 0;
+
 export const testRedirect = (url: string) => {
+  console.log("action", count++);
   redirect(url, RedirectType.replace);
+  // redirect(url);
 };

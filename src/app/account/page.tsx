@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 export default function AccountPage() {
-  return <p>Account</p>;
+  notFound();
 }

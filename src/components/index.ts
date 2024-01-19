@@ -19,6 +19,7 @@ export * from "./signinBlock";
 
 export * from "./signupBlock";
 export * from "./signupBlock/confirmEmail";
+export * from "./authLayer";
 
 // ***
 export * from "./activationBlock";

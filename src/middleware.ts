@@ -12,8 +12,10 @@ export async function middleware(req: NextRequest) {
 
     return NextResponse.next();
   }
+
+  return NextResponse.next();
 }
 
-export const config = {
-  matcher: "/account/:path*",
-};
+// export const config = {
+//   matcher: "/account/:path*",
+// };

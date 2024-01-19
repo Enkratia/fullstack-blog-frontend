@@ -5,14 +5,19 @@ import { signOut, useSession } from "next-auth/react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
-import { useAppDispatch } from "../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { removeToken, setToken } from "../../redux/authSlice/slice";
+import { selectAuthLink } from "../../redux/authLinkSlice/selectors";
 
 import { FRONTEND_URL } from "../../utils/constants";
+import { testRedirect } from "../_testProtector/actions/action";
 
 type RoutesProtectorProps = {
   children: React.ReactNode;
 };
+
+let controller: AbortController;
+let signal: AbortSignal;
 
 export const RoutesProtector: React.FC<RoutesProtectorProps> = ({ children }) => {
   const dispatch = useAppDispatch();
@@ -32,6 +37,18 @@ export const RoutesProtector: React.FC<RoutesProtectorProps> = ({ children }) =>
 
   const id = session?.user?.id;
   const isNewUser = prevId.current && prevId.current !== id;
+
+  // ================================================================================================
+  const authLinkPrev = React.useRef("");
+  const authLink = useAppSelector(selectAuthLink);
+
+  React.useEffect(() => {
+    if (authLink && authLink !== authLinkPrev.current) {
+      testRedirect(authLink);
+      authLinkPrev.current = authLink;
+    }
+  }, [authLink]);
+  // ================================================================================================
 
   // React.useEffect(() => {
   //   if (isForbidden && !isExit) {

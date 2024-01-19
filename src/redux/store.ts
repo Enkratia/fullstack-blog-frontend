@@ -4,12 +4,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from "react-
 import { backendApi } from "./backendApi";
 import menuBtn from "./menuBtnSlice/slice";
 import auth from "./authSlice/slice";
+import authLink from "./authLinkSlice/slice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       auth,
       menuBtn,
+      authLink,
       [backendApi.reducerPath]: backendApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(backendApi.middleware),

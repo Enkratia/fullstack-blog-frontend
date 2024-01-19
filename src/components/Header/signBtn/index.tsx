@@ -100,7 +100,7 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
     <Link
       onClick={onSignClick}
       className={className}
-      href={`/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`}
+      href={`/auth/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`}
       scroll={false}>
       Sign-in/up
     </Link>

@@ -14,11 +14,12 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = {
   children: React.ReactNode;
-  modalSignin: React.ReactNode;
-  modalSignup: React.ReactNode;
+  // modalSignin: React.ReactNode;
+  // modalSignup: React.ReactNode;
+  modalAuth: React.ReactNode;
 };
 
-const RootLayout: React.FC<RootLayoutProps> = ({ children, modalSignin, modalSignup }) => {
+const RootLayout: React.FC<RootLayoutProps> = ({ children, modalAuth }) => {
   return (
     <html lang="en">
       <body>
@@ -27,8 +28,9 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children, modalSignin, modalSig
             <Header />
             <RoutesProtector>
               {children}
-              {modalSignin}
-              {modalSignup}
+              {modalAuth}
+              {/* {modalSignin}
+              {modalSignup} */}
             </RoutesProtector>
             <Footer />
           </AuthProvider>
