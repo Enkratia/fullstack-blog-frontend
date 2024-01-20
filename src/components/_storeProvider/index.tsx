@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Provider } from "react-redux";
+
 import { makeStore, AppStore } from "../../redux/store";
 
 export const StoreProvider = ({ children }: { children: React.ReactNode }) => {
@@ -10,5 +11,9 @@ export const StoreProvider = ({ children }: { children: React.ReactNode }) => {
     storeRef.current = makeStore();
   }
 
-  return <Provider store={storeRef.current}>{children}</Provider>;
+  return (
+    <div>
+      <Provider store={storeRef.current}>{children}</Provider>
+    </div>
+  );
 };

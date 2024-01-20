@@ -1,14 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import { useImmer } from "use-immer";
 import { useRouter } from "next/navigation";
 
 import { useCreateUserMutation } from "../../redux/backendApi";
-import { setAuthLink } from "../../redux/authLinkSlice/slice";
 import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
-import { useAppDispatch } from "../../redux/store";
 
 import { ConfirmEmail } from "../../components";
 
@@ -19,7 +17,6 @@ import Close from "../../../public/img/close.svg";
 type SignupBlockProps = {
   callbackUrl: string;
   onModalCloseClick?: () => void;
-  // onAuthLinkClick?: (url: string) => void;
 };
 
 const initialFields = {
@@ -29,12 +26,7 @@ const initialFields = {
   passwordConfirm: "",
 };
 
-export const SignupBlock: React.FC<SignupBlockProps> = ({
-  callbackUrl,
-  onModalCloseClick,
-  // onAuthLinkClick,
-}) => {
-  const router = useRouter();
+export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
   const callback = `?callbackUrl=${callbackUrl}`;
   const formRef = React.useRef<HTMLFormElement>(null);
 
@@ -61,18 +53,6 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({
       onModalCloseClick();
     }
   };
-
-  // **************************************************************************************
-  const dispatch = useAppDispatch();
-  const onSigninLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // console.log(onAuthLinkClick);
-    // if (onAuthLinkClick) {
-    e.preventDefault();
-    dispatch(setAuthLink(`/auth/signin${callback}`));
-    // onAuthLinkClick(`/auth/signin${callback}`);
-    // }
-  };
-  // **************************************************************************************
 
   // **
   const validateForm = () => {
@@ -208,11 +188,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({
 
           <div className={s.descr}>
             <span className={s.descrText}>Already have an account?</span>
-            <Link
-              onClick={onSigninLinkClick}
-              href={`/auth/signin${callback}`}
-              className={s.descrLink}
-              scroll={false}>
+            <Link href={`/auth/signin${callback}`} className={s.descrLink} scroll={false}>
               Sign-in
             </Link>
           </div>

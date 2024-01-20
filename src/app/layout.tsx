@@ -1,11 +1,16 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { Footer, Header, RoutesProtector, AuthProvider, StoreProvider } from "../components";
+import {
+  Footer,
+  Header,
+  StoreTokenSetter,
+  AuthProvider,
+  StoreProvider,
+  ResetProvider,
+} from "../components";
 
 import "./globals.scss";
-// import { TestProtector } from "../components";
-// import { testRedirect } from "../components/_testProtector/actions/action";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,8 +19,6 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = {
   children: React.ReactNode;
-  // modalSignin: React.ReactNode;
-  // modalSignup: React.ReactNode;
   modalAuth: React.ReactNode;
 };
 
@@ -23,18 +26,17 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children, modalAuth }) => {
   return (
     <html lang="en">
       <body>
-        <StoreProvider>
-          <AuthProvider>
-            <Header />
-            <RoutesProtector>
+        <ResetProvider>
+          <StoreProvider>
+            <AuthProvider>
+              <StoreTokenSetter />
+              <Header />
               {children}
               {modalAuth}
-              {/* {modalSignin}
-              {modalSignup} */}
-            </RoutesProtector>
-            <Footer />
-          </AuthProvider>
-        </StoreProvider>
+              <Footer />
+            </AuthProvider>
+          </StoreProvider>
+        </ResetProvider>
       </body>
     </html>
   );

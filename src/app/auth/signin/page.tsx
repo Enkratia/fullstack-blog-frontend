@@ -1,9 +1,6 @@
-"use client";
-
 import React from "react";
 
 import { SigninBlock } from "../../../components";
-import { testRedirect } from "../../../components/_testProtector/actions/action";
 
 import s from "./signin.module.scss";
 
@@ -14,10 +11,7 @@ type SigninPageProps = {
 const SigninPage: React.FC<SigninPageProps> = ({ searchParams }) => {
   return (
     <div className={s.root}>
-      <SigninBlock
-        callbackUrl={searchParams.callbackUrl}
-        // testRedirect={testRedirect}
-      />
+      <SigninBlock callbackUrl={searchParams.callbackUrl} />
     </div>
   );
 };

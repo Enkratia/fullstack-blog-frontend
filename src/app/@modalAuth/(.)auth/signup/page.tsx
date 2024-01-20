@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
 import { FRONTEND_URL } from "../../../../utils/constants";
 import { ModalPA, SignupBlock } from "../../../../components";

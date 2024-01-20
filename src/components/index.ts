@@ -1,8 +1,7 @@
 export * from "./_authProvider";
-export * from "./_routesProtector";
 export * from "./_storeProvider";
-
-export * from "./_testProtector";
+export * from "./_storeTokenSetter";
+export * from "./_resetProvider";
 
 // Common sections
 export * from "./join";
@@ -19,7 +18,6 @@ export * from "./signinBlock";
 
 export * from "./signupBlock";
 export * from "./signupBlock/confirmEmail";
-export * from "./authLayer";
 
 // ***
 export * from "./activationBlock";

@@ -6,9 +6,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
 
-import { useAppDispatch } from "../../redux/store";
-import { setAuthLink } from "../../redux/authLinkSlice/slice";
-import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
+import { useAuthErrorMessage, useValidateForm, useResetData } from "../../utils/customHooks";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./signinBlock.module.scss";
@@ -17,14 +15,10 @@ import Close from "../../../public/img/close.svg";
 type SigninBlockProps = {
   callbackUrl: string;
   onModalCloseClick?: () => void;
-  // testRedirect?: (url: string) => void;
 };
 
-export const SigninBlock: React.FC<SigninBlockProps> = ({
-  callbackUrl,
-  onModalCloseClick,
-  // testRedirect,
-}) => {
+export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
+  const resetData = useResetData();
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
   const callback = `?callbackUrl=${callbackUrl}`;
@@ -33,17 +27,6 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({
   const [fields, setFields] = useImmer({ email: "", password: "" });
 
   const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();
-
-  // **************************************************************************************
-  const dispatch = useAppDispatch();
-  const onSignupClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // if (!testRedirect) return;
-
-    e.preventDefault();
-    dispatch(setAuthLink(`/auth/signup${callback}`));
-    // testRedirect(`/auth/signup${callback}`);
-  };
-  // **************************************************************************************
 
   // **
   const onCloseClick = () => {
@@ -99,6 +82,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({
       return;
     }
 
+    resetData((n) => n + 1);
     router.push(callbackUrl);
   };
 
@@ -138,11 +122,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({
 
       <div className={s.descr}>
         <span className={s.descrText}>Don&apos;t have an account?</span>
-        <Link
-          onClick={onSignupClick}
-          href={`/auth/signup${callback}`}
-          className={s.descrLink}
-          scroll={false}>
+        <Link href={`/auth/signup${callback}`} className={s.descrLink} scroll={false}>
           Sign-up
         </Link>
       </div>
