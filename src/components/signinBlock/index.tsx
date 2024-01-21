@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { useImmer } from "use-immer";
 
 import { useAuthErrorMessage, useValidateForm, useResetData } from "../../utils/customHooks";
@@ -12,13 +12,15 @@ import cs from "../../scss/helpers.module.scss";
 import s from "./signinBlock.module.scss";
 import Close from "../../../public/img/close.svg";
 
+import { redirectAction, revaldatePathAction } from "../../utils/actions";
+
 type SigninBlockProps = {
   callbackUrl: string;
   onModalCloseClick?: () => void;
 };
 
 export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
-  const resetData = useResetData();
+  const reInitApp = useResetData();
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
   const callback = `?callbackUrl=${callbackUrl}`;
@@ -82,9 +84,20 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       return;
     }
 
-    resetData((n) => n + 1);
+    // revaldatePathAction();
+    // reInitApp();
     router.push(callbackUrl);
   };
+
+  // ***************************************************************
+  const onTestClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    // await signOut({ redirect: false });
+    redirectAction(`/auth/signup${callback}`);
+    revaldatePathAction();
+    // router.push(`/auth/signup${callback}`);
+  };
+  // ***************************************************************
 
   return (
     <form onClick={(e) => e.preventDefault} className={s.root}>
@@ -122,7 +135,11 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
       <div className={s.descr}>
         <span className={s.descrText}>Don&apos;t have an account?</span>
-        <Link href={`/auth/signup${callback}`} className={s.descrLink} scroll={false}>
+        <Link
+          onClick={onTestClick}
+          href={`/auth/signup${callback}`}
+          className={s.descrLink}
+          scroll={false}>
           Sign-up
         </Link>
       </div>

@@ -11,11 +11,15 @@ type TestLayerProps = {
 export const ResetProvider: React.FC<TestLayerProps> = ({ children }) => {
   const [key, setKey] = React.useState(0);
 
+  const reInitApp = () => {
+    setKey((n) => n + 1);
+  };
+
   return (
-    <div>
-      <ResetContext.Provider key={key} value={setKey}>
+    <>
+      <ResetContext.Provider key={key} value={reInitApp}>
         {children}
       </ResetContext.Provider>
-    </div>
+    </>
   );
 };

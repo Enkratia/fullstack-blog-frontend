@@ -24,9 +24,9 @@ type RootLayoutProps = {
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children, modalAuth }) => {
   return (
-    <html lang="en">
-      <body>
-        <ResetProvider>
+    <ResetProvider>
+      <html lang="en">
+        <body>
           <StoreProvider>
             <AuthProvider>
               <StoreTokenSetter />
@@ -36,9 +36,9 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children, modalAuth }) => {
               <Footer />
             </AuthProvider>
           </StoreProvider>
-        </ResetProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ResetProvider>
   );
 };
 

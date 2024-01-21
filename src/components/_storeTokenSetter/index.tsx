@@ -11,6 +11,8 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 import { FRONTEND_URL } from "../../utils/constants";
+import { redirectAction, revaldatePathAction } from "../../utils/actions";
+import { useResetData } from "../../utils/customHooks";
 
 export const StoreTokenSetter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -33,14 +35,26 @@ export const StoreTokenSetter: React.FC = () => {
   const id = session?.user?.id;
   const isNewUser = prevId.current && prevId.current !== id;
 
+  const reInitApp = useResetData();
+
   // **
   React.useEffect(() => {
-    if (isForbidden && !isExit) {
-      router.replace(`/auth/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`, {
-        scroll: false,
-      });
-    }
+    // if (isForbidden && !isExit) {
+    //   router.replace(`/auth/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`, {
+    //     scroll: false,
+    //   });
+    // }
   }, [isForbidden]);
+
+  // *****************************************************************
+  // React.useEffect(() => {
+  //   if (pathname.startsWith("/auth/signup")) {
+  //     redirectAction("/auth/signup");
+  //   } else if (pathname.startsWith("/auth/signin")) {
+  //     redirectAction("/auth/signin");
+  //   }
+  // }, [pathname]);
+  // *****************************************************************
 
   // Перезагрузка (сброс данных) при: невозможности обновить токен / выходе через кнопку / когда новый пользователь заходит, не выйдя с прежнего аккаунта (чтобы данные прежнего пользователя не сохранились в кэше у нового)
   React.useEffect(() => {
@@ -49,6 +63,10 @@ export const StoreTokenSetter: React.FC = () => {
       // signOut({
       //   redirect: false,
       // });
+      // console.log("#1");
+      // revaldatePathAction();
+      // reInitApp();
+      // router.push(window.location.href);
     }
 
     prevStatus.current = status;
@@ -66,7 +84,3 @@ export const StoreTokenSetter: React.FC = () => {
 
   return <></>;
 };
-
-// ************************************************************* //
-// ******************** * CLIENT SIDE PROTECTOR * ************** //
-// ************************************************************* //

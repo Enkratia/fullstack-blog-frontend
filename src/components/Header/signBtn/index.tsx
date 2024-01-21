@@ -9,6 +9,7 @@ import { useMediaQuery } from "../../../utils/customHooks";
 import { FRONTEND_URL } from "../../../utils/constants";
 
 import s from "./signInBtn.module.scss";
+import { revaldatePathAction } from "../../../utils/actions";
 
 type SignBtnProps = {
   className: string;
@@ -57,6 +58,7 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
   const onExitClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     await signOut({ redirect: false });
+    // revaldatePathAction();
   };
 
   return session ? (

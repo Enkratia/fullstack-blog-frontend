@@ -1,3 +1,5 @@
+"use server";
+
 import { GetPostsType } from "../redux/backendApi/types";
 
 const baseUrl = "http://localhost:3001/api";
