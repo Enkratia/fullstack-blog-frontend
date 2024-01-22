@@ -1,6 +1,6 @@
 export * from "./_authProvider";
 export * from "./_storeProvider";
-export * from "./_storeTokenSetter";
+export * from "./_routesProtector";
 export * from "./_resetProvider";
 
 // Common sections

@@ -26,6 +26,13 @@ export const ModalPA: React.FC<ModalPAProps> = ({ children, callbackUrl }) => {
 
   // **
   const onModalCloseClick = () => {
+    const pathname = new URL(callbackUrl).pathname;
+
+    if (!!pathname.match(/^(\/account)/)) {
+      router.push(FRONTEND_URL);
+      return;
+    }
+
     router.push(callbackUrl);
   };
 

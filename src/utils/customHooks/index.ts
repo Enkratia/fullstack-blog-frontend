@@ -1,6 +1,5 @@
 export * from "./useValidateForm";
 export * from "./useMediaQuery";
-
-export * from "./useResetData";
+export * from "./useReinitApp";
 
 export * from "./useAuthErrorMessage";

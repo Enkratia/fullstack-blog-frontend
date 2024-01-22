@@ -2,24 +2,24 @@
 
 import React from "react";
 
-import { ResetContext } from "../../utils/contexts";
+import { ReinitAppContext } from "../../utils/contexts";
 
 type TestLayerProps = {
   children: any;
 };
 
-export const ResetProvider: React.FC<TestLayerProps> = ({ children }) => {
+export const ReinitAppProvider: React.FC<TestLayerProps> = ({ children }) => {
   const [key, setKey] = React.useState(0);
 
-  const reInitApp = () => {
+  const reinitApp = () => {
     setKey((n) => n + 1);
   };
 
   return (
     <>
-      <ResetContext.Provider key={key} value={reInitApp}>
+      <ReinitAppContext.Provider key={key} value={reinitApp}>
         {children}
-      </ResetContext.Provider>
+      </ReinitAppContext.Provider>
     </>
   );
 };

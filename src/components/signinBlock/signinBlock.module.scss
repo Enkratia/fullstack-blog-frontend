@@ -11,6 +11,10 @@
   color: var(--black-color);
   background-color: var(--light-color);
   transform: translateX(-50%);
+
+  @include bp-down("440") {
+    padding-inline: rem(20); // (60>40)1360>320
+  }
 }
 
 .title {
@@ -35,17 +39,28 @@
 
 // **
 .descr {
+  display: flex;
+  width: 100%;
   font: var(--body01-font);
   text-align: initial;
+
+  &Wrapper {
+    margin-right: rem(20);
+  }
 
   &Text {
     margin-right: rem(6);
   }
 
   &Link {
-    white-space: nowrap;
+    text-align: left;
     color: var(--purple-color);
     transition: opacity 0.3s;
+
+    &Right {
+      margin-left: auto;
+      text-align: right;
+    }
 
     &:hover {
       opacity: 0.85;

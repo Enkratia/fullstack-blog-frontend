@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 
-import { useMediaQuery } from "../../../utils/customHooks";
+import { useMediaQuery, useReinitApp } from "../../../utils/customHooks";
 import { FRONTEND_URL } from "../../../utils/constants";
 
 import s from "./signInBtn.module.scss";
@@ -19,6 +19,7 @@ type SignBtnProps = {
 export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => {
   const { isMQ896 } = useMediaQuery();
   const router = useRouter();
+  const reinitApp = useReinitApp();
 
   const { data: session } = useSession();
   const pathname = usePathname();
@@ -30,7 +31,7 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
   // **
   const onSignClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Чтобы не переходить @modalLogin/@modalSignup, если signup/signin уже открыт
-    if (!!pathname.match(/(\/signin|\/signup)/)) {
+    if (pathname.startsWith("/auth")) {
       e.preventDefault();
     }
 
@@ -58,7 +59,8 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
   const onExitClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     await signOut({ redirect: false });
-    // revaldatePathAction();
+    revaldatePathAction();
+    reinitApp();
   };
 
   return session ? (

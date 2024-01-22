@@ -4,10 +4,10 @@ import type { Metadata } from "next";
 import {
   Footer,
   Header,
-  StoreTokenSetter,
+  RoutesProtector,
   AuthProvider,
   StoreProvider,
-  ResetProvider,
+  ReinitAppProvider,
 } from "../components";
 
 import "./globals.scss";
@@ -24,12 +24,12 @@ type RootLayoutProps = {
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children, modalAuth }) => {
   return (
-    <ResetProvider>
-      <html lang="en">
+    <html lang="en">
+      <ReinitAppProvider>
         <body>
           <StoreProvider>
             <AuthProvider>
-              <StoreTokenSetter />
+              <RoutesProtector />
               <Header />
               {children}
               {modalAuth}
@@ -37,8 +37,8 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children, modalAuth }) => {
             </AuthProvider>
           </StoreProvider>
         </body>
-      </html>
-    </ResetProvider>
+      </ReinitAppProvider>
+    </html>
   );
 };
 

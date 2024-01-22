@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-type ResetContextType = () => void | never;
+type ReinitAppContextType = () => void | never;
 
-export const ResetContext = createContext<ResetContextType>(undefined as never);
+export const ReinitAppContext = createContext<ReinitAppContextType>(undefined as never);

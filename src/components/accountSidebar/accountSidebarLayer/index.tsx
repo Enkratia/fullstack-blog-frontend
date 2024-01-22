@@ -1,8 +1,12 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { useRouter, useSelectedLayoutSegment } from "next/navigation";
 import { signOut } from "next-auth/react";
 
+import { useReinitApp } from "../../../utils/customHooks";
+import { revaldatePathAction } from "../../../utils/actions";
 import { FRONTEND_URL } from "../../../utils/constants";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -24,6 +28,8 @@ const links = [
 ];
 
 export const AccountSidebarLayer: React.FC = () => {
+  const reinitApp = useReinitApp();
+
   const segment = useSelectedLayoutSegment();
   const router = useRouter();
 
@@ -46,8 +52,10 @@ export const AccountSidebarLayer: React.FC = () => {
   // **
   const onExitClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const data = await signOut({ redirect: false });
-    router.push(data?.url || FRONTEND_URL);
+    await signOut({ redirect: false });
+
+    revaldatePathAction();
+    reinitApp();
   };
 
   const onMenuBtnClick = () => {

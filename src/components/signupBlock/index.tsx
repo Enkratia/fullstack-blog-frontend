@@ -1,15 +1,12 @@
 "use client";
 
-import React, { useContext } from "react";
+import React from "react";
 import Link from "next/link";
 import { useImmer } from "use-immer";
-import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 
 import { useCreateUserMutation } from "../../redux/backendApi";
 
 import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
-import { redirectAction, revaldatePathAction } from "../../utils/actions";
 
 import { ConfirmEmail } from "../../components";
 
@@ -127,17 +124,6 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     }
   };
 
-  // ***************************************************************
-  const router = useRouter();
-  const onTestClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    // await signOut({ redirect: false });
-    redirectAction(`/auth/signin${callback}`);
-    // router.push(`/auth/signin${callback}`);
-    revaldatePathAction();
-  };
-  // ***************************************************************
-
   return (
     <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
       <p className={`${s.title} ${cs.title}`}>Sign-up</p>
@@ -201,14 +187,12 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
           </div>
 
           <div className={s.descr}>
-            <span className={s.descrText}>Already have an account?</span>
-            <Link
-              onClick={onTestClick}
-              href={`/auth/signin${callback}`}
-              className={s.descrLink}
-              scroll={false}>
-              Sign-in
-            </Link>
+            <div className={s.descrWrapper}>
+              <span className={s.descrText}>Already have an account?</span>
+              <Link href={`/auth/signin${callback}`} className={s.descrLink} scroll={false}>
+                Sign-in
+              </Link>
+            </div>
           </div>
         </div>
       )}
