@@ -2,15 +2,15 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RevalidationSliceType } from "./types";
 
 const initialState: RevalidationSliceType = {
-  isRevalidate: null,
+  isRevalidate: undefined,
 };
 
 const RevalidationSlice = createSlice({
-  name: "authLinkSlice",
+  name: "revalidation",
   initialState,
   reducers: {
-    setRevalidation: (state, action: PayloadAction<{}>) => {
-      state.isRevalidate = action.payload;
+    setRevalidation: (state) => {
+      state.isRevalidate = {};
     },
   },
 });

@@ -1,3 +1,3 @@
 export type RevalidationSliceType = {
-  isRevalidate: {} | null;
+  isRevalidate: {} | undefined;
 };

@@ -6,13 +6,14 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
 
+import { useAppDispatch } from "../../redux/store";
+
 import { useAuthErrorMessage, useValidateForm, useReinitApp } from "../../utils/customHooks";
+import { revaldatePathAction } from "../../utils/actions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./signinBlock.module.scss";
 import Close from "../../../public/img/close.svg";
-
-import { revaldatePathAction } from "../../utils/actions";
 
 type SigninBlockProps = {
   callbackUrl: string;
@@ -21,6 +22,7 @@ type SigninBlockProps = {
 
 export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
   const reinitApp = useReinitApp();
+  const dispatch = useAppDispatch();
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
   const callback = `?callbackUrl=${callbackUrl}`;
@@ -71,6 +73,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
     const res = await signIn("credentials", {
       email: fields.email,
       password: fields.password,
+      callbackUrl: callbackUrl,
       redirect: false,
     });
 
@@ -84,9 +87,6 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       return;
     }
 
-    router.push(callbackUrl);
-    reinitApp();
-    revaldatePathAction();
     // await new Promise((resolve) => {
     //   setTimeout(() => {
     //     console.log("resolves");
@@ -94,7 +94,21 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
     //   }, 3000);
     // });
 
-    // console.log("continue");
+    // router.push(callbackUrl);
+
+    // await new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     console.log("resolves");
+    //     resolve("resolved");
+    //   }, 3000);
+    // });
+
+    // revaldatePathAction();
+
+    // setTimeout(() => {
+    router.push(callbackUrl);
+    reinitApp();
+    // }, 3000);
   };
 
   return (
