@@ -4,12 +4,17 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
-import { useAppDispatch } from "../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { removeToken, setToken } from "../../redux/authSlice/slice";
+import { selectRevalidation } from "../../redux/revalidationSlice/selectors";
 
 import { FRONTEND_URL } from "../../utils/constants";
+import { revaldatePathAction } from "../../utils/actions";
 
 export const RoutesProtector: React.FC = () => {
+  const isRevalidatePrev = React.useRef<{}>(null);
+  const { isRevalidate } = useAppSelector(selectRevalidation);
+
   const dispatch = useAppDispatch();
 
   const { data: session, status } = useSession();
@@ -29,6 +34,13 @@ export const RoutesProtector: React.FC = () => {
       });
     }
   }, [isForbidden]);
+
+  const isNotSigninPage = !pathname.startsWith("/auth/signin");
+  React.useEffect(() => {
+    if (isRevalidate && isNotSigninPage) {
+      revaldatePathAction();
+    }
+  }, [pathname, isRevalidate, isNotSigninPage]);
 
   // For RTK Query
   React.useEffect(() => {

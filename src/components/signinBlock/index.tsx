@@ -84,9 +84,17 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       return;
     }
 
-    revaldatePathAction();
-    reinitApp();
     router.push(callbackUrl);
+    reinitApp();
+    revaldatePathAction();
+    // await new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     console.log("resolves");
+    //     resolve("resolved");
+    //   }, 3000);
+    // });
+
+    // console.log("continue");
   };
 
   return (
@@ -132,7 +140,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
         </div>
 
         <Link
-          href={`/auth/forgot${callback}`}
+          href={`/auth/reset${callback}`}
           className={`${s.descrLink} ${s.descrLinkRight}`}
           scroll={false}>
           Forgot password?

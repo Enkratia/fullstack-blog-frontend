@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
 import { useActivateUserQuery } from "../../redux/backendApi";
@@ -17,21 +17,16 @@ const messages = {
   wrong: "Something went wrong...",
 };
 
-type ActivationBlockProps = {
-  token: string;
-};
-
-export const ActivationBlock: React.FC<ActivationBlockProps> = ({ token }) => {
+export const ActivationBlock: React.FC = () => {
   let message = "";
   const router = useRouter();
+  const token = useParams().token as string;
 
-  const { isError, error, isSuccess } = useActivateUserQuery({ token });
+  const { data, isError, error, isSuccess } = useActivateUserQuery({ token });
 
   React.useEffect(() => {
-    if (isSuccess) {
-      setTimeout(() => {
-        router.replace(`/auth/signin?callbackUrl=${FRONTEND_URL}`);
-      }, 1500);
+    if (data && isSuccess) {
+      router.replace(`/auth/signin?callbackUrl=${FRONTEND_URL}`);
     }
   }, [isSuccess]);
 

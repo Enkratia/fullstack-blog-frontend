@@ -1,20 +1,20 @@
 "use server";
 
 import { GetPostsType } from "../redux/backendApi/types";
-
-const baseUrl = "http://localhost:3001/api";
+import { BACKEND_URL } from "../utils/constants";
 
 const fetchApi = async (query: string) => {
   try {
-    const response = await fetch(`${baseUrl}/${query}`, {
+    const response = await fetch(`${BACKEND_URL}/${query}`, {
       next: { tags: [query] },
       cache: "no-store",
     });
-    const data = await response.json();
 
     if (!response.ok) {
       return { isError: true };
     }
+
+    const data = await response.json();
 
     return { isError: false, data };
   } catch (error) {

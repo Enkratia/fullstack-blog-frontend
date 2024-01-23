@@ -9,8 +9,9 @@ type ModalAuthLayoutProps = {
 
 const ModalAuthLayout: React.FC<ModalAuthLayoutProps> = ({ children }) => {
   const pathname = usePathname();
+  const modalAuthPathname = /^\/auth\/(signin|signup|forgot)/;
 
-  if (!pathname.startsWith("/auth")) {
+  if (!pathname.match(modalAuthPathname)) {
     return null;
   }
 

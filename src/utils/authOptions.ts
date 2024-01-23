@@ -14,7 +14,7 @@ const refreshToken = async (token: JWT): Promise<JWT> => {
   const res = await fetch(BACKEND_URL + "/auth/refresh", {
     method: "POST",
     headers: {
-      authorization: `Refresh ${token.backendTokens.refreshToken}`,
+      authorization: `Refresh ${token?.backendTokens?.refreshToken}`,
     },
     cache: "no-store",
   });
@@ -111,8 +111,8 @@ export const authOptions: NextAuthOptions = {
       return await refreshToken(token);
     },
     async session({ token, session }) {
-      session.user = token.user;
-      session.backendTokens = token.backendTokens;
+      session.user = token?.user;
+      session.backendTokens = token?.backendTokens;
 
       return session;
     },
