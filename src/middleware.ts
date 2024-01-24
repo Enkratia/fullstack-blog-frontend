@@ -2,6 +2,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+let prevPathname = "";
+
 export async function middleware(req: NextRequest) {
   // const token = await getToken({ req });
 
@@ -11,9 +13,28 @@ export async function middleware(req: NextRequest) {
   //   }
   // }
 
+  if (!req.nextUrl.pathname.startsWith("/auth")) {
+    prevPathname = req.nextUrl.pathname;
+  }
+
+  if (req.nextUrl.pathname.startsWith("/auth")) {
+    const url = new URL(prevPathname, req.url);
+
+    const response = NextResponse.rewrite(url);
+    response.headers.set("x-middleware-custom-test", "test");
+
+    if (prevPathname) {
+      return response;
+    }
+  }
+
   return NextResponse.next();
 }
 
 // export const config = {
 //   matcher: "/account/:path*",
 // };
+
+export const config = {
+  matcher: "/((?!api|_next|static|public|favicon.ico).*)",
+};

@@ -22,10 +22,10 @@ export const ActivationBlock: React.FC = () => {
   const router = useRouter();
   const token = useParams().token as string;
 
-  const { data, isError, error, isSuccess } = useActivateUserQuery({ token });
+  const { isError, error, isSuccess } = useActivateUserQuery({ token });
 
   React.useEffect(() => {
-    if (data && isSuccess) {
+    if (isSuccess) {
       router.replace(`/auth/signin?callbackUrl=${FRONTEND_URL}`);
     }
   }, [isSuccess]);

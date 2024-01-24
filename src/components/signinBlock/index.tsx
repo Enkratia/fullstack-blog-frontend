@@ -106,8 +106,8 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
     // revaldatePathAction();
 
     // setTimeout(() => {
+    // reinitApp();
     router.push(callbackUrl);
-    reinitApp();
     // }, 3000);
   };
 

@@ -11,12 +11,12 @@ type TestLayerProps = {
 };
 
 export const ReinitAppProvider: React.FC<TestLayerProps> = ({ children }) => {
-  const prevTest = React.useRef({});
-  const [test, setTest] = React.useState<{}>();
+  // const prevTest = React.useRef({});
+  // const [test, setTest] = React.useState<{}>();
 
   const [key, setKey] = React.useState(0);
 
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   // React.useEffect(() => {
   //   if (!test) return;
@@ -34,7 +34,8 @@ export const ReinitAppProvider: React.FC<TestLayerProps> = ({ children }) => {
   // }, [test, pathname]);
 
   const reinitApp = () => {
-    setTest({});
+    setKey((n) => n + 1);
+    // setTest({});
   };
 
   return (

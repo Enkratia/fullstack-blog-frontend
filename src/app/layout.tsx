@@ -11,6 +11,7 @@ import {
 } from "../components";
 
 import "./globals.scss";
+// import { TestComponent } from "../components/_testComponent";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,10 +20,13 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = {
   children: React.ReactNode;
-  modalAuth: React.ReactNode;
+  // modalAuth: React.ReactNode;
 };
 
-const RootLayout: React.FC<RootLayoutProps> = ({ children, modalAuth }) => {
+const RootLayout: React.FC<RootLayoutProps> = ({
+  children,
+  //  modalAuth
+}) => {
   return (
     <html lang="en">
       <ReinitAppProvider>
@@ -30,9 +34,12 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children, modalAuth }) => {
           <StoreProvider>
             <AuthProvider>
               <RoutesProtector />
+              {/* <TestComponent />
+              </RoutesProtector> */}
+              {/* <TestComponent /> */}
               <Header />
               {children}
-              {modalAuth}
+              {/* {modalAuth} */}
               <Footer />
             </AuthProvider>
           </StoreProvider>
