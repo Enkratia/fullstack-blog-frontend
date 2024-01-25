@@ -38,7 +38,7 @@ export const Hero: React.FC = async () => {
   const request = "?isFeatured=true";
 
   const { data, isError } = await fetchPostsQuery(request);
-  const post = data.data[0];
+  const post = data?.data[0];
 
   if (!post) {
     return;

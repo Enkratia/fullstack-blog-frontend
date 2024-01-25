@@ -16,6 +16,10 @@ import cs from "../../scss/helpers.module.scss";
 export const Testimonials: React.FC = async () => {
   const { data, isError } = await fetchTestimonialStaticQuery();
 
+  if (!data) {
+    return;
+  }
+
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>Testimonials</h2>

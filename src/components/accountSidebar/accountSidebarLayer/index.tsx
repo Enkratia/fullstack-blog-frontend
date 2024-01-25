@@ -2,12 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter, useSelectedLayoutSegment } from "next/navigation";
+import { useSelectedLayoutSegment } from "next/navigation";
 import { signOut } from "next-auth/react";
-
-import { useReinitApp } from "../../../utils/customHooks";
-import { revaldatePathAction } from "../../../utils/actions";
-import { FRONTEND_URL } from "../../../utils/constants";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./accountSidebarLayer.module.scss";
@@ -28,10 +24,7 @@ const links = [
 ];
 
 export const AccountSidebarLayer: React.FC = () => {
-  const reinitApp = useReinitApp();
-
   const segment = useSelectedLayoutSegment();
-  const router = useRouter();
 
   const ulRef = React.useRef<HTMLUListElement>(null);
   const [isActive, setIsActive] = React.useState(false);
@@ -52,10 +45,9 @@ export const AccountSidebarLayer: React.FC = () => {
   // **
   const onExitClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    await signOut({ redirect: false });
-
-    revaldatePathAction();
-    reinitApp();
+    await signOut({
+      redirect: false,
+    });
   };
 
   const onMenuBtnClick = () => {

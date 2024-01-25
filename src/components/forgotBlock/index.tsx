@@ -6,13 +6,11 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
 
-import { useAuthErrorMessage, useValidateForm, useReinitApp } from "../../utils/customHooks";
+import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./signinBlock.module.scss";
 import Close from "../../../public/img/close.svg";
-
-import { revaldatePathAction } from "../../utils/actions";
 
 type SigninBlockProps = {
   callbackUrl: string;
@@ -20,7 +18,6 @@ type SigninBlockProps = {
 };
 
 export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
-  const reinitApp = useReinitApp();
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
   const callback = `?callbackUrl=${callbackUrl}`;
@@ -84,8 +81,6 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       return;
     }
 
-    revaldatePathAction();
-    reinitApp();
     router.push(callbackUrl);
   };
 

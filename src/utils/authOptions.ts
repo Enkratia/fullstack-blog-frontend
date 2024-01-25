@@ -70,19 +70,27 @@ export const authOptions: NextAuthOptions = {
           });
         } catch (error) {
           throw Error("FetchError");
+          // return { error: "FetchError" };
+          // return undefined;
         }
 
         if (res.status === 401) {
           throw Error("EmailOrPasswordAreIncorrect");
+          // return undefined;
+          // return { error: "EmailOrPasswordAreIncorrect" };
         }
 
         const result = await res.json();
 
-        if (!result?.user?.emailVerified) {
+        if (!result.user?.emailVerified) {
           throw Error("EmailNotVerfied");
+          // return undefined;
+          // return { error: "EmailNotVerfied" };
         }
 
         return result;
+        // return null;
+        // return undefined;
       },
     }),
 

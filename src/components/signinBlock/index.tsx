@@ -6,9 +6,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
 
-import { useAppDispatch } from "../../redux/store";
-
-import { useAuthErrorMessage, useValidateForm, useReinitApp } from "../../utils/customHooks";
+import { useAuthErrorMessage, useReinitApp, useValidateForm } from "../../utils/customHooks";
 import { revaldatePathAction } from "../../utils/actions";
 
 import cs from "../../scss/helpers.module.scss";
@@ -22,7 +20,6 @@ type SigninBlockProps = {
 
 export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
   const reinitApp = useReinitApp();
-  const dispatch = useAppDispatch();
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
   const callback = `?callbackUrl=${callbackUrl}`;
@@ -73,7 +70,6 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
     const res = await signIn("credentials", {
       email: fields.email,
       password: fields.password,
-      callbackUrl: callbackUrl,
       redirect: false,
     });
 
@@ -87,28 +83,9 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       return;
     }
 
-    // await new Promise((resolve) => {
-    //   setTimeout(() => {
-    //     console.log("resolves");
-    //     resolve("resolved");
-    //   }, 3000);
-    // });
-
-    // router.push(callbackUrl);
-
-    // await new Promise((resolve) => {
-    //   setTimeout(() => {
-    //     console.log("resolves");
-    //     resolve("resolved");
-    //   }, 3000);
-    // });
-
-    // revaldatePathAction();
-
-    // setTimeout(() => {
+    revaldatePathAction();
     // reinitApp();
-    router.push(callbackUrl);
-    // }, 3000);
+    // router.push(callbackUrl);
   };
 
   return (
@@ -154,7 +131,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
         </div>
 
         <Link
-          href={`/auth/reset${callback}`}
+          href={`/auth/forgot${callback}`}
           className={`${s.descrLink} ${s.descrLinkRight}`}
           scroll={false}>
           Forgot password?

@@ -1,6 +1,7 @@
 "use server";
 
 import { GetPostsType } from "../redux/backendApi/types";
+
 import { BACKEND_URL } from "../utils/constants";
 
 const fetchApi = async (query: string) => {

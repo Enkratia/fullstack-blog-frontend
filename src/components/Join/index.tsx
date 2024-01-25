@@ -15,6 +15,10 @@ import s from "./join.module.scss";
 export const Join: React.FC = async () => {
   const { isError, data } = await fetchJoinQuery();
 
+  if (!data) {
+    return;
+  }
+
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>

@@ -22,6 +22,10 @@ import s from "./usMission.module.scss";
 export const UsMission: React.FC = async () => {
   let { data, isError } = await fetchUsMissionQuery();
 
+  if (!data) {
+    return;
+  }
+
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>Our mission and information about us.</h2>

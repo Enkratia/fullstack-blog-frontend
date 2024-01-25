@@ -4,16 +4,16 @@ import React from "react";
 import { useSearchParams } from "next/navigation";
 
 import { FRONTEND_URL } from "../../../../utils/constants";
-import { ModalPA, SigninBlock } from "../../../../components";
+import { ModalPA, SignupBlock } from "../../../../components";
 
-const TESTModalSigninPage: React.FC = () => {
+const ModalSignupPage: React.FC = () => {
   const callbackUrl = useSearchParams().get("callbackUrl") || FRONTEND_URL;
 
   return (
     <ModalPA callbackUrl={callbackUrl}>
-      <SigninBlock callbackUrl={callbackUrl} />
+      <SignupBlock callbackUrl={callbackUrl} />
     </ModalPA>
   );
 };
 
-export default TESTModalSigninPage;
+export default ModalSignupPage;

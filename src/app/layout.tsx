@@ -4,14 +4,13 @@ import type { Metadata } from "next";
 import {
   Footer,
   Header,
-  RoutesProtector,
+  StoreTokenSetter,
   AuthProvider,
   StoreProvider,
   ReinitAppProvider,
 } from "../components";
 
 import "./globals.scss";
-// import { TestComponent } from "../components/_testComponent";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,26 +19,20 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = {
   children: React.ReactNode;
-  // modalAuth: React.ReactNode;
+  modalAuth: React.ReactNode;
 };
 
-const RootLayout: React.FC<RootLayoutProps> = ({
-  children,
-  //  modalAuth
-}) => {
+const RootLayout: React.FC<RootLayoutProps> = ({ children, modalAuth }) => {
   return (
     <html lang="en">
       <ReinitAppProvider>
         <body>
           <StoreProvider>
             <AuthProvider>
-              <RoutesProtector />
-              {/* <TestComponent />
-              </RoutesProtector> */}
-              {/* <TestComponent /> */}
+              <StoreTokenSetter />
               <Header />
               {children}
-              {/* {modalAuth} */}
+              {modalAuth}
               <Footer />
             </AuthProvider>
           </StoreProvider>

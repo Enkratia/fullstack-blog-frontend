@@ -1,7 +1,7 @@
 export * from "./_authProvider";
 export * from "./_storeProvider";
-export * from "./_routesProtector";
-export * from "./_resetProvider";
+export * from "./_storeTokenSetter";
+export * from "./_reinitAppProvider";
 
 // Common sections
 export * from "./join";
