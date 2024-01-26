@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { signOut } from "next-auth/react";
 
+import { useReinitApp } from "../../../utils/customHooks";
+import { revaldatePathAction } from "../../../utils/actions";
+
 import cs from "../../../scss/helpers.module.scss";
 import s from "./accountSidebarLayer.module.scss";
 
@@ -24,6 +27,7 @@ const links = [
 ];
 
 export const AccountSidebarLayer: React.FC = () => {
+  const reinitApp = useReinitApp();
   const segment = useSelectedLayoutSegment();
 
   const ulRef = React.useRef<HTMLUListElement>(null);
@@ -48,6 +52,9 @@ export const AccountSidebarLayer: React.FC = () => {
     await signOut({
       redirect: false,
     });
+
+    revaldatePathAction();
+    reinitApp();
   };
 
   const onMenuBtnClick = () => {

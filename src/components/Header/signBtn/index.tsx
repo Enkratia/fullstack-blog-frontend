@@ -2,10 +2,11 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 
-import { useMediaQuery } from "../../../utils/customHooks";
+import { useMediaQuery, useReinitApp } from "../../../utils/customHooks";
+import { revaldatePathAction } from "../../..//utils/actions";
 import { FRONTEND_URL } from "../../../utils/constants";
 
 import s from "./signInBtn.module.scss";
@@ -16,6 +17,8 @@ type SignBtnProps = {
 };
 
 export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => {
+  const router = useRouter();
+  const reinitApp = useReinitApp();
   const { isMQ896 } = useMediaQuery();
 
   const { data: session } = useSession();
@@ -58,6 +61,10 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
     await signOut({
       redirect: false,
     });
+
+    revaldatePathAction();
+    reinitApp();
+    router.push(window.location.href);
   };
 
   return session ? (

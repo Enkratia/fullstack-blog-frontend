@@ -73,7 +73,9 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       redirect: false,
     });
 
-    if (res && !res.ok) {
+    console.log(res);
+
+    if (!res?.ok) {
       if (res.error === "EmailOrPasswordAreIncorrect" || res.error === "EmailNotVerfied") {
         setAuthError(res.error);
         return;
@@ -83,9 +85,9 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       return;
     }
 
+    reinitApp();
     revaldatePathAction();
-    // reinitApp();
-    // router.push(callbackUrl);
+    router.push(callbackUrl);
   };
 
   return (

@@ -38,13 +38,13 @@ export const StoreTokenSetter: React.FC = () => {
   const isForbidden = status === "unauthenticated" && !!pathname.match(/^(\/account)/);
 
   // Routes protector
-  React.useEffect(() => {
-    if (isForbidden) {
-      router.push(`/auth/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`, {
-        scroll: false,
-      });
-    }
-  }, [isForbidden]);
+  // React.useEffect(() => {
+  //   if (isForbidden) {
+  //     router.push(`/auth/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`, {
+  //       scroll: false,
+  //     });
+  //   }
+  // }, [isForbidden]);
 
   // Parallel routes
   React.useEffect(() => {
@@ -62,6 +62,8 @@ export const StoreTokenSetter: React.FC = () => {
     }
   }, [pathname]);
 
+  console.log("render");
+
   // For RTK Query
   React.useEffect(() => {
     if (session) {
@@ -72,6 +74,11 @@ export const StoreTokenSetter: React.FC = () => {
   }, [session]);
 
   return (
-    <>{isActive && modalPage && createPortal(modalPage, document.body, Date.now().toString())}</>
+    <>
+      {isActive &&
+        modalPage &&
+        document.body &&
+        createPortal(modalPage, document.body, Date.now().toString())}
+    </>
   );
 };

@@ -33,7 +33,8 @@ export const ModalPA: React.FC<ModalPAProps> = ({ children, callbackUrl }) => {
       return;
     }
 
-    router.push(callbackUrl);
+    router.back();
+    // router.push(callbackUrl);
   };
 
   // **
