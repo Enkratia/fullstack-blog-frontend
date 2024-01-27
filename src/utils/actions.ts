@@ -10,6 +10,5 @@ export const revaldatePathAction = () => {
 
 // прочитать заголок из middleware
 export const checkReqHeaderAction = async () => {
-  const header = headers().get("x-middleware-custom-auth");
-  return !!header;
+  return !!headers().get("x-middleware-custom-auth");
 };

@@ -19,10 +19,13 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = {
   children: React.ReactNode;
-  modalAuth: React.ReactNode;
+  // modalAuth: React.ReactNode;
 };
 
-const RootLayout: React.FC<RootLayoutProps> = ({ children, modalAuth }) => {
+const RootLayout: React.FC<RootLayoutProps> = ({
+  children,
+  // modalAuth
+}) => {
   return (
     <html lang="en">
       <ReinitAppProvider>
@@ -32,7 +35,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children, modalAuth }) => {
               <StoreTokenSetter />
               <Header />
               {children}
-              {modalAuth}
+              {/* {modalAuth} */}
               <Footer />
             </AuthProvider>
           </StoreProvider>

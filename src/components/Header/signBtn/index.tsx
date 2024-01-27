@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 
 import { useMediaQuery, useReinitApp } from "../../../utils/customHooks";
-import { revaldatePathAction } from "../../..//utils/actions";
+import { checkReqHeaderAction, revaldatePathAction } from "../../..//utils/actions";
 import { FRONTEND_URL } from "../../../utils/constants";
 
 import s from "./signInBtn.module.scss";
@@ -58,13 +58,16 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
 
   const onExitClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+
     await signOut({
       redirect: false,
     });
 
-    revaldatePathAction();
-    reinitApp();
-    router.push(window.location.href);
+    // checkReqHeaderAction();
+    // revaldatePathAction();
+    // reinitApp();
+    // router.replace(`/auth/signin?callbackUrl=${a.url}`);
+    window.location.reload();
   };
 
   return session ? (

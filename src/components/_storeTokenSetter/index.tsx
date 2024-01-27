@@ -25,17 +25,17 @@ const modalPages: ModalPagesType = {
 
 export const StoreTokenSetter: React.FC = () => {
   const dispatch = useAppDispatch();
-  const router = useRouter();
+  // const router = useRouter();
   const pathname = usePathname();
   const { data: session, status } = useSession();
 
   const [isActive, setIsActive] = React.useState(false);
   const modalPage = modalPages[pathname];
 
-  const sP = useSearchParams().toString();
-  const searchParams = sP ? "?" + sP : "";
+  // const sP = useSearchParams().toString();
+  // const searchParams = sP ? "?" + sP : "";
 
-  const isForbidden = status === "unauthenticated" && !!pathname.match(/^(\/account)/);
+  // const isForbidden = status === "unauthenticated" && !!pathname.match(/^(\/account)/);
 
   // Routes protector
   // React.useEffect(() => {
@@ -62,7 +62,7 @@ export const StoreTokenSetter: React.FC = () => {
     }
   }, [pathname]);
 
-  console.log("render");
+  // console.log("render");
 
   // For RTK Query
   React.useEffect(() => {
@@ -77,7 +77,7 @@ export const StoreTokenSetter: React.FC = () => {
     <>
       {isActive &&
         modalPage &&
-        document.body &&
+        typeof document?.body !== undefined &&
         createPortal(modalPage, document.body, Date.now().toString())}
     </>
   );

@@ -53,8 +53,9 @@ export const AccountSidebarLayer: React.FC = () => {
       redirect: false,
     });
 
-    revaldatePathAction();
-    reinitApp();
+    // revaldatePathAction();
+    // reinitApp();
+    window.location.reload();
   };
 
   const onMenuBtnClick = () => {
