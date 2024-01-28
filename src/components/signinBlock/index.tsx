@@ -7,7 +7,7 @@ import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
 
 import { useAuthErrorMessage, useReinitApp, useValidateForm } from "../../utils/customHooks";
-import { revaldatePathAction } from "../../utils/actions";
+// import { revaldatePathAction } from "../../utils/actions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./signinBlock.module.scss";
@@ -19,7 +19,7 @@ type SigninBlockProps = {
 };
 
 export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
-  const reinitApp = useReinitApp();
+  // const reinitApp = useReinitApp();
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
   const callback = `?callbackUrl=${callbackUrl}`;
@@ -83,10 +83,14 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       return;
     }
 
-    // revaldatePathAction();
-    // reinitApp();
-    // router.push(callbackUrl);
     window.location.assign(callbackUrl);
+
+    // Workaround when no data resetted(reload) after login (just router.push() or nothing at all)
+    // try {
+    //   await revaldatePathAction(window.location.pathname, "page");
+    // } catch {
+    //   console.log(`Failed to revalidate ${window.location.pathname}`);
+    // }
   };
 
   return (

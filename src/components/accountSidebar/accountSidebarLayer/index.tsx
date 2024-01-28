@@ -27,7 +27,6 @@ const links = [
 ];
 
 export const AccountSidebarLayer: React.FC = () => {
-  const reinitApp = useReinitApp();
   const segment = useSelectedLayoutSegment();
 
   const ulRef = React.useRef<HTMLUListElement>(null);
@@ -49,12 +48,11 @@ export const AccountSidebarLayer: React.FC = () => {
   // **
   const onExitClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+
     await signOut({
       redirect: false,
     });
 
-    // revaldatePathAction();
-    // reinitApp();
     window.location.reload();
   };
 

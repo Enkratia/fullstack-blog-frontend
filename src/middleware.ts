@@ -3,66 +3,54 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const protectedRoutes = ["/account", "/dashboard"];
+const modalPageNames = ["/auth/signin", "/auth/signup", "/auth/forgot"];
 
 export async function middleware(req: NextRequest) {
-  // const token = await getCsrfToken({ req });
+  // **
+  const isProtectedCallback = (callbackUrl: string) => {
+    return protectedRoutes.find((protectedRouteName: string) => {
+      return callbackUrl.startsWith(process.env.NEXTAUTH_URL + protectedRouteName);
+    });
+  };
 
-  // if (req.nextUrl.pathname.startsWith("/blog")) {
-  //   return NextResponse.redirect(new URL(`/`, req.url));
-  // }
+  // **
+  const isProtectedPathname = (pathname: string) => {
+    return protectedRoutes.find((protectedRouteName: string) => {
+      return pathname.startsWith(protectedRouteName);
+    });
+  };
 
-  console.log(Date.now());
+  // **
+  const isAuthenticated = async () => {
+    const token = await getToken({ req });
+    if (!token) return false;
 
-  // Routes protector
-  if (req.nextUrl.pathname.startsWith("/account")) {
-    const isAuthenticated = await getToken({ req });
+    const refreshTokenExpiresIn = token.backendTokens?.refreshExpiresIn || 0;
+    if (Date.now() > refreshTokenExpiresIn) return false;
 
-    if (!isAuthenticated) {
+    return true;
+  };
+
+  // Routes protector (+modal routes)
+  if (isProtectedPathname(req.nextUrl.pathname)) {
+    if (!(await isAuthenticated())) {
       return NextResponse.redirect(new URL(`/auth/signin?callbackUrl=${req.nextUrl}`, req.url));
     }
   }
-  // return NextResponse.redirect(new URL(`/`, req.url));
-  // return NextResponse.redirect("http://localhost:3000");
 
-  // const pathname = req.nextUrl.pathname;
-  // const search = req.nextUrl.search;
-
-  // return NextResponse.redirect(`http://localhost:3000/auth/signin?callbackUrl=${req.url}`);
-  // return NextResponse.redirect(
-  //   `http://localhost:3000/auth/signin?callbackUrl=http://localhost:3000/account/profile`,
-  // );
-
-  // Modal pages
-  if (req.nextUrl.pathname.startsWith("/auth")) {
-    console.log(req);
-    const isAuthenticated = await getToken({ req });
-    const refererPathname = req.nextUrl.searchParams.get("referer");
-
-    // const isProtected = (currentRouteName: string) => {
-    //   return protectedRoutes.find((protectedRouteName) => {
-    //     return currentRouteName.startsWith(protectedRouteName);
-    //   });
-    // };
-
-    // const header = req.headers.get("x-middleware-custom-auth");
-    // console.log(header);
-
-    if (isAuthenticated) {
-      return NextResponse.next();
-    }
-
-    if (refererPathname && refererPathname.startsWith("/account") && !isAuthenticated) {
-      return NextResponse.next();
-    }
-
-    console.log(req);
-
+  // Modal routes
+  if (modalPageNames.includes(req.nextUrl.pathname)) {
     const callbackUrl = req.nextUrl.searchParams.get("callbackUrl") || "/";
+
+    if (isProtectedCallback(callbackUrl) && !(await isAuthenticated())) {
+      return NextResponse.next();
+    }
+
     const url = new URL(callbackUrl, req.url);
-
     const response = NextResponse.rewrite(url);
-    response.headers.set("x-middleware-custom-auth", "auth");
 
+    // Differentiate: modal page / 'normal' page
+    response.headers.set("x-middleware-custom-modal-header", "custom");
     return response;
   }
 
@@ -70,10 +58,7 @@ export async function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 
+// Get only real pages
 export const config = {
   matcher: "/((?!api|_next|static|public|favicon.ico).*)",
 };
-
-// export const config = {
-//   matcher: "/account/:path*",
-// };

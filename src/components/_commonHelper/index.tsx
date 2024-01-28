@@ -3,16 +3,16 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import { useSession } from "next-auth/react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import { useAppDispatch } from "../../redux/store";
 import { removeToken, setToken } from "../../redux/authSlice/slice";
 
-import { checkReqHeaderAction } from "../../utils/actions";
-import { FRONTEND_URL } from "../../utils/constants";
+import { checkModalHeaderAction } from "../../utils/actions";
 
 import SigninRoot from "../../app/_modalAuth/auth/signin/page";
 import SignupRoot from "../../app/_modalAuth/auth/signup/page";
+import ForgotRoot from "../../app/_modalAuth/auth/forgot/page";
 
 interface ModalPagesType {
   [key: string]: React.ReactNode;
@@ -21,36 +21,22 @@ interface ModalPagesType {
 const modalPages: ModalPagesType = {
   "/auth/signin": <SigninRoot />,
   "/auth/signup": <SignupRoot />,
+  "/auth/forgot": <ForgotRoot />,
 };
 
-export const StoreTokenSetter: React.FC = () => {
+export const CommonHelper: React.FC = () => {
   const dispatch = useAppDispatch();
-  // const router = useRouter();
   const pathname = usePathname();
   const { data: session, status } = useSession();
 
   const [isActive, setIsActive] = React.useState(false);
   const modalPage = modalPages[pathname];
 
-  // const sP = useSearchParams().toString();
-  // const searchParams = sP ? "?" + sP : "";
-
-  // const isForbidden = status === "unauthenticated" && !!pathname.match(/^(\/account)/);
-
-  // Routes protector
-  // React.useEffect(() => {
-  //   if (isForbidden) {
-  //     router.push(`/auth/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`, {
-  //       scroll: false,
-  //     });
-  //   }
-  // }, [isForbidden]);
-
-  // Parallel routes
+  // Modal routes
   React.useEffect(() => {
-    const checkReqHeader = async () => {
+    const checkModalHeader = async () => {
       try {
-        const res = await checkReqHeaderAction();
+        const res = await checkModalHeaderAction();
         setIsActive(res);
       } catch {
         console.warn("Failed to get header");
@@ -58,11 +44,9 @@ export const StoreTokenSetter: React.FC = () => {
     };
 
     if (modalPage) {
-      checkReqHeader();
+      checkModalHeader();
     }
   }, [pathname]);
-
-  // console.log("render");
 
   // For RTK Query
   React.useEffect(() => {
@@ -74,11 +58,6 @@ export const StoreTokenSetter: React.FC = () => {
   }, [session]);
 
   return (
-    <>
-      {isActive &&
-        modalPage &&
-        typeof document?.body !== undefined &&
-        createPortal(modalPage, document.body, Date.now().toString())}
-    </>
+    <>{isActive && modalPage && createPortal(modalPage, document?.body, Date.now().toString())}</>
   );
 };

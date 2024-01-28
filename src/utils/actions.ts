@@ -1,14 +1,18 @@
 "use server";
 
-import { headers, cookies } from "next/headers";
+import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 
-// сбросить все серверные данные
-export const revaldatePathAction = () => {
-  revalidatePath("/", "layout");
+// Reset server data
+export const revaldatePathAction = async (pathname?: string, pathtype?: "layout" | "page") => {
+  const name = pathname ?? "/";
+  const type = pathtype ?? "layout";
+
+  revalidatePath(name, type);
+  return true;
 };
 
-// прочитать заголок из middleware
-export const checkReqHeaderAction = async () => {
-  return !!headers().get("x-middleware-custom-auth");
+// Read middleware modal header
+export const checkModalHeaderAction = async () => {
+  return !!headers().get("x-middleware-custom-modal-header");
 };

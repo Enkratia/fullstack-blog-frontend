@@ -4,11 +4,11 @@ import { SignupBlock } from "../../../components";
 
 import s from "../signin/signin.module.scss";
 
-type ForgotPasswordPageProps = {
+type ForgotPageProps = {
   searchParams: Record<"callbackUrl", string>;
 };
 
-const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({ searchParams }) => {
+const ForgotPage: React.FC<ForgotPageProps> = ({ searchParams }) => {
   return (
     <div className={s.root}>
       <SignupBlock callbackUrl={searchParams.callbackUrl} />
@@ -16,4 +16,4 @@ const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({ searchParams })
   );
 };
 
-export default ForgotPasswordPage;
+export default ForgotPage;

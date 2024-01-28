@@ -1,14 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import {
-  Footer,
-  Header,
-  StoreTokenSetter,
-  AuthProvider,
-  StoreProvider,
-  ReinitAppProvider,
-} from "../components";
+import { Footer, Header, CommonHelper, AuthProvider, StoreProvider } from "../components";
 
 import "./globals.scss";
 
@@ -19,28 +12,21 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = {
   children: React.ReactNode;
-  // modalAuth: React.ReactNode;
 };
 
-const RootLayout: React.FC<RootLayoutProps> = ({
-  children,
-  // modalAuth
-}) => {
+const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en">
-      <ReinitAppProvider>
-        <body>
-          <StoreProvider>
-            <AuthProvider>
-              <StoreTokenSetter />
-              <Header />
-              {children}
-              {/* {modalAuth} */}
-              <Footer />
-            </AuthProvider>
-          </StoreProvider>
-        </body>
-      </ReinitAppProvider>
+      <body>
+        <StoreProvider>
+          <AuthProvider>
+            <CommonHelper />
+            <Header />
+            {children}
+            <Footer />
+          </AuthProvider>
+        </StoreProvider>
+      </body>
     </html>
   );
 };

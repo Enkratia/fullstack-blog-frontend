@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 
 import { useMediaQuery, useReinitApp } from "../../../utils/customHooks";
-import { checkReqHeaderAction, revaldatePathAction } from "../../..//utils/actions";
+import { revaldatePathAction } from "../../../utils/actions";
 import { FRONTEND_URL } from "../../../utils/constants";
 
 import s from "./signInBtn.module.scss";
@@ -17,8 +17,6 @@ type SignBtnProps = {
 };
 
 export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => {
-  const router = useRouter();
-  const reinitApp = useReinitApp();
   const { isMQ896 } = useMediaQuery();
 
   const { data: session } = useSession();
@@ -63,11 +61,14 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
       redirect: false,
     });
 
-    // checkReqHeaderAction();
-    // revaldatePathAction();
-    // reinitApp();
-    // router.replace(`/auth/signin?callbackUrl=${a.url}`);
     window.location.reload();
+
+    // Workaround when no data resetted(reload) after logout (just router.push() or nothing at all)
+    // try {
+    //   await revaldatePathAction(window.location.pathname, "page");
+    // } catch {
+    //   console.log(`Failed to revalidate ${window.location.pathname}`);
+    // }
   };
 
   return session ? (
