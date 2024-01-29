@@ -8,7 +8,10 @@ export default function ActivationPage() {
   return (
     <main>
       <h1 className={cs.srOnly}>Activation page</h1>
-      <ActivationBlock />
+
+      <section className={cs.container}>
+        <ActivationBlock />
+      </section>
     </main>
   );
 }

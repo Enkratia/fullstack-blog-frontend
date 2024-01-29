@@ -57,7 +57,5 @@ export const CommonHelper: React.FC = () => {
     }
   }, [session]);
 
-  return (
-    <>{isActive && modalPage && createPortal(modalPage, document?.body, Date.now().toString())}</>
-  );
+  return <>{isActive && modalPage && createPortal(modalPage, document?.body, pathname)}</>;
 };

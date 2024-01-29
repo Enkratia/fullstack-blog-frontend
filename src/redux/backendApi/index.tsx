@@ -7,6 +7,7 @@ import {
   GetUsersType,
   UnsubscribeType,
   UpdateUserType,
+  VerifyResetType,
 } from "./types";
 import type { RootState } from "../store";
 
@@ -98,6 +99,15 @@ export const backendApi = createApi({
         };
       },
     }),
+    checkUserEmail: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: "auth/forgot",
+          method: "POST",
+          body: body,
+        };
+      },
+    }),
 
     // **
     activateUser: builder.query<any, ActivateUserType>({
@@ -109,11 +119,11 @@ export const backendApi = createApi({
         };
       },
     }),
-    unsubscribe: builder.query<any, UnsubscribeType>({
+    verifyReset: builder.query<any, VerifyResetType>({
       query: (body) => {
         return {
-          url: "subscribe",
-          method: "DELETE",
+          url: "auth/verify-reset",
+          method: "POST",
           body: body,
         };
       },
@@ -125,6 +135,17 @@ export const backendApi = createApi({
         return {
           url: `users/${id}`,
           method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+
+    // DELETE
+    unsubscribe: builder.query<any, UnsubscribeType>({
+      query: (body) => {
+        return {
+          url: "subscribe",
+          method: "DELETE",
           body: body,
         };
       },
@@ -146,6 +167,7 @@ export const {
   useGetContactUsQueriesQuery,
   useActivateUserQuery,
   useUnsubscribeQuery,
+  useVerifyResetQuery,
 
   // **
   useCreateUserMutation,
@@ -153,4 +175,5 @@ export const {
   useUpdateUserMutation,
   useCreateSubscribeMutation,
   useCreateContactUsMessageMutation,
+  useCheckUserEmailMutation,
 } = backendApi;

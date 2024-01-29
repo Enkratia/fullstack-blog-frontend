@@ -2,30 +2,29 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
-import { useImmer } from "use-immer";
 
+import { useCheckUserEmailMutation } from "../../redux/backendApi";
 import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./signinBlock.module.scss";
+import s from "../signinBlock/signinBlock.module.scss";
 import Close from "../../../public/img/close.svg";
+import { EmailSent } from "./emailSent";
 
-type SigninBlockProps = {
+type ForgotBlockProps = {
   callbackUrl: string;
   onModalCloseClick?: () => void;
 };
 
-export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
-  const { authMessage, setAuthError } = useAuthErrorMessage();
-
+export const ForgotBlock: React.FC<ForgotBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
+  const formRef = React.useRef<HTMLFormElement>(null);
   const callback = `?callbackUrl=${callbackUrl}`;
 
-  const router = useRouter();
-  const [fields, setFields] = useImmer({ email: "", password: "" });
+  const { authMessage, setAuthError } = useAuthErrorMessage();
+  const { isValidEmail, validateEmail } = useValidateForm();
 
-  const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();
+  const [email, setEmail] = React.useState("");
+  const [checkUserEmail, { isSuccess }] = useCheckUserEmailMutation();
 
   // **
   const onCloseClick = () => {
@@ -36,28 +35,15 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
   // **
   const validateForm = () => {
-    return [isValidEmail, isValidPassLength].every((el) =>
+    return [isValidEmail].every((el) =>
       !el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success"),
     );
   };
 
   // **
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields((o) => {
-      o.email = e.target.value;
-      return o;
-    });
-
+    setEmail(e.target.value);
     validateEmail(e.target.value);
-  };
-
-  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields((o) => {
-      o.password = e.target.value;
-      return o;
-    });
-
-    validatePassLength(e.target.value);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
@@ -65,74 +51,63 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
     if (!validateForm()) return;
 
-    const res = await signIn("credentials", {
-      email: fields.email,
-      password: fields.password,
-      redirect: false,
-    });
+    const form = formRef.current;
+    if (!form) return;
 
-    if (res && !res.ok) {
-      if (res.error === "EmailOrPasswordAreIncorrect" || res.error === "EmailNotVerfied") {
-        setAuthError(res.error);
-        return;
+    const formData = new FormData(form);
+
+    const res = await checkUserEmail(formData);
+
+    if ("error" in res) {
+      if ("status" in res.error) {
+        if (res.error.status === 404) {
+          setAuthError("EmailNotFound");
+          return;
+        }
       }
 
       setAuthError("FetchError");
       return;
     }
-
-    router.push(callbackUrl);
   };
 
   return (
-    <form onClick={(e) => e.preventDefault} className={s.root}>
-      <p className={`${s.title} ${cs.title}`}>Sign-in</p>
+    <form onClick={(e) => e.preventDefault} className={s.root} ref={formRef}>
+      {isSuccess ? (
+        <EmailSent email={email} />
+      ) : (
+        <div className={s.content}>
+          <p className={`${s.title} ${cs.title}`}>Forgot password?</p>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
+            <input
+              onChange={onEmailChange}
+              className={`${s.input} ${cs.input}`}
+              type="text"
+              placeholder="Email"
+              value={email}
+              name="email"
+            />
+          </div>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
-        <input
-          onChange={onEmailChange}
-          className={`${s.input} ${cs.input}`}
-          type="text"
-          placeholder="Email"
-          value={fields.email}
-        />
-      </div>
+          <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>
+            <button
+              onClick={onSubmit}
+              className={`${s.btn} ${cs.btn} ${cs.btnLg}`}
+              disabled={!validateForm()}
+              type="submit">
+              Submit
+            </button>
+          </div>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassLength}>
-        <input
-          onChange={onPasswordChange}
-          className={`${s.input} ${cs.input}`}
-          type="password"
-          placeholder="Password"
-          value={fields.password}
-        />
-      </div>
-
-      <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>
-        <button
-          onClick={onSubmit}
-          className={`${s.btn} ${cs.btn} ${cs.btnLg}`}
-          disabled={!validateForm()}
-          type="submit">
-          Submit
-        </button>
-      </div>
-
-      <div className={s.descr}>
-        <div className={s.descrWrapper}>
-          <span className={s.descrText}>Don&apos;t have an account?</span>
-          <Link href={`/auth/signup${callback}`} className={s.descrLink} scroll={false}>
-            Sign-up
-          </Link>
+          <div className={s.descr}>
+            <div className={s.descrWrapper}>
+              <Link href={`/auth/signin${callback}`} className={s.descrLink} scroll={false}>
+                Return to Sign-in page
+              </Link>
+            </div>
+          </div>
         </div>
-
-        <Link
-          href={`/auth/forgot${callback}`}
-          className={`${s.descrLink} ${s.descrLinkRight}`}
-          scroll={false}>
-          Forgot password?
-        </Link>
-      </div>
+      )}
 
       <button
         onClick={onCloseClick}

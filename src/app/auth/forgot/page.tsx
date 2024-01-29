@@ -1,7 +1,8 @@
 import React from "react";
 
-import { SignupBlock } from "../../../components";
+import { ForgotBlock } from "../../../components";
 
+import cs from "../../../scss/helpers.module.scss";
 import s from "../signin/signin.module.scss";
 
 type ForgotPageProps = {
@@ -10,9 +11,13 @@ type ForgotPageProps = {
 
 const ForgotPage: React.FC<ForgotPageProps> = ({ searchParams }) => {
   return (
-    <div className={s.root}>
-      <SignupBlock callbackUrl={searchParams.callbackUrl} />
-    </div>
+    <main className={s.root}>
+      <h1 className={cs.srOnly}>Forget password page</h1>
+
+      <section className={cs.container}>
+        <ForgotBlock callbackUrl={searchParams.callbackUrl} />
+      </section>
+    </main>
   );
 };
 

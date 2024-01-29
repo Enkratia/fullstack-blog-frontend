@@ -19,9 +19,13 @@ export * from "./signinBlock";
 export * from "./signupBlock";
 export * from "./signupBlock/confirmEmail";
 
+export * from "./resetPasswordBlock";
+
 // ***
 export * from "./activationBlock";
 export * from "./unsubscribeBlock";
+export * from "./forgotBlock";
+export * from "./forgotBlock/emailSent";
 
 // NotFound(all)
 export * from "./notFound";

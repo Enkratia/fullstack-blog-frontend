@@ -16,6 +16,9 @@ export type ActivateUserType = Record<"token", string>;
 export type UnsubscribeType = Record<"token", string>;
 
 // **
+export type VerifyResetType = Record<"token", string>;
+
+// **
 export type GetPostsType = {
   data: PostType[];
   totalCount: number;

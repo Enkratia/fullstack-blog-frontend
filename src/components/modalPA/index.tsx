@@ -29,13 +29,14 @@ export const ModalPA: React.FC<ModalPAProps> = ({ children, callbackUrl }) => {
   // **
   const onModalCloseClick = () => {
     const pathname = new URL(callbackUrl).pathname;
+    // console.log("hello");
 
     if (!!pathname.match(/^(\/account|\/dashboard)/) && !session) {
       router.push(FRONTEND_URL);
       return;
     }
 
-    router.push(callbackUrl);
+    router.push(pathname);
   };
 
   // **

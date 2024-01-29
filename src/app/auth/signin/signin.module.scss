@@ -3,6 +3,7 @@
 .root {
   padding-top: rem(40);
   padding-bottom: rem(60);
+  min-height: 80vh;
 
   @include bp-down("container") {
     padding-top: calc(rem(0.77) + 2.88vw); // 40>10(1360>320)

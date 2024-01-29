@@ -7,6 +7,7 @@ type ErrorType =
   | "EmailOrPasswordAreIncorrect"
   | "EmailNotVerfied"
   | "EmailRegistered"
+  | "EmailNotFound"
   | "";
 
 export const useAuthErrorMessage = () => {
@@ -24,6 +25,9 @@ export const useAuthErrorMessage = () => {
     },
     emailRegistered: {
       "data-auth-message": "Email is already registered",
+    },
+    emailNotFound: {
+      "data-auth-message": "Email not found",
     },
     default: {
       "data-auth-message": "",
@@ -43,6 +47,9 @@ export const useAuthErrorMessage = () => {
         break;
       case "EmailRegistered":
         setAuthMessage(messages.emailRegistered);
+        break;
+      case "EmailNotFound":
+        setAuthMessage(messages.emailNotFound);
         break;
       default:
         setAuthMessage(messages.default);

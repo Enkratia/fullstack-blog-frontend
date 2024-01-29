@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
 
@@ -24,7 +24,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
   const callback = `?callbackUrl=${callbackUrl}`;
 
-  const router = useRouter();
+  // const router = useRouter();
   const [fields, setFields] = useImmer({ email: "", password: "" });
 
   const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();
