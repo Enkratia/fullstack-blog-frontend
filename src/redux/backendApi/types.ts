@@ -10,13 +10,10 @@ export type GetUsersType = {
 };
 
 // **
-export type ActivateUserType = Record<"token", string>;
-
-// **
-export type UnsubscribeType = Record<"token", string>;
-
-// **
-export type VerifyResetType = Record<"token", string>;
+export type ResetPasswordType = {
+  token: string;
+  body: FormData;
+};
 
 // **
 export type GetPostsType = {

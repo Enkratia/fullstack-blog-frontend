@@ -22,9 +22,8 @@ type UnsubscribeBlockProps = {
 
 export const UnsubscribeBlock: React.FC<UnsubscribeBlockProps> = ({ token }) => {
   let message = "";
-  const router = useRouter();
 
-  const { isError, error, isSuccess } = useUnsubscribeQuery({ token });
+  const { isError, error, isSuccess } = useUnsubscribeQuery(token);
 
   if (isError) {
     if ((error as FetchBaseQueryError)?.status === 410) {

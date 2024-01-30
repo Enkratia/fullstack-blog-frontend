@@ -1,14 +1,14 @@
 import React from "react";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./confirmEmail.module.scss";
+import s from "./signupBlockSuccess.module.scss";
 import Email from "../../../../public/img/default/email.svg";
 
-type ConfirmEmailProps = {
+type SignupBlockSuccessProps = {
   email: string;
 };
 
-export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ email }) => {
+export const SignupBlockSuccess: React.FC<SignupBlockSuccessProps> = ({ email }) => {
   return (
     <div className={s.root}>
       <Email />

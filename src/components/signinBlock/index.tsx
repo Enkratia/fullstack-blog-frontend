@@ -2,12 +2,10 @@
 
 import React from "react";
 import Link from "next/link";
-// import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
 
-import { useAuthErrorMessage, useReinitApp, useValidateForm } from "../../utils/customHooks";
-// import { revaldatePathAction } from "../../utils/actions";
+import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./signinBlock.module.scss";
@@ -19,12 +17,10 @@ type SigninBlockProps = {
 };
 
 export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
-  // const reinitApp = useReinitApp();
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
   const callback = `?callbackUrl=${callbackUrl}`;
 
-  // const router = useRouter();
   const [fields, setFields] = useImmer({ email: "", password: "" });
 
   const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();

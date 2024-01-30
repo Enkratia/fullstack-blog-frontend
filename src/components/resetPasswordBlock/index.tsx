@@ -1,15 +1,13 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { useImmer } from "use-immer";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
-import { useCreateUserMutation, useVerifyResetQuery } from "../../redux/backendApi";
+import { useResetPasswordMutation, useVerifyResetQuery } from "../../redux/backendApi";
 
+import { ResetPasswordBlockError, ResetPasswordBlockSuccess } from "../../components";
 import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
-
-import { ConfirmEmail } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "../signinBlock/signinBlock.module.scss";
@@ -20,28 +18,31 @@ const initialFields = {
 };
 
 export const ResetPasswordBlock: React.FC = () => {
-  // const callback = `?callbackUrl=${callbackUrl}`;
   const formRef = React.useRef<HTMLFormElement>(null);
   const token = useParams().token.toString();
 
-  const { data, isError } = useVerifyResetQuery({ token }, { skip: !token });
+  const {
+    data: verificationData,
+    isError: isVerificationError,
+    error: verificationError,
+  } = useVerifyResetQuery(token);
 
-  const [createUser, { isSuccess }] = useCreateUserMutation();
+  const [resetPassword, { isSuccess }] = useResetPasswordMutation();
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
   const [fields, setFields] = useImmer(initialFields);
   const { isValidPassLength, validatePassLength, isValidPassConfirm, validatePassConfirm } =
     useValidateForm();
 
-  if (isError) {
-    return (
-      <h2 className={cs.title} style={{ textAlign: "center" }}>
-        Something went wrong
-      </h2>
-    );
+  if (isVerificationError) {
+    if ("status" in verificationError && verificationError.status === 410) {
+      return <ResetPasswordBlockError text="The link you followed has expired" />;
+    } else {
+      return <ResetPasswordBlockError text="Something went wrong" />;
+    }
   }
 
-  if (!data) {
+  if (!verificationData) {
     return;
   }
 
@@ -82,29 +83,24 @@ export const ResetPasswordBlock: React.FC = () => {
     const formData = new FormData(form);
     formData.delete("confirmPassword");
 
-    const res = await createUser(formData);
+    const res = await resetPassword({
+      token: token,
+      body: formData,
+    });
 
     if ("error" in res) {
-      if ("status" in res.error) {
-        if (res.error.status === 409) {
-          setAuthError("EmailRegistered");
-          return;
-        }
-      }
-
       setAuthError("FetchError");
-      return;
     }
   };
 
   return (
     <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
-      <p className={`${s.title} ${cs.title}`}>Reset password</p>
-
       {isSuccess ? (
-        ""
+        <ResetPasswordBlockSuccess />
       ) : (
         <div className={s.content}>
+          <p className={`${s.title} ${cs.title}`}>Reset password</p>
+
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassLength}>
             <input
               onChange={onPasswordChange}

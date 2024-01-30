@@ -20,9 +20,10 @@ const messages = {
 export const ActivationBlock: React.FC = () => {
   let message = "";
   const router = useRouter();
-  const token = useParams().token as string;
 
-  const { isError, error, isSuccess } = useActivateUserQuery({ token });
+  const token = useParams().token.toString();
+
+  const { isError, error, isSuccess } = useActivateUserQuery(token);
 
   React.useEffect(() => {
     if (isSuccess) {

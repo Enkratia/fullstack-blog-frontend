@@ -8,7 +8,7 @@ import { useCreateUserMutation } from "../../redux/backendApi";
 
 import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
 
-import { ConfirmEmail } from "../../components";
+import { SignupBlockSuccess } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "../signinBlock/signinBlock.module.scss";
@@ -129,7 +129,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
       <p className={`${s.title} ${cs.title}`}>Sign-up</p>
 
       {isSuccess ? (
-        <ConfirmEmail email={fields.email} />
+        <SignupBlockSuccess email={fields.email} />
       ) : (
         <div className={s.content}>
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>

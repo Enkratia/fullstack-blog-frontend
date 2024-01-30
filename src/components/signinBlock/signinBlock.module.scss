@@ -21,6 +21,10 @@
   margin-bottom: rem(60);
   text-align: center;
 
+  &Red {
+    color: var(--danger-color);
+  }
+
   @include bp-down("container") {
     margin-bottom: calc(rem(33.84) + 1.92vw); // (60>40)1360>320
   }

@@ -9,7 +9,7 @@ import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
 import cs from "../../scss/helpers.module.scss";
 import s from "../signinBlock/signinBlock.module.scss";
 import Close from "../../../public/img/close.svg";
-import { EmailSent } from "./emailSent";
+import { ForgotBlockSuccess } from "./forgotBlockSuccess";
 
 type ForgotBlockProps = {
   callbackUrl: string;
@@ -74,10 +74,11 @@ export const ForgotBlock: React.FC<ForgotBlockProps> = ({ callbackUrl, onModalCl
   return (
     <form onClick={(e) => e.preventDefault} className={s.root} ref={formRef}>
       {isSuccess ? (
-        <EmailSent email={email} />
+        <ForgotBlockSuccess email={email} />
       ) : (
         <div className={s.content}>
           <p className={`${s.title} ${cs.title}`}>Forgot password?</p>
+
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
             <input
               onChange={onEmailChange}

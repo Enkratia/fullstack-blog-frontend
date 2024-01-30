@@ -1,7 +1,6 @@
 export * from "./_authProvider";
 export * from "./_storeProvider";
 export * from "./_commonHelper";
-// export * from "./_reinitAppProvider";
 
 // Common sections
 export * from "./join";
@@ -14,18 +13,22 @@ export * from "./sizeImage";
 export * from "./categories";
 export * from "./authorCard";
 export * from "./article";
+
+// ***
 export * from "./signinBlock";
 
 export * from "./signupBlock";
-export * from "./signupBlock/confirmEmail";
+export * from "./signupBlock/signupBlockSuccess";
 
 export * from "./resetPasswordBlock";
+export * from "./resetPasswordBlock/resetPasswordBlockError";
+export * from "./resetPasswordBlock/resetPasswordBlockSuccess";
 
-// ***
+export * from "./forgotBlock";
+export * from "./forgotBlock/forgotBlockSuccess";
+
 export * from "./activationBlock";
 export * from "./unsubscribeBlock";
-export * from "./forgotBlock";
-export * from "./forgotBlock/emailSent";
 
 // NotFound(all)
 export * from "./notFound";

@@ -1,13 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import {
-  ActivateUserType,
   GetPostsType,
   GetTagsType,
   GetUsersType,
-  UnsubscribeType,
+  ResetPasswordType,
   UpdateUserType,
-  VerifyResetType,
 } from "./types";
 import type { RootState } from "../store";
 
@@ -108,23 +106,11 @@ export const backendApi = createApi({
         };
       },
     }),
-
-    // **
-    activateUser: builder.query<any, ActivateUserType>({
-      query: (body) => {
+    verifyReset: builder.query<any, string>({
+      query: (token) => {
         return {
-          url: "auth/activate",
-          method: "PATCH",
-          body: body,
-        };
-      },
-    }),
-    verifyReset: builder.query<any, VerifyResetType>({
-      query: (body) => {
-        return {
-          url: "auth/verify-reset",
+          url: `auth/verify-reset?token=${token}`,
           method: "POST",
-          body: body,
         };
       },
     }),
@@ -139,14 +125,30 @@ export const backendApi = createApi({
         };
       },
     }),
+    resetPassword: builder.mutation<any, ResetPasswordType>({
+      query: ({ token, body }) => {
+        return {
+          url: `auth/reset?token=${token}`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+    activateUser: builder.query<any, string>({
+      query: (token) => {
+        return {
+          url: `auth/activate?token=${token}`,
+          method: "PATCH",
+        };
+      },
+    }),
 
     // DELETE
-    unsubscribe: builder.query<any, UnsubscribeType>({
-      query: (body) => {
+    unsubscribe: builder.query<any, string>({
+      query: (token) => {
         return {
-          url: "subscribe",
+          url: `subscribe?token=${token}`,
           method: "DELETE",
-          body: body,
         };
       },
     }),
@@ -176,4 +178,5 @@ export const {
   useCreateSubscribeMutation,
   useCreateContactUsMessageMutation,
   useCheckUserEmailMutation,
+  useResetPasswordMutation,
 } = backendApi;

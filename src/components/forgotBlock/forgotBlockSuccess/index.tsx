@@ -1,14 +1,14 @@
 import React from "react";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./emailSent.module.scss";
+import s from "./forgotBlockSuccess.module.scss";
 import Email from "../../../../public/img/default/email.svg";
 
-type EmailSentProps = {
+type ForgotBlockSuccessProps = {
   email: string;
 };
 
-export const EmailSent: React.FC<EmailSentProps> = ({ email }) => {
+export const ForgotBlockSuccess: React.FC<ForgotBlockSuccessProps> = ({ email }) => {
   return (
     <div className={s.root}>
       <Email />
