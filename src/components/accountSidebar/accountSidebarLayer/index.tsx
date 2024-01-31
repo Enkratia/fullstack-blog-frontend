@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { signOut } from "next-auth/react";
 
-import { useReinitApp } from "../../../utils/customHooks";
-import { revaldatePathAction } from "../../../utils/actions";
+// import { useReinitApp } from "../../../utils/customHooks";
+// import { revaldatePathAction } from "../../../utils/actions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./accountSidebarLayer.module.scss";

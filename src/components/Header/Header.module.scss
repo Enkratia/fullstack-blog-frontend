@@ -19,6 +19,12 @@
   align-items: center;
   padding-top: rem(12);
   padding-bottom: rem(12);
+
+  @include bp-down("480") {
+    flex-wrap: wrap;
+    padding-top: rem(18);
+    padding-bottom: rem(18);
+  }
 }
 
 .logo {
@@ -36,5 +42,15 @@
 
   &:hover {
     fill: var(--yellow-hover-color);
+  }
+}
+
+.btn {
+  text-align: center;
+
+  @include bp-down("480") {
+    order: -1;
+    margin-bottom: rem(25);
+    width: 100%;
   }
 }

@@ -1,6 +1,8 @@
 export * from "./_authProvider";
 export * from "./_storeProvider";
 export * from "./_commonHelper";
+export * from "./_reinitAppProvider";
+// export * from "./_testComponent";
 
 // Common sections
 export * from "./join";
@@ -106,6 +108,9 @@ export * from "./contactUs/contactUsForm";
 // PrivacyPolicyPage
 export * from "./privacyPolicyHeader";
 export * from "./privacyPolicyBlock";
+
+// EditPostPage
+export * from "./editPostBlock";
 
 // ===== AccountLayout ===== //
 export * from "./accountSidebar";

@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
             <Nav />
           </ModalNav>
 
-          <Link href="#subscribe-form" className={`${cs.btn} ${cs.btnWhite}`}>
+          <Link href="#subscribe-form" className={`${s.btn} ${cs.btn} ${cs.btnWhite}`}>
             Subscribe
           </Link>
         </div>

@@ -2,6 +2,10 @@
 
 .root {
   padding-block: rem(120);
+
+  @include bp-down("container") {
+    padding-block: calc(rem(41.54) + 5.77vw); // (120>60)1360>320
+  }
 }
 
 .container {

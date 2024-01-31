@@ -30,7 +30,7 @@ body {
   padding-top: rem(81.94);
   font-family: sans-serif;
 
-  // @include bp-down("1024") {
-  //   padding-top: rem(112);
-  // }
+  @include bp-down("480") {
+    padding-top: rem(152);
+  }
 }

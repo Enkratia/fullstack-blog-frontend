@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 
 // Reset server data
-export const revaldatePathAction = async (pathname?: string, pathtype?: "layout" | "page") => {
+export const revalidatePathAction = async (pathname?: string, pathtype?: "layout" | "page") => {
   const name = pathname ?? "/";
   const type = pathtype ?? "layout";
 

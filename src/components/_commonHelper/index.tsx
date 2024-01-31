@@ -57,5 +57,5 @@ export const CommonHelper: React.FC = () => {
     }
   }, [session]);
 
-  return <>{isActive && modalPage && createPortal(modalPage, document?.body, pathname)}</>;
+  return <div>{isActive && modalPage && createPortal(modalPage, document?.body, pathname)}</div>;
 };
