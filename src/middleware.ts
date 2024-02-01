@@ -2,7 +2,7 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const protectedRoutes = ["/account", "/dashboard"];
+const protectedRoutes = ["/account", "/dashboard", "/edit-post"];
 const modalPageNames = ["/auth/signin", "/auth/signup", "/auth/forgot"];
 
 export async function middleware(req: NextRequest) {

@@ -11,6 +11,13 @@ type validatePassOptions = {
 
 type validatePassLengthProps = (value: string, options?: validatePassOptions) => void;
 
+type validateTextOptions = {
+  length?: number;
+  type?: "list" | "normal";
+};
+
+type validateTextProps = (value: string | null, idx: number, options?: validateTextOptions) => void;
+
 // ****
 const mailRegExp = /^\S+@\S+\.\S+$/;
 
@@ -120,10 +127,12 @@ export const useValidateForm = () => {
     }
   };
 
-  const validateText = (value: string | null, idx: number) => {
-    const length = 1;
+  const validateText: validateTextProps = (value, idx, options) => {
+    options = options ?? {};
+    const length = options.length ?? 1;
+    const type = options.type ?? "normal";
 
-    // **
+    // reset
     if (value === null) {
       setIsValidText((draft) => {
         draft[idx] = {};
@@ -133,9 +142,18 @@ export const useValidateForm = () => {
     }
 
     // **
-    const isNotEmpty = value.trim().length >= length;
+    const matches = [];
 
-    if (isNotEmpty) {
+    const isLengthMatch = value.trim().length >= length;
+    matches.push(isLengthMatch);
+
+    if (type === "list") {
+      const isList = value.replace(/(\s|,)/g, "").length >= length;
+      matches.push(isList);
+    }
+
+    // **
+    if (matches.every((el) => el)) {
       setIsValidText((draft) => {
         draft[idx] = { "data-validity-success": "" };
         return draft;

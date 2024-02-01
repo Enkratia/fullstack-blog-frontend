@@ -63,9 +63,7 @@ type PostProps = {
 };
 
 export const Post: React.FC<PostProps> = ({ id }) => {
-  const { data: post, isError } = useGetPostByIdQuery(id);
-
-  console.log(id);
+  const { data: post, isError } = useGetPostByIdQuery(id + "?_increment=views");
 
   const html = React.useMemo(() => {
     if (!post) return "";

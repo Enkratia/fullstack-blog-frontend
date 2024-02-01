@@ -5,6 +5,7 @@ import {
   GetTagsType,
   GetUsersType,
   ResetPasswordType,
+  UpdatePostType,
   UpdateUserType,
 } from "./types";
 import type { RootState } from "../store";
@@ -125,6 +126,15 @@ export const backendApi = createApi({
         };
       },
     }),
+    updatePost: builder.mutation<any, UpdatePostType>({
+      query: ({ id, body }) => {
+        return {
+          url: `posts/${id}`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
     resetPassword: builder.mutation<any, ResetPasswordType>({
       query: ({ token, body }) => {
         return {
@@ -179,4 +189,5 @@ export const {
   useCreateContactUsMessageMutation,
   useCheckUserEmailMutation,
   useResetPasswordMutation,
+  useUpdatePostMutation,
 } = backendApi;

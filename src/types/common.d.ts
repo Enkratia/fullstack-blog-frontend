@@ -10,7 +10,7 @@ type PostType = {
   contentJson: string;
   contentText: string;
   imageUrl: string;
-  tags: string[];
+  tags: ContentType[];
   user: UserType;
   isFeatured: boolean;
   views: number;

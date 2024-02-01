@@ -7,14 +7,14 @@ import { JSONContent } from "@tiptap/react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
 
-import { useCreatePostMutation } from "../../../redux/backendApi";
+import { useUpdatePostMutation } from "../../../redux/backendApi";
 
 import { TextEditor } from "../../../components";
 import { useValidateForm } from "../../../utils/customHooks";
-import { capitalize, checkRequestStatus } from "../../../utils/customFunctions";
+import { capitalize, checkRequestStatus, toArray } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./addPostForm.module.scss";
+import s from "../../../components/addPost/addPostForm/addPostForm.module.scss";
 import AngleDown from "../../../../public/img/angle-down.svg";
 
 const categoriesPlaceholder = "choose category";
@@ -23,15 +23,28 @@ const categories = [categoriesPlaceholder, ...categoriesNames];
 
 type ContentType = { text: string; json: JSONContent };
 
-export const AddPostForm: React.FC = () => {
-  const [createPost, { isError, isLoading, isSuccess }] = useCreatePostMutation();
+type EditPostFormProps = {
+  post: PostType;
+};
+
+export const EditPostForm: React.FC<EditPostFormProps> = ({ post }) => {
+  const getCategoryIdx = () => {
+    return categories.findIndex((category) => {
+      return category === post.category;
+    });
+  };
+
+  const [updatePost, { isError, isLoading, isSuccess }] = useUpdatePostMutation();
 
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
-  const [content, setContent] = useImmer<ContentType>({ text: "", json: {} });
+  const [content, setContent] = useImmer<ContentType>({
+    text: post.contentText,
+    json: JSON.parse(post.contentJson),
+  });
 
   const [isOpen, setIsOpen] = React.useState(false);
-  const [active, setActive] = React.useState(0);
+  const [active, setActive] = React.useState(getCategoryIdx());
 
   const formRef = React.useRef<HTMLFormElement>(null);
   const { isValidText, validateText, isValidSelect, validateSelect, isValidFile, validateFile } =
@@ -40,7 +53,7 @@ export const AddPostForm: React.FC = () => {
   // **
   const validateForm = () => {
     return [isValidText[0], isValidText[1], isValidText[2], isValidSelect[0], isValidFile].every(
-      (el) => (!el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success")),
+      (el) => (!el ? !el : !Object.keys(el)?.[0]?.includes("data-validity-warning")),
     );
   };
 
@@ -53,7 +66,7 @@ export const AddPostForm: React.FC = () => {
     formData.append("contentJson", JSON.stringify(content.json));
     formData.append("contentText", content.text);
 
-    createPost(formData);
+    updatePost({ id: post.id, body: formData });
   };
 
   // **
@@ -149,6 +162,7 @@ export const AddPostForm: React.FC = () => {
           className={`${s.input} ${cs.input}`}
           placeholder="Title"
           name="title"
+          defaultValue={post.title}
         />
       </div>
 
@@ -202,6 +216,7 @@ export const AddPostForm: React.FC = () => {
       <TextEditor
         isValidText={isValidText[1]}
         setContent={(text: string, json: JSONContent) => onEditorChange({ text, json })}
+        defaultContent={JSON.parse(post.contentJson)}
       />
 
       <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
@@ -211,6 +226,7 @@ export const AddPostForm: React.FC = () => {
           className={`${s.input} ${cs.input}`}
           placeholder="Tags"
           name="tags"
+          defaultValue={toArray(post.tags).join(", ")}
         />
       </div>
 

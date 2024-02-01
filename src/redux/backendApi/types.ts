@@ -4,6 +4,12 @@ export type UpdateUserType = {
 };
 
 // **
+export type UpdatePostType = {
+  id: string;
+  body: FormData;
+};
+
+// **
 export type GetUsersType = {
   data: UserType[];
   totalCount: number;

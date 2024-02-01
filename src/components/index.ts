@@ -15,6 +15,7 @@ export * from "./sizeImage";
 export * from "./categories";
 export * from "./authorCard";
 export * from "./article";
+export * from "./textEditor";
 
 // ***
 export * from "./signinBlock";
@@ -110,7 +111,10 @@ export * from "./privacyPolicyHeader";
 export * from "./privacyPolicyBlock";
 
 // EditPostPage
-export * from "./editPostBlock";
+export * from "./editPost";
+
+// **
+export * from "./editPost/editPostForm";
 
 // ===== AccountLayout ===== //
 export * from "./accountSidebar";
@@ -129,7 +133,6 @@ export * from "./addPost";
 
 // **
 export * from "./addPost/addPostForm";
-export * from "./addPost/addPostEditor";
 
 // MyPostsPage
 export * from "./myPosts";

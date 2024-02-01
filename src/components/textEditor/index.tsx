@@ -6,20 +6,20 @@ import { useEditor, EditorContent, Editor, JSONContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 
-import cs from "../../../scss/helpers.module.scss";
+import cs from "../../scss/helpers.module.scss";
 import s from "./addPostEditor.module.scss";
 
-import BlockQuoteSVG from "../../../../public/img/editor/blockquote.svg";
-import BoldSVG from "../../../../public/img/editor/bold.svg";
-import H1SVG from "../../../../public/img/editor/h1.svg";
-import H2SVG from "../../../../public/img/editor/h2.svg";
-import ItalicSVG from "../../../../public/img/editor/italic.svg";
-import OlistSVG from "../../../../public/img/editor/olist.svg";
-import UlistSVG from "../../../../public/img/editor/ulist.svg";
-import RedoSVG from "../../../../public/img/editor/redo.svg";
-import UndoSVG from "../../../../public/img/editor/undo.svg";
-import StrikeSVG from "../../../../public/img/editor/strikethrough.svg";
-import UnderlineSVG from "../../../../public/img/editor/underline.svg";
+import BlockQuoteSVG from "../../../public/img/editor/blockquote.svg";
+import BoldSVG from "../../../public/img/editor/bold.svg";
+import H1SVG from "../../../public/img/editor/h1.svg";
+import H2SVG from "../../../public/img/editor/h2.svg";
+import ItalicSVG from "../../../public/img/editor/italic.svg";
+import OlistSVG from "../../../public/img/editor/olist.svg";
+import UlistSVG from "../../../public/img/editor/ulist.svg";
+import RedoSVG from "../../../public/img/editor/redo.svg";
+import UndoSVG from "../../../public/img/editor/undo.svg";
+import StrikeSVG from "../../../public/img/editor/strikethrough.svg";
+import UnderlineSVG from "../../../public/img/editor/underline.svg";
 
 type EditorBarProps = {
   editor: Editor | null;
@@ -108,15 +108,20 @@ const EditorBar: React.FC<EditorBarProps> = ({ editor }) => {
   );
 };
 
-type AddPostEditorProps = {
+type TextEditorProps = {
   setContent: (text: string, json: JSONContent) => void;
   isValidText: Record<string, string>;
+  defaultContent?: JSONContent;
 };
 
-export const AddPostEditor: React.FC<AddPostEditorProps> = ({ setContent, isValidText }) => {
+export const TextEditor: React.FC<TextEditorProps> = ({
+  setContent,
+  isValidText,
+  defaultContent,
+}) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
-    content: "",
+    content: defaultContent ?? "",
 
     onUpdate: ({ editor }) => {
       const json = editor.getJSON();

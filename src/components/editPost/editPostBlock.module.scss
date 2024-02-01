@@ -1,0 +1,15 @@
+@use "../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(85);
+  padding-bottom: rem(120);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(52.3) + 2.4vw); // 85>60(1920>320)
+    padding-bottom: calc(rem(41.54) + 5.77vw); // 120>60(1920>320)
+  }
+}
+
+.title {
+  margin-bottom: rem(30);
+}
