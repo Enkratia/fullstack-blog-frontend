@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
+import { useAppDispatch } from "../../redux/store";
 
 import { Article, Pagination } from "../../components";
 
@@ -16,6 +17,7 @@ import s from "./myPosts.module.scss";
 const limit = 3;
 
 export const MyPosts: React.FC = () => {
+  const dispatch = useAppDispatch();
   const isRouter = React.useRef(true);
   const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
 
@@ -49,11 +51,14 @@ export const MyPosts: React.FC = () => {
   let requestLocal = `?${qs.stringify(new Request(false), { encode: true })}`;
   let request = `?${qs.stringify(new Request(true), { encode: true })}`;
 
-  const { data, isError } = useGetPostsQuery(request, { skip: session?.user?.id === undefined });
+  const { data, isError, refetch } = useGetPostsQuery(request, {
+    skip: session?.user?.id === undefined,
+  });
   const posts = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
 
+  // **
   React.useEffect(() => {
     if (!isRouter.current) {
       urlPage !== page && setPage(urlPage);
@@ -69,15 +74,26 @@ export const MyPosts: React.FC = () => {
     }
   }, [isNavigate]);
 
+  if (!posts) {
+    return;
+  }
+
   // **
+  const refetchPostsAfterDelete = () => {
+    if (posts.length === 1 && page > 1) {
+      setPage((n) => n - 1);
+      setIsNavigate({});
+
+      return;
+    }
+
+    refetch();
+  };
+
   const onPageChange = ({ selected }: Record<string, number>) => {
     setPage(selected + 1);
     setIsNavigate({});
   };
-
-  if (!posts) {
-    return;
-  }
 
   return (
     <div className={s.root}>
@@ -86,7 +102,7 @@ export const MyPosts: React.FC = () => {
       <ul className={s.list}>
         {posts.map((obj) => (
           <li key={obj.id} className={s.item}>
-            <Article obj={obj} />
+            <Article obj={obj} refetch={refetchPostsAfterDelete} />
           </li>
         ))}
       </ul>

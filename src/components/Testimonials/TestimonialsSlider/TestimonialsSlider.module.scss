@@ -16,6 +16,8 @@
 .slider {
   display: flex;
   height: 100%;
+  backface-visibility: hidden;
+  touch-action: pan-y;
 }
 
 .item {

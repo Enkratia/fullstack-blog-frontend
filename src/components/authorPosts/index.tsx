@@ -97,10 +97,10 @@ export const AuthorPosts: React.FC = () => {
   const request = `?_page=${page}&_limit=${limit}&user.id=${id}&_sort=createdAt&_order=DESC`;
   const requestlocal = `?_page=${page}&_limit=${limit}&_sort=createdAt&_order=DESC`;
 
-  const { data, isError, isLoading } = useGetPostsQuery(request);
+  const { data, isError, isLoading, refetch } = useGetPostsQuery(request);
   const posts = data?.data;
   const totalCount = data?.totalCount;
-  const totalPages = (totalCount || 1) / limit;
+  const totalPages = Math.ceil((totalCount || 1) / limit);
 
   React.useEffect(() => {
     if (!isRouter.current) {
@@ -124,6 +124,18 @@ export const AuthorPosts: React.FC = () => {
   if (!posts) {
     return;
   }
+
+  // **
+  const refetchPostsAfterDelete = () => {
+    if (posts.length === 1 && page > 1) {
+      setPage((n) => n - 1);
+      setIsNavigate({});
+
+      return;
+    }
+
+    refetch();
+  };
 
   const onPrevClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -152,7 +164,7 @@ export const AuthorPosts: React.FC = () => {
           <ul className={s.list}>
             {posts.map((post) => (
               <li key={post.id} className={s.item}>
-                <Article obj={post} isArticlePage={true} />
+                <Article obj={post} isArticlePage={true} refetch={refetchPostsAfterDelete} />
               </li>
             ))}
           </ul>

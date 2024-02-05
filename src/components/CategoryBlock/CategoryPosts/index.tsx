@@ -102,6 +102,7 @@ import s from "./categoryPosts.module.scss";
 interface CategoryPostsProps extends NavigationProps {
   posts: PostType[];
   resetFilters: () => void;
+  refetch: () => void;
 }
 
 export const CategoryPosts: React.FC<CategoryPostsProps> = ({
@@ -111,6 +112,7 @@ export const CategoryPosts: React.FC<CategoryPostsProps> = ({
   page,
   totalPages,
   resetFilters,
+  refetch,
 }) => {
   if (!posts.length) {
     return (
@@ -125,7 +127,7 @@ export const CategoryPosts: React.FC<CategoryPostsProps> = ({
       <ul className={s.root}>
         {posts.map((obj) => (
           <li key={obj.id} className={s.item}>
-            <Article obj={obj} isCategoryPage={true} />
+            <Article obj={obj} isCategoryPage={true} refetch={refetch} />
           </li>
         ))}
       </ul>

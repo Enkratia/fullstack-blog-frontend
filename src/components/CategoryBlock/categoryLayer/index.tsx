@@ -72,7 +72,7 @@ export const CategoryLayer: React.FC = () => {
   const requestLocal = `?${qs.stringify(new Request(false))}`;
   const request = `?${qs.stringify(new Request(true))}`;
 
-  const { data, isError } = useGetPostsQuery(request);
+  const { data, isError, refetch } = useGetPostsQuery(request);
   const posts = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
@@ -114,6 +114,10 @@ export const CategoryLayer: React.FC = () => {
       }
     }
   }, [isMQ1024, initialize, posts]);
+
+  if (!posts) {
+    return;
+  }
 
   // **
   const resetFilters = () => {
@@ -191,9 +195,17 @@ export const CategoryLayer: React.FC = () => {
     }
   };
 
-  if (!posts) {
-    return;
-  }
+  // **
+  const refetchPostsAfterDelete = () => {
+    if (posts.length === 1 && page > 1) {
+      setPage((n) => n - 1);
+      setIsNavigate({});
+
+      return;
+    }
+
+    refetch();
+  };
 
   return (
     <div className={`${s.container} ${cs.container}`}>
@@ -204,6 +216,7 @@ export const CategoryLayer: React.FC = () => {
         page={page}
         totalPages={totalPages}
         resetFilters={resetFilters}
+        refetch={refetchPostsAfterDelete}
       />
 
       <div

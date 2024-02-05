@@ -150,7 +150,7 @@ export const AllPosts: React.FC = () => {
 
   const request = `?_page=${page}&_limit=${limit}&_sort=createdAt&_order=DESC`;
 
-  const { data, isError } = useGetPostsQuery(request);
+  const { data, isError, refetch } = useGetPostsQuery(request);
   const posts = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
@@ -175,6 +175,17 @@ export const AllPosts: React.FC = () => {
   }
 
   // **
+  const refetchPostsAfterDelete = () => {
+    if (posts.length === 1 && page > 1) {
+      setPage((n) => n - 1);
+      setIsNavigate({});
+
+      return;
+    }
+
+    refetch();
+  };
+
   const onPrevClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     if (page === 1) return;
@@ -197,7 +208,7 @@ export const AllPosts: React.FC = () => {
         <h2 className={s.title}>All posts</h2>
         <div className={s.posts}>
           {posts.map((obj) => (
-            <Article key={obj.id} obj={obj} />
+            <Article key={obj.id} obj={obj} refetch={refetchPostsAfterDelete} />
           ))}
         </div>
 

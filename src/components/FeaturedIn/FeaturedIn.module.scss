@@ -58,15 +58,39 @@
 }
 
 .slider {
-  [class*="slick-slide"] {
-    >div {
-      margin-inline: rem(12);
-    }
-  }
+  display: flex;
+  margin-left: rem(-24);
+  backface-visibility: hidden;
+  touch-action: pan-y;
 
   &Wrapper {
     align-self: center;
-    margin-inline: rem(-24);
+    overflow: hidden;
+    width: 100%;
+  }
+}
+
+.slide {
+  display: flex;
+  flex: 0 0 calc(100% / 5);
+  justify-content: center;
+  padding-left: rem(24);
+  min-width: 0;
+
+  @include bp-down("1325") {
+    flex: 0 0 calc(100% / 4);
+  }
+
+  @include bp-down("768") {
+    flex: 0 0 calc(100% / 3);
+  }
+
+  @include bp-down("576") {
+    flex: 0 0 calc(100% / 2);
+  }
+
+  @include bp-down("375") {
+    flex: 0 0 calc(100% / 1);
   }
 }
 
@@ -83,6 +107,7 @@
 
 .link {
   position: relative;
+  display: block;
   overflow: visible;
   width: rem(160);
   height: rem(32);

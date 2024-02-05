@@ -22,6 +22,8 @@ export async function middleware(req: NextRequest) {
 
   // **
   const isAuthenticated = async () => {
+    console.log(req.nextUrl.pathname);
+
     const token = await getToken({ req });
     if (!token) return false;
 

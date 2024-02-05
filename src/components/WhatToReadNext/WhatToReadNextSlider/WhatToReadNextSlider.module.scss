@@ -8,6 +8,8 @@
 .slider {
   display: flex;
   margin-left: rem(-32);
+  backface-visibility: hidden;
+  touch-action: pan-y;
 
   @include bp-down("1024") {
     margin-left: rem(-20);

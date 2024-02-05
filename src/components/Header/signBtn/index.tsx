@@ -11,6 +11,8 @@ import { FRONTEND_URL } from "../../../utils/constants";
 
 import s from "./signInBtn.module.scss";
 
+const modalPageNames = ["/auth/signin", "/auth/signup", "/auth/forgot"];
+
 type SignBtnProps = {
   className: string;
   onCloseClick: () => void;
@@ -28,9 +30,15 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
   const [isActive, setIsActive] = React.useState(false);
 
   // **
+  const isModalPathname = (pathname: string) => {
+    return modalPageNames.find((modalPathanme: string) => {
+      return pathname.startsWith(modalPathanme);
+    });
+  };
+
   const onSignClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Чтобы не переходить @modalLogin/@modalSignup, если signup/signin уже открыт
-    if (pathname.startsWith("/auth")) {
+    if (isModalPathname(pathname)) {
       e.preventDefault();
     }
 

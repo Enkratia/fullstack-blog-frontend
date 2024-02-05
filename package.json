@@ -20,6 +20,7 @@
     "@tiptap/starter-kit": "^2.1.13",
     "bcrypt": "^5.1.1",
     "blaze-slider": "^1.9.3",
+    "embla-carousel-autoplay": "^8.0.0-rc22",
     "embla-carousel-react": "^8.0.0-rc14",
     "html-react-parser": "^5.0.7",
     "jsonwebtoken": "^9.0.2",

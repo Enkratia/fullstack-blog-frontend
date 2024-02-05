@@ -25,6 +25,7 @@ export const backendApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["Posts"],
   endpoints: (builder) => ({
     // GET
     getUserById: builder.query<UserType, string>({
@@ -38,6 +39,7 @@ export const backendApi = createApi({
     }),
     getPosts: builder.query<GetPostsType, string>({
       query: (request) => `posts/${request}`,
+      providesTags: ["Posts"],
     }),
     getTags: builder.query<GetTagsType, string>({
       query: (request) => `posts/tags${request}`,
@@ -154,6 +156,15 @@ export const backendApi = createApi({
     }),
 
     // DELETE
+    deletePost: builder.mutation<any, string>({
+      query: (id) => {
+        return {
+          url: `posts/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["Posts"],
+    }),
     unsubscribe: builder.query<any, string>({
       query: (token) => {
         return {
@@ -190,4 +201,5 @@ export const {
   useCheckUserEmailMutation,
   useResetPasswordMutation,
   useUpdatePostMutation,
+  useDeletePostMutation,
 } = backendApi;
