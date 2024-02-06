@@ -85,6 +85,14 @@
 }
 
 .btn {
+  &Wrapper {
+    &[data-request-process] {
+      &::before {
+        color: var(--light-color);
+      }
+    }
+  }
+
   @include bp-down("576") {
     width: 100%;
   }

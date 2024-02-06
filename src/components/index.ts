@@ -2,8 +2,7 @@ export * from "./_authProvider";
 export * from "./_storeProvider";
 export * from "./_commonHelper";
 export * from "./_reinitAppProvider";
-// export * from "./_testComponent";
-export * from "./_alertPopup";
+export * from "./_popup";
 
 // Common sections
 export * from "./join";

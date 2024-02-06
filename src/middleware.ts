@@ -2,10 +2,16 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const protectedRoutes = ["/account", "/dashboard", "/edit-post"];
-const modalPageNames = ["/auth/signin", "/auth/signup", "/auth/forgot"];
+const protectedRoutes: ProtectedRoutesType = ["/account", "/dashboard", "/edit-post"];
+const modalPageNames: ModalPageNamesType = ["/auth/signin", "/auth/signup", "/auth/forgot"];
 
 export async function middleware(req: NextRequest) {
+  const isModalPathname = (pathname: string) => {
+    return modalPageNames.find((modalPageName: string) => {
+      return pathname.startsWith(modalPageName);
+    });
+  };
+
   // **
   const isProtectedCallback = (callbackUrl: string) => {
     return protectedRoutes.find((protectedRouteName: string) => {
@@ -41,7 +47,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // Modal routes
-  if (modalPageNames.includes(req.nextUrl.pathname)) {
+  if (isModalPathname(req.nextUrl.pathname)) {
     const callbackUrl = req.nextUrl.searchParams.get("callbackUrl") || "/";
 
     if (isProtectedCallback(callbackUrl) && !(await isAuthenticated())) {

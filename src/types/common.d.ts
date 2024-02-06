@@ -1,3 +1,8 @@
+type ProtectedRoutesType = ["/account", "/dashboard", "/edit-post"];
+type ModalPageNamesType = ["/auth/signin", "/auth/signup", "/auth/forgot"];
+type ModalPagesType = { [key in ModalPageNamesType[number]]: React.ReactNode };
+
+// **
 type ContentType = {
   id: number;
   content: string;

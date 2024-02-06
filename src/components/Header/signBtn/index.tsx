@@ -11,7 +11,7 @@ import { FRONTEND_URL } from "../../../utils/constants";
 
 import s from "./signInBtn.module.scss";
 
-const modalPageNames = ["/auth/signin", "/auth/signup", "/auth/forgot"];
+const modalPageNames: ModalPageNamesType = ["/auth/signin", "/auth/signup", "/auth/forgot"];
 
 type SignBtnProps = {
   className: string;
@@ -37,12 +37,12 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
   };
 
   const onSignClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Чтобы не переходить @modalLogin/@modalSignup, если signup/signin уже открыт
+    // Не переходить на 'modal' page, будучи на 'normal' page (переходить с 'normal' на 'normal')
     if (isModalPathname(pathname)) {
       e.preventDefault();
     }
 
-    // Чтобы закрывалось модальное окно nav-меню, перед открытием @modalLogin/@modalSignup
+    // Закрыть модальное окно nav-меню, перед открытием 'modal' page (избежать проблем с наложение/снятием overflow-hidden при >1 открытых модалках)
     onCloseClick();
   };
 

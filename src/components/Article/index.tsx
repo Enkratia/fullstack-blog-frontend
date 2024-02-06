@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 
 import { useDeletePostMutation } from "../../redux/backendApi";
 
-import { AlertPopup } from "../../components";
+import { ConfirmPopup, AlertPopup } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./article.module.scss";
@@ -26,8 +26,9 @@ export const Article: React.FC<ArticleType> = ({
   refetch,
 }) => {
   const [isShowAlert, setIsShowAlert] = React.useState(false);
+  const [isShowConfirm, setIsShowConfirm] = React.useState(false);
 
-  const [deletePost, { isError, isLoading, isSuccess, data }] = useDeletePostMutation();
+  const [deletePost, { isError, isSuccess }] = useDeletePostMutation();
 
   const { data: session } = useSession();
   let isFeatured = post.isFeatured;
@@ -44,11 +45,11 @@ export const Article: React.FC<ArticleType> = ({
 
   // **
   const onDeleteClick = () => {
-    setIsShowAlert(true);
+    setIsShowConfirm(true);
   };
 
-  const onAlertClick = (value: boolean) => {
-    setIsShowAlert(false);
+  const onConfirmClick = (value: boolean) => {
+    setIsShowConfirm(false);
 
     if (value) {
       deletePost(post.id);
@@ -60,7 +61,11 @@ export const Article: React.FC<ArticleType> = ({
     if (isSuccess) {
       refetch();
     }
-  }, [isSuccess]);
+
+    if (isError) {
+      setIsShowAlert(true);
+    }
+  }, [isSuccess, isError]);
 
   return (
     <article
@@ -93,7 +98,8 @@ export const Article: React.FC<ArticleType> = ({
         )}
       </div>
 
-      {isShowAlert && <AlertPopup onAlertClick={(value) => onAlertClick(value)} />}
+      {isShowConfirm && <ConfirmPopup onConfirmClick={(value) => onConfirmClick(value)} />}
+      {isShowAlert && <AlertPopup onAlertClick={() => setIsShowAlert(false)} />}
 
       <div className={s.data}>
         <span className={s.dataCategory}>{post.category}</span>

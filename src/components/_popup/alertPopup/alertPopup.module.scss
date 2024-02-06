@@ -1,0 +1,71 @@
+@use "../../../scss//utils/" as*;
+
+.root {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background-color: var(--overlay-light-color);
+  opacity: 0;
+  transform: scale(1.4);
+  transition: all 0.3s;
+  animation: var(--popup-animation);
+  backdrop-filter: blur(2px);
+}
+
+.wrapper {
+  overflow-y: auto;
+  padding: rem(10);
+  width: 100%;
+  max-height: 100vh;
+}
+
+.content {
+  display: inline-flex;
+  column-gap: rem(20);
+  flex-direction: column;
+  align-items: center;
+  border-radius: rem(4);
+  padding-block: rem(40);
+  padding-inline: rem(30);
+  max-width: max-content;
+  background-color: var(--light-color);
+
+  @include bp-down("440") {
+    padding-block: rem(20);
+    padding-inline: rem(15);
+  }
+}
+
+.icon {
+  position: relative;
+  margin-bottom: rem(30);
+  border-style: solid;
+  border-width: 0 rem(82.5) rem(140);
+  border-color: transparent transparent #ff4532;
+  width: 0;
+  height: 0;
+  transform: rotate(0deg);
+
+  &::before {
+    content: "!";
+    position: absolute;
+    left: 50%;
+    top: rem(17);
+    font: var(--popup-font);
+    color: var(--light-color);
+    transform: translateX(-50%);
+  }
+}
+
+.title {
+  margin-bottom: rem(40);
+  max-width: rem(450);
+  text-align: center;
+}

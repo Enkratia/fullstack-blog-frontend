@@ -1,4 +1,4 @@
-@use "../../scss//utils/" as*;
+@use "../../../scss//utils/" as*;
 
 .root {
   position: fixed;
@@ -12,7 +12,10 @@
   height: 100%;
   text-align: center;
   background-color: var(--overlay-light-color);
+  opacity: 0;
+  transform: scale(1.4);
   transition: all 0.3s;
+  animation: var(--popup-animation);
   backdrop-filter: blur(2px);
 }
 
@@ -34,16 +37,26 @@
   max-width: max-content;
   background-color: var(--light-color);
 
-  svg {
-    margin-bottom: rem(20);
-    width: rem(140);
-    height: rem(140);
-    stroke: var(--danger-color);
-  }
-
   @include bp-down("440") {
     padding-block: rem(20);
     padding-inline: rem(15);
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: rem(30);
+  border-radius: 50%;
+  width: rem(140);
+  height: rem(140);
+  background-color: var(--danger-color);
+
+  &::before {
+    content: "!";
+    font: var(--popup-font);
+    color: var(--light-color);
   }
 }
 

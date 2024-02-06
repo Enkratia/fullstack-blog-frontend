@@ -14,10 +14,6 @@ import SigninRoot from "../../app/_modalAuth/auth/signin/page";
 import SignupRoot from "../../app/_modalAuth/auth/signup/page";
 import ForgotRoot from "../../app/_modalAuth/auth/forgot/page";
 
-interface ModalPagesType {
-  [key: string]: React.ReactNode;
-}
-
 const modalPages: ModalPagesType = {
   "/auth/signin": <SigninRoot />,
   "/auth/signup": <SignupRoot />,
@@ -30,7 +26,7 @@ export const CommonHelper: React.FC = () => {
   const { data: session, status } = useSession();
 
   const [isActive, setIsActive] = React.useState(false);
-  const modalPage = modalPages[pathname];
+  const modalPage = modalPages[pathname as ModalPageNamesType[number]];
 
   // Modal routes
   React.useEffect(() => {
