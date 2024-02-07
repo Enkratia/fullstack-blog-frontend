@@ -116,7 +116,7 @@ export * from "./editPost";
 // **
 export * from "./editPost/editPostForm";
 
-// ===== AccountLayout ===== //
+/////////////////= ACCOUNT =////////////////////
 export * from "./accountSidebar";
 
 // **
@@ -136,3 +136,7 @@ export * from "./addPost/addPostForm";
 
 // MyPostsPage
 export * from "./myPosts";
+
+/////////////////= DASHBOARD =////////////////////
+export * from "./dashboardBlock";
+export * from "./dashboardSidebar";

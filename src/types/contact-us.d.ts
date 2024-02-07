@@ -16,4 +16,9 @@ type ContactUsType = {
 };
 
 // **
-type ContactUsQueryType = string[];
+type ContactUsQueryType = {
+  id: number;
+  content: string;
+};
+
+type ContactUsQueriesType = ContactUsQueryType[];

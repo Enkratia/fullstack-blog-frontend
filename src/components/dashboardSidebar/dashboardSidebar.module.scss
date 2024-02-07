@@ -1,0 +1,104 @@
+@use "../../scss/utils" as *;
+
+.root {
+  color: var(--black-color);
+}
+
+.section {
+  &:not(:last-child) {
+    margin-bottom: rem(15);
+  }
+}
+
+.title {
+  margin: 0;
+  margin-bottom: rem(8);
+  width: 100%;
+  transition: color 0.3s;
+
+  &Link {
+    display: block;
+    width: 100%;
+  }
+
+  &:hover {
+    color: var(--blue-color);
+  }
+}
+
+.dropdown {
+  margin-bottom: rem(4);
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: rem(4);
+  border: none;
+  padding: 0;
+  width: 100%;
+  font: var(--body01-font);
+  background-color: transparent;
+  transition: color 0.3s;
+  cursor: pointer;
+
+  svg {
+    position: relative;
+  }
+
+  &:hover {
+    color: var(--blue-color);
+  }
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: rem(8);
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: rem(12);
+  padding-block: rem(3);
+  color: var(--black-color);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: rem(2);
+    height: 100%;
+    background-color: var(--grayborder-color);
+    transition: background-color 0.3s;
+  }
+
+  &:hover {
+    color: var(--blue-color);
+
+    &::before {
+      background-color: var(--blue-color);
+    }
+  }
+}
+
+.link {
+  display: block;
+  width: 100%;
+  font: var(--body01-font);
+  color: inherit;
+  transition: color 0.3s;
+
+  &:not(:last-child) {
+    margin-bottom: rem(5);
+  }
+
+  &:hover {
+    color: var(--blue-color);
+  }
+}

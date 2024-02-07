@@ -8,7 +8,7 @@ import "overlayscrollbars/overlayscrollbars.css";
 import { useCreateContactUsMessageMutation } from "../../../redux/backendApi";
 
 import { useValidateForm } from "../../../utils/customHooks";
-import { checkRequestStatus } from "../../../utils/customFunctions";
+import { checkRequestStatus, toArray } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./contactUsForm.module.scss";
@@ -32,10 +32,10 @@ import AngleDown from "../../../../public/img/angle-down.svg";
 const selectPlaceholder = "Query Related";
 
 type ContactUsFormProps = {
-  queries: ContactUsQueryType;
+  queries: ContactUsQueriesType;
 };
 
-export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
+export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries: queriesData }) => {
   const formRef = React.useRef<HTMLFormElement>(null);
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -119,7 +119,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries }) => {
   };
 
   // **
-  queries = [selectPlaceholder, ...queries];
+  const queries = [selectPlaceholder, ...toArray(queriesData)];
 
   return (
     <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>

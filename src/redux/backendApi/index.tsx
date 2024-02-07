@@ -59,7 +59,7 @@ export const backendApi = createApi({
     getContactUs: builder.query<ContactUsType[], void>({
       query: () => "contact-us",
     }),
-    getContactUsQueries: builder.query<ContactUsQueryType, void>({
+    getContactUsQueries: builder.query<ContactUsQueriesType, void>({
       query: () => "contact-us-queries",
     }),
 
