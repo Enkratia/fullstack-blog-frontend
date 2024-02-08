@@ -28,35 +28,63 @@
 
 .dropdown {
   margin-bottom: rem(4);
+  width: 100%;
 }
 
 .btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: rem(4);
   border: none;
   padding: 0;
   width: 100%;
   font: var(--body01-font);
   background-color: transparent;
-  transition: color 0.3s;
+  transition: color 0.3s, padding-bottom 0.3s;
   cursor: pointer;
 
   svg {
-    position: relative;
+    width: rem(18);
+    height: rem(18);
+    transform: rotate(-90deg);
+    transition: stroke 0.3s;
+  }
+
+  &Active {
+    svg {
+      transform: revert;
+    }
+
+    ~ul {
+      visibility: visible;
+    }
   }
 
   &:hover {
     color: var(--blue-color);
+
+    svg {
+      stroke: currentcolor;
+    }
   }
 }
 
 .list {
   list-style: none;
+  overflow: hidden;
   margin: 0;
   padding: 0;
   padding-left: rem(8);
+  height: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: rem(4);
+  }
 }
 
 .item {
@@ -64,7 +92,7 @@
   display: flex;
   align-items: center;
   padding-left: rem(12);
-  padding-block: rem(3);
+  padding-block: rem(2.5);
   color: var(--black-color);
 
   &::before {
@@ -94,8 +122,13 @@
   color: inherit;
   transition: color 0.3s;
 
+  &Active {
+    font-weight: 700;
+    color: var(--blue-color);
+  }
+
   &:not(:last-child) {
-    margin-bottom: rem(5);
+    margin-bottom: rem(4);
   }
 
   &:hover {

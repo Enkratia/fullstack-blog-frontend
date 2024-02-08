@@ -1,0 +1,42 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  font: var(--body01-font);
+  color: var(--black-color);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  &:not(:last-child) {
+    display: inline-flex;
+    align-items: center;
+    margin-right: rem(4);
+    gap: rem(4);
+
+    &::after {
+      content: "";
+      display: block;
+      width: rem(18);
+      height: rem(18);
+      background-image: url(".././../../../public/img/default/chevron.svg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transform: rotate(-90deg);
+    }
+  }
+
+  &:last-child {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+}

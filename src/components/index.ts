@@ -140,3 +140,7 @@ export * from "./myPosts";
 /////////////////= DASHBOARD =////////////////////
 export * from "./dashboardBlock";
 export * from "./dashboardSidebar";
+
+export * from "./dashboard/editAboutUsSection1Block";
+export * from "./dashboard/editAboutUsSection2Block";
+export * from "./dashboard/dashboardBreadcrumbs";

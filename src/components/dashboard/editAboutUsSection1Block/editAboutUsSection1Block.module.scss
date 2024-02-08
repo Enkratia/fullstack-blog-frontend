@@ -1,0 +1,12 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: rem(20);
+}
+
+.input {
+  resize: none;
+}

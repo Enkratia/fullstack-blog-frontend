@@ -1,30 +1,34 @@
 @use "../../scss/utils/" as *;
 
 .root {
-  padding-block: rem(80);
-
-  // @include bp-down("container") {
-  //   padding-block: calc(rem(41.54) + 5.77vw); // (120>60)1360>320
-  // }
+  padding-top: rem(70);
+  padding-bottom: rem(120);
 }
 
 .title {
   margin: 0;
+  margin-right: rem(15);
   margin-bottom: rem(20);
   font: var(--h1-font);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .content {
   display: grid;
   column-gap: rem(60);
-  grid-template-columns: minmax(0, rem(280)) minmax(rem(670), 1fr);
+  grid-template-columns: rem(200) minmax(0, 1fr);
 
-  @include bp-down("1290") {
-    column-gap: rem(45);
-  }
+  // @include bp-down("1290") {
+  //   column-gap: rem(45);
+  // }
 
-  @include bp-down("1024") {
-    grid-template-columns: 1fr;
-    row-gap: rem(45);
-  }
+  // @include bp-down("1024") {
+  //   grid-template-columns: 1fr;
+  //   row-gap: rem(45);
+  // }
 }

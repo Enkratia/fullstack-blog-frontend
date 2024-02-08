@@ -50,7 +50,7 @@ export const backendApi = createApi({
     getTestimonial: builder.query<TestimonialType[], void>({
       query: () => "testimonial",
     }),
-    getAboutUsStatic: builder.query<AboutUsStaticType, void>({
+    getAboutUsStatic: builder.query<AboutUsStaticType[], void>({
       query: () => "about-us-static",
     }),
     getCategoryHeader: builder.query<CategoryHeaderType[], void>({
@@ -109,6 +109,8 @@ export const backendApi = createApi({
         };
       },
     }),
+
+    // **
     verifyReset: builder.query<any, string>({
       query: (token) => {
         return {
@@ -137,6 +139,17 @@ export const backendApi = createApi({
         };
       },
     }),
+    updateAboutUsStatic: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `about-us-static`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+
+    // **
     resetPassword: builder.mutation<any, ResetPasswordType>({
       query: ({ token, body }) => {
         return {
@@ -165,6 +178,8 @@ export const backendApi = createApi({
       },
       invalidatesTags: ["Posts"],
     }),
+
+    // **
     unsubscribe: builder.query<any, string>({
       query: (token) => {
         return {
@@ -202,4 +217,5 @@ export const {
   useResetPasswordMutation,
   useUpdatePostMutation,
   useDeletePostMutation,
+  useUpdateAboutUsStaticMutation,
 } = backendApi;

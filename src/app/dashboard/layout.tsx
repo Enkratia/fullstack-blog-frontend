@@ -1,8 +1,9 @@
-"use client";
+// "use client";
 
 import React from "react";
+import Link from "next/link";
 
-import { DashboardSidebar } from "../../components";
+import { DashboardBreadcrumbs, DashboardSidebar } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./dashboard.module.scss";
@@ -15,10 +16,19 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <main className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
-        <h1 className={s.title}>Dashboard</h1>
+        <div className={s.head}>
+          <h1 className={s.title}>
+            <Link href="/dashboard" className={s.link}>
+              Dashboard
+            </Link>
+          </h1>
+
+          <DashboardBreadcrumbs />
+        </div>
 
         <div className={s.content}>
           <DashboardSidebar />
+
           {children}
         </div>
       </div>
