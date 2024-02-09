@@ -2,71 +2,48 @@
 
 import React from "react";
 
-import { useUpdateKnowMoreStaticMutation } from "../../../redux/backendApi";
+import { useUpdateJoinMutation } from "../../../redux/backendApi";
 
 import { useValidateForm } from "../../../utils/customHooks";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./editAboutUsSection2Block.module.scss";
+import s from "./editHomeSection9Block.module.scss";
 
-type EditAboutUsSection2BlockProps = {
-  data: WhyThisBlogType;
+type EditHomeSection9BlockProps = {
+  data: JoinType;
 };
 
-export const EditAboutUsSection2Block: React.FC<EditAboutUsSection2BlockProps> = ({ data }) => {
+export const EditHomeSection9Block: React.FC<EditHomeSection9BlockProps> = ({ data }) => {
   const formRef = React.useRef<HTMLFormElement>(null);
 
-  const [updateKnowMore, { isError, isSuccess, isLoading }] = useUpdateKnowMoreStaticMutation();
+  const [updateJoin, { isError, isSuccess, isLoading }] = useUpdateJoinMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
-  const { isValidText, validateText, isValidFile, validateFile } = useValidateForm();
+  const { isValidText, validateText } = useValidateForm();
 
   // **
   const validateForm = () => {
-    return [isValidText, isValidFile]
+    return [isValidText]
       .flat()
       .every((el) => (!el ? !el : !Object.keys(el)?.[0]?.includes("data-validity-warning")));
   };
 
   // **
-  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validateFile(e.target.files);
-  };
-
-  const onUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const fileInput = e.currentTarget?.nextElementSibling as HTMLInputElement;
-    if (fileInput) fileInput.click();
-  };
-
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (!formRef.current || !validateForm()) return;
 
     const formData = new FormData(formRef.current);
-    updateKnowMore(formData);
+    updateJoin(formData);
   };
 
   return (
     <form className={s.root} ref={formRef} onSubmit={(e) => e.preventDefault()}>
-      <h2 className={`${s.title} ${cs.title}`}>Section 2</h2>
+      <h2 className={`${s.title} ${cs.title}`}>Section 9</h2>
 
       <div className={s.content}>
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidFile}>
-          <button onClick={onUploadClick} type="button" className={cs.btn}>
-            Upload picture
-          </button>
-
-          <input
-            onChange={onFileChange}
-            type="file"
-            accept=".png, .jpg, .jpeg, .svg"
-            name="file"
-            hidden
-          />
-        </div>
-
         <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
           <textarea
             onChange={(e) => validateText(e.target.value, 0)}
@@ -80,18 +57,8 @@ export const EditAboutUsSection2Block: React.FC<EditAboutUsSection2BlockProps> =
           <textarea
             onChange={(e) => validateText(e.target.value, 1)}
             className={`${s.input} ${cs.input}`}
-            name="subtitle"
-            defaultValue={data.subtitle}
-          />
-        </div>
-
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
-          <textarea
-            onChange={(e) => validateText(e.target.value, 2)}
-            className={`${s.input} ${cs.input}`}
             name="description"
             defaultValue={data.description}
-            rows={4}
           />
         </div>
 

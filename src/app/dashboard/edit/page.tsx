@@ -1,9 +1,7 @@
 import React from "react";
-import { notFound } from "next/navigation";
 
 const DashboardEditPage: React.FC = () => {
-  // notFound();
-  return <div>hello</div>;
+  return <div>edit</div>;
 };
 
 export default DashboardEditPage;

@@ -141,6 +141,17 @@ export * from "./myPosts";
 export * from "./dashboardBlock";
 export * from "./dashboardSidebar";
 
+export * from "./dashboard/dashboardBreadcrumbs";
 export * from "./dashboard/editAboutUsSection1Block";
 export * from "./dashboard/editAboutUsSection2Block";
-export * from "./dashboard/dashboardBreadcrumbs";
+export * from "./dashboard/editAboutUsSection3Block";
+
+// **
+export * from "./dashboard/editHomeSection3Block";
+export * from "./dashboard/editHomeSection4Block";
+export * from "./dashboard/editHomeSection5Block";
+export * from "./dashboard/editHomeSection8Block";
+export * from "./dashboard/editHomeSection9Block";
+
+// **
+export * from "./dashboard/editCategorySection1Block";

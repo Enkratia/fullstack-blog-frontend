@@ -2,22 +2,23 @@
 
 import React from "react";
 
-import { useUpdateKnowMoreStaticMutation } from "../../../redux/backendApi";
+import { useUpdateWhyThisBlogStaticMutation } from "../../../redux/backendApi";
 
 import { useValidateForm } from "../../../utils/customHooks";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./editAboutUsSection2Block.module.scss";
+import s from "./editAboutUsSection3Block.module.scss";
 
-type EditAboutUsSection2BlockProps = {
+type EditAboutUsSection3BlockProps = {
   data: WhyThisBlogType;
 };
 
-export const EditAboutUsSection2Block: React.FC<EditAboutUsSection2BlockProps> = ({ data }) => {
+export const EditAboutUsSection3Block: React.FC<EditAboutUsSection3BlockProps> = ({ data }) => {
   const formRef = React.useRef<HTMLFormElement>(null);
 
-  const [updateKnowMore, { isError, isSuccess, isLoading }] = useUpdateKnowMoreStaticMutation();
+  const [updateWhyThisBlog, { isError, isSuccess, isLoading }] =
+    useUpdateWhyThisBlogStaticMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
   const { isValidText, validateText, isValidFile, validateFile } = useValidateForm();
@@ -45,12 +46,12 @@ export const EditAboutUsSection2Block: React.FC<EditAboutUsSection2BlockProps> =
     if (!formRef.current || !validateForm()) return;
 
     const formData = new FormData(formRef.current);
-    updateKnowMore(formData);
+    updateWhyThisBlog(formData);
   };
 
   return (
     <form className={s.root} ref={formRef} onSubmit={(e) => e.preventDefault()}>
-      <h2 className={`${s.title} ${cs.title}`}>Section 2</h2>
+      <h2 className={`${s.title} ${cs.title}`}>Section 3</h2>
 
       <div className={s.content}>
         <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidFile}>

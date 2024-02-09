@@ -1,9 +1,4 @@
-// "use client";
-
 import React from "react";
-
-// import cs from "../../../scss/helpers.module.scss";
-// import s from "./dashboardEdit.module.scss";
 
 type DashboardEditLayoutProps = {
   children: any;

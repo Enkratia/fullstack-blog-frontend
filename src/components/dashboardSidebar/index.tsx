@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useImmer } from "use-immer";
 
 import { capitalize } from "../../utils/customFunctions";
@@ -17,8 +17,8 @@ interface NestedObject {
 
 const linkNames: NestedObject = {
   edit: {
-    "about-us": ["section 1", "section 2"],
-    home: ["section 3", "section 4", "section 5", "section 8"],
+    "about-us": ["section 1", "section 2", "section 3"],
+    home: ["section 3", "section 4", "section 5", "section 8", "section 9"],
     rest: ["category", "contact us", "footer", "privacy policy"],
   },
   change: ["brands", "posts", "queries", "testimonials"],
@@ -26,12 +26,66 @@ const linkNames: NestedObject = {
 };
 
 export const DashboardSidebar: React.FC = () => {
+  const linkPrevRef = React.useRef<HTMLAnchorElement | null>();
+  const isMount = React.useRef(true);
+  const navRef = React.useRef<HTMLElement>(null);
   const [isOpen, setIsOpen] = useImmer([false, false]);
 
-  const currentSegment = useSelectedLayoutSegment();
-  console.log(currentSegment);
+  const pathname = usePathname();
 
-  const getLinkElements = (segment1: string, segment2?: string) => {
+  React.useEffect(() => {
+    if (pathname === "/dashboard") {
+      navRef.current?.querySelector("[data-link-active]")?.removeAttribute("data-link-active");
+      return;
+    }
+
+    const links = navRef.current?.querySelectorAll("a") || [];
+
+    const linkActive = [...links].reduce((linkPrev, linkNext) => {
+      const hrefPrev = linkPrev.getAttribute("href");
+      const hrefNext = linkNext.getAttribute("href");
+
+      if (hrefNext && pathname.startsWith(hrefNext) && hrefPrev && pathname.startsWith(hrefPrev)) {
+        const matchesPrev = hrefPrev.match(/\//g)?.length || 0;
+        const mathesNext = hrefNext.match(/\//g)?.length || 0;
+
+        if (mathesNext > matchesPrev) {
+          return linkNext;
+        }
+      }
+
+      return linkPrev;
+    });
+
+    const linkPrev = navRef.current?.querySelector("[data-link-active]") as HTMLAnchorElement;
+    linkPrev?.removeAttribute("data-link-active");
+
+    linkActive.setAttribute("data-link-active", "");
+    linkPrevRef.current = linkActive;
+  }, [pathname]);
+
+  React.useEffect(() => {
+    if (!isMount.current) return;
+    isMount.current = false;
+
+    const linkActive = document.body.querySelector("[data-link-active]");
+    if (!linkActive) return;
+
+    const dropdown = linkActive.closest("[data-dropdown-idx]");
+    if (!dropdown) return;
+
+    const dropdownBtn = dropdown.firstElementChild as HTMLAnchorElement;
+    if (!dropdownBtn) return;
+
+    const dropdownIdx = dropdown.getAttribute("data-dropdown-idx");
+
+    if (dropdownIdx) {
+      onDropdownClick(dropdownBtn, +dropdownIdx);
+    }
+  }, []);
+
+  // **
+  const getLinkElements = (segment1: string, segment2?: string, isList?: boolean) => {
     let linkArray = linkNames[segment1];
     let linkPiece = segment1;
 
@@ -43,19 +97,28 @@ export const DashboardSidebar: React.FC = () => {
       }
     }
 
-    return (linkArray as string[]).map((name, i) => (
-      <Link key={i} href={`/dashboard/${linkPiece}/${name.replace(" ", "-")}`} className={s.link}>
-        {capitalize(name)}
-      </Link>
-    ));
+    return (linkArray as string[]).map((name, i) =>
+      isList ? (
+        <li key={i} className={s.item}>
+          <Link href={`/dashboard/${linkPiece}/${name.replace(" ", "-")}`} className={s.link}>
+            {capitalize(name)}
+          </Link>
+
+          <span className={s.itemMark} aria-hidden="true"></span>
+        </li>
+      ) : (
+        <Link key={i} href={`/dashboard/${linkPiece}/${name.replace(" ", "-")}`} className={s.link}>
+          {capitalize(name)}
+        </Link>
+      ),
+    );
   };
 
-  const onDropdownClick = (e: React.MouseEvent<HTMLButtonElement>, idx: number) => {
-    const button = e.currentTarget;
-    const list = button.nextElementSibling as HTMLUListElement;
+  const onDropdownClick = (btn: HTMLAnchorElement, idx: number) => {
+    const list = btn.nextElementSibling as HTMLUListElement;
     if (!list) return;
 
-    if (list.hasAttribute("style")) {
+    if (list.hasAttribute("style") && btn === linkPrevRef.current) {
       list.removeAttribute("style");
 
       setIsOpen((o) => {
@@ -76,41 +139,43 @@ export const DashboardSidebar: React.FC = () => {
   };
 
   return (
-    <nav className={s.root}>
+    <nav className={s.root} ref={navRef}>
       <section className={s.section}>
         <h2 className={`${s.title} ${cs.title}`}>
-          <Link href="" className={s.titleLink}>
+          <Link href="/dashboard/edit" className={s.titleLink}>
             Edit
           </Link>
         </h2>
 
-        <div className={s.dropdown}>
-          <button
-            onClick={(e) => onDropdownClick(e, 0)}
+        <div className={s.dropdown} data-dropdown-idx={0}>
+          <Link
+            href="/dashboard/edit/about-us"
+            onClick={(e) => onDropdownClick(e.currentTarget, 0)}
             className={`${s.btn} ${isOpen[0] ? s.btnActive : ""}`}
             aria-expanded={false}
             aria-controls="edit-about-us">
             About us
             <Chevron aria-hidden="true" />
-          </button>
+          </Link>
 
           <ul className={s.list} id="edit-about-us">
-            {getLinkElements("edit", "about-us")}
+            {getLinkElements("edit", "about-us", true)}
           </ul>
         </div>
 
-        <div className={s.dropdown}>
-          <button
-            onClick={(e) => onDropdownClick(e, 1)}
+        <div className={s.dropdown} data-dropdown-idx={1}>
+          <Link
+            href="/dashboard/edit/home"
+            onClick={(e) => onDropdownClick(e.currentTarget, 1)}
             className={`${s.btn} ${isOpen[1] ? s.btnActive : ""}`}
             aria-expanded={false}
             aria-controls="edit-home">
             Home
             <Chevron aria-hidden="true" />
-          </button>
+          </Link>
 
           <ul className={s.list} id="edit-home">
-            {getLinkElements("edit", "home")}
+            {getLinkElements("edit", "home", true)}
           </ul>
         </div>
 
@@ -119,7 +184,7 @@ export const DashboardSidebar: React.FC = () => {
 
       <section className={s.section}>
         <h2 className={`${s.title} ${cs.title}`}>
-          <Link href="" className={s.titleLink}>
+          <Link href="/dashboard/change" className={s.titleLink}>
             Change
           </Link>
         </h2>
@@ -129,7 +194,7 @@ export const DashboardSidebar: React.FC = () => {
 
       <section className={s.section}>
         <h2 className={`${s.title} ${cs.title}`}>
-          <Link href="" className={s.titleLink}>
+          <Link href="/dashboard/view" className={s.titleLink}>
             View
           </Link>
         </h2>

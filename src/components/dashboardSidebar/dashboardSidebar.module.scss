@@ -19,6 +19,12 @@
   &Link {
     display: block;
     width: 100%;
+    transition: color 0.3s, font-weight 0.3s;
+
+    &[data-link-active] {
+      font-weight: 500;
+      color: var(--blue-color);
+    }
   }
 
   &:hover {
@@ -35,13 +41,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: none;
-  padding: 0;
   width: 100%;
   font: var(--body01-font);
-  background-color: transparent;
-  transition: color 0.3s, padding-bottom 0.3s;
-  cursor: pointer;
+  transition: color 0.3s, padding-bottom 0.3s, font-weight 0.3s;
 
   svg {
     width: rem(18);
@@ -66,6 +68,11 @@
     svg {
       stroke: currentcolor;
     }
+  }
+
+  &[data-link-active] {
+    font-weight: 500;
+    color: var(--blue-color);
   }
 }
 
@@ -95,11 +102,11 @@
   padding-block: rem(2.5);
   color: var(--black-color);
 
-  &::before {
-    content: "";
+  &Mark {
     position: absolute;
     left: 0;
     top: 0;
+    order: -1;
     width: rem(2);
     height: 100%;
     background-color: var(--grayborder-color);
@@ -108,10 +115,6 @@
 
   &:hover {
     color: var(--blue-color);
-
-    &::before {
-      background-color: var(--blue-color);
-    }
   }
 }
 
@@ -120,12 +123,7 @@
   width: 100%;
   font: var(--body01-font);
   color: inherit;
-  transition: color 0.3s;
-
-  &Active {
-    font-weight: 700;
-    color: var(--blue-color);
-  }
+  transition: color 0.3s font-weight 0.3s;
 
   &:not(:last-child) {
     margin-bottom: rem(4);
@@ -133,5 +131,14 @@
 
   &:hover {
     color: var(--blue-color);
+  }
+
+  &[data-link-active] {
+    font-weight: 500;
+    color: var(--blue-color);
+
+    ~span {
+      background-color: var(--blue-color);
+    }
   }
 }

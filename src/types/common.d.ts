@@ -47,20 +47,18 @@ type UserType = {
 };
 
 // **
-type CategoryNames = "business" | "startup" | "economy" | "technology";
+type CategoryNames = ["startup", "business", "economy", "technology"];
 
-interface CategoryDescription extends IObjKeys {
-  [key: CategoryNames]: string;
-}
+type CategoryDescriptionType = {
+  category: CategoryNames[keyof CategoryNames];
+  description: string;
+};
 
 // **
 type JoinType = {
   title: string;
   description: string;
 };
-
-// **
-type CategoriesNames = ["startup", "business", "economy", "technology"];
 
 // **
 interface SocialLinksType extends IObjKeys {

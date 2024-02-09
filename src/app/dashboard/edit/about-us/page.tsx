@@ -1,10 +1,7 @@
-import { Join } from "@/components";
 import React from "react";
 
-import { notFound } from "next/navigation";
-
 const DashboardEditAboutUsPage: React.FC = () => {
-  notFound();
+  return "about us";
 };
 
 export default DashboardEditAboutUsPage;

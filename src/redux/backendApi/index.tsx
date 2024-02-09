@@ -53,8 +53,8 @@ export const backendApi = createApi({
     getAboutUsStatic: builder.query<AboutUsStaticType[], void>({
       query: () => "about-us-static",
     }),
-    getCategoryHeader: builder.query<CategoryHeaderType[], void>({
-      query: () => "category-header",
+    getCategoryHeader: builder.query<CategoryHeaderType[], string | void>({
+      query: (request) => `category-header${request ?? ""}`,
     }),
     getContactUs: builder.query<ContactUsType[], void>({
       query: () => "contact-us",
@@ -148,6 +148,69 @@ export const backendApi = createApi({
         };
       },
     }),
+    updateKnowMoreStatic: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `know-more`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+    updateWhyThisBlogStatic: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `why-this-blog`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+    updateUsMissionStatic: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `us-mission`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+    updateCategoryDescriptionStatic: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `category-description`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+    updateWhyWeStartedStatic: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `why-we-started`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+    updateTestimonialStatic: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `testimonial-static`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+    updateJoin: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `join`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
 
     // **
     resetPassword: builder.mutation<any, ResetPasswordType>({
@@ -218,4 +281,11 @@ export const {
   useUpdatePostMutation,
   useDeletePostMutation,
   useUpdateAboutUsStaticMutation,
+  useUpdateKnowMoreStaticMutation,
+  useUpdateWhyThisBlogStaticMutation,
+  useUpdateUsMissionStaticMutation,
+  useUpdateCategoryDescriptionStaticMutation,
+  useUpdateWhyWeStartedStaticMutation,
+  useUpdateTestimonialStaticMutation,
+  useUpdateJoinMutation,
 } = backendApi;
