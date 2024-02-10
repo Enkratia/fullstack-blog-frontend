@@ -14,16 +14,15 @@ import s from "./categoryHeader.module.scss";
 const categories: CategoryNames = ["startup", "business", "economy", "technology"];
 
 export const CategoryHeader: React.FC = () => {
-  const category = useParams().category as string;
+  const category = useParams().category as CategoryNames[number];
 
-  const { data, isError } = useGetCategoryHeaderQuery(`?category=${category}`);
-  const header = data?.[0];
+  const { data, isError } = useGetCategoryHeaderQuery();
 
-  console.log(header);
+  if (!categories.includes(category)) {
+    return;
+  }
 
-  if (!categories.includes(category as CategoryNames[number])) return;
-
-  if (!header) {
+  if (!data) {
     return;
   }
 
@@ -31,7 +30,7 @@ export const CategoryHeader: React.FC = () => {
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
         <p className={s.title}>{capitalize(category)}</p>
-        <p className={s.descr}>{header.description}</p>
+        <p className={s.descr}>{data[category]}</p>
 
         <ul className={s.breadcrumbs}>
           <li className={s.item}>

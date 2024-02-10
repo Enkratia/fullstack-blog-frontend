@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 import { fetchAboutUsStatisticQuery } from "../../../fetchApi/fetchApi";
+import { formatStatistic } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./aboutUsOverview.module.scss";
@@ -28,23 +29,6 @@ type AboutUsOverviewProps = {
 export const AboutUsOverview: React.FC<AboutUsOverviewProps> = async ({ data }) => {
   const { data: statistic, isError } = await fetchAboutUsStatisticQuery();
 
-  const formatData = (count: number) => {
-    let formattedCount = "";
-
-    if (count > 999999) {
-      formattedCount = ~~(count / 1000 / 1000) + "K+";
-      return formattedCount;
-    }
-
-    if (count > 999) {
-      formattedCount = ~~(count / 1000) + "K+";
-      return formattedCount;
-    }
-
-    formattedCount = count + "+";
-    return formattedCount;
-  };
-
   if (!statistic) {
     return;
   }
@@ -61,9 +45,9 @@ export const AboutUsOverview: React.FC<AboutUsOverviewProps> = async ({ data }) 
 
       <ul className={s.overview}>
         {statistic.map((obj, i) => (
-          <li key={i} className={s.overviewItem}>
-            <span className={s.overviewData}>{formatData(obj.count)}</span>
-            <span className={s.overviewDescr}>{obj.type}</span>
+          <li key={i} className={cs.statisticItem}>
+            <span className={cs.statisticData}>{formatStatistic(obj.count)}</span>
+            <span className={cs.statisticDescr}>{obj.type}</span>
           </li>
         ))}
       </ul>

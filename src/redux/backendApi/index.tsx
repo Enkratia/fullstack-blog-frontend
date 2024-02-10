@@ -53,14 +53,23 @@ export const backendApi = createApi({
     getAboutUsStatic: builder.query<AboutUsStaticType[], void>({
       query: () => "about-us-static",
     }),
-    getCategoryHeader: builder.query<CategoryHeaderType[], string | void>({
-      query: (request) => `category-header${request ?? ""}`,
+    getCategoryHeader: builder.query<CategoryHeaderType, void>({
+      query: () => "category-header",
     }),
     getContactUs: builder.query<ContactUsType[], void>({
       query: () => "contact-us",
     }),
     getContactUsQueries: builder.query<ContactUsQueriesType, void>({
       query: () => "contact-us-queries",
+    }),
+    getPrivacyPolicy: builder.query<PrivacyPolicyType, void>({
+      query: () => "privacy-policy",
+    }),
+    getAboutUsStatistic: builder.query<AboutUsOverviewType[], void>({
+      query: () => "about-us-statistic",
+    }),
+    getSubscribersCount: builder.query<SubscribersCountType, void>({
+      query: () => "subscribe/count",
     }),
 
     // CREATE
@@ -211,6 +220,42 @@ export const backendApi = createApi({
         };
       },
     }),
+    updateCategoryHeader: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `category-header`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+    updateContactUs: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `contact-us`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+    updateFooterBottom: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `footer-bottom`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
+    updatePrivacyPolicy: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: `privacy-policy`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+    }),
 
     // **
     resetPassword: builder.mutation<any, ResetPasswordType>({
@@ -269,6 +314,9 @@ export const {
   useActivateUserQuery,
   useUnsubscribeQuery,
   useVerifyResetQuery,
+  useGetPrivacyPolicyQuery,
+  useGetAboutUsStatisticQuery,
+  useGetSubscribersCountQuery,
 
   // **
   useCreateUserMutation,
@@ -288,4 +336,8 @@ export const {
   useUpdateWhyWeStartedStaticMutation,
   useUpdateTestimonialStaticMutation,
   useUpdateJoinMutation,
+  useUpdateCategoryHeaderMutation,
+  useUpdateContactUsMutation,
+  useUpdateFooterBottomMutation,
+  useUpdatePrivacyPolicyMutation,
 } = backendApi;

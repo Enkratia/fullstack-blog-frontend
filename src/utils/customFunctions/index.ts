@@ -10,3 +10,6 @@ export * from "./formatDate3";
 export * from "./setOverflowHidden";
 
 export * from "./checkRequestStatus";
+
+// **
+export * from "./formatStatistic";

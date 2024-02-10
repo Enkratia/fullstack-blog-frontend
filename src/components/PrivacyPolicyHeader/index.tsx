@@ -1,17 +1,27 @@
+"use client";
+
 import React from "react";
+
+import { useGetPrivacyPolicyQuery } from "../../redux/backendApi";
 
 import { formatDate2 } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./privacyPolicyHeader.module.scss";
 
-const policy: PrivacyPolicyType = {
-  message: "",
-  createdAt: "2023-11-25T16:48:55.329Z",
-  updatedAt: "2023-11-25T16:48:55.329Z",
-};
+// const policy: PrivacyPolicyType = {
+//   message: "",
+//   createdAt: "2023-11-25T16:48:55.329Z",
+//   updatedAt: "2023-11-25T16:48:55.329Z",
+// };
 
 export const PrivacyPolicyHeader: React.FC = () => {
+  const { data: policy, isError } = useGetPrivacyPolicyQuery();
+
+  if (!policy) {
+    return;
+  }
+
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>Privacy Policy.</h2>

@@ -8,7 +8,7 @@ import { useValidateForm } from "../../../utils/customHooks";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./editHomeSection5Block.module.scss";
+import s from "../editSection.module.scss";
 
 type EditHomeSection5BlockProps = {
   data: WhyWeStartedType;
@@ -50,58 +50,60 @@ export const EditHomeSection5Block: React.FC<EditHomeSection5BlockProps> = ({ da
   };
 
   return (
-    <form className={s.root} ref={formRef} onSubmit={(e) => e.preventDefault()}>
+    <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Section 5</h2>
 
-      <div className={s.content}>
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidFile}>
-          <button onClick={onUploadClick} type="button" className={cs.btn}>
-            Upload picture
-          </button>
+      <form className={s.form} ref={formRef} onSubmit={(e) => e.preventDefault()}>
+        <div className={s.content}>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidFile}>
+            <button onClick={onUploadClick} type="button" className={cs.btn}>
+              Upload picture
+            </button>
 
-          <input
-            onChange={onFileChange}
-            type="file"
-            accept=".png, .jpg, .jpeg, .svg"
-            name="file"
-            hidden
-          />
-        </div>
+            <input
+              onChange={onFileChange}
+              type="file"
+              accept=".png, .jpg, .jpeg, .svg"
+              name="file"
+              hidden
+            />
+          </div>
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-          <textarea
-            onChange={(e) => validateText(e.target.value, 0)}
-            className={`${s.input} ${cs.input}`}
-            name="title"
-            defaultValue={data.title}
-          />
-        </div>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
+            <textarea
+              onChange={(e) => validateText(e.target.value, 0)}
+              className={`${s.input} ${cs.input}`}
+              name="title"
+              defaultValue={data.title}
+            />
+          </div>
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
-          <textarea
-            onChange={(e) => validateText(e.target.value, 1)}
-            className={`${s.input} ${cs.input}`}
-            name="subtitle"
-            defaultValue={data.subtitle}
-          />
-        </div>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
+            <textarea
+              onChange={(e) => validateText(e.target.value, 1)}
+              className={`${s.input} ${cs.input}`}
+              name="subtitle"
+              defaultValue={data.subtitle}
+            />
+          </div>
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
-          <textarea
-            onChange={(e) => validateText(e.target.value, 2)}
-            className={`${s.input} ${cs.input}`}
-            name="description"
-            defaultValue={data.description}
-            rows={4}
-          />
-        </div>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
+            <textarea
+              onChange={(e) => validateText(e.target.value, 2)}
+              className={`${s.input} ${cs.input}`}
+              name="description"
+              defaultValue={data.description}
+              rows={4}
+            />
+          </div>
 
-        <div className={cs.btnWrapper} {...requestStatus}>
-          <button onClick={onSubmit} type="button" className={cs.btn} disabled={!validateForm()}>
-            Submit
-          </button>
+          <div className={cs.btnWrapper} {...requestStatus}>
+            <button onClick={onSubmit} type="button" className={cs.btn} disabled={!validateForm()}>
+              Submit
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </section>
   );
 };

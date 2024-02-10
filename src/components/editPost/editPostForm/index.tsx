@@ -18,7 +18,7 @@ import s from "../../../components/addPost/addPostForm/addPostForm.module.scss";
 import AngleDown from "../../../../public/img/angle-down.svg";
 
 const categoriesPlaceholder = "choose category";
-const categoriesNames: CategoriesNames = ["startup", "business", "economy", "technology"];
+const categoriesNames: CategoryNames = ["startup", "business", "economy", "technology"];
 const categories = [categoriesPlaceholder, ...categoriesNames];
 
 type ContentType = { text: string; json: JSONContent };

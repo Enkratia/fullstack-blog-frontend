@@ -26,7 +26,7 @@ const fetchApi = async (query: string) => {
 // Common
 export const fetchCategoryDescriptionQuery = async () => {
   const res = await fetchApi("category-description");
-  return { isError: res?.isError, data: res?.data?.[0] as CategoryDescription };
+  return { isError: res?.isError, data: res?.data?.[0] as CategoryDescriptionType };
 };
 
 export const fetchJoinQuery = async () => {

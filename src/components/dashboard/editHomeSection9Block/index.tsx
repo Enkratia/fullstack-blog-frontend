@@ -8,7 +8,7 @@ import { useValidateForm } from "../../../utils/customHooks";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./editHomeSection9Block.module.scss";
+import s from "../editSection.module.scss";
 
 type EditHomeSection9BlockProps = {
   data: JoinType;
@@ -40,34 +40,36 @@ export const EditHomeSection9Block: React.FC<EditHomeSection9BlockProps> = ({ da
   };
 
   return (
-    <form className={s.root} ref={formRef} onSubmit={(e) => e.preventDefault()}>
+    <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Section 9</h2>
 
-      <div className={s.content}>
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-          <textarea
-            onChange={(e) => validateText(e.target.value, 0)}
-            className={`${s.input} ${cs.input}`}
-            name="title"
-            defaultValue={data.title}
-          />
-        </div>
+      <form className={s.form} ref={formRef} onSubmit={(e) => e.preventDefault()}>
+        <div className={s.content}>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
+            <textarea
+              onChange={(e) => validateText(e.target.value, 0)}
+              className={`${s.input} ${cs.input}`}
+              name="title"
+              defaultValue={data.title}
+            />
+          </div>
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
-          <textarea
-            onChange={(e) => validateText(e.target.value, 1)}
-            className={`${s.input} ${cs.input}`}
-            name="description"
-            defaultValue={data.description}
-          />
-        </div>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
+            <textarea
+              onChange={(e) => validateText(e.target.value, 1)}
+              className={`${s.input} ${cs.input}`}
+              name="description"
+              defaultValue={data.description}
+            />
+          </div>
 
-        <div className={cs.btnWrapper} {...requestStatus}>
-          <button onClick={onSubmit} type="button" className={cs.btn} disabled={!validateForm()}>
-            Submit
-          </button>
+          <div className={cs.btnWrapper} {...requestStatus}>
+            <button onClick={onSubmit} type="button" className={cs.btn} disabled={!validateForm()}>
+              Submit
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </section>
   );
 };

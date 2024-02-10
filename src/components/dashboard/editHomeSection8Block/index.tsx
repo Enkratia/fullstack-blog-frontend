@@ -8,7 +8,7 @@ import { useValidateForm } from "../../../utils/customHooks";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./editHomeSection8Block.module.scss";
+import s from "../editSection.module.scss";
 
 type EditHomeSection8BlockProps = {
   data: TestimonialStaticType;
@@ -41,44 +41,46 @@ export const EditHomeSection8Block: React.FC<EditHomeSection8BlockProps> = ({ da
   };
 
   return (
-    <form className={s.root} ref={formRef} onSubmit={(e) => e.preventDefault()}>
+    <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Section 8</h2>
 
-      <div className={s.content}>
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-          <textarea
-            onChange={(e) => validateText(e.target.value, 0)}
-            className={`${s.input} ${cs.input}`}
-            name="title"
-            defaultValue={data.title}
-          />
-        </div>
+      <form className={s.form} ref={formRef} onSubmit={(e) => e.preventDefault()}>
+        <div className={s.content}>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
+            <textarea
+              onChange={(e) => validateText(e.target.value, 0)}
+              className={`${s.input} ${cs.input}`}
+              name="title"
+              defaultValue={data.title}
+            />
+          </div>
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
-          <textarea
-            onChange={(e) => validateText(e.target.value, 1)}
-            className={`${s.input} ${cs.input}`}
-            name="subtitle"
-            defaultValue={data.subtitle}
-          />
-        </div>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
+            <textarea
+              onChange={(e) => validateText(e.target.value, 1)}
+              className={`${s.input} ${cs.input}`}
+              name="subtitle"
+              defaultValue={data.subtitle}
+            />
+          </div>
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
-          <textarea
-            onChange={(e) => validateText(e.target.value, 2)}
-            className={`${s.input} ${cs.input}`}
-            name="description"
-            defaultValue={data.description}
-            rows={3}
-          />
-        </div>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
+            <textarea
+              onChange={(e) => validateText(e.target.value, 2)}
+              className={`${s.input} ${cs.input}`}
+              name="description"
+              defaultValue={data.description}
+              rows={3}
+            />
+          </div>
 
-        <div className={cs.btnWrapper} {...requestStatus}>
-          <button onClick={onSubmit} type="button" className={cs.btn} disabled={!validateForm()}>
-            Submit
-          </button>
+          <div className={cs.btnWrapper} {...requestStatus}>
+            <button onClick={onSubmit} type="button" className={cs.btn} disabled={!validateForm()}>
+              Submit
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </section>
   );
 };

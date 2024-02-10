@@ -138,10 +138,14 @@ export * from "./addPost/addPostForm";
 export * from "./myPosts";
 
 /////////////////= DASHBOARD =////////////////////
-export * from "./dashboardBlock";
 export * from "./dashboardSidebar";
-
 export * from "./dashboard/dashboardBreadcrumbs";
+
+// **
+export * from "./dashboard/dashboardBlock";
+export * from "./dashboard/dashboardBlock/dashboardBlockStats";
+
+// Edit pages
 export * from "./dashboard/editAboutUsSection1Block";
 export * from "./dashboard/editAboutUsSection2Block";
 export * from "./dashboard/editAboutUsSection3Block";
@@ -155,3 +159,21 @@ export * from "./dashboard/editHomeSection9Block";
 
 // **
 export * from "./dashboard/editCategorySection1Block";
+
+// **
+export * from "./dashboard/editContactUsSection1Block";
+
+// **
+export * from "./dashboard/editFooterSection1Block";
+
+// **
+export * from "./dashboard/editPrivacyPolicySection1Block";
+export * from "./dashboard/editPrivacyPolicySection1Block/editPrivacyPolicySection1Form";
+
+// **
+export * from "./dashboard/editHomeBlock";
+export * from "./dashboard/editAboutUsBlock";
+export * from "./dashboard/editBlock";
+
+// View pages
+export * from "./dashboard/viewUsersBlock";

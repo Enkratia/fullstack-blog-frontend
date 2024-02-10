@@ -59,7 +59,7 @@ export const Categories: React.FC = async () => {
           <Link href="">
             {icon}
             <h3 className={s.title}>{capitalize(title)}</h3>
-            <p className={s.descr}>{data[title]}</p>
+            <p className={s.descr}>{data[title as CategoryNames[number]]}</p>
           </Link>
         </li>
       ))}

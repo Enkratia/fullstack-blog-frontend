@@ -1,0 +1,24 @@
+@use "../../../../scss/utils/" as *;
+
+.root {
+  margin-bottom: rem(60);
+  padding: rem(30);
+  background-color: var(--lightgray-color);
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: rem(20);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

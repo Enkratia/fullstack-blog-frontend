@@ -109,7 +109,7 @@ export const useValidateForm = () => {
 
   // ***
   const validatePhone = (value: string | null) => {
-    const length = 15;
+    const length = 13;
 
     // **
     if (value === null) {

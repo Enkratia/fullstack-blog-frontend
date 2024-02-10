@@ -49,10 +49,15 @@ type UserType = {
 // **
 type CategoryNames = ["startup", "business", "economy", "technology"];
 
-type CategoryDescriptionType = {
-  category: CategoryNames[keyof CategoryNames];
-  description: string;
+type CategoryDescriptionIdType = {
+  id: number;
 };
+
+type CategoryDescriptionContentType = {
+  [key in CategoryNames[number]]: string;
+};
+
+type CategoryDescriptionType = CategoryDescriptionIdType & CategoryDescriptionContentType;
 
 // **
 type JoinType = {

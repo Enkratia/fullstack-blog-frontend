@@ -41,27 +41,30 @@ export const DashboardSidebar: React.FC = () => {
 
     const links = navRef.current?.querySelectorAll("a") || [];
 
-    const linkActive = [...links].reduce((linkPrev, linkNext) => {
-      const hrefPrev = linkPrev.getAttribute("href");
-      const hrefNext = linkNext.getAttribute("href");
+    const linksMatched = [...links].filter((link) => {
+      const href = link.getAttribute("href");
 
-      if (hrefNext && pathname.startsWith(hrefNext) && hrefPrev && pathname.startsWith(hrefPrev)) {
-        const matchesPrev = hrefPrev.match(/\//g)?.length || 0;
-        const mathesNext = hrefNext.match(/\//g)?.length || 0;
-
-        if (mathesNext > matchesPrev) {
-          return linkNext;
-        }
+      if (href && pathname.startsWith(href)) {
+        return link;
       }
-
-      return linkPrev;
     });
+
+    const linkMostMatched = linksMatched.sort((a, b) => {
+      const hrefPrev = a.getAttribute("href");
+      const hrefNext = b.getAttribute("href");
+
+      const matchesPrev = hrefPrev?.match(/\//g)?.length || 0;
+      const mathesNext = hrefNext?.match(/\//g)?.length || 0;
+
+      return matchesPrev > mathesNext ? -1 : 1;
+    })[0];
 
     const linkPrev = navRef.current?.querySelector("[data-link-active]") as HTMLAnchorElement;
     linkPrev?.removeAttribute("data-link-active");
 
-    linkActive.setAttribute("data-link-active", "");
-    linkPrevRef.current = linkActive;
+    linkMostMatched.setAttribute("data-link-active", "");
+
+    linkPrevRef.current = linkMostMatched;
   }, [pathname]);
 
   React.useEffect(() => {

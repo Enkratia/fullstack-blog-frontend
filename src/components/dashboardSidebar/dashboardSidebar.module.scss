@@ -99,7 +99,6 @@
   display: flex;
   align-items: center;
   padding-left: rem(12);
-  padding-block: rem(2.5);
   color: var(--black-color);
 
   &Mark {
@@ -107,7 +106,7 @@
     left: 0;
     top: 0;
     order: -1;
-    width: rem(2);
+    width: rem(1);
     height: 100%;
     background-color: var(--grayborder-color);
     transition: background-color 0.3s;
@@ -120,14 +119,11 @@
 
 .link {
   display: block;
+  padding-block: rem(2.5);
   width: 100%;
   font: var(--body01-font);
   color: inherit;
   transition: color 0.3s font-weight 0.3s;
-
-  &:not(:last-child) {
-    margin-bottom: rem(4);
-  }
 
   &:hover {
     color: var(--blue-color);

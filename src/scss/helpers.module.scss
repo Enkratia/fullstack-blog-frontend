@@ -695,3 +695,34 @@
     padding-left: 1rem;
   }
 }
+
+.statistic {
+  &Item {
+    &:not(:last-child) {
+      margin-right: rem(68);
+
+      @include bp-down("container") {
+        margin-right: 5vw; // 68>16(1360>320)
+      }
+
+      @include bp-down("414") {
+        margin-right: 0;
+        margin-bottom: rem(16);
+      }
+    }
+  }
+
+  &Data {
+    display: block;
+    font: var(--display-font);
+    letter-spacing: rem(-2);
+
+    @include bp-down("container") {
+      font-size: calc(rem(29.85) + 1.92vw); // 56>36(1360>320)
+    }
+  }
+
+  &Descr {
+    font: var(--body01-font);
+  }
+}
