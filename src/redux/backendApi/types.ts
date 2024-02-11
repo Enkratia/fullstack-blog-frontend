@@ -32,3 +32,9 @@ export type GetTagsType = {
   data: ContentType[];
   totalCount: number;
 };
+
+// **
+export type GetContactUsMessagesType = {
+  data: ContactUsMessageType[];
+  totalCount: number;
+};

@@ -22,3 +22,14 @@ type ContactUsQueryType = {
 };
 
 type ContactUsQueriesType = ContactUsQueryType[];
+
+// **
+type ContactUsMessageType = {
+  id: number;
+  fullname: string;
+  email: string;
+  query: string;
+  message: string;
+  read: boolean;
+  createdAt: string;
+};

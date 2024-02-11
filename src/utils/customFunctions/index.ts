@@ -13,3 +13,4 @@ export * from "./checkRequestStatus";
 
 // **
 export * from "./formatStatistic";
+export * from "./formatEmailDate";

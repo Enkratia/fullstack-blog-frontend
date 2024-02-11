@@ -524,6 +524,7 @@
 
   &Selected {
     margin-right: rem(4);
+    word-break: break-word;
     transition: color 0.3s;
     user-select: none;
   }

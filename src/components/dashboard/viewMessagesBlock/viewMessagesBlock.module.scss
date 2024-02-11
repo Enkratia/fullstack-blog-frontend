@@ -1,0 +1,62 @@
+/* stylelint-disable order/order */
+@use "../../../scss/utils/" as *;
+
+.root {
+  color: var(--black-color);
+}
+
+.title {
+  margin-bottom: rem(15);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  position: relative;
+  display: grid;
+  column-gap: rem(50);
+  grid-template-columns: rem(140) 1fr max-content;
+  border: rem(1) solid var(--mediumgray01-color);
+  border-top: none;
+  padding-block: rem(15);
+  padding-inline: rem(20);
+  width: 100%;
+  font: var(--body02-font);
+  font-weight: 500;
+  background-color: var(--blue-light-color);
+  cursor: pointer;
+
+  &:first-child {
+    border-top: rem(1) solid var(--mediumgray01-color);
+  }
+
+  &:hover {
+    z-index: var(--z-up);
+    box-shadow: 0 0 0 rem(1) rgba(0 0 0 / 20%);
+  }
+
+  &Read {
+    font-weight: revert;
+    background-color: var(--light-color);
+  }
+}
+
+.fullname {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.message {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.date {
+  text-align: right;
+}

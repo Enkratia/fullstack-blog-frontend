@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import {
+  GetContactUsMessagesType,
   GetPostsType,
   GetTagsType,
   GetUsersType,
@@ -70,6 +71,13 @@ export const backendApi = createApi({
     }),
     getSubscribersCount: builder.query<SubscribersCountType, void>({
       query: () => "subscribe/count",
+    }),
+    getContactUsMessages: builder.query<GetContactUsMessagesType, string>({
+      query: (request) => `contact-us-messages${request}`,
+    }),
+    getContactUsMessageById: builder.query<ContactUsMessageType, string>({
+      query: (id) => `contact-us-messages/${id}`,
+      // providesTags: ["ContactUsMessageById"],
     }),
 
     // CREATE
@@ -256,6 +264,15 @@ export const backendApi = createApi({
         };
       },
     }),
+    updateContactUsMessages: builder.mutation<any, number>({
+      query: (id) => {
+        return {
+          url: `contact-us-messages/${id}`,
+          method: "PATCH",
+        };
+      },
+      // invalidatesTags: ["ContactUsMessageById"],
+    }),
 
     // **
     resetPassword: builder.mutation<any, ResetPasswordType>({
@@ -317,6 +334,8 @@ export const {
   useGetPrivacyPolicyQuery,
   useGetAboutUsStatisticQuery,
   useGetSubscribersCountQuery,
+  useGetContactUsMessagesQuery,
+  useGetContactUsMessageByIdQuery,
 
   // **
   useCreateUserMutation,
@@ -340,4 +359,5 @@ export const {
   useUpdateContactUsMutation,
   useUpdateFooterBottomMutation,
   useUpdatePrivacyPolicyMutation,
+  useUpdateContactUsMessagesMutation,
 } = backendApi;

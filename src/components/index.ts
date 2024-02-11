@@ -177,3 +177,5 @@ export * from "./dashboard/editBlock";
 
 // View pages
 export * from "./dashboard/viewUsersBlock";
+export * from "./dashboard/viewMessagesBlock";
+export * from "./dashboard/viewMessageBlock";
