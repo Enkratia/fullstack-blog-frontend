@@ -8,13 +8,13 @@ import "overlayscrollbars/overlayscrollbars.css";
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { useGetUsersQuery } from "../../../redux/backendApi";
+import { useGetPostsQuery } from "../../../redux/backendApi";
 
-import { AuthorCard, Pagination } from "../../../components";
+import { Article, Pagination } from "../../../components";
 import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
-import s from "./viewUsersBlock.module.scss";
+import s from "./changePostsBlock.module.scss";
 import AngleDown from "../../../../public/img/angle-down.svg";
 
 const sorting = [
@@ -26,7 +26,7 @@ type SortingCode = (typeof sorting)[number]["code"];
 
 const limit = 3;
 
-export const ViewUsersBlock: React.FC = () => {
+export const ChangePostsBlock: React.FC = () => {
   const selectRef = React.useRef<HTMLUListElement>(null);
   const [initializeOS, instanceOS] = useOverlayScrollbars({ defer: true });
 
@@ -71,8 +71,8 @@ export const ViewUsersBlock: React.FC = () => {
   let requestLocal = `?${qs.stringify(new Request(false), { encode: true })}`;
   let request = `?${qs.stringify(new Request(true), { encode: true })}`;
 
-  const { data, isError } = useGetUsersQuery(request);
-  const users = data?.data;
+  const { data, isError, refetch } = useGetPostsQuery(request);
+  const posts = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
 
@@ -95,7 +95,7 @@ export const ViewUsersBlock: React.FC = () => {
     }
   }, [isNavigate]);
 
-  if (!users) {
+  if (!posts) {
     return;
   }
 
@@ -179,7 +179,7 @@ export const ViewUsersBlock: React.FC = () => {
 
   return (
     <section className={s.root}>
-      <h2 className={`${s.title} ${cs.title}`}>Users</h2>
+      <h2 className={`${s.title} ${cs.title}`}>Posts</h2>
 
       <div className={s.toolbar}>
         <input
@@ -223,9 +223,9 @@ export const ViewUsersBlock: React.FC = () => {
       </div>
 
       <ul className={s.list}>
-        {users.map((user, i) => (
-          <li key={i} className={s.item}>
-            <AuthorCard author={user} />
+        {posts.map((post) => (
+          <li key={post.id} className={s.item}>
+            <Article obj={post} refetch={refetch} isEditable={true} />
           </li>
         ))}
       </ul>

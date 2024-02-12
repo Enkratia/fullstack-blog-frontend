@@ -15,16 +15,13 @@
 
 // **
 .list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: rem(20);
 }
 
 .item {
-  >article {
-    height: 100%;
+  &:not(:last-child) {
+    margin-bottom: rem(20);
   }
 }

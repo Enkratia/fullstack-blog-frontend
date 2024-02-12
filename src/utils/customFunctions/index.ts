@@ -11,6 +11,8 @@ export * from "./setOverflowHidden";
 
 export * from "./checkRequestStatus";
 
+export * from "./getSortingIndex";
+
 // **
 export * from "./formatStatistic";
 export * from "./formatEmailDate";

@@ -10,8 +10,16 @@
 
 .field {
   display: flex;
-  align-items: center;
   gap: rem(10);
+
+  &Name {
+    font: var(--body01-font);
+    font-weight: 600;
+  }
+
+  &Value {
+    font: var(--body01-font);
+  }
 
   &:not(:last-child) {
     margin-bottom: rem(10);
@@ -22,14 +30,5 @@
     align-items: flex-start;
     border-top: rem(1) solid var(--grayborder-color);
     padding-top: rem(10);
-  }
-
-  &Name {
-    font: var(--body01-font);
-    font-weight: 600;
-  }
-
-  &Value {
-    font: var(--body01-font);
   }
 }

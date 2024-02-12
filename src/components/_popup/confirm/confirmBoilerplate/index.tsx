@@ -1,15 +1,19 @@
 import React from "react";
 
-import { setOverflowHidden } from "../../../utils/customFunctions";
+import { setOverflowHidden } from "../../../../utils/customFunctions";
 
-import cs from "../../../scss/helpers.module.scss";
-import s from "./confirmPopup.module.scss";
+import cs from "../../../../scss/helpers.module.scss";
+import s from "./confirmBoilerplate.module.scss";
 
-type ConfirmPopupProps = {
+type ConfirmBoilerplatePopupProps = {
   onConfirmClick: (value: boolean) => void;
+  title: string;
 };
 
-export const ConfirmPopup: React.FC<ConfirmPopupProps> = ({ onConfirmClick }) => {
+export const ConfirmBoilerplatePopup: React.FC<ConfirmBoilerplatePopupProps> = ({
+  onConfirmClick,
+  title,
+}) => {
   React.useEffect(() => {
     setOverflowHidden(true);
 
@@ -22,7 +26,7 @@ export const ConfirmPopup: React.FC<ConfirmPopupProps> = ({ onConfirmClick }) =>
         <div className={s.content}>
           <div className={s.icon} aria-hidden="true"></div>
 
-          <h1 className={`${s.title} ${cs.title}`}>Your post will be deleted Permanently!</h1>
+          <h1 className={`${s.title} ${cs.title}`}>{title}</h1>
 
           <p className={s.descr}>Are you sure to proceed?</p>
 

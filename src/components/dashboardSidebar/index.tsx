@@ -49,7 +49,7 @@ export const DashboardSidebar: React.FC = () => {
       }
     });
 
-    const linkMostMatched = linksMatched.sort((a, b) => {
+    const linkMostMatched = linksMatched.slice().sort((a, b) => {
       const hrefPrev = a.getAttribute("href");
       const hrefNext = b.getAttribute("href");
 

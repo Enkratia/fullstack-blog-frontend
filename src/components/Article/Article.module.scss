@@ -120,7 +120,12 @@
     transition: border-color 0.3s, background-color 0.3s;
     cursor: pointer;
 
-    &:first-child {
+    svg {
+      width: rem(24);
+      height: rem(24);
+    }
+
+    &:nth-child(1) {
       background-color: var(--light-color);
 
       &:hover {
@@ -128,13 +133,23 @@
       }
     }
 
-    &:last-child {
+    &:nth-child(2) {
       padding: 0;
       background-color: var(--light-color);
 
       &:hover {
         color: var(--light-color);
         background-color: var(--danger-color);
+      }
+    }
+
+    &:nth-child(3) {
+      padding: 0;
+      background-color: var(--light-color);
+
+      &:hover {
+        color: var(--light-color);
+        background-color: var(--orange-color);
       }
     }
   }

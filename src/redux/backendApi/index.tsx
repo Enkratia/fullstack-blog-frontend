@@ -77,7 +77,6 @@ export const backendApi = createApi({
     }),
     getContactUsMessageById: builder.query<ContactUsMessageType, string>({
       query: (id) => `contact-us-messages/${id}`,
-      // providesTags: ["ContactUsMessageById"],
     }),
 
     // CREATE
@@ -271,7 +270,6 @@ export const backendApi = createApi({
           method: "PATCH",
         };
       },
-      // invalidatesTags: ["ContactUsMessageById"],
     }),
 
     // **
@@ -281,6 +279,14 @@ export const backendApi = createApi({
           url: `auth/reset?token=${token}`,
           method: "PATCH",
           body: body,
+        };
+      },
+    }),
+    updateFeaturedPost: builder.mutation<any, string>({
+      query: (id) => {
+        return {
+          url: `posts/featured?id=${id}`,
+          method: "PATCH",
         };
       },
     }),
@@ -360,4 +366,5 @@ export const {
   useUpdateFooterBottomMutation,
   useUpdatePrivacyPolicyMutation,
   useUpdateContactUsMessagesMutation,
+  useUpdateFeaturedPostMutation,
 } = backendApi;

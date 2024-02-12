@@ -179,3 +179,9 @@ export * from "./dashboard/editBlock";
 export * from "./dashboard/viewUsersBlock";
 export * from "./dashboard/viewMessagesBlock";
 export * from "./dashboard/viewMessageBlock";
+
+// Change pages
+export * from "./dashboard/changePostsBlock";
+
+// TEST
+export * from "./_popup";

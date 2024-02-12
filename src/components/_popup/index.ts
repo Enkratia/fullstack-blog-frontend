@@ -1,2 +1,2 @@
-export * from "./confirmPopup";
-export * from "./alertPopup";
+export * from "./confirm";
+export * from "./alert";

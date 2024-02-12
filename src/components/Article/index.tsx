@@ -3,19 +3,26 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 
-import { useDeletePostMutation } from "../../redux/backendApi";
+import { useDeletePostMutation, useUpdateFeaturedPostMutation } from "../../redux/backendApi";
 
-import { ConfirmPopup, AlertPopup } from "../../components";
+import {
+  ConfirmDeletePostPopup,
+  ConfirmUpdateFeaturedPostPopup,
+  AlertDeletePostPopup,
+  AlertUpdateFeaturedPostPopup,
+} from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./article.module.scss";
 import Bin from "../../../public/img/default/bin.svg";
 import Edit from "../../../public/img/default/edit.svg";
+import Star from "../../../public/img/default/star.svg";
 
 type ArticleType = {
   obj: PostType;
   isCategoryPage?: boolean;
   isArticlePage?: boolean;
+  isEditable?: boolean;
   refetch: () => void;
 };
 
@@ -23,12 +30,22 @@ export const Article: React.FC<ArticleType> = ({
   obj: post,
   isCategoryPage = false,
   isArticlePage = false,
+  isEditable = false,
   refetch,
 }) => {
-  const [isShowAlert, setIsShowAlert] = React.useState(false);
-  const [isShowConfirm, setIsShowConfirm] = React.useState(false);
+  const [isShowAlertUpdate, setIsShowAlertUpdate] = React.useState(false);
+  const [isShowAlertDelete, setIsShowAlertDelete] = React.useState(false);
 
-  const [deletePost, { isError, isSuccess }] = useDeletePostMutation();
+  const [isShowConfirmUpdate, setIsShowConfirmUpdate] = React.useState(false);
+  const [isShowConfirmDelete, setIsShowConfirmDelete] = React.useState(false);
+
+  const [deletePost, { isError: isDeleteError, isSuccess: isDeleteSuccess, reset: resetDelete }] =
+    useDeletePostMutation();
+
+  const [
+    updateFeaturedPost,
+    { isError: isUpdateError, isSuccess: isUpdateSuccess, reset: resetUpdate },
+  ] = useUpdateFeaturedPostMutation();
 
   const { data: session } = useSession();
   let isFeatured = post.isFeatured;
@@ -44,12 +61,25 @@ export const Article: React.FC<ArticleType> = ({
   }
 
   // **
-  const onDeleteClick = () => {
-    setIsShowConfirm(true);
+  const onUpdateFeaturedClick = () => {
+    setIsShowConfirmUpdate(true);
   };
 
-  const onConfirmClick = (value: boolean) => {
-    setIsShowConfirm(false);
+  const onUpdateConfirmClick = (value: boolean) => {
+    setIsShowConfirmUpdate(false);
+
+    if (value) {
+      updateFeaturedPost(post.id);
+    }
+  };
+
+  // **
+  const onDeleteClick = () => {
+    setIsShowConfirmDelete(true);
+  };
+
+  const onDeleteConfirmClick = (value: boolean) => {
+    setIsShowConfirmDelete(false);
 
     if (value) {
       deletePost(post.id);
@@ -58,14 +88,28 @@ export const Article: React.FC<ArticleType> = ({
 
   // **
   React.useEffect(() => {
-    if (isSuccess) {
+    if (isUpdateSuccess) {
       refetch();
+      resetUpdate();
     }
 
-    if (isError) {
-      setIsShowAlert(true);
+    if (isUpdateError) {
+      setIsShowAlertUpdate(true);
+      resetUpdate();
     }
-  }, [isSuccess, isError]);
+  }, [isUpdateError, isUpdateSuccess]);
+
+  React.useEffect(() => {
+    if (isDeleteSuccess) {
+      refetch();
+      resetDelete();
+    }
+
+    if (isDeleteError) {
+      setIsShowAlertDelete(true);
+      resetDelete();
+    }
+  }, [isDeleteSuccess, isDeleteError]);
 
   return (
     <article
@@ -83,7 +127,7 @@ export const Article: React.FC<ArticleType> = ({
           <Image src={post.imageUrl} alt={post.title} fill className={s.image} />
         </Link>
 
-        {isAuthor && (
+        {isEditable && isAuthor && (
           <div className={s.toolbar}>
             <Link href={`/edit-post/${post.id}`} className={s.toolbarBtn} aria-label="Edit post.">
               <Edit aria-hidden="true" />
@@ -94,18 +138,39 @@ export const Article: React.FC<ArticleType> = ({
                 <Bin aria-hidden="true" />
               </button>
             )}
+
+            <button
+              className={s.toolbarBtn}
+              aria-label="Mark post as featured."
+              onClick={onUpdateFeaturedClick}>
+              <Star aria-hidden="true" />
+            </button>
           </div>
         )}
       </div>
 
-      {isShowConfirm && <ConfirmPopup onConfirmClick={(value) => onConfirmClick(value)} />}
-      {isShowAlert && <AlertPopup onAlertClick={() => setIsShowAlert(false)} />}
+      {isShowConfirmDelete && (
+        <ConfirmDeletePostPopup onConfirmClick={(value) => onDeleteConfirmClick(value)} />
+      )}
+
+      {isShowConfirmUpdate && (
+        <ConfirmUpdateFeaturedPostPopup onConfirmClick={(value) => onUpdateConfirmClick(value)} />
+      )}
+
+      {isShowAlertDelete && (
+        <AlertDeletePostPopup onAlertClick={() => setIsShowAlertDelete(false)} />
+      )}
+
+      {isShowAlertUpdate && (
+        <AlertUpdateFeaturedPostPopup onAlertClick={() => setIsShowAlertUpdate(false)} />
+      )}
 
       <div className={s.data}>
         <span className={s.dataCategory}>{post.category}</span>
         <h3 className={`${s.dataTitle} ${cs.title}`}>
           <Link href="">{post.title}</Link>
         </h3>
+
         <p className={`${s.dataText} ${isCategoryPage ? s.dataTextCategoryPage : ""}`}>
           {post.contentText}
         </p>

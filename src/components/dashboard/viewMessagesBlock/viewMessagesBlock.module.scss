@@ -9,6 +9,16 @@
   margin-bottom: rem(15);
 }
 
+// **
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: rem(30);
+  gap: rem(30);
+}
+
+// **
 .list {
   list-style: none;
   margin: 0;
@@ -19,7 +29,7 @@
   position: relative;
   display: grid;
   column-gap: rem(50);
-  grid-template-columns: rem(140) 1fr max-content;
+  grid-template-columns: rem(140) 1fr rem(110);
   border: rem(1) solid var(--mediumgray01-color);
   border-top: none;
   padding-block: rem(15);

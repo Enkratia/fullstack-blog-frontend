@@ -33,12 +33,14 @@ const dateLastYears: DateLastYearsType = {
 };
 
 export const formatEmailDate = (inputDatetime: string) => {
-  // const inputDatetime = "2024-02-11T15:52:19.418Z";
-  const dateInput = new Date(inputDatetime);
   const dateNow = new Date();
+  const dateInput = new Date(inputDatetime);
 
-  if (+dateNow - +dateInput < 86400000) {
-    return new Intl.DateTimeFormat("ru-RU", timeTodayOptions).format(dateInput);
+  const dayNow = dateNow.getDate();
+  const dayInput = dateInput.getDate();
+
+  if (dayNow === dayInput) {
+    return new Intl.DateTimeFormat("en-US", timeTodayOptions).format(dateInput);
   }
 
   const yearNow = dateNow.getFullYear();
