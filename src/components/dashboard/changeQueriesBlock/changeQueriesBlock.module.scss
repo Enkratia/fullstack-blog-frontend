@@ -1,0 +1,28 @@
+@use "../../../scss/utils/" as *;
+
+.title {
+  margin-bottom: rem(15);
+}
+
+// **
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: rem(30);
+  gap: rem(30);
+}
+
+.btn {
+  margin-bottom: rem(30);
+}
+
+// **
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: rem(20);
+}

@@ -1,0 +1,16 @@
+@use "../../../../scss/utils/" as *;
+
+.title {
+  margin: 0;
+  margin-bottom: rem(15);
+}
+
+.inputWrapper {
+  margin-bottom: rem(20);
+}
+
+.btnWrapper {
+  &:not(:last-child) {
+    margin-bottom: rem(15);
+  }
+}

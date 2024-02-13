@@ -16,6 +16,8 @@ export * from "./categories";
 export * from "./authorCard";
 export * from "./article";
 export * from "./textEditor";
+export * from "./brand";
+export * from "./testimonial";
 
 // ***
 export * from "./signinBlock";
@@ -58,6 +60,7 @@ export * from "./whyWeStarted";
 export * from "./listAuthors";
 export * from "./featuredIn";
 export * from "./testimonials";
+export * from "./query";
 
 // **
 export * from "./testimonials/testimonialsSlider";
@@ -183,5 +186,16 @@ export * from "./dashboard/viewMessageBlock";
 // Change pages
 export * from "./dashboard/changePostsBlock";
 
-// TEST
-export * from "./_popup";
+// **
+export * from "./dashboard/changeBrandsBlock";
+export * from "./dashboard/changeBrandsBlock/changeBrandCreateBlock";
+export * from "./dashboard/changeBrandsBlock/changeBrandEditBlock";
+
+// **
+export * from "./dashboard/changeTestimonialsBlock";
+export * from "./dashboard/changeTestimonialsBlock/changeTestimonialCreateBlock";
+export * from "./dashboard/changeTestimonialsBlock/changeTestimonialEditBlock";
+
+// **
+export * from "./dashboard/changeQueriesBlock";
+export * from "./dashboard/changeQueriesBlock/changeQueriesCreateBlock";

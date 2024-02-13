@@ -2,8 +2,8 @@
 
 import qs from "qs";
 
-import { useOverlayScrollbars } from "overlayscrollbars-react";
-import "overlayscrollbars/overlayscrollbars.css";
+// import { useOverlayScrollbars } from "overlayscrollbars-react";
+// import "overlayscrollbars/overlayscrollbars.css";
 
 import React from "react";
 import Link from "next/link";
@@ -31,10 +31,6 @@ type SortingCode = (typeof sorting)[number]["code"];
 const limit = 5;
 
 export const ViewMessagesBlock: React.FC = () => {
-  const selectRef = React.useRef<HTMLUListElement>(null);
-  const [initializeOS, instanceOS] = useOverlayScrollbars({ defer: true });
-
-  // **
   const timer = React.useRef<NodeJS.Timeout>();
 
   // **
@@ -223,7 +219,7 @@ export const ViewMessagesBlock: React.FC = () => {
           </div>
           <div
             className={`${cs.selectWrapper} ${cs.input} ${isOpen ? cs.selectWrapperActive : ""}`}>
-            <ul ref={selectRef} className={cs.selectList}>
+            <ul className={cs.selectList}>
               {sorting.map(({ title }, i) => (
                 <li
                   key={i}

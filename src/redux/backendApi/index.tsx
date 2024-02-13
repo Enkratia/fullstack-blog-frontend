@@ -2,11 +2,17 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import {
   GetContactUsMessagesType,
+  GetContactUsQueriesType,
+  GetFeaturedInType,
   GetPostsType,
   GetTagsType,
+  GetTestimonialsType,
   GetUsersType,
   ResetPasswordType,
+  UpdateBrandType,
   UpdatePostType,
+  UpdateQueryType,
+  UpdateTestimonialType,
   UpdateUserType,
 } from "./types";
 import type { RootState } from "../store";
@@ -26,7 +32,7 @@ export const backendApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Posts"],
+  tagTypes: ["Posts", "Brands", "Testimonials", "Queries"],
   endpoints: (builder) => ({
     // GET
     getUserById: builder.query<UserType, string>({
@@ -45,11 +51,13 @@ export const backendApi = createApi({
     getTags: builder.query<GetTagsType, string>({
       query: (request) => `posts/tags${request}`,
     }),
-    getFeaturedIn: builder.query<FeaturedCompanyType[], void>({
-      query: () => "featured-in",
+    getFeaturedIn: builder.query<GetFeaturedInType, string>({
+      query: (request) => `featured-in${request}`,
+      providesTags: ["Brands"],
     }),
-    getTestimonial: builder.query<TestimonialType[], void>({
-      query: () => "testimonial",
+    getTestimonial: builder.query<GetTestimonialsType, string>({
+      query: (request) => `testimonial${request}`,
+      providesTags: ["Testimonials"],
     }),
     getAboutUsStatic: builder.query<AboutUsStaticType[], void>({
       query: () => "about-us-static",
@@ -60,8 +68,9 @@ export const backendApi = createApi({
     getContactUs: builder.query<ContactUsType[], void>({
       query: () => "contact-us",
     }),
-    getContactUsQueries: builder.query<ContactUsQueriesType, void>({
-      query: () => "contact-us-queries",
+    getContactUsQueries: builder.query<GetContactUsQueriesType, string>({
+      query: (request) => `contact-us-queries${request}`,
+      providesTags: ["Queries"],
     }),
     getPrivacyPolicy: builder.query<PrivacyPolicyType, void>({
       query: () => "privacy-policy",
@@ -77,6 +86,12 @@ export const backendApi = createApi({
     }),
     getContactUsMessageById: builder.query<ContactUsMessageType, string>({
       query: (id) => `contact-us-messages/${id}`,
+    }),
+    getBrandById: builder.query<FeaturedCompanyType, number>({
+      query: (id) => `featured-in/${id}`,
+    }),
+    getTestimonialById: builder.query<TestimonialType, number>({
+      query: (id) => `testimonial/${id}`,
     }),
 
     // CREATE
@@ -124,6 +139,36 @@ export const backendApi = createApi({
           body: body,
         };
       },
+    }),
+    createBrand: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: "featured-in",
+          method: "POST",
+          body: body,
+        };
+      },
+      invalidatesTags: ["Brands"],
+    }),
+    createTestimonial: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: "testimonial",
+          method: "POST",
+          body: body,
+        };
+      },
+      invalidatesTags: ["Testimonials"],
+    }),
+    createQuery: builder.mutation<any, FormData>({
+      query: (body) => {
+        return {
+          url: "contact-us-queries",
+          method: "POST",
+          body: body,
+        };
+      },
+      invalidatesTags: ["Queries"],
     }),
 
     // **
@@ -271,6 +316,36 @@ export const backendApi = createApi({
         };
       },
     }),
+    updateBrand: builder.mutation<any, UpdateBrandType>({
+      query: ({ id, body }) => {
+        return {
+          url: `featured-in/${id}`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+      invalidatesTags: ["Brands"],
+    }),
+    updateTestimonial: builder.mutation<any, UpdateTestimonialType>({
+      query: ({ id, body }) => {
+        return {
+          url: `testimonial/${id}`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+      invalidatesTags: ["Testimonials"],
+    }),
+    updateQuery: builder.mutation<any, UpdateQueryType>({
+      query: ({ id, body }) => {
+        return {
+          url: `contact-us-queries/${id}`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+      invalidatesTags: ["Queries"],
+    }),
 
     // **
     resetPassword: builder.mutation<any, ResetPasswordType>({
@@ -309,6 +384,24 @@ export const backendApi = createApi({
       },
       invalidatesTags: ["Posts"],
     }),
+    deleteBrand: builder.mutation<any, number>({
+      query: (id) => {
+        return {
+          url: `featured-in/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["Brands"],
+    }),
+    deleteTestimonial: builder.mutation<any, number>({
+      query: (id) => {
+        return {
+          url: `testimonial/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["Testimonials"],
+    }),
 
     // **
     unsubscribe: builder.query<any, string>({
@@ -342,6 +435,8 @@ export const {
   useGetSubscribersCountQuery,
   useGetContactUsMessagesQuery,
   useGetContactUsMessageByIdQuery,
+  useGetBrandByIdQuery,
+  useGetTestimonialByIdQuery,
 
   // **
   useCreateUserMutation,
@@ -367,4 +462,12 @@ export const {
   useUpdatePrivacyPolicyMutation,
   useUpdateContactUsMessagesMutation,
   useUpdateFeaturedPostMutation,
+  useCreateBrandMutation,
+  useDeleteBrandMutation,
+  useUpdateBrandMutation,
+  useCreateTestimonialMutation,
+  useDeleteTestimonialMutation,
+  useUpdateTestimonialMutation,
+  useCreateQueryMutation,
+  useUpdateQueryMutation,
 } = backendApi;

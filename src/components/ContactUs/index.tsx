@@ -29,7 +29,8 @@ import s from "./contactUs.module.scss";
 
 export const ContactUs: React.FC = () => {
   const { data, isError: isInfoError } = useGetContactUsQuery();
-  const { data: queries, isError: isQueryError } = useGetContactUsQueriesQuery();
+  const { data: queriesData, isError: isQueryError } = useGetContactUsQueriesQuery("");
+  const queries = queriesData?.data;
 
   const info = data?.[0];
 

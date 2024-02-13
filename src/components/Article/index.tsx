@@ -23,7 +23,7 @@ type ArticleType = {
   isCategoryPage?: boolean;
   isArticlePage?: boolean;
   isEditable?: boolean;
-  refetch: () => void;
+  refetch?: () => void;
 };
 
 export const Article: React.FC<ArticleType> = ({
@@ -39,19 +39,32 @@ export const Article: React.FC<ArticleType> = ({
   const [isShowConfirmUpdate, setIsShowConfirmUpdate] = React.useState(false);
   const [isShowConfirmDelete, setIsShowConfirmDelete] = React.useState(false);
 
-  const [deletePost, { isError: isDeleteError, isSuccess: isDeleteSuccess, reset: resetDelete }] =
-    useDeletePostMutation();
+  const [
+    deletePost,
+    {
+      isError: isDeleteError,
+      isSuccess: isDeleteSuccess,
+      isLoading: isDeleteLoading,
+      reset: resetDelete,
+    },
+  ] = useDeletePostMutation();
 
   const [
     updateFeaturedPost,
-    { isError: isUpdateError, isSuccess: isUpdateSuccess, reset: resetUpdate },
+    {
+      isError: isUpdateError,
+      isSuccess: isUpdateSuccess,
+      isLoading: isUpdateLoading,
+      reset: resetUpdate,
+    },
   ] = useUpdateFeaturedPostMutation();
 
+  // **
   const { data: session } = useSession();
   let isFeatured = post.isFeatured;
   let isAuthor = false;
 
-  if (session) {
+  if (session && isEditable) {
     const userId = session.user.id;
     const authorId = post.user.id;
 
@@ -89,7 +102,7 @@ export const Article: React.FC<ArticleType> = ({
   // **
   React.useEffect(() => {
     if (isUpdateSuccess) {
-      refetch();
+      refetch && refetch();
       resetUpdate();
     }
 
@@ -101,7 +114,7 @@ export const Article: React.FC<ArticleType> = ({
 
   React.useEffect(() => {
     if (isDeleteSuccess) {
-      refetch();
+      refetch && refetch();
       resetDelete();
     }
 
@@ -127,24 +140,31 @@ export const Article: React.FC<ArticleType> = ({
           <Image src={post.imageUrl} alt={post.title} fill className={s.image} />
         </Link>
 
-        {isEditable && isAuthor && (
-          <div className={s.toolbar}>
-            <Link href={`/edit-post/${post.id}`} className={s.toolbarBtn} aria-label="Edit post.">
+        {isAuthor && (
+          <div className={`${s.toolbar} ${cs.toolbar}`}>
+            <Link href={`/edit-post/${post.id}`} className={cs.toolbarBtn} aria-label="Edit post.">
               <Edit aria-hidden="true" />
             </Link>
 
             {!isFeatured && (
-              <button className={s.toolbarBtn} aria-label="Delete post." onClick={onDeleteClick}>
-                <Bin aria-hidden="true" />
-              </button>
-            )}
+              <>
+                <button
+                  className={cs.toolbarBtn}
+                  aria-label="Delete post."
+                  onClick={onDeleteClick}
+                  disabled={isUpdateLoading}>
+                  <Bin aria-hidden="true" />
+                </button>
 
-            <button
-              className={s.toolbarBtn}
-              aria-label="Mark post as featured."
-              onClick={onUpdateFeaturedClick}>
-              <Star aria-hidden="true" />
-            </button>
+                <button
+                  className={cs.toolbarBtn}
+                  aria-label="Mark post as featured."
+                  onClick={onUpdateFeaturedClick}
+                  disabled={isDeleteLoading}>
+                  <Star aria-hidden="true" />
+                </button>
+              </>
+            )}
           </div>
         )}
       </div>

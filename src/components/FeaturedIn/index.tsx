@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import Image from "next/image";
 
 import useEmblaCarousel from "embla-carousel-react";
 import autoplay from "embla-carousel-autoplay";
 
 import { useGetFeaturedInQuery } from "../../redux/backendApi";
+
+import { Brand } from "../../components";
 
 import s from "./featuredIn.module.scss";
 import cs from "../../scss/helpers.module.scss";
@@ -291,6 +291,9 @@ import cs from "../../scss/helpers.module.scss";
 //   );
 // };
 
+const limit = 5;
+const page = 1;
+
 export const FeaturedIn: React.FC = () => {
   const plugins = [autoplay()];
   const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -307,9 +310,12 @@ export const FeaturedIn: React.FC = () => {
     plugins,
   );
 
-  const { data: featuredCompanies, isError } = useGetFeaturedInQuery();
+  const request = `?_page=${page}&_limit=${limit}`;
 
-  if (!featuredCompanies) {
+  const { data, isError } = useGetFeaturedInQuery(request);
+  const brands = data?.data;
+
+  if (!brands) {
     return;
   }
 
@@ -325,11 +331,9 @@ export const FeaturedIn: React.FC = () => {
 
         <div className={s.sliderWrapper} ref={emblaRef}>
           <div className={s.slider}>
-            {featuredCompanies.map((obj) => (
+            {brands.map((obj) => (
               <div key={obj.id} className={s.slide}>
-                <Link href={obj.linkUrl} className={s.link}>
-                  <Image src={obj.imageUrl} alt={obj.title} className={s.image} fill />
-                </Link>
+                <Brand obj={obj} />
               </div>
             ))}
           </div>

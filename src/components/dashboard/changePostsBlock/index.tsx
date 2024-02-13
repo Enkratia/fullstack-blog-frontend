@@ -2,9 +2,6 @@
 
 import qs from "qs";
 
-import { useOverlayScrollbars } from "overlayscrollbars-react";
-import "overlayscrollbars/overlayscrollbars.css";
-
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -27,10 +24,6 @@ type SortingCode = (typeof sorting)[number]["code"];
 const limit = 3;
 
 export const ChangePostsBlock: React.FC = () => {
-  const selectRef = React.useRef<HTMLUListElement>(null);
-  const [initializeOS, instanceOS] = useOverlayScrollbars({ defer: true });
-
-  // **
   const timer = React.useRef<NodeJS.Timeout>();
 
   // **
@@ -204,7 +197,7 @@ export const ChangePostsBlock: React.FC = () => {
           </div>
           <div
             className={`${cs.selectWrapper} ${cs.input} ${isOpen ? cs.selectWrapperActive : ""}`}>
-            <ul ref={selectRef} className={cs.selectList}>
+            <ul className={cs.selectList}>
               {sorting.map(({ title }, i) => (
                 <li
                   key={i}

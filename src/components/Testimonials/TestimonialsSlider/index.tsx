@@ -7,6 +7,8 @@ import useEmblaCarousel from "embla-carousel-react";
 
 import { useGetTestimonialQuery } from "../../../redux/backendApi";
 
+import { Testimonial } from "../../../components";
+
 import s from "./TestimonialsSlider.module.scss";
 import Arrow from "../../../../public/img/arrow.svg";
 import Deafult from "../../../../public/img/default/user.png";
@@ -36,57 +38,17 @@ import Deafult from "../../../../public/img/default/user.png";
 // ];
 
 const defaultHeight = 160;
-
-type TextButtonProps = {
-  thisSlide: number;
-  currentSlide: number;
-};
-
-const TextButton: React.FC<TextButtonProps> = ({ thisSlide, currentSlide }) => {
-  const textBtnRef = React.useRef<HTMLButtonElement>(null);
-  const [isActive, setIsActive] = React.useState(false);
-
-  const onTextBtnClick = () => {
-    setIsActive((b) => !b);
-
-    const text = textBtnRef.current?.nextElementSibling as HTMLParagraphElement;
-    if (!text) return;
-
-    if (isActive) {
-      text.style.maxHeight = "";
-      return;
-    }
-
-    const textSH = text.scrollHeight;
-    text.style.maxHeight = textSH + "px";
-  };
-
-  React.useEffect(() => {
-    const text = textBtnRef.current?.nextElementSibling as HTMLParagraphElement;
-    if (!text) return;
-
-    if (thisSlide !== currentSlide && isActive) {
-      setIsActive(false);
-      text.style.maxHeight = "";
-    }
-  });
-
-  return (
-    <button
-      ref={textBtnRef}
-      onClick={onTextBtnClick}
-      className={s.textBtn}
-      data-text-btn-active={isActive ? "true" : "false"}
-      aria-label={`Show / hide entire message.`}
-      aria-pressed={isActive ? "true" : "false"}></button>
-  );
-};
+const limit = 3;
+const page = 1;
 
 export const TestimonialsSlider: React.FC = () => {
   const sliderRef = React.useRef<HTMLDivElement>(null);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
 
-  const { data: testimonials, isError } = useGetTestimonialQuery();
+  const request = `?_page=${page}&_limit=${limit}`;
+  const { data, isError } = useGetTestimonialQuery(request);
+  const testimonials = data?.data;
+
   const [slide, setSlide] = React.useState(0);
 
   React.useEffect(() => {
@@ -140,29 +102,7 @@ export const TestimonialsSlider: React.FC = () => {
     <div className={s.root} ref={emblaRef}>
       <div className={s.slider} ref={sliderRef}>
         {testimonials.map((obj, i) => (
-          <div key={obj.id} className={s.item}>
-            <div className={s.textWrapper}>
-              <TextButton thisSlide={i} currentSlide={slide} />
-              <p className={s.text}>{obj.text}</p>
-            </div>
-
-            <div className={s.info}>
-              <div className={s.imageWrapper}>
-                <Image
-                  src={obj.imageUrl ? obj.imageUrl : Deafult}
-                  alt="Avatar of the author."
-                  className={s.image}
-                  fill
-                />
-              </div>
-              <div className={s.bottom}>
-                <div className={s.metadata}>
-                  <span className={s.fullname}>{obj.fullname}</span>
-                  <span className={s.address}>{obj.address}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Testimonial key={i} obj={obj} index={i} currentSlide={slide} />
         ))}
       </div>
 

@@ -93,22 +93,3 @@
     flex: 0 0 calc(100% / 1);
   }
 }
-
-.image {
-  width: 100%;
-  object-fit: contain;
-  filter: var(--featured-filter);
-  transition: filter 0.3s;
-
-  &:hover {
-    filter: none;
-  }
-}
-
-.link {
-  position: relative;
-  display: block;
-  overflow: visible;
-  width: rem(160);
-  height: rem(32);
-}

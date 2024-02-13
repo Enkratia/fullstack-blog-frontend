@@ -102,7 +102,7 @@ export const MyPosts: React.FC = () => {
       <ul className={s.list}>
         {posts.map((obj) => (
           <li key={obj.id} className={s.item}>
-            <Article obj={obj} refetch={refetchPostsAfterDelete} />
+            <Article obj={obj} refetch={refetchPostsAfterDelete} isEditable={true} />
           </li>
         ))}
       </ul>
