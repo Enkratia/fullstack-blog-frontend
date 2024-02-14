@@ -1,0 +1,209 @@
+@use "../../../scss/utils" as *;
+
+// **
+.head {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-up);
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: rem(1) solid var(--grayborder-color);
+  padding-block: rem(14);
+  padding-inline: rem(24);
+  background-color: var(--light-color);
+
+  &Title {
+    margin: 0;
+    margin-right: rem(10);
+    text-align: left;
+  }
+
+  &Close {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    cursor: pointer;
+
+    svg {
+      width: rem(24);
+      height: rem(24);
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  @include bp-down("1024") {
+    display: flex;
+  }
+}
+
+// **
+.nav {
+  &Wrapper {
+    @include bp-down("1024") {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      overflow-y: auto;
+      border-top-left-radius: rem(4);
+      border-bottom-left-radius: rem(4);
+      width: 100%;
+      height: 100%;
+      max-width: rem(280);
+      max-height: 100vh;
+      background-color: var(--light-color);
+      transform: translateX(100%);
+      transition: transform 0.3s;
+    }
+  }
+
+  @include bp-down("1024") {
+    display: inline-flex;
+    flex-direction: column;
+    padding-block: rem(14);
+    padding-inline: rem(24);
+    width: 100%;
+    height: 100%;
+    text-align: initial;
+  }
+}
+
+.section {
+  &:not(:last-child) {
+    margin-bottom: rem(15);
+  }
+}
+
+.title {
+  margin: 0;
+  margin-bottom: rem(8);
+  width: 100%;
+  transition: color 0.3s;
+
+  &Link {
+    display: block;
+    width: 100%;
+    transition: color 0.3s, font-weight 0.3s;
+
+    &[data-link-active] {
+      font-weight: 500;
+      color: var(--blue-color);
+    }
+  }
+
+  &:hover {
+    color: var(--blue-color);
+  }
+}
+
+.dropdown {
+  margin-bottom: rem(4);
+  width: 100%;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font: var(--body01-font);
+  transition: color 0.3s, padding-bottom 0.3s, font-weight 0.3s;
+
+  svg {
+    width: rem(18);
+    height: rem(18);
+    transform: rotate(-90deg);
+    transition: stroke 0.3s;
+  }
+
+  &Active {
+    svg {
+      transform: revert;
+    }
+
+    ~ul {
+      visibility: visible;
+    }
+  }
+
+  &:hover {
+    color: var(--blue-color);
+
+    svg {
+      stroke: currentcolor;
+    }
+  }
+
+  &[data-link-active] {
+    font-weight: 500;
+    color: var(--blue-color);
+  }
+}
+
+.list {
+  list-style: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  padding-left: rem(8);
+  height: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: rem(4);
+  }
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: rem(12);
+  color: var(--black-color);
+
+  &Mark {
+    position: absolute;
+    left: 0;
+    top: 0;
+    order: -1;
+    width: rem(1);
+    height: 100%;
+    background-color: var(--grayborder-color);
+    transition: background-color 0.3s;
+  }
+
+  &:hover {
+    color: var(--blue-color);
+  }
+}
+
+.link {
+  display: block;
+  padding-block: rem(2.5);
+  width: 100%;
+  font: var(--body01-font);
+  color: inherit;
+  transition: color 0.3s font-weight 0.3s;
+
+  &:hover {
+    color: var(--blue-color);
+  }
+
+  &[data-link-active] {
+    font-weight: 500;
+    color: var(--blue-color);
+
+    ~span {
+      background-color: var(--blue-color);
+    }
+  }
+}

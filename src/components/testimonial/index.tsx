@@ -24,6 +24,7 @@ const TextButton: React.FC<TextButtonProps> = ({ thisSlide, currentSlide }) => {
   const textBtnRef = React.useRef<HTMLButtonElement>(null);
   const [isActive, setIsActive] = React.useState(false);
 
+  // **
   const onTextBtnClick = () => {
     setIsActive((b) => !b);
 
@@ -39,6 +40,7 @@ const TextButton: React.FC<TextButtonProps> = ({ thisSlide, currentSlide }) => {
     text.style.maxHeight = textSH + "px";
   };
 
+  // **
   React.useEffect(() => {
     const text = textBtnRef.current?.nextElementSibling as HTMLParagraphElement;
     if (!text) return;
@@ -113,9 +115,9 @@ export const Testimonial: React.FC<TestimonialProps> = ({
 
     if (isSuccess) {
       refetch && refetch();
-
-      reset();
     }
+
+    reset();
   }, [isError, isSuccess]);
 
   return (

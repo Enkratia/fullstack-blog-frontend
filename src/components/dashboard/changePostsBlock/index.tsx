@@ -174,7 +174,7 @@ export const ChangePostsBlock: React.FC = () => {
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Posts</h2>
 
-      <div className={s.toolbar}>
+      <div className={`${s.tooltip} ${cs.tooltip}`}>
         <input
           defaultValue={search}
           onChange={onSearchChange}

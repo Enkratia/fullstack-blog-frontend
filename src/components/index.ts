@@ -142,7 +142,12 @@ export * from "./myPosts";
 
 /////////////////= DASHBOARD =////////////////////
 export * from "./dashboardSidebar";
+export * from "./dashboardSidebar/modalDashboard";
+export * from "./dashboardSidebar/dashboardNav";
 export * from "./dashboard/dashboardBreadcrumbs";
+
+// **
+export * from "./dashboard/editBlock";
 
 // **
 export * from "./dashboard/dashboardBlock";
@@ -176,14 +181,19 @@ export * from "./dashboard/editPrivacyPolicySection1Block/editPrivacyPolicySecti
 // **
 export * from "./dashboard/editHomeBlock";
 export * from "./dashboard/editAboutUsBlock";
-export * from "./dashboard/editBlock";
 
 // View pages
+export * from "./dashboard/viewBlock";
+
+// **
 export * from "./dashboard/viewUsersBlock";
 export * from "./dashboard/viewMessagesBlock";
 export * from "./dashboard/viewMessageBlock";
 
 // Change pages
+export * from "./dashboard/changeBlock";
+
+// **
 export * from "./dashboard/changePostsBlock";
 
 // **

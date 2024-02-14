@@ -4,17 +4,12 @@
   margin-bottom: rem(15);
 }
 
-// **
-.toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: rem(30);
-  gap: rem(30);
-}
-
 .btn {
   margin-bottom: rem(20);
+
+  @include bp-down("576") {
+    padding-inline: rem(35);
+  }
 }
 
 // **
@@ -26,4 +21,16 @@
   padding: 0;
   padding-top: rem(30);
   gap: rem(20);
+
+  @include bp-down("768") {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+.item {
+  @include bp-down("768") {
+    >div {
+      align-items: center;
+    }
+  }
 }

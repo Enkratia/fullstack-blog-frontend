@@ -1,11 +1,11 @@
 import React from "react";
 
-import { EditBlock } from "../../../components";
+import { ViewBlock } from "../../../components";
 
 const DashboardViewPage: React.FC = () => {
   return (
     <div>
-      <EditBlock />
+      <ViewBlock />
     </div>
   );
 };

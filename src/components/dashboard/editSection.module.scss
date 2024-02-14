@@ -63,4 +63,20 @@
       height: rem(18);
     }
   }
+
+  @include bp-down("1120") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include bp-down("1024") {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @include bp-down("876") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include bp-down("576") {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }

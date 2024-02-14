@@ -6,9 +6,9 @@ import React from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { useGetContactUsQueriesQuery, useGetTestimonialQuery } from "../../../redux/backendApi";
+import { useGetContactUsQueriesQuery } from "../../../redux/backendApi";
 
-import { Pagination, Query, Testimonial } from "../../../components";
+import { Pagination, Query } from "../../../components";
 import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -188,7 +188,7 @@ export const ChangeQueriesBlock: React.FC = () => {
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Queries</h2>
 
-      <div className={s.toolbar}>
+      <div className={`${s.tooltip} ${cs.tooltip}`}>
         <input
           defaultValue={search}
           onChange={onSearchChange}
@@ -236,11 +236,7 @@ export const ChangeQueriesBlock: React.FC = () => {
       <ul className={s.list}>
         {queries.map((obj, i) => (
           <li key={obj.id} className={s.item}>
-            <Query obj={obj} />
-            {/* <Testimonial
-              obj={obj}
-              refetch={refetchQueriesAfterDelete}
-            /> */}
+            <Query obj={obj} refetch={refetchQueriesAfterDelete} />
           </li>
         ))}
       </ul>

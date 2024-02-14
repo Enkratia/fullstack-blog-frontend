@@ -4,16 +4,25 @@
   margin-bottom: rem(60);
   padding: rem(30);
   background-color: var(--lightgray-color);
+
+  @include bp-down("678") {
+    padding: rem(20);
+  }
 }
 
 .list {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: rem(20);
+  gap: rem(30);
+
+  @include bp-down("678") {
+    flex-wrap: wrap;
+    gap: rem(20);
+  }
 }
 
 .item {
@@ -21,4 +30,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+
+  &:not(:last-child) {
+    margin-right: revert;
+    margin-bottom: revert;
+  }
+
+  @include bp-down("678") {
+    width: calc(50% - rem(10));
+  }
 }

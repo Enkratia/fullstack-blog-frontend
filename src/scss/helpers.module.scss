@@ -781,3 +781,17 @@
     }
   }
 }
+
+// **
+.tooltip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: rem(30);
+  gap: rem(30);
+
+  @include bp-down("500") {
+    flex-direction: column;
+    gap: rem(10);
+  }
+}

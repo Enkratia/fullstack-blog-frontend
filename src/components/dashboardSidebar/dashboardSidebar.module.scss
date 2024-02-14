@@ -4,137 +4,37 @@
   color: var(--black-color);
 }
 
-.section {
-  &:not(:last-child) {
-    margin-bottom: rem(15);
-  }
-}
-
-.title {
-  margin: 0;
-  margin-bottom: rem(8);
-  width: 100%;
-  transition: color 0.3s;
-
-  &Link {
-    display: block;
-    width: 100%;
-    transition: color 0.3s, font-weight 0.3s;
-
-    &[data-link-active] {
-      font-weight: 500;
-      color: var(--blue-color);
-    }
-  }
-
-  &:hover {
-    color: var(--blue-color);
-  }
-}
-
-.dropdown {
-  margin-bottom: rem(4);
-  width: 100%;
-}
-
-.btn {
+// **
+.menuBtn {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  border: none;
+  padding: 0;
   font: var(--body01-font);
-  transition: color 0.3s, padding-bottom 0.3s, font-weight 0.3s;
+  color: var(--black-color);
+  background-color: transparent;
+  cursor: pointer;
 
   svg {
     width: rem(18);
     height: rem(18);
     transform: rotate(-90deg);
-    transition: stroke 0.3s;
   }
 
   &Active {
     svg {
-      transform: revert;
-    }
-
-    ~ul {
-      visibility: visible;
+      transform: initial;
     }
   }
 
-  &:hover {
-    color: var(--blue-color);
+  &Wrapper {
+    display: none;
+    border-top: rem(1) solid var(--grayborder-color);
+    border-bottom: rem(1) solid var(--grayborder-color);
+    padding-block: rem(15);
 
-    svg {
-      stroke: currentcolor;
-    }
-  }
-
-  &[data-link-active] {
-    font-weight: 500;
-    color: var(--blue-color);
-  }
-}
-
-.list {
-  list-style: none;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  padding-left: rem(8);
-  height: 0;
-  visibility: hidden;
-  transition: all 0.3s;
-
-  &::before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: rem(4);
-  }
-}
-
-.item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding-left: rem(12);
-  color: var(--black-color);
-
-  &Mark {
-    position: absolute;
-    left: 0;
-    top: 0;
-    order: -1;
-    width: rem(1);
-    height: 100%;
-    background-color: var(--grayborder-color);
-    transition: background-color 0.3s;
-  }
-
-  &:hover {
-    color: var(--blue-color);
-  }
-}
-
-.link {
-  display: block;
-  padding-block: rem(2.5);
-  width: 100%;
-  font: var(--body01-font);
-  color: inherit;
-  transition: color 0.3s font-weight 0.3s;
-
-  &:hover {
-    color: var(--blue-color);
-  }
-
-  &[data-link-active] {
-    font-weight: 500;
-    color: var(--blue-color);
-
-    ~span {
-      background-color: var(--blue-color);
+    @include bp-down("1024") {
+      display: flex;
     }
   }
 }

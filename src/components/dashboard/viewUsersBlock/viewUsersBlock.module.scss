@@ -5,15 +5,6 @@
 }
 
 // **
-.toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: rem(30);
-  gap: rem(30);
-}
-
-// **
 .list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -21,6 +12,22 @@
   margin: 0;
   padding: 0;
   gap: rem(20);
+
+  @include bp-down("1150") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include bp-down("1024") {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @include bp-down("876") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include bp-down("576") {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }
 
 .item {

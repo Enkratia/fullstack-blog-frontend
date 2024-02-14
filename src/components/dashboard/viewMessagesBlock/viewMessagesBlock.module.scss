@@ -10,15 +10,6 @@
 }
 
 // **
-.toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: rem(30);
-  gap: rem(30);
-}
-
-// **
 .list {
   list-style: none;
   margin: 0;
@@ -53,6 +44,11 @@
     font-weight: revert;
     background-color: var(--light-color);
   }
+
+  @include bp-down("576") {
+    column-gap: rem(20);
+    grid-template-columns: rem(100) 1fr;
+  }
 }
 
 .fullname {
@@ -69,4 +65,8 @@
 
 .date {
   text-align: right;
+
+  @include bp-down("576") {
+    display: none;
+  }
 }

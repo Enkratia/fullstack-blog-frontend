@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from "react-
 
 import { backendApi } from "./backendApi";
 import menuBtn from "./menuBtnSlice/slice";
+import dashboardMenuBtn from "./dashboardMenuBtnSlice/slice";
 import auth from "./authSlice/slice";
 
 export const makeStore = () => {
@@ -10,6 +11,7 @@ export const makeStore = () => {
     reducer: {
       auth,
       menuBtn,
+      dashboardMenuBtn,
       [backendApi.reducerPath]: backendApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(backendApi.middleware),

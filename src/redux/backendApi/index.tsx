@@ -402,6 +402,14 @@ export const backendApi = createApi({
       },
       invalidatesTags: ["Testimonials"],
     }),
+    deleteQuery: builder.mutation<any, number>({
+      query: (id) => {
+        return {
+          url: `contact-us-queries/${id}`,
+          method: "DELETE",
+        };
+      },
+    }),
 
     // **
     unsubscribe: builder.query<any, string>({
@@ -470,4 +478,5 @@ export const {
   useUpdateTestimonialMutation,
   useCreateQueryMutation,
   useUpdateQueryMutation,
+  useDeleteQueryMutation,
 } = backendApi;
