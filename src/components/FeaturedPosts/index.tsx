@@ -3,134 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { fetchPostsQuery } from "../../fetchApi/fetchApi";
+
+import { SkeletonFeaturedPosts } from "../../components";
 import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./featuredPosts.module.scss";
-
-// const allPosts: PostType[] = [
-//   {
-//     id: 1,
-//     title: "8 Figma design systems that you can download for free today.",
-//     category: "startup",
-//     createdAt: "2023-11-03T17:44:30.644Z",
-//     updatedAt: "2023-11-03T17:44:30.644Z",
-//     contentText:
-//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//     contentJson: "",
-//     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-//     tags: ["business", "experience"],
-//     isFeatured: false,
-//     views: 0,
-//     user: {
-//       id: 1,
-//       email: "email@email.com",
-//       fullname: "John Doe",
-//       imageUrl: "",
-//       profession: "",
-//       company: "",
-//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//     },
-//   },
-//   {
-//     id: 2,
-//     title: "8 Figma design systems that you can download for free today.",
-//     category: "startup",
-//     createdAt: "2023-11-03T17:44:30.644Z",
-//     updatedAt: "2023-11-03T17:44:30.644Z",
-//     contentText:
-//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//     contentJson: "",
-//     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-//     tags: ["business", "experience"],
-//     isFeatured: false,
-//     views: 0,
-//     user: {
-//       id: 1,
-//       fullname: "John Doe",
-//       imageUrl: "",
-//       email: "email@email.com",
-//       profession: "",
-//       company: "",
-//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//     },
-//   },
-//   {
-//     id: 3,
-//     title: "8 Figma design systems that you can download for free today.",
-//     category: "startup",
-//     createdAt: "2023-11-03T17:44:30.644Z",
-//     updatedAt: "2023-11-03T17:44:30.644Z",
-//     contentText:
-//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//     contentJson: "",
-//     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-//     tags: ["business", "experience"],
-//     isFeatured: false,
-//     views: 0,
-//     user: {
-//       id: 1,
-//       fullname: "John Doe",
-//       imageUrl: "",
-//       profession: "",
-//       email: "email@email.com",
-//       company: "",
-//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//     },
-//   },
-//   {
-//     id: 4,
-//     title: "8 Figma design systems that you can download for free today.",
-//     category: "startup",
-//     createdAt: "2023-11-03T17:44:30.644Z",
-//     updatedAt: "2023-11-03T17:44:30.644Z",
-//     contentText:
-//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//     contentJson: "",
-//     imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-//     tags: ["business", "experience"],
-//     isFeatured: false,
-//     views: 0,
-//     user: {
-//       id: 1,
-//       fullname: "John Doe",
-//       imageUrl: "",
-//       profession: "",
-//       email: "email@email.com",
-//       company: "",
-//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//     },
-//   },
-// ];
-
-// const post: PostType = {
-//   id: 1,
-//   title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-//   category: "startup",
-//   createdAt: "2023-11-03T17:44:30.644Z",
-//   updatedAt: "2023-11-03T17:44:30.644Z",
-//   contentText:
-//     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//   contentJson: "",
-//   imageUrl: "https://i.postimg.cc/Yq9vxzbW/6846465184684-1000x667.png",
-//   tags: ["business", "experience"],
-//   isFeatured: true,
-//   views: 0,
-//   user: {
-//     id: 1,
-//     fullname: "John Doe",
-//     imageUrl: "",
-//     profession: "",
-//     email: "email@email.com",
-//     company: "",
-//     representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-//     userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//   },
-// };
 
 export const FeaturedPosts: React.FC = async () => {
   const requestFeatured = "?isFeatured=true";
@@ -146,6 +24,8 @@ export const FeaturedPosts: React.FC = async () => {
     return;
   }
 
+  // return <SkeletonFeaturedPosts />;
+
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
@@ -159,6 +39,7 @@ export const FeaturedPosts: React.FC = async () => {
                   src={featuredPost.imageUrl}
                   alt={featuredPost.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className={s.featuredImage}
                 />
               </div>
@@ -168,26 +49,30 @@ export const FeaturedPosts: React.FC = async () => {
               <span className={cs.metadataItem}>
                 By
                 <Link
-                  href={`/users/${featuredPost.user.id}`}
+                  href={`/author/${featuredPost.user.id}`}
                   className={cs.metadataName}>{` ${featuredPost.user.fullname}`}</Link>
               </span>
               <span className={cs.metadataItem}>{formatDate(featuredPost.createdAt)}</span>
             </div>
 
-            <Link href="" className={s.featuredTitleSecondLink}>
+            <Link
+              href={`/blog/${featuredPost.category}/${featuredPost.user.id}`}
+              className={s.featuredTitleSecondLink}>
               <h3 className={s.featuredTitleSecond}>{featuredPost.title}</h3>
             </Link>
 
             <p className={s.featuredDescr}>{featuredPost.contentText}</p>
 
-            <Link href="" className={`${s.btn} ${cs.btn}`}>{`Read More >`}</Link>
+            <Link
+              href={`/blog/${featuredPost.category}/${featuredPost.user.id}`}
+              className={`${s.btn} ${cs.btn}`}>{`Read More >`}</Link>
           </div>
         </div>
 
         <div className={s.all}>
           <div className={s.allHead}>
             <h2 className={`${s.allTitle} ${cs.title}`}>All Posts</h2>
-            <Link href="" className={s.allView}>
+            <Link href="/blog" className={s.allView}>
               View All
             </Link>
           </div>
@@ -200,13 +85,13 @@ export const FeaturedPosts: React.FC = async () => {
                     <span className={cs.metadataItem}>
                       By
                       <Link
-                        href={`/users/${obj.user.id}`}
+                        href={`/author/${obj.user.id}`}
                         className={cs.metadataName}>{` ${featuredPost.user?.fullname}`}</Link>
                     </span>
                     <span className={cs.metadataItem}>{formatDate(obj.createdAt)}</span>
                   </div>
 
-                  <Link href="" className={s.allTitleSecondLink}>
+                  <Link href={`/blog/${obj.category}/${obj.id}`} className={s.allTitleSecondLink}>
                     <p className={s.allTitleSecond}>{obj.title}</p>
                   </Link>
                 </article>

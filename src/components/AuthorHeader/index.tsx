@@ -22,19 +22,6 @@ const socialIcons = {
   linkedin: <Linkedin aria-hidden="true" />,
 };
 
-// const user: UserType = {
-//   id: 1,
-//   imageUrl: "https://i.postimg.cc/7YBBcBS5/5b103af032f344457c097e10aa7ebd86.png",
-//   fullname: "Floyd Miles",
-//   profession: "Content Writer",
-//   company: "Company",
-//   email: "email@email.com",
-//   representation:
-//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec. Scelerisque viverra mauris in aliquam sem. At risus viverra adipiscing at in tellus.",
-//   userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//   posts: [],
-// };
-
 export const AuthorHeader: React.FC = () => {
   const { id } = useParams();
 
@@ -60,6 +47,7 @@ export const AuthorHeader: React.FC = () => {
               alt={`Picture of ${user.fullname}`}
               className={s.image}
               fill
+              sizes="100vw"
             />
           </div>
         </div>

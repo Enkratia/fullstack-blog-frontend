@@ -18,6 +18,7 @@ export * from "./article";
 export * from "./textEditor";
 export * from "./brand";
 export * from "./testimonial";
+export * from "./join/joinBtn";
 
 // ***
 export * from "./signinBlock";
@@ -209,3 +210,6 @@ export * from "./dashboard/changeTestimonialsBlock/changeTestimonialEditBlock";
 // **
 export * from "./dashboard/changeQueriesBlock";
 export * from "./dashboard/changeQueriesBlock/changeQueriesCreateBlock";
+
+// Skeletons
+export * from "./skeletons";

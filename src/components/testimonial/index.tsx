@@ -134,6 +134,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
             alt="Avatar of the author."
             className={s.image}
             fill
+            sizes="48px"
           />
         </div>
         <div className={s.bottom}>

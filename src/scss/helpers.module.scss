@@ -795,3 +795,13 @@
     gap: rem(10);
   }
 }
+
+// **
+.skeleton {
+  display: block;
+  border-radius: rem(4);
+  background-color: var(--skeleton-color);
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

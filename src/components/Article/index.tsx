@@ -132,12 +132,18 @@ export const Article: React.FC<ArticleType> = ({
       }`}>
       <div className={s.imageWrapper}>
         <Link
-          href=""
+          href={`/blog/${post.category}/${post.id}`}
           className={`${s.imageWrapperInner} ${
             isCategoryPage ? s.imageWrapperInnerCategoryPage : ""
           } ${isArticlePage ? s.imageWrapperInnerArticlePage : ""}`}
           aria-label="Go to the post.">
-          <Image src={post.imageUrl} alt={post.title} fill className={s.image} />
+          <Image
+            src={post.imageUrl}
+            alt={post.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className={s.image}
+          />
         </Link>
 
         {isAuthor && (
@@ -188,7 +194,7 @@ export const Article: React.FC<ArticleType> = ({
       <div className={s.data}>
         <span className={s.dataCategory}>{post.category}</span>
         <h3 className={`${s.dataTitle} ${cs.title}`}>
-          <Link href="">{post.title}</Link>
+          <Link href={`/blog/${post.category}/${post.id}`}>{post.title}</Link>
         </h3>
 
         <p className={`${s.dataText} ${isCategoryPage ? s.dataTextCategoryPage : ""}`}>

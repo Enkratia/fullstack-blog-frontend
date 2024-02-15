@@ -7,14 +7,6 @@ import { fetchWhyWeStartedQuery } from "../../fetchApi/fetchApi";
 import cs from "../../scss/helpers.module.scss";
 import s from "./whyWeStarted.module.scss";
 
-// const data: WhyWeStartedType = {
-//   imageUrl: "http://localhost:3001/api/images/1701100182000-1789x1006.png",
-//   subtitle: "Why we started",
-//   title: "It started out as a simple idea and evolved into our passion",
-//   description:
-//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
-// };
-
 export const WhyWeStarted: React.FC = async () => {
   const { isError, data } = await fetchWhyWeStartedQuery();
 
@@ -37,6 +29,7 @@ export const WhyWeStarted: React.FC = async () => {
             alt="Background image."
             className={s.image}
             aria-hidden="true"
+            sizes="(max-width: 700px) 0vw, 75vw"
             fill
           />
         </div>
@@ -46,7 +39,9 @@ export const WhyWeStarted: React.FC = async () => {
           <p className={s.title}>{data.title}</p>
           <p className={s.descr}>{data.description}</p>
 
-          <Link href="" className={`${s.btn} ${cs.btn}`}>{`Discover our story >`}</Link>
+          <Link
+            href="/about-us#why-this-blog"
+            className={`${s.btn} ${cs.btn}`}>{`Discover our story >`}</Link>
         </div>
       </div>
     </section>

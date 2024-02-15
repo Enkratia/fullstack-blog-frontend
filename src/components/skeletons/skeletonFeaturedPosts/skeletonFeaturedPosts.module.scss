@@ -1,0 +1,130 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(128);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(49.18) + 5.88vw); // 128>68(1340>320)
+  }
+}
+
+.container {
+  display: grid;
+  column-gap: rem(30);
+  justify-content: space-between;
+  grid-template-columns: minmax(0, rem(733)) minmax(0, rem(517));
+
+  @include bp-down("768") {
+    grid-template-columns: 1fr;
+    row-gap: rem(40);
+  }
+}
+
+.featured {
+  &Title {
+    margin-bottom: rem(32);
+    width: rem(220);
+    height: rem(48);
+
+    &Second {
+      margin-bottom: rem(16);
+      width: rem(421);
+      height: rem(40);
+    }
+
+    @include bp-down("container") {
+      margin-bottom: calc(rem(16.23) + 1.18vw); // 32>20 (1340>320)
+    }
+  }
+
+  &Content {
+    border: rem(1) solid var(--mediumgray01-color);
+    padding: rem(32);
+
+    @include bp-down("576") {
+      padding: rem(20);
+    }
+
+    @include bp-down("414") {
+      padding: rem(15);
+    }
+  }
+
+  &Image {
+    &Wrapper {
+      display: block;
+      margin-bottom: rem(32);
+      width: 100%;
+
+      &Inner {
+        padding-top: 52.6%;
+        width: 100%;
+      }
+    }
+  }
+
+  &Metadata {
+    margin-bottom: rem(16);
+    width: rem(260);
+    height: rem(20);
+  }
+
+  &Descr {
+    margin-bottom: rem(32);
+    width: rem(551);
+    height: rem(56);
+  }
+}
+
+// **
+.btn {
+  width: rem(207);
+  height: rem(58);
+}
+
+// **
+.all {
+  &Head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: rem(32);
+
+    @include bp-down("container") {
+      margin-bottom: calc(rem(16.23) + 1.18vw); // 32>20 (1340>320)
+    }
+  }
+
+  &Title {
+    width: rem(130);
+    height: rem(48);
+  }
+
+  &View {
+    width: rem(60);
+    height: rem(28);
+  }
+
+  &Item {
+    border: rem(1) solid var(--skeleton-border-color);
+    padding: rem(32);
+    padding-bottom: rem(25);
+    width: rem(517);
+    height: rem(149);
+
+    &Data {
+      width: 100%;
+      height: 100%;
+    }
+
+    @include bp-down("576") {
+      padding-top: rem(20);
+      padding-inline: rem(16);
+    }
+
+    @include bp-down("414") {
+      padding-top: rem(15);
+      padding-inline: rem(10);
+    }
+  }
+}

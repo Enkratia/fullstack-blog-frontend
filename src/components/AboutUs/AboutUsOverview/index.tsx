@@ -7,21 +7,6 @@ import { formatStatistic } from "../../../utils/customFunctions";
 import cs from "../../../scss/helpers.module.scss";
 import s from "./aboutUsOverview.module.scss";
 
-// const aboutUsOverview: AboutUsOverviewType[] = [
-//   {
-//     type: "Blogs Published",
-//     count: 12,
-//   },
-//   {
-//     type: "Views on Finsweet",
-//     count: 18500,
-//   },
-//   {
-//     type: "Total active Users",
-//     count: 30250,
-//   },
-// ];
-
 type AboutUsOverviewProps = {
   data: AboutUsStaticType;
 };
@@ -41,6 +26,8 @@ export const AboutUsOverview: React.FC<AboutUsOverviewProps> = async ({ data }) 
         fill
         alt="Picture for 'About Us' section."
         aria-hidden="true"
+        priority={true}
+        sizes="100vw"
       />
 
       <ul className={s.overview}>

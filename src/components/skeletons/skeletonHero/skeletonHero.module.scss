@@ -1,0 +1,66 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  border-bottom: rem(1) solid var(--skeleton-color);
+  height: rem(718);
+
+  @include bp-down("container") {
+    height: calc(rem(641.8) + 5.68vw) // 718>660(1340>320);
+  }
+}
+
+.container {
+  height: 100%;
+}
+
+.content {
+  padding-top: rem(126);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(52.43) + 5.49vw) // 126>70(1340>320);
+  }
+}
+
+.subtitle {
+  margin-bottom: rem(24);
+  width: rem(234);
+  height: rem(20);
+}
+
+.title {
+  margin-bottom: rem(24);
+  width: rem(685);
+  height: rem(127);
+
+  @include bp-down("container") {
+    width: calc(rem(154.08) + 39.04vw); // 685>279(1360>320)
+    height: calc(rem(161) - 2.5vw); // 127>153(1360>320)
+  }
+}
+
+.metadata {
+  margin-bottom: rem(16);
+  width: rem(292);
+  height: rem(28);
+
+  @include bp-down("container") {
+    width: calc(rem(101.08) + 14.04vw); // 292>146(1360>320)
+    height: calc(rem(64.61) - 2.69vw); // 28>56(1360>320)
+  }
+}
+
+.descr {
+  margin-bottom: rem(48);
+  width: rem(599);
+  height: rem(28);
+
+  @include bp-down("container") {
+    width: calc(rem(162.63) + 32.1vw); // 599>265(1360>320)
+    height: calc(rem(64.61) - 2.69vw); // 28>56(1360>320)
+  }
+}
+
+.btn {
+  width: rem(207);
+  height: rem(58);
+}

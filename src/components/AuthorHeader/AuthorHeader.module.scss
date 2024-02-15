@@ -30,14 +30,11 @@
 
   &Wrapper {
     width: 100%;
+    max-width: rem(250);
 
     &Inner {
       position: relative;
       padding-top: 117%;
-    }
-
-    @include bp-down("678") {
-      max-width: rem(400);
     }
   }
 }

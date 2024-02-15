@@ -6,15 +6,6 @@ import { fetchWhyThisBlogQuery } from "../../fetchApi/fetchApi";
 import cs from "../../scss/helpers.module.scss";
 import s from "./whyThisBlog.module.scss";
 
-// const data: WhyThisBlogType = {
-//   title: "Why we started this Blog",
-//   subtitle:
-//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
-//   description:
-//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
-//   imageUrl: "http://localhost:3001/api/images/1701100182002-2247x1500.png",
-// };
-
 export const WhyThisBlog: React.FC = async () => {
   const { data, isError } = await fetchWhyThisBlogQuery();
 
@@ -23,13 +14,19 @@ export const WhyThisBlog: React.FC = async () => {
   }
 
   return (
-    <section className={s.root}>
+    <section className={s.root} id="why-this-blog">
       <h2 className={cs.srOnly}>Creativity of our team.</h2>
 
       <div className={`${s.container} ${cs.container}`}>
         <div className={s.imageWrapper}>
           <div className={s.imageWrapperInner}>
-            <Image src={data.imageUrl} alt="Section's picture." fill className={s.image} />
+            <Image
+              src={data.imageUrl}
+              alt="Section's picture."
+              fill
+              sizes="(max-width: 678px) 100vw, 50vw"
+              className={s.image}
+            />
           </div>
         </div>
 

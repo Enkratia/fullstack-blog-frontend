@@ -16,7 +16,7 @@ type WhatToReadNextSliderProps = {
 };
 
 export const WhatToReadNextSlider: React.FC<WhatToReadNextSliderProps> = ({ nextPosts }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
+  const [emblaRef] = useEmblaCarousel({ loop: true, align: "start" });
 
   return (
     <div className={s.root} ref={emblaRef}>
@@ -25,14 +25,20 @@ export const WhatToReadNextSlider: React.FC<WhatToReadNextSliderProps> = ({ next
           <div key={obj.id} className={s.slideWrapper}>
             <div className={s.slide}>
               <Link href="" className={s.imageWrapper}>
-                <Image src={obj.imageUrl} alt={obj.title} className={s.image} fill />
+                <Image
+                  src={obj.imageUrl}
+                  alt={obj.title}
+                  className={s.image}
+                  sizes="(max-width: 440px) 100vw, (max-width: 768px) 50vw, 33vw"
+                  fill
+                />
               </Link>
 
               <div className={`${s.metadata} ${cs.metadata}`}>
                 <span className={cs.metadataItem}>
                   By
                   <Link
-                    href={`/users/${obj.user.id}`}
+                    href={`/author/${obj.user.id}`}
                     className={cs.metadataName}>{` ${obj.user.fullname}`}</Link>
                 </span>
 
@@ -40,7 +46,7 @@ export const WhatToReadNextSlider: React.FC<WhatToReadNextSliderProps> = ({ next
               </div>
 
               <h3 className={s.title}>
-                <Link href="" className={s.titleLink}>
+                <Link href={`/blog/${obj.category}/${obj.id}`} className={s.titleLink}>
                   {obj.title}
                 </Link>
               </h3>

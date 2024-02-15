@@ -21,24 +21,24 @@
     flex: 0 0 calc(100% / 3);
     padding-left: rem(32);
     min-width: 0;
+
+    @include bp-down("1024") {
+      padding-left: rem(20);
+    }
+
+    @include bp-down("768") {
+      flex: 0 0 50%;
+    }
+
+    @include bp-down("440") {
+      flex: 0 0 100%;
+    }
   }
 
   &:hover {
     img {
       transform: scale(1.04);
     }
-  }
-
-  @include bp-down("1024") {
-    padding-left: rem(20);
-  }
-
-  @include bp-down("768") {
-    flex: 0 0 50%;
-  }
-
-  @include bp-down("440") {
-    flex: 0 0 100%;
   }
 }
 
@@ -61,6 +61,8 @@
 }
 
 .metadata {
+  display: flex;
+  flex-wrap: wrap;
   margin-bottom: rem(16);
 
   @include bp-down("container") {

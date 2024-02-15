@@ -13,18 +13,6 @@ import { toArray } from "../../../utils/customFunctions";
 import cs from "../../../scss/helpers.module.scss";
 import s from "./categoryTags.module.scss";
 
-// const tags: CategoryTags = [
-//   "Business",
-//   "Experience",
-//   "Screen",
-//   "Technology",
-//   "Marketing",
-//   "Life",
-//   "Technology",
-//   "Marketing",
-//   "Life",
-// ];
-
 type CategoryTagsProps = {
   onTagClick: (e: React.MouseEvent<HTMLAnchorElement>, tag: string) => void;
 };

@@ -41,17 +41,18 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
   return (
     <article className={s.root}>
       <div className={s.imageWrapper}>
-        <Link href="">
+        <Link href={`/author/${author.id}`}>
           <Image
             src={!!author.imageUrl ? author.imageUrl : DefaultAvatar}
             alt="Avatar of author"
             className={s.image}
             fill
+            sizes="128px"
           />
         </Link>
       </div>
 
-      <Link href="" className={s.fullnameLink}>
+      <Link href={`/author/${author.id}`} className={s.fullnameLink}>
         <p className={s.fullname}>{`${author.fullname}`}</p>
       </Link>
 

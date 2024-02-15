@@ -11,21 +11,6 @@ import Startup from "../../../public/img/startup.svg";
 import Economy from "../../../public/img/economy.svg";
 import Technology from "../../../public/img/technology.svg";
 
-// const data: CategoryDescription[] = [
-//   {
-//     description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor.",
-//   },
-//   {
-//     description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor.",
-//   },
-//   {
-//     description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor.",
-//   },
-//   {
-//     description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor.",
-//   },
-// ];
-
 const icons = [
   {
     title: "business",
@@ -56,7 +41,7 @@ export const Categories: React.FC = async () => {
     <ul className={s.root}>
       {icons.map(({ title, icon }, i) => (
         <li key={i} className={s.category}>
-          <Link href="">
+          <Link href={`/blog/${title}`}>
             {icon}
             <h3 className={s.title}>{capitalize(title)}</h3>
             <p className={s.descr}>{data[title as CategoryNames[number]]}</p>

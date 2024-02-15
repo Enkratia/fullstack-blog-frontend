@@ -54,21 +54,19 @@ export const Brand: React.FC<BrandProps> = ({ obj, isEditable = false, refetch }
   React.useEffect(() => {
     if (isError) {
       setIsShowAlertDelete(true);
-
-      reset();
     }
 
     if (isSuccess) {
       refetch && refetch();
-
-      reset();
     }
+
+    reset();
   }, [isError, isSuccess]);
 
   return (
     <div className={s.root}>
-      <Link href={obj.linkUrl} className={s.link}>
-        <Image src={obj.imageUrl} alt={obj.title} className={s.image} fill />
+      <Link href={obj.linkUrl} target="_blank" className={s.link}>
+        <Image src={obj.imageUrl} alt={obj.title} className={s.image} fill sizes="160px" />
 
         {isAuthor && (
           <div className={`${s.toolbar} ${cs.toolbar}`}>

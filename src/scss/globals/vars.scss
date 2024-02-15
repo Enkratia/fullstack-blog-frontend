@@ -39,6 +39,8 @@
   --danger-color: #ff4242;
   --overlay-color: rgb(0 0 0 / 60%);
   --overlay-light-color: rgb(59 69 78 / 40%);
+  --skeleton-color: #ccc;
+  --skeleton-border-color: rgb(110 111 120 / 10%);
 
   // Filters
   --featured-filter: invert(14%) sepia(7%) saturate(2165%) hue-rotate(198deg) brightness(89%) contrast(90%);
@@ -90,6 +92,7 @@
 
   // Animations
   --popup-animation: popup-animation 0.2s ease forwards;
+  --skeleton-animation: skeleton-animation 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
   // Gradients
   --overlay-gradient: radial-gradient(80.99% 71.93% at 74.58% 0%, rgba(0 0 0 / 40%) 0%, rgba(0 0 0 / 60%) 100%);
