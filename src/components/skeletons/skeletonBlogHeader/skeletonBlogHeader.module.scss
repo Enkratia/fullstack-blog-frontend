@@ -1,0 +1,80 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  border-bottom: rem(1) solid var(--skeleton-border-color);
+  padding-block: rem(80);
+
+  @include bp-down("container") {
+    padding-block: calc(rem(53.72) + 1.96vw); // 80>60 (1340>320)
+  }
+}
+
+.container {
+  display: grid;
+  column-gap: rem(60);
+  justify-content: space-between;
+  grid-template-columns: minmax(rem(50), rem(624)) minmax(0, rem(515));
+
+  @include bp-down("992") {
+    column-gap: rem(40);
+  }
+
+  @include bp-down("876") {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+.left {
+  padding-top: rem(14);
+  width: 100%;
+}
+
+.subtitle {
+  margin-bottom: rem(20);
+  width: 100%;
+  height: rem(20);
+  max-width: rem(169);
+}
+
+.title {
+  margin-bottom: rem(16);
+  width: 100%;
+  height: rem(43);
+  max-width: rem(518);
+
+  @include bp-down("container") {
+    height: calc(rem(83.54) - 2.98vw); // 43>74(1360>320)
+  }
+}
+
+.metadata {
+  margin-bottom: rem(16);
+  width: 100%;
+  height: rem(20);
+  max-width: rem(260);
+}
+
+.text {
+  margin-bottom: rem(32);
+  width: 100%;
+  height: rem(56);
+  max-width: rem(624);
+}
+
+.link {
+  width: 100%;
+  height: rem(58);
+  max-width: rem(207);
+}
+
+.right {
+  width: 100%;
+}
+
+.image {
+  &Wrapper {
+    padding-top: 70%;
+    width: 100%;
+  }
+}

@@ -6,8 +6,8 @@ import React from "react";
 import { useImmer } from "use-immer";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 
-import { useOverlayScrollbars } from "overlayscrollbars-react";
-import "overlayscrollbars/overlayscrollbars.css";
+// import { useOverlayScrollbars } from "overlayscrollbars-react";
+// import "overlayscrollbars/overlayscrollbars.css";
 
 import { useGetPostsQuery } from "../../../redux/backendApi";
 
@@ -28,8 +28,8 @@ export const CategoryLayer: React.FC = () => {
     },
   };
 
-  const sidebarRef = React.useRef<HTMLElement>(null);
-  const [initialize, instance] = useOverlayScrollbars({ options: osOptions, defer: true });
+  // const sidebarRef = React.useRef<HTMLElement>(null);
+  // const [initialize, instance] = useOverlayScrollbars({ options: osOptions, defer: true });
 
   const isRouter = React.useRef(false);
   const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
@@ -104,20 +104,20 @@ export const CategoryLayer: React.FC = () => {
     }
   }, [isNavigate]);
 
-  React.useEffect(() => {
-    if (isMQ1024) {
-      instance()?.destroy();
-      return;
-    } else {
-      if (sidebarRef.current) {
-        initialize(sidebarRef.current);
-      }
-    }
-  }, [isMQ1024, initialize, posts]);
+  // React.useEffect(() => {
+  // if (isMQ1024) {
+  //   instance()?.destroy();
+  //   return;
+  // } else {
+  //   if (sidebarRef.current) {
+  //     initialize(sidebarRef.current);
+  //   }
+  // }
 
-  if (!posts) {
-    return;
-  }
+  //   if (sidebarRef.current) {
+  //     initialize(sidebarRef.current);
+  //   }
+  // }, [isMQ1024, initialize, posts]);
 
   // **
   const resetFilters = () => {
@@ -197,7 +197,7 @@ export const CategoryLayer: React.FC = () => {
 
   // **
   const refetchPostsAfterDelete = () => {
-    if (posts.length === 1 && page > 1) {
+    if (posts?.length === 1 && page > 1) {
       setPage((n) => n - 1);
       setIsNavigate({});
 
@@ -235,7 +235,9 @@ export const CategoryLayer: React.FC = () => {
             </button>
           </div>
 
-          <aside ref={sidebarRef} className={s.sidebar}>
+          <aside
+            // ref={sidebarRef}
+            className={s.sidebar}>
             <CategoryCategories onCategoryClick={onCategoryClick} />
             <CategoryTags onTagClick={onTagClick} />
           </aside>

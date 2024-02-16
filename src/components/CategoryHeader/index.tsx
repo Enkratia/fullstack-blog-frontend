@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 
 import { useGetCategoryHeaderQuery } from "../../redux/backendApi";
 
+import { SkeletonCategoryHeader } from "../../components";
 import { capitalize } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
@@ -23,7 +24,7 @@ export const CategoryHeader: React.FC = () => {
   }
 
   if (!data) {
-    return;
+    return <SkeletonCategoryHeader />;
   }
 
   return (

@@ -1,0 +1,11 @@
+@use "../../../scss/utils/" as *;
+
+.tag {
+  display: inline;
+  border-radius: rem(28);
+  padding-top: rem(5);
+  padding-bottom: rem(5);
+  padding-inline: rem(40);
+  width: 100%;
+  height: rem(46);
+}

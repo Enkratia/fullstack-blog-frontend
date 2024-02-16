@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 
 import {
   ChooseCategory,
@@ -10,10 +10,6 @@ import {
   Testimonials,
   UsMission,
   WhyWeStarted,
-
-  // **
-  SkeletonFeaturedPosts,
-  SkeletonHero,
 } from "../components";
 
 import cs from "../scss/helpers.module.scss";
@@ -22,33 +18,16 @@ export default function Home() {
   return (
     <main>
       <h1 className={cs.srOnly}>Finsweet`s home page.</h1>
-      <Suspense fallback={<SkeletonHero />}>
-        <Hero />
-      </Suspense>
 
-      <Suspense fallback={<SkeletonFeaturedPosts />}>
-        <FeaturedPosts />
-      </Suspense>
-
-      {/* <Suspense fallback={<div>LOADING</div>}> */}
+      <Hero />
+      <FeaturedPosts />
       <UsMission />
-      {/* </Suspense> */}
-
-      {/* <Suspense fallback={<div>LOADING</div>}> */}
       <ChooseCategory />
-      {/* </Suspense> */}
-
-      {/* <Suspense fallback={<div>LOADING</div>}> */}
       <WhyWeStarted />
-      {/* </Suspense> */}
-
       <ListAuthors />
       <FeaturedIn />
       <Testimonials />
-
-      {/* <Suspense fallback={<div>LOADING</div>}> */}
       <Join />
-      {/* </Suspense> */}
     </main>
   );
 }

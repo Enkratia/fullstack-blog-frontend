@@ -64,8 +64,9 @@ export * from "./testimonials";
 export * from "./query";
 
 // **
-export * from "./testimonials/testimonialsSlider";
 export * from "./listAuthors/listAuthorsSlider";
+export * from "./testimonials/testimonialsSlider";
+export * from "./testimonials/testimonialsStatic";
 
 // BlogPage
 export * from "./blogHeader";

@@ -1,0 +1,50 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding-block: rem(40);
+  padding-inline: rem(15);
+  width: 100%;
+}
+
+.image {
+  &Wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: rem(20);
+    border-radius: 50%;
+    width: rem(128);
+    height: rem(128);
+  }
+}
+
+.fullname {
+  margin-bottom: rem(10);
+  width: 100%;
+  height: rem(30);
+  max-width: rem(260);
+}
+
+.info {
+  margin-bottom: rem(20);
+  width: 100%;
+  height: rem(20);
+  max-width: rem(260);
+}
+
+.social {
+  display: flex;
+  align-items: center;
+
+  &Item {
+    width: rem(16);
+    height: rem(16);
+
+    &:not(:last-child) {
+      margin-right: rem(16);
+    }
+  }
+}

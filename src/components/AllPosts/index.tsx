@@ -7,128 +7,10 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
-import { Article, Navigation } from "../../components";
+import { Article, Navigation, SkeletonArticle } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./allPosts.module.scss";
-
-// const posts: PostType[] = [
-//   {
-//     id: 1,
-//     title: "Design tips for designers that cover everything you need",
-//     category: "startup",
-//     createdAt: "2023-12-03T17:44:30.644Z",
-//     updatedAt: "2023-12-03T17:44:30.644Z",
-//     contentText:
-//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//     contentJson: "",
-//     imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
-//     tags: ["business", "experience"],
-//     isFeatured: true,
-//     user: {
-//       id: 1,
-//       fullname: "Floyd Miles",
-//       email: "email@email.com",
-//       imageUrl: "https://i.postimg.cc/B62Mfw3V/baf975398b74732b52898a2562dfa9a6.png",
-//       profession: "",
-//       company: "",
-//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//     },
-//   },
-//   {
-//     id: 2,
-//     title: "Design tips for designers that cover everything you need",
-//     category: "startup",
-//     createdAt: "2023-12-03T17:44:30.644Z",
-//     updatedAt: "2023-12-03T17:44:30.644Z",
-//     contentText:
-//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//     contentJson: "",
-//     imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
-//     tags: ["business", "experience"],
-//     isFeatured: true,
-//     user: {
-//       id: 1,
-//       fullname: "Floyd Miles",
-//       email: "email@email.com",
-//       imageUrl: "",
-//       profession: "",
-//       company: "",
-//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//     },
-//   },
-//   {
-//     id: 3,
-//     title: "Design tips for designers that cover everything you need",
-//     category: "startup",
-//     createdAt: "2023-12-03T17:44:30.644Z",
-//     updatedAt: "2023-12-03T17:44:30.644Z",
-//     contentText:
-//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//     contentJson: "",
-//     imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
-//     tags: ["business", "experience"],
-//     isFeatured: true,
-//     user: {
-//       id: 1,
-//       fullname: "Floyd Miles",
-//       email: "email@email.com",
-//       imageUrl: "",
-//       profession: "",
-//       company: "",
-//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//     },
-//   },
-//   {
-//     id: 4,
-//     title: "Design tips for designers that cover everything you need",
-//     category: "startup",
-//     createdAt: "2023-12-03T17:44:30.644Z",
-//     updatedAt: "2023-12-03T17:44:30.644Z",
-//     contentText:
-//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//     contentJson: "",
-//     imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
-//     tags: ["business", "experience"],
-//     isFeatured: true,
-//     user: {
-//       id: 1,
-//       fullname: "Floyd Miles",
-//       imageUrl: "",
-//       profession: "",
-//       company: "",
-//       email: "email@email.com",
-//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//     },
-//   },
-//   {
-//     id: 5,
-//     title: "Design tips for designers that cover everything you need",
-//     category: "startup",
-//     createdAt: "2023-12-03T17:44:30.644Z",
-//     updatedAt: "2023-12-03T17:44:30.644Z",
-//     contentText:
-//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//     contentJson: "",
-//     imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
-//     tags: ["business", "experience"],
-//     isFeatured: true,
-//     user: {
-//       id: 1,
-//       fullname: "Floyd Miles",
-//       imageUrl: "",
-//       profession: "",
-//       email: "email@email.com",
-//       company: "",
-//       representation: "Excepteur sint occaecat cupidatat non proident. Duis aute",
-//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//     },
-//   },
-// ];
 
 export const AllPosts: React.FC = () => {
   const limit = 5;
@@ -170,13 +52,9 @@ export const AllPosts: React.FC = () => {
     }
   }, [isNavigate]);
 
-  if (!posts || !totalCount) {
-    return;
-  }
-
   // **
   const refetchPostsAfterDelete = () => {
-    if (posts.length === 1 && page > 1) {
+    if (posts?.length === 1 && page > 1) {
       setPage((n) => n - 1);
       setIsNavigate({});
 
@@ -207,9 +85,11 @@ export const AllPosts: React.FC = () => {
       <div className={`${s.container} ${cs.container}`}>
         <h2 className={s.title}>All posts</h2>
         <div className={s.posts}>
-          {posts.map((obj) => (
-            <Article key={obj.id} obj={obj} refetch={refetchPostsAfterDelete} />
-          ))}
+          {!posts
+            ? [...Array(5)].map((_, i) => <SkeletonArticle key={i} />)
+            : posts.map((obj) => (
+                <Article key={obj.id} obj={obj} refetch={refetchPostsAfterDelete} />
+              ))}
         </div>
 
         {totalPages > 1 && (

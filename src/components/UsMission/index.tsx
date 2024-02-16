@@ -1,20 +1,19 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 
 import { fetchUsMissionQuery } from "../../fetchApi/fetchApi";
+
 import { SkeletonUsMission } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./usMission.module.scss";
 
-export const UsMission: React.FC = async () => {
+const UsMissionSuspense: React.FC = async () => {
   let { data, isError } = await fetchUsMissionQuery();
 
   if (!data) {
     return;
   }
-
-  // return <SkeletonUsMission />;
 
   return (
     <section className={s.root}>
@@ -48,3 +47,10 @@ export const UsMission: React.FC = async () => {
     </section>
   );
 };
+
+// **
+export const UsMission: React.FC = async () => (
+  <Suspense fallback={<SkeletonUsMission />}>
+    <UsMissionSuspense />
+  </Suspense>
+);

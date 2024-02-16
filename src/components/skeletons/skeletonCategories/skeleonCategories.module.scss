@@ -1,0 +1,40 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  display: grid;
+  column-gap: rem(32);
+  grid-template-columns: repeat(4, 1fr);
+
+  @include bp-down("992") {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: rem(32);
+  }
+
+  @include bp-down("576") {
+    grid-template-columns: 1fr;
+  }
+}
+
+.category {
+  border: rem(1) solid var(--mediumgray03-color);
+  padding: rem(32);
+}
+
+.icon {
+  margin-bottom: rem(10);
+  padding: rem(12.5);
+  width: rem(48);
+  height: rem(48);
+}
+
+.title {
+  margin-bottom: rem(4);
+  width: 100%;
+  height: rem(40);
+  max-width: rem(105);
+}
+
+.descr {
+  width: 100%;
+  height: rem(56);
+}

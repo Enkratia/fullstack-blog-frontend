@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 
 import { fetchCategoryDescriptionQuery } from "../../fetchApi/fetchApi";
@@ -10,6 +10,7 @@ import Business from "../../../public/img/business.svg";
 import Startup from "../../../public/img/startup.svg";
 import Economy from "../../../public/img/economy.svg";
 import Technology from "../../../public/img/technology.svg";
+import { SkeletonCategories } from "..";
 
 const icons = [
   {
@@ -30,7 +31,7 @@ const icons = [
   },
 ];
 
-export const Categories: React.FC = async () => {
+export const CategoriesSuspense: React.FC = async () => {
   const { data, isError } = await fetchCategoryDescriptionQuery();
 
   if (!data) {
@@ -49,5 +50,14 @@ export const Categories: React.FC = async () => {
         </li>
       ))}
     </ul>
+  );
+};
+
+// **
+export const Categories: React.FC = async () => {
+  return (
+    <Suspense fallback={<SkeletonCategories />}>
+      <CategoriesSuspense />
+    </Suspense>
   );
 };

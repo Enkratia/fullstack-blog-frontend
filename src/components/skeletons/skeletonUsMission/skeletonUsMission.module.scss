@@ -58,6 +58,14 @@
   width: 100%;
   height: rem(144);
 
+  @include bp-down("container") {
+    height: calc(rem(199) - 4.05vw); // 144>168(1360>768)
+  }
+
+  @include bp-down("768") {
+    height: calc(rem(195.43) - 14.5vw); // 84>149(768>320)
+  }
+
   @include bp-down("678") {
     margin-bottom: rem(10);
   }
@@ -109,6 +117,14 @@
     margin-bottom: rem(20);
     height: rem(80);
     max-width: rem(450);
+
+    @include bp-down("container") {
+      height: calc(rem(148.9) - 5.07vw); // 80>110(1360>768)
+    }
+
+    @include bp-down("768") {
+      height: calc(rem(122.71) - 6.47vw); // 73>102(768>320)
+    }
 
     @include bp-down("678") {
       margin-bottom: rem(10);

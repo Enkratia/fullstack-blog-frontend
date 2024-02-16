@@ -1,14 +1,16 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 import { fetchPostsQuery } from "../../fetchApi/fetchApi";
+
+import { SkeletonBlogHeader } from "../../components";
 import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./blogHeader.module.scss";
 
-export const BlogHeader: React.FC = async () => {
+const BlogHeaderSuspense: React.FC = async () => {
   const request = "?isFeatured=true";
 
   const { data, isError } = await fetchPostsQuery(request);
@@ -67,3 +69,10 @@ export const BlogHeader: React.FC = async () => {
     </section>
   );
 };
+
+// **
+export const BlogHeader: React.FC = async () => (
+  <Suspense fallback={<SkeletonBlogHeader />}>
+    <BlogHeaderSuspense />
+  </Suspense>
+);

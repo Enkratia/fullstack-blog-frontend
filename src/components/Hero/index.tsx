@@ -1,15 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 import { fetchPostsQuery } from "../../fetchApi/fetchApi";
+
+import { SkeletonHero } from "../../components";
 
 import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./hero.module.scss";
 
-export const Hero: React.FC = async () => {
+const HeroSuspense: React.FC = async () => {
   const request = "?isFeatured=true";
 
   const { data, isError } = await fetchPostsQuery(request);
@@ -68,3 +70,10 @@ export const Hero: React.FC = async () => {
     </section>
   );
 };
+
+// **
+export const Hero: React.FC = async () => (
+  <Suspense fallback={<SkeletonHero />}>
+    <HeroSuspense />
+  </Suspense>
+);

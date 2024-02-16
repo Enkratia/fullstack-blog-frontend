@@ -1,0 +1,44 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  border-bottom: rem(1) solid var(--skeleton-border-color);
+  padding-top: rem(79);
+  padding-bottom: rem(79);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(39.77) + 2.88vw); // 79>49(1360>320)
+    padding-bottom: calc(rem(52.84) + 1.92vw); // 79>59(1360>320)
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: rem(16);
+  width: 100%;
+  height: rem(64);
+  max-width: rem(191);
+}
+
+.descr {
+  margin-bottom: rem(32);
+  width: 100%;
+  height: rem(84);
+  max-width: rem(515);
+
+  @include bp-down("container") {
+    height: calc(rem(157.23) - 5.38vw); // 84>140(1360>320)
+  }
+}
+
+// **
+.breadcrumbs {
+  display: flex;
+  width: 100%;
+  height: rem(20);
+  max-width: rem(177);
+}

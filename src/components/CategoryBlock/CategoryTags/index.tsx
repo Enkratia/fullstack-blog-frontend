@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import qs from "qs";
 
@@ -8,6 +8,7 @@ import { useSearchParams } from "next/navigation";
 
 import { useGetTagsQuery } from "../../../redux/backendApi";
 
+import { SkeletonTag } from "../../../components";
 import { toArray } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -44,10 +45,7 @@ export const CategoryTags: React.FC<CategoryTagsProps> = ({ onTagClick }) => {
     }
   }, [urlTags.length]);
 
-  if (!tags) {
-    return;
-  }
-
+  // **
   const onPrevClick = () => {
     if (tagPage === 1) return;
 
@@ -62,38 +60,49 @@ export const CategoryTags: React.FC<CategoryTagsProps> = ({ onTagClick }) => {
     setPrevUrlTags(urlTags);
   };
 
+  // **
   const currentTags = Array.from(new Set([...prevUrlTags, ...toArray(tags || [])]));
+
+  // const a = 5;
 
   return (
     <div className={s.root}>
       <h3 className={`${s.title} ${cs.title}`}>All Tags</h3>
 
       <ul className={s.list}>
-        {currentTags.map((tag) => (
-          <li key={tag} className={s.item}>
-            <Link
-              onClick={(e) => onTagClick(e, tag)}
-              href=""
-              className={`${s.tag} ${urlTags.includes(tag) ? s.tagActive : ""}`}>
-              {tag}
-            </Link>
-          </li>
-        ))}
+        {!tags
+          ? [...Array(8)].map((_, i) => (
+              <li key={i} className={s.item}>
+                <SkeletonTag key={i} />
+              </li>
+            ))
+          : currentTags.map((tag) => (
+              <li key={tag} className={s.item}>
+                <Link
+                  onClick={(e) => onTagClick(e, tag)}
+                  href=""
+                  className={`${s.tag} ${urlTags.includes(tag) ? s.tagActive : ""}`}>
+                  {tag}
+                </Link>
+              </li>
+            ))}
       </ul>
 
-      <div className={s.navigation}>
-        <button
-          onClick={onPrevClick}
-          className={s.btn}
-          disabled={tagPage === 1 ? true : false}
-          aria-label={`Show previous ${limit} tags.`}></button>
+      {totalPages > 1 && (
+        <div className={s.navigation}>
+          <button
+            onClick={onPrevClick}
+            className={s.btn}
+            disabled={tagPage === 1 ? true : false}
+            aria-label={`Show previous ${limit} tags.`}></button>
 
-        <button
-          onClick={onNextlick}
-          className={s.btn}
-          disabled={tagPage === totalPages ? true : false}
-          aria-label={`Show next ${limit} tags.`}></button>
-      </div>
+          <button
+            onClick={onNextlick}
+            className={s.btn}
+            disabled={tagPage === totalPages ? true : false}
+            aria-label={`Show next ${limit} tags.`}></button>
+        </div>
+      )}
     </div>
   );
 };

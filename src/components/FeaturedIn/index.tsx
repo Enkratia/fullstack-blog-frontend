@@ -7,17 +7,17 @@ import autoplay from "embla-carousel-autoplay";
 
 import { useGetFeaturedInQuery } from "../../redux/backendApi";
 
-import { Brand } from "../../components";
+import { Brand, SkeletonBrand } from "../../components";
 
 import s from "./featuredIn.module.scss";
 import cs from "../../scss/helpers.module.scss";
 
-const limit = 5;
+const limit = 10;
 const page = 1;
 
 export const FeaturedIn: React.FC = () => {
   const plugins = [autoplay()];
-  const [emblaRef, emblaApi] = useEmblaCarousel(
+  const [emblaRef] = useEmblaCarousel(
     {
       active: false,
       loop: true,
@@ -36,9 +36,7 @@ export const FeaturedIn: React.FC = () => {
   const { data, isError } = useGetFeaturedInQuery(request);
   const brands = data?.data;
 
-  if (!brands) {
-    return;
-  }
+  const isReady = brands && brands.length;
 
   return (
     <section className={s.root}>
@@ -52,11 +50,17 @@ export const FeaturedIn: React.FC = () => {
 
         <div className={s.sliderWrapper} ref={emblaRef}>
           <div className={s.slider}>
-            {brands.map((obj) => (
-              <div key={obj.id} className={s.slide}>
-                <Brand obj={obj} />
-              </div>
-            ))}
+            {!isReady
+              ? [...Array(5)].map((_, i) => (
+                  <div key={i} className={s.slide}>
+                    <SkeletonBrand />
+                  </div>
+                ))
+              : brands.map((obj) => (
+                  <div key={obj.id} className={s.slide}>
+                    <Brand obj={obj} />
+                  </div>
+                ))}
           </div>
         </div>
       </div>

@@ -1,15 +1,16 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 import { fetchPostsQuery } from "../../fetchApi/fetchApi";
 
+import { SkeletonFeaturedPosts } from "../../components";
 import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./featuredPosts.module.scss";
 
-export const FeaturedPosts: React.FC = async () => {
+const FeaturedPostsSuspense: React.FC = async () => {
   const requestFeatured = "?isFeatured=true";
   const requestAllPosts = "?_sort=createdAt&_order=DESC&_limit=4&_page=1";
 
@@ -100,3 +101,10 @@ export const FeaturedPosts: React.FC = async () => {
     </section>
   );
 };
+
+// **
+export const FeaturedPosts: React.FC = async () => (
+  <Suspense fallback={<SkeletonFeaturedPosts />}>
+    <FeaturedPostsSuspense />
+  </Suspense>
+);

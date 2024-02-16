@@ -1,13 +1,13 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import { fetchJoinQuery } from "../../fetchApi/fetchApi";
 
-import { JoinBtn } from "../../components";
+import { JoinBtn, SkeletonJoin } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./join.module.scss";
 
-export const Join: React.FC = async () => {
+const JoinSuspense: React.FC = async () => {
   const { isError, data } = await fetchJoinQuery();
 
   if (!data) {
@@ -29,3 +29,10 @@ export const Join: React.FC = async () => {
     </section>
   );
 };
+
+// **
+export const Join: React.FC = async () => (
+  <Suspense fallback={<SkeletonJoin />}>
+    <JoinSuspense />
+  </Suspense>
+);
