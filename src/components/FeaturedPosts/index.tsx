@@ -4,7 +4,6 @@ import Image from "next/image";
 
 import { fetchPostsQuery } from "../../fetchApi/fetchApi";
 
-import { SkeletonFeaturedPosts } from "../../components";
 import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
@@ -23,8 +22,6 @@ export const FeaturedPosts: React.FC = async () => {
   if (!featuredPost || !allPosts) {
     return;
   }
-
-  // return <SkeletonFeaturedPosts />;
 
   return (
     <section className={s.root}>

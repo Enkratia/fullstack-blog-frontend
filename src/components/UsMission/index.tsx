@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import { fetchUsMissionQuery } from "../../fetchApi/fetchApi";
+import { SkeletonUsMission } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./usMission.module.scss";
@@ -12,6 +13,8 @@ export const UsMission: React.FC = async () => {
   if (!data) {
     return;
   }
+
+  // return <SkeletonUsMission />;
 
   return (
     <section className={s.root}>

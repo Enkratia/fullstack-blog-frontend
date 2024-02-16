@@ -1,0 +1,122 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(126);
+
+  @include bp-down("1120") {
+    padding-top: calc(rem(60.31) + 4.9vw); // 126>76(13540>320)
+  }
+}
+
+.container {
+  border: rem(1) solid var(--skeleton-border-color);
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-right: rem(108);
+  padding-left: rem(80);
+  padding-block: rem(96);
+
+  @include bp-down("1120") {
+    padding-inline: rem(70);
+  }
+
+  @include bp-down("1024") {
+    padding-block: rem(60);
+    padding-inline: rem(45);
+  }
+
+  @include bp-down("768") {
+    flex-direction: column;
+    padding-block: rem(55);
+    padding-inline: rem(35);
+  }
+
+  @include bp-down("576") {
+    padding-block: rem(35);
+    padding-inline: rem(20);
+  }
+}
+
+.subtitle {
+  display: inline-block;
+  margin-bottom: rem(24);
+  width: 100%;
+  height: rem(20);
+  max-width: rem(107);
+
+  @include bp-down("768") {
+    margin-bottom: rem(10);
+  }
+}
+
+.title {
+  margin-bottom: rem(16);
+  width: 100%;
+  height: rem(144);
+
+  @include bp-down("678") {
+    margin-bottom: rem(10);
+  }
+}
+
+.descr {
+  width: 100%;
+  height: rem(56);
+
+  &Margin {
+    margin-bottom: rem(18);
+  }
+
+  &V2 {
+    height: rem(112);
+  }
+
+  @include bp-down("768") {
+    margin-bottom: rem(10);
+    height: calc(rem(200) - 18.75vw); // 56>140(1360>320)
+
+    &V2 {
+      height: calc(rem(352) - 31.25vw); // 112>252(1360>320)
+    }
+  }
+}
+
+.us {
+  margin-right: rem(45);
+  width: 100%;
+  max-width: rem(505);
+
+  @include bp-down("768") {
+    margin-right: 0;
+    margin-bottom: rem(35);
+  }
+}
+
+.btn {
+  width: rem(109);
+  height: rem(22);
+}
+
+.mission {
+  width: 100%;
+  max-width: rem(516);
+
+  &Title {
+    margin-bottom: rem(20);
+    height: rem(80);
+    max-width: rem(450);
+
+    @include bp-down("678") {
+      margin-bottom: rem(10);
+    }
+  }
+}
+
+.decoration {
+  width: 100%;
+  height: rem(23);
+}

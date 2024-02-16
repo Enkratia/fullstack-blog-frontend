@@ -7,10 +7,13 @@ import {
   Hero,
   Join,
   ListAuthors,
-  SkeletonHero,
   Testimonials,
   UsMission,
   WhyWeStarted,
+
+  // **
+  SkeletonFeaturedPosts,
+  SkeletonHero,
 } from "../components";
 
 import cs from "../scss/helpers.module.scss";
@@ -23,7 +26,9 @@ export default function Home() {
         <Hero />
       </Suspense>
 
-      <FeaturedPosts />
+      <Suspense fallback={<SkeletonFeaturedPosts />}>
+        <FeaturedPosts />
+      </Suspense>
 
       {/* <Suspense fallback={<div>LOADING</div>}> */}
       <UsMission />
