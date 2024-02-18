@@ -1,0 +1,32 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(128);
+  padding-bottom: rem(128);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(23.38) + 7.69vw); // 128>48(1360>320)
+    padding-bottom: calc(rem(36.46) + 6.73vw); // 128>58(1360>320)
+  }
+}
+
+.title {
+  margin-bottom: rem(24);
+  width: 100%;
+  height: rem(64);
+}
+
+.paragraph {
+  &:not(:last-child) {
+    margin-bottom: rem(24);
+  }
+}
+
+.line {
+  width: 100%;
+  height: rem(20);
+
+  &:not(:last-child) {
+    margin-bottom: rem(8);
+  }
+}

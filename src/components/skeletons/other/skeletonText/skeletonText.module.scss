@@ -1,0 +1,26 @@
+@use "../../../../scss/utils/" as *;
+
+.root {
+  width: 100%;
+}
+
+.title {
+  margin-bottom: rem(24);
+  width: 100%;
+  height: rem(64);
+}
+
+.paragraph {
+  &:not(:last-child) {
+    margin-bottom: rem(24);
+  }
+}
+
+.line {
+  width: 100%;
+  height: rem(20);
+
+  &:not(:last-child) {
+    margin-bottom: rem(8);
+  }
+}

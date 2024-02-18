@@ -1,0 +1,10 @@
+@use "../../../../scss/utils/" as *;
+
+.field {
+  width: 100%;
+  height: rem(50);
+
+  &:not(:last-child) {
+    margin-bottom: rem(2);
+  }
+}

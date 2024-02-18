@@ -8,6 +8,7 @@ import {
   useGetTestimonialByIdQuery,
 } from "../../../../redux/backendApi";
 
+import { SkeletonDashboardForm } from "../../../../components";
 import { useValidateForm } from "../../../../utils/customHooks";
 import { checkRequestStatus } from "../../../../utils/customFunctions";
 
@@ -27,7 +28,7 @@ export const ChangeTestimonialEditBlock: React.FC = () => {
   const { isValidText, validateText, isValidFile, validateFile } = useValidateForm();
 
   if (!testimonial) {
-    return;
+    return <SkeletonDashboardForm />;
   }
 
   // **

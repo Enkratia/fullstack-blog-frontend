@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { Footer, Header, CommonHelper, AuthProvider, StoreProvider } from "../components";
+import { Header, CommonHelper, AuthProvider, StoreProvider, Footer } from "../components";
 
 import "./globals.scss";
 

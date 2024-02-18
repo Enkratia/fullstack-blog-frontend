@@ -1,0 +1,80 @@
+@use "../../../../scss/utils/" as *;
+
+.root {
+  position: relative;
+  z-index: var(--z-up);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: rem(-42);
+  padding-right: rem(38);
+
+  @include bp-down("1024") {
+    align-items: center;
+    margin-bottom: 0;
+    padding-right: rem(30);
+    padding-bottom: rem(60);
+  }
+
+  @include bp-down("768") {
+    display: block;
+    padding-bottom: rem(55);
+    padding-inline: 0;
+  }
+}
+
+// Left
+.left {
+  position: relative;
+  top: rem(21);
+  margin-right: rem(20);
+  padding: rem(64);
+  width: 100%;
+  max-width: rem(624);
+
+  @include bp-down("container") {
+    padding: calc(rem(-65.52) + 9.52vw); // 64>32(1360>1024)
+  }
+
+  @include bp-down("1024") {
+    padding: 0;
+  }
+
+  @include bp-down("1024") {
+    position: revert;
+    margin-right: rem(40);
+  }
+
+  @include bp-down("768") {
+    margin-right: 0;
+    margin-bottom: rem(15);
+  }
+}
+
+.subtitle {
+  margin-bottom: rem(16);
+  width: 100%;
+  height: rem(20);
+  max-width: rem(107);
+}
+
+.title {
+  width: 100%;
+  height: rem(191);
+  max-width: rem(496);
+
+  @include bp-down("container") {
+    height: calc(rem(296.92) - 7.7vw); // 191>272(1360>320)
+  }
+}
+
+// Right
+.right {
+  width: 100%;
+  height: rem(112);
+  max-width: rem(477);
+
+  @include bp-down("container") {
+    height: calc(rem(221.84) - 8.07vw); // 112>196(1360>320)
+  }
+}

@@ -20,7 +20,7 @@ const socialLinks = {
   linkedin: <Linkedin aria-hidden="true" />,
 };
 
-const FooterBottomSuspense: React.FC = async () => {
+export const FooterBottom: React.FC = async () => {
   const { data, isError } = await fetchFooterBottomQuery();
 
   if (!data) {
@@ -55,10 +55,3 @@ const FooterBottomSuspense: React.FC = async () => {
     </div>
   );
 };
-
-// **
-export const FooterBottom: React.FC = async () => (
-  <Suspense fallback={<SkeletonFooterBottom />}>
-    <FooterBottomSuspense />
-  </Suspense>
-);

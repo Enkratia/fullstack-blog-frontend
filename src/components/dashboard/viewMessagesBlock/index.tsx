@@ -14,7 +14,7 @@ import {
   useUpdateContactUsMessagesMutation,
 } from "../../../redux/backendApi";
 
-import { Pagination } from "../../../components";
+import { Pagination, SkeletonDashboardViewMessages } from "../../../components";
 import { formatEmailDate, getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -238,18 +238,20 @@ export const ViewMessagesBlock: React.FC = () => {
       </div>
 
       <ul className={s.list}>
-        {messages.map((message) => (
-          <li key={message.id} className={s.item}>
-            <Link
-              onClick={(e) => onLinkClick(e, message)}
-              href={`/dashboard/view/messages/${message.id}`}
-              className={`${s.link} ${message.read ? s.linkRead : ""}`}>
-              <span className={s.fullname}>{message.fullname}</span>
-              <span className={s.message}>{message.message}</span>
-              <span className={s.date}>{formatEmailDate(message.createdAt)}</span>
-            </Link>
-          </li>
-        ))}
+        {!messages
+          ? [...Array(5)].map((_, i) => <SkeletonDashboardViewMessages key={i} />)
+          : messages.map((message) => (
+              <li key={message.id} className={s.item}>
+                <Link
+                  onClick={(e) => onLinkClick(e, message)}
+                  href={`/dashboard/view/messages/${message.id}`}
+                  className={`${s.link} ${message.read ? s.linkRead : ""}`}>
+                  <span className={s.fullname}>{message.fullname}</span>
+                  <span className={s.message}>{message.message}</span>
+                  <span className={s.date}>{formatEmailDate(message.createdAt)}</span>
+                </Link>
+              </li>
+            ))}
       </ul>
 
       {totalPages > 1 && (

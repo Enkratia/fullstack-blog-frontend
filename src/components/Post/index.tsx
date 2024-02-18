@@ -11,7 +11,7 @@ import Underline from "@tiptap/extension-underline";
 import { useGetPostByIdQuery } from "../../redux/backendApi";
 import { capitalize, formatDate2 } from "../../utils/customFunctions";
 
-import { PostNotFound } from "../../components";
+import { PostNotFound, SkeletonPost } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./post.module.scss";
@@ -59,7 +59,7 @@ export const Post: React.FC<PostProps> = ({ id }) => {
   }
 
   if (!post) {
-    return;
+    return <SkeletonPost />;
   }
 
   return (

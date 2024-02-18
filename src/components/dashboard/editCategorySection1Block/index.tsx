@@ -7,6 +7,8 @@ import {
   useUpdateCategoryHeaderMutation,
 } from "../../../redux/backendApi";
 
+import { SkeletonDashboardForm } from "../../../components";
+
 import { useValidateForm } from "../../../utils/customHooks";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 
@@ -41,7 +43,7 @@ export const EditCategorySection1Block: React.FC = () => {
   };
 
   if (!data) {
-    return;
+    return <SkeletonDashboardForm />;
   }
 
   return (

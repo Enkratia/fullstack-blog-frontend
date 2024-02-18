@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 
 import { useUpdateBrandMutation, useGetBrandByIdQuery } from "../../../../redux/backendApi";
 
+import { SkeletonDashboardForm } from "../../../../components";
 import { useValidateForm } from "../../../../utils/customHooks";
 import { checkRequestStatus } from "../../../../utils/customFunctions";
 
@@ -26,7 +27,7 @@ export const ChangeBrandEditBlock: React.FC = () => {
   const { isValidText, validateText, isValidFile, validateFile } = useValidateForm();
 
   if (!brand) {
-    return;
+    return <SkeletonDashboardForm />;
   }
 
   // **

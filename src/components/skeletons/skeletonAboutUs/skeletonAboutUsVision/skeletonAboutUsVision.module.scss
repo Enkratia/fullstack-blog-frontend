@@ -1,0 +1,71 @@
+@use "../../../../scss/utils/" as *;
+
+.root {
+  display: flex;
+  padding-top: rem(128);
+  padding-right: rem(38);
+  padding-bottom: rem(61);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(36.46) + 6.73vw); // 128>58(1360>320)
+    padding-bottom: calc(rem(20.46) + 2.98vw); // 61>30(1360>320)
+  }
+
+  @include bp-down("1024") {
+    padding-inline: rem(30);
+  }
+
+  @include bp-down("768") {
+    display: block;
+  }
+
+  @include bp-down("500") {
+    padding-inline: rem(20);
+  }
+}
+
+.box {
+  width: 100%;
+  max-width: rem(516);
+
+  &:first-child {
+    margin-right: rem(32);
+
+    @include bp-down("768") {
+      margin-right: 0;
+      margin-bottom: rem(32);
+    }
+  }
+}
+
+.subtitle {
+  margin-bottom: rem(24);
+  width: 100%;
+  height: rem(20);
+  max-width: rem(140);
+
+  @include bp-down("container") {
+    margin-right: 0;
+    margin-bottom: calc(rem(3.23) + 2.11vw); // 32>10(1360>320)
+  }
+}
+
+.title {
+  margin-bottom: rem(16);
+  width: 100%;
+  height: rem(80);
+  max-width: rem(475);
+
+  @include bp-down("container") {
+    height: calc(rem(183.3) - 7.59vw); // 80>159(1360>320)
+  }
+}
+
+.descr {
+  width: 100%;
+  height: rem(112);
+
+  @include bp-down("container") {
+    height: calc(rem(258.46) - 10.76vw); // 112>224(1360>320)
+  }
+}

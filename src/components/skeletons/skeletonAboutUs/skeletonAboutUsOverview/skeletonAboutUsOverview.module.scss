@@ -1,0 +1,72 @@
+@use "../../../../scss/utils/" as *;
+
+.root {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto min-content;
+  border: rem(1) solid var(--skeleton-border-color);
+  height: rem(444);
+}
+
+.overview {
+  position: relative;
+  z-index: var(--z-up);
+  display: flex;
+  align-self: self-end;
+  padding-block: rem(32);
+  padding-inline: rem(49);
+
+  // **
+  @include bp-down("768") {
+    padding-block: rem(25);
+    padding-inline: rem(30);
+  }
+
+  @include bp-down("500") {
+    padding-block: rem(25);
+    padding-inline: rem(20);
+  }
+
+  @include bp-down("414") {
+    flex-direction: column;
+  }
+}
+
+.statistic {
+  &Item {
+    width: 100%;
+    max-width: rem(120);
+
+    &:not(:last-child) {
+      margin-right: rem(68);
+
+      @include bp-down("container") {
+        margin-right: 5vw; // 68>16(1360>320)
+      }
+
+      @include bp-down("414") {
+        margin-right: 0;
+        margin-bottom: rem(16);
+      }
+    }
+  }
+
+  &Data {
+    margin-bottom: rem(4);
+    width: 100%;
+    height: rem(60);
+  }
+
+  &Descr {
+    width: 100%;
+    height: rem(20);
+  }
+}
+
+.decoration {
+  position: relative;
+  z-index: var(--z-up);
+  width: 100%;
+  height: rem(17);
+}

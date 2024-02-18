@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { fetchCategoryDescriptionQuery } from "../../fetchApi/fetchApi";
 
+import { SkeletonCategories } from "../../components";
 import { capitalize } from "../../utils/customFunctions";
 
 import s from "./categories.module.scss";
@@ -10,7 +11,6 @@ import Business from "../../../public/img/business.svg";
 import Startup from "../../../public/img/startup.svg";
 import Economy from "../../../public/img/economy.svg";
 import Technology from "../../../public/img/technology.svg";
-import { SkeletonCategories } from "..";
 
 const icons = [
   {
@@ -31,7 +31,7 @@ const icons = [
   },
 ];
 
-export const CategoriesSuspense: React.FC = async () => {
+const CategoriesSuspense: React.FC = async () => {
   const { data, isError } = await fetchCategoryDescriptionQuery();
 
   if (!data) {

@@ -1,0 +1,41 @@
+@use "../../../scss/utils/" as *;
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-color: var(--skeleton-color);
+  border-bottom: 0;
+  border-bottom-right-radius: initial;
+  border-bottom-left-radius: initial;
+
+  >div {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: rem(12);
+
+    &:first-child {
+      margin-right: rem(30);
+    }
+
+    &:last-child {
+      justify-content: flex-end;
+    }
+  }
+
+  &Btn {
+    width: rem(36);
+    height: rem(36);
+  }
+
+  @include bp-down("678") {
+    padding-right: rem(24);
+  }
+}
+
+.content {
+  border-color: var(--skeleton-color);
+  border-top-left-radius: initial;
+  border-top-right-radius: initial;
+  min-height: rem(280);
+}

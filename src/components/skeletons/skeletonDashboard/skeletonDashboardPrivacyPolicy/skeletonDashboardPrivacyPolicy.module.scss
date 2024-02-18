@@ -1,0 +1,17 @@
+@use "../../../../scss/utils/" as *;
+
+.title {
+  margin-bottom: rem(15);
+  width: 100%;
+  height: rem(48);
+  max-width: rem(180);
+}
+
+.wrapper {
+  margin-bottom: rem(20);
+}
+
+.btn {
+  width: rem(160);
+  height: rem(58);
+}

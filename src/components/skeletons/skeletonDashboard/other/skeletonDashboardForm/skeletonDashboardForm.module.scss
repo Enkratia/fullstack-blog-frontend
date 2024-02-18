@@ -1,0 +1,26 @@
+@use "../../../../../scss//utils/" as *;
+
+.title {
+  margin-bottom: rem(15);
+  width: 100%;
+  height: rem(48);
+  max-width: rem(220);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: rem(20);
+}
+
+.input {
+  width: 100%;
+  height: rem(108);
+}
+
+.btn {
+  width: 100%;
+  height: rem(58);
+  max-width: rem(160);
+}

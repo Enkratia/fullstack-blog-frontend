@@ -1,3 +1,4 @@
+/* stylelint-disable order/order */
 @use "../../../scss/utils/" as *;
 
 .item {
@@ -23,6 +24,18 @@
     padding-top: rem(36);
     padding-left: 0;
   }
+
+  &Dash {
+    padding-left: 0;
+    height: auto;
+
+    @include bp-down("768") {
+      left: 50%;
+      width: 100%;
+      max-width: rem(460);
+      transform: translateX(-50%);
+    }
+  }
 }
 
 .text {
@@ -35,6 +48,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: rem(25);
+    width: 100%;
     max-width: rem(469);
   }
 }

@@ -5,6 +5,7 @@ import { backendApi } from "./backendApi";
 import menuBtn from "./menuBtnSlice/slice";
 import dashboardMenuBtn from "./dashboardMenuBtnSlice/slice";
 import auth from "./authSlice/slice";
+import toast from "./toastSlice/slice";
 
 export const makeStore = () => {
   return configureStore({
@@ -12,6 +13,7 @@ export const makeStore = () => {
       auth,
       menuBtn,
       dashboardMenuBtn,
+      toast,
       [backendApi.reducerPath]: backendApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(backendApi.middleware),

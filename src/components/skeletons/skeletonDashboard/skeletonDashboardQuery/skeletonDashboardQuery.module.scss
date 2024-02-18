@@ -1,0 +1,20 @@
+@use "../../../../scss/utils/" as *;
+
+.btns {
+  display: flex;
+  margin-bottom: rem(8);
+}
+
+.btn {
+  width: rem(24);
+  height: rem(24);
+
+  &:first-child {
+    margin-right: rem(5);
+  }
+}
+
+.input {
+  width: 100%;
+  height: rem(104);
+}

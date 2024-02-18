@@ -7,6 +7,7 @@ import {
   useGetSubscribersCountQuery,
 } from "../../../../redux/backendApi";
 
+import { SkeletonDashboardBlockStats } from "../../../../components";
 import { formatStatistic } from "../../../../utils/customFunctions";
 
 import cs from "../../../../scss/helpers.module.scss";
@@ -17,7 +18,7 @@ export const DashboardBlockStats: React.FC = () => {
   const { data: subscribeCount, isError: isSubscribeCountError } = useGetSubscribersCountQuery();
 
   if (!statistic || !subscribeCount) {
-    return;
+    return <SkeletonDashboardBlockStats />;
   }
 
   return (

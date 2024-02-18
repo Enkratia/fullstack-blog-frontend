@@ -4,28 +4,10 @@ import React from "react";
 
 import { useGetContactUsQueriesQuery, useGetContactUsQuery } from "../../redux/backendApi";
 
-import { ContactUsForm, SomethingWrong } from "../../components";
+import { ContactUsForm, SkeletonContactUs, SomethingWrong } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./contactUs.module.scss";
-
-// const data: ContactUsType = {
-//   header: {
-//     subtitle: "Contact us",
-//     title: "Let’s Start a Conversation",
-//     description:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.",
-//   },
-//   time: {
-//     days: "Monday To Friday",
-//     hours: "9:00 AM to 8:00 PM",
-//     description: "Our Support Team is available 24/7",
-//   },
-//   data: {
-//     phone: "020 7993 2905",
-//     email: "hello@finsweet.com",
-//   },
-// };
 
 export const ContactUs: React.FC = () => {
   const { data, isError: isInfoError } = useGetContactUsQuery();
@@ -39,7 +21,7 @@ export const ContactUs: React.FC = () => {
   }
 
   if (!info || !queries) {
-    return;
+    return <SkeletonContactUs />;
   }
 
   return (

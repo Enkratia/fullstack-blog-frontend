@@ -1,0 +1,77 @@
+@use "../../../scss/utils/" as *;
+
+.root {
+  padding-top: rem(128);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(36.46) + 6.73vw); // 128>58(1360>320)
+  }
+}
+
+.container {
+  display: grid;
+  column-gap: rem(64);
+  justify-content: space-between;
+  grid-template-columns: minmax(0, rem(519)) minmax(0, rem(624));
+
+  @include bp-down("896") {
+    column-gap: rem(44);
+  }
+
+  @include bp-down("678") {
+    grid-template-columns: 1fr;
+    row-gap: rem(25);
+  }
+}
+
+// **
+.text {
+  align-self: center;
+
+  @include bp-down("678") {
+    order: 1;
+  }
+}
+
+.title {
+  margin-bottom: rem(16);
+  width: 100%;
+  height: rem(48);
+  max-width: rem(345);
+
+  @include bp-down("678") {
+    margin-bottom: rem(10);
+  }
+}
+
+.subtitle {
+  display: inline-block;
+  margin-bottom: rem(16);
+  width: 100%;
+  height: rem(96);
+
+  @include bp-down("678") {
+    height: calc(rem(260) - 31.2vw); // 48>160(678>320)
+  }
+}
+
+.description {
+  width: 100%;
+  height: rem(140);
+
+  @include bp-down("678") {
+    height: calc(rem(405.14) - 39.1vw); // 140>280(678>320)
+  }
+}
+
+// **
+.image {
+  &Wrapper {
+    width: 100%;
+
+    &Inner {
+      position: relative;
+      padding-top: 76.9%;
+    }
+  }
+}

@@ -4,7 +4,7 @@ import React from "react";
 
 import { useGetUsersQuery } from "../../redux/backendApi";
 
-import { AuthorCard, Navigation } from "../../components";
+import { AuthorCard, Navigation, SkeletonAuthorCard } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./aboutUsList.module.scss";
@@ -19,10 +19,7 @@ export const AboutUsList: React.FC = () => {
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
 
-  if (!authorsList) {
-    return;
-  }
-
+  // **
   const onPrevClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     if (page === 1) return;
@@ -37,17 +34,26 @@ export const AboutUsList: React.FC = () => {
     setPage((n) => n + 1);
   };
 
+  // **
+  const isReady = !!authorsList && !!authorsList.length;
+
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
         <h2 className={`${s.title} ${cs.title}`}>List of Authors</h2>
 
         <ul className={s.list}>
-          {authorsList.map((obj) => (
-            <li key={obj.id} className={s.item}>
-              <AuthorCard author={obj} />
-            </li>
-          ))}
+          {!isReady
+            ? [...Array(4)].map((_, i) => (
+                <li key={i} className={s.item}>
+                  <SkeletonAuthorCard />
+                </li>
+              ))
+            : authorsList.map((obj) => (
+                <li key={obj.id} className={s.item}>
+                  <AuthorCard author={obj} />
+                </li>
+              ))}
         </ul>
 
         {totalPages > 1 && (

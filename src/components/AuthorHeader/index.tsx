@@ -6,6 +6,8 @@ import { notFound, useParams } from "next/navigation";
 
 import { useGetUserByIdQuery } from "../../redux/backendApi";
 
+import { SkeletonAuthorHeader } from "../../components";
+
 import cs from "../../scss/helpers.module.scss";
 import s from "./authorHeader.module.scss";
 
@@ -25,14 +27,14 @@ const socialIcons = {
 export const AuthorHeader: React.FC = () => {
   const { id } = useParams();
 
-  const { data: user, isError } = useGetUserByIdQuery(id as string);
+  const { data: user, isError, isSuccess } = useGetUserByIdQuery(id as string);
 
   if (isError) {
     notFound();
   }
 
   if (!user) {
-    return;
+    return <SkeletonAuthorHeader />;
   }
 
   return (

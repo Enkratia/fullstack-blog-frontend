@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useGetPostsQuery } from "../../redux/backendApi";
 import { useAppDispatch } from "../../redux/store";
 
-import { Article, Pagination } from "../../components";
+import { Article, Pagination, SkeletonArticle } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./myPosts.module.scss";
@@ -74,13 +74,9 @@ export const MyPosts: React.FC = () => {
     }
   }, [isNavigate]);
 
-  if (!posts) {
-    return;
-  }
-
   // **
   const refetchPostsAfterDelete = () => {
-    if (posts.length === 1 && page > 1) {
+    if (posts?.length === 1 && page > 1) {
       setPage((n) => n - 1);
       setIsNavigate({});
 
@@ -100,11 +96,17 @@ export const MyPosts: React.FC = () => {
       <h2 className={`${s.title} ${cs.title}`}>My posts</h2>
 
       <ul className={s.list}>
-        {posts.map((obj) => (
-          <li key={obj.id} className={s.item}>
-            <Article obj={obj} refetch={refetchPostsAfterDelete} isEditable={true} />
-          </li>
-        ))}
+        {!posts
+          ? [...Array(3)].map((_, i) => (
+              <li key={i} className={s.item}>
+                <SkeletonArticle key={i} />
+              </li>
+            ))
+          : posts.map((obj) => (
+              <li key={obj.id} className={s.item}>
+                <Article obj={obj} refetch={refetchPostsAfterDelete} isEditable={true} />
+              </li>
+            ))}
       </ul>
 
       {totalPages > 1 && (

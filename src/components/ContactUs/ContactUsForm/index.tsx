@@ -15,20 +15,6 @@ import s from "./contactUsForm.module.scss";
 
 import AngleDown from "../../../../public/img/angle-down.svg";
 
-// const data: ContactUsQueryType = [
-//   "Query1",
-//   "Query2",
-//   "Query3",
-//   "Query4",
-//   "Query5",
-//   "Query6",
-//   "Query7",
-//   "Query8",
-//   "Query9",
-//   "Query10",
-//   "Query11",
-// ];
-
 const selectPlaceholder = "Query Related";
 
 type ContactUsFormProps = {

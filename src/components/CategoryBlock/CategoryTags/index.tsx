@@ -63,8 +63,6 @@ export const CategoryTags: React.FC<CategoryTagsProps> = ({ onTagClick }) => {
   // **
   const currentTags = Array.from(new Set([...prevUrlTags, ...toArray(tags || [])]));
 
-  // const a = 5;
-
   return (
     <div className={s.root}>
       <h3 className={`${s.title} ${cs.title}`}>All Tags</h3>

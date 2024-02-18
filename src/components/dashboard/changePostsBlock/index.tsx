@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetPostsQuery } from "../../../redux/backendApi";
 
-import { Article, Pagination } from "../../../components";
+import { Article, Pagination, SkeletonArticle } from "../../../components";
 import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -87,10 +87,6 @@ export const ChangePostsBlock: React.FC = () => {
       isRouter.current = true;
     }
   }, [isNavigate]);
-
-  if (!posts) {
-    return;
-  }
 
   // **
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
@@ -216,11 +212,17 @@ export const ChangePostsBlock: React.FC = () => {
       </div>
 
       <ul className={s.list}>
-        {posts.map((post) => (
-          <li key={post.id} className={s.item}>
-            <Article obj={post} refetch={refetch} isEditable={true} />
-          </li>
-        ))}
+        {!posts
+          ? [...Array(3)].map((_, i) => (
+              <li key={i} className={s.item}>
+                <SkeletonArticle />
+              </li>
+            ))
+          : posts.map((post) => (
+              <li key={post.id} className={s.item}>
+                <Article obj={post} refetch={refetch} isEditable={true} />
+              </li>
+            ))}
       </ul>
 
       {totalPages > 1 && (

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import { fetchFooterBottomQuery } from "../../../../fetchApi/fetchApi";
 
-import { EditFooterSection1Block } from "../../../../components";
+import { EditFooterSection1Block, SkeletonDashboardForm } from "../../../../components";
 
-const DashboardEditFooterPage: React.FC = async () => {
+const DashboardEditFooterPageSuspense: React.FC = async () => {
   const { data, isError } = await fetchFooterBottomQuery();
 
   if (!data) {
@@ -17,5 +17,12 @@ const DashboardEditFooterPage: React.FC = async () => {
     </div>
   );
 };
+
+// **
+const DashboardEditFooterPage: React.FC = async () => (
+  <Suspense fallback={<SkeletonDashboardForm />}>
+    <DashboardEditFooterPageSuspense />
+  </Suspense>
+);
 
 export default DashboardEditFooterPage;

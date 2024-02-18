@@ -1,0 +1,10 @@
+@use "../../../scss/utils/" as *;
+
+.update {
+  position: relative;
+  left: 50%;
+  width: 100%;
+  height: rem(25);
+  max-width: rem(277);
+  transform: translateX(-50%);
+}

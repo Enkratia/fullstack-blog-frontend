@@ -121,7 +121,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
   }, [isError, isSuccess]);
 
   return (
-    <div key={obj.id} className={`${s.item} ${isEditable ? s.itemP0 : ""}`}>
+    <div key={obj.id} className={`${s.item} ${isEditable ? s.itemDash : ""}`}>
       <div className={s.textWrapper}>
         <TextButton thisSlide={index} currentSlide={currentSlide} />
         <p className={s.text}>{obj.text}</p>

@@ -5,9 +5,13 @@ import React from "react";
 import cs from "../../../scss/helpers.module.scss";
 import s from "./skeletonTestimonial.module.scss";
 
-export const SkeletonTestimonial: React.FC = () => {
+type SkeletonTestimonial = {
+  isDashboard?: boolean;
+};
+
+export const SkeletonTestimonial: React.FC<SkeletonTestimonial> = ({ isDashboard }) => {
   return (
-    <div className={s.item}>
+    <div className={`${s.item} ${isDashboard ? s.itemDash : ""}`}>
       <div className={s.textWrapper}>
         <span className={`${s.text} ${cs.skeleton}`}></span>
       </div>

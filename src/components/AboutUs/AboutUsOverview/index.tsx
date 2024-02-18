@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 
 import { fetchAboutUsStatisticQuery } from "../../../fetchApi/fetchApi";
@@ -6,12 +6,13 @@ import { formatStatistic } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./aboutUsOverview.module.scss";
+import { SkeletonAboutUsOverview } from "@/components";
 
 type AboutUsOverviewProps = {
   data: AboutUsStaticType;
 };
 
-export const AboutUsOverview: React.FC<AboutUsOverviewProps> = async ({ data }) => {
+const AboutUsOverviewSuspense: React.FC<AboutUsOverviewProps> = async ({ data }) => {
   const { data: statistic, isError } = await fetchAboutUsStatisticQuery();
 
   if (!statistic) {
@@ -47,3 +48,10 @@ export const AboutUsOverview: React.FC<AboutUsOverviewProps> = async ({ data }) 
     </div>
   );
 };
+
+// **
+export const AboutUsOverview: React.FC<AboutUsOverviewProps> = async ({ data }) => (
+  <Suspense fallback={<SkeletonAboutUsOverview />}>
+    <AboutUsOverviewSuspense data={data} />
+  </Suspense>
+);

@@ -8,5 +8,9 @@ interface ProvidersProps {
 }
 
 export const AuthProvider = ({ children }: ProvidersProps) => {
-  return <SessionProvider>{children}</SessionProvider>;
+  return (
+    <div>
+      <SessionProvider>{children}</SessionProvider>
+    </div>
+  );
 };

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 
 import { fetchKnowMoreQuery } from "../../fetchApi/fetchApi";
 
+import { SkeletonKnowMore } from "../../components";
+
 import cs from "../../scss/helpers.module.scss";
 import s from "./knowMore.module.scss";
 
-export const KnowMore: React.FC = async () => {
+const KnowMoreSuspense: React.FC = async () => {
   const { data, isError } = await fetchKnowMoreQuery();
 
   if (!data) {
@@ -39,3 +41,10 @@ export const KnowMore: React.FC = async () => {
     </section>
   );
 };
+
+// **
+export const KnowMore: React.FC = async () => (
+  <Suspense fallback={<SkeletonKnowMore />}>
+    <KnowMoreSuspense />
+  </Suspense>
+);

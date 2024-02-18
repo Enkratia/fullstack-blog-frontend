@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import { fetchCategoryDescriptionQuery } from "../../../../../fetchApi/fetchApi";
 
-import { EditHomeSection4Block } from "../../../../../components";
+import { EditHomeSection4Block, SkeletonDashboardForm } from "../../../../../components";
 
-const EditHomeSection4Page: React.FC = async () => {
+const EditHomeSection4PageSuspense: React.FC = async () => {
   const { data, isError } = await fetchCategoryDescriptionQuery();
 
   if (!data) {
@@ -17,5 +17,12 @@ const EditHomeSection4Page: React.FC = async () => {
     </div>
   );
 };
+
+// **
+const EditHomeSection4Page: React.FC = async () => (
+  <Suspense fallback={<SkeletonDashboardForm />}>
+    <EditHomeSection4PageSuspense />
+  </Suspense>
+);
 
 export default EditHomeSection4Page;

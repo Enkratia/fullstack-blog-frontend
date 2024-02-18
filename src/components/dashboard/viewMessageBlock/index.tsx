@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 
 import { useGetContactUsMessageByIdQuery } from "../../../redux/backendApi";
 
+import { SkeletonDashboardViewMessage } from "../../../components";
 import { formatEmailDate } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -16,7 +17,7 @@ export const ViewMessageBlock: React.FC = () => {
   const { data: message, isError } = useGetContactUsMessageByIdQuery(id);
 
   if (!message) {
-    return;
+    return <SkeletonDashboardViewMessage />;
   }
 
   return (

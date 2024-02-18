@@ -16,10 +16,10 @@ export const ReinitAppProvider: React.FC<TestLayerProps> = ({ children }) => {
   };
 
   return (
-    <>
+    <div>
       <ReinitAppContext.Provider key={key} value={reinitApp}>
         {children}
       </ReinitAppContext.Provider>
-    </>
+    </div>
   );
 };

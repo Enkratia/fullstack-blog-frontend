@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import { fetchUsMissionQuery } from "../../../../../fetchApi/fetchApi";
 
-import { EditHomeSection3Block } from "../../../../../components";
+import { EditHomeSection3Block, SkeletonDashboardForm } from "../../../../../components";
 
-const EditHomeSection3Page: React.FC = async () => {
+const EditHomeSection3PageSuspense: React.FC = async () => {
   const { data, isError } = await fetchUsMissionQuery();
 
   if (!data) {
@@ -17,5 +17,12 @@ const EditHomeSection3Page: React.FC = async () => {
     </div>
   );
 };
+
+// **
+const EditHomeSection3Page: React.FC = async () => (
+  <Suspense fallback={<SkeletonDashboardForm />}>
+    <EditHomeSection3PageSuspense />
+  </Suspense>
+);
 
 export default EditHomeSection3Page;

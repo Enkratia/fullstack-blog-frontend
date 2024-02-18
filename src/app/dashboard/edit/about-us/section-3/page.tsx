@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import { fetchWhyThisBlogQuery } from "../../../../../fetchApi/fetchApi";
 
-import { EditAboutUsSection3Block } from "../../../../../components";
+import { EditAboutUsSection3Block, SkeletonDashboardForm } from "../../../../../components";
 
-const EditAboutUsSection3Page: React.FC = async () => {
+const EditAboutUsSection3PageSuspense: React.FC = async () => {
   const { data, isError } = await fetchWhyThisBlogQuery();
 
   if (!data) {
@@ -17,5 +17,12 @@ const EditAboutUsSection3Page: React.FC = async () => {
     </div>
   );
 };
+
+// **
+const EditAboutUsSection3Page: React.FC = async () => (
+  <Suspense fallback={<SkeletonDashboardForm />}>
+    <EditAboutUsSection3PageSuspense />
+  </Suspense>
+);
 
 export default EditAboutUsSection3Page;

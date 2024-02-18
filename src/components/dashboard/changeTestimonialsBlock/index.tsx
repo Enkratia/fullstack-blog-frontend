@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetTestimonialQuery } from "../../../redux/backendApi";
 
-import { Pagination, Testimonial } from "../../../components";
+import { Pagination, SkeletonTestimonial, Testimonial } from "../../../components";
 import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -108,13 +108,9 @@ export const ChangeTestimonialsBlock: React.FC = () => {
     });
   });
 
-  if (!testimonials) {
-    return;
-  }
-
   // **
   const refetchTestimonialsAfterDelete = () => {
-    if (testimonials.length === 1 && page > 1) {
+    if (testimonials?.length === 1 && page > 1) {
       setPage((n) => n - 1);
       setIsNavigate({});
 
@@ -252,17 +248,23 @@ export const ChangeTestimonialsBlock: React.FC = () => {
       </Link>
 
       <ul className={s.list} ref={listRef}>
-        {testimonials.map((obj, i) => (
-          <li key={obj.id} className={s.item}>
-            <Testimonial
-              obj={obj}
-              index={0}
-              currentSlide={0}
-              isEditable={true}
-              refetch={refetchTestimonialsAfterDelete}
-            />
-          </li>
-        ))}
+        {!testimonials
+          ? [...Array(2)].map((_, i) => (
+              <li key={i} className={s.item}>
+                <SkeletonTestimonial isDashboard={true} />
+              </li>
+            ))
+          : testimonials.map((obj, i) => (
+              <li key={obj.id} className={s.item}>
+                <Testimonial
+                  obj={obj}
+                  index={0}
+                  currentSlide={0}
+                  isEditable={true}
+                  refetch={refetchTestimonialsAfterDelete}
+                />
+              </li>
+            ))}
       </ul>
 
       {totalPages > 1 && (

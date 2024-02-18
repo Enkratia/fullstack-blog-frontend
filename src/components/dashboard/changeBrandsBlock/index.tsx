@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetFeaturedInQuery } from "../../../redux/backendApi";
 
-import { Brand, Pagination } from "../../../components";
+import { Brand, Pagination, SkeletonBrand } from "../../../components";
 import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -89,13 +89,13 @@ export const ChangeBrandsBlock: React.FC = () => {
     }
   }, [isNavigate]);
 
-  if (!brands) {
-    return;
-  }
+  // if (!brands) {
+  //   return;
+  // }
 
   // **
   const refetchBrandsAfterDelete = () => {
-    if (brands.length === 1 && page > 1) {
+    if (brands?.length === 1 && page > 1) {
       setPage((n) => n - 1);
       setIsNavigate({});
 
@@ -233,11 +233,17 @@ export const ChangeBrandsBlock: React.FC = () => {
       </Link>
 
       <ul className={s.list}>
-        {brands.map((brand) => (
-          <li key={brand.id} className={s.item}>
-            <Brand obj={brand} isEditable={true} refetch={refetchBrandsAfterDelete} />
-          </li>
-        ))}
+        {!brands
+          ? [...Array(4)].map((_, i) => (
+              <li key={i} className={s.item}>
+                <SkeletonBrand />
+              </li>
+            ))
+          : brands.map((brand) => (
+              <li key={brand.id} className={s.item}>
+                <Brand obj={brand} isEditable={true} refetch={refetchBrandsAfterDelete} />
+              </li>
+            ))}
       </ul>
 
       {totalPages > 1 && (

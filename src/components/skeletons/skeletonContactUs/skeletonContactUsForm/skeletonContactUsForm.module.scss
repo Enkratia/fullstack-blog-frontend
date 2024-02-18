@@ -1,0 +1,19 @@
+@use "../../../../scss/utils/" as *;
+
+.inputWrapper {
+  width: 100%;
+  height: rem(76);
+
+  &:not(:last-child) {
+    margin-bottom: rem(16);
+  }
+
+  &:nth-child(4) {
+    height: rem(144);
+  }
+}
+
+.btnWrapper {
+  width: 100%;
+  height: rem(76);
+}

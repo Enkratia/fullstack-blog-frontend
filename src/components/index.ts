@@ -96,7 +96,6 @@ export * from "./categoryHeader";
 export * from "./categoryBlock";
 
 // **
-export * from "./categoryBlock/categoryLayer";
 export * from "./categoryBlock/categoryPosts";
 export * from "./categoryBlock/categoryCategories";
 export * from "./categoryBlock/categoryTags";

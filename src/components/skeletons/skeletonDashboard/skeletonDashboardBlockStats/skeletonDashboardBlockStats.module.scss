@@ -1,0 +1,39 @@
+@use "../../../../scss/utils/" as *;
+
+.root {
+  margin-bottom: rem(60);
+  padding: rem(30);
+  text-align: center;
+
+  @include bp-down("678") {
+    padding: rem(20);
+  }
+}
+
+.list {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-width: rem(600);
+  gap: rem(30);
+
+  @include bp-down("678") {
+    flex-wrap: wrap;
+    gap: rem(20);
+  }
+}
+
+.item {
+  width: 25%;
+  height: rem(92);
+
+  &:not(:last-child) {
+    margin-right: revert;
+    margin-bottom: revert;
+  }
+
+  @include bp-down("678") {
+    width: calc(50% - rem(10));
+  }
+}

@@ -32,11 +32,6 @@ export default function Home() {
   );
 }
 
-// await fetch("https://dummyjson.com/products");
-// await fetch("https://dummyjson.com/carts");
-// await fetch("https://dummyjson.com/users");
-// await fetch("https://dummyjson.com/posts");
-// await fetch("https://dummyjson.com/comments");
-// await fetch("https://dummyjson.com/quotes");
-// await fetch("https://dummyjson.com/recipes");
-// await fetch("https://dummyjson.com/todos");
+// await new Promise((resolve) => {
+//   setTimeout(() => resolve(""), 6000);
+// });

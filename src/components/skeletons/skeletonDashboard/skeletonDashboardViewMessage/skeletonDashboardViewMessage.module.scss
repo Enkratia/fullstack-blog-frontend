@@ -1,0 +1,36 @@
+@use "../../../../scss/utils/" as *;
+
+.title {
+  margin-bottom: rem(15);
+  width: 100%;
+  height: rem(48);
+  max-width: rem(185);
+}
+
+.field {
+  display: flex;
+  gap: rem(10);
+
+  &Name {
+    width: 100%;
+    height: rem(28);
+    max-width: rem(55);
+  }
+
+  &Value {
+    width: 100%;
+    height: rem(28);
+    max-width: rem(230);
+  }
+
+  &:not(:last-child) {
+    margin-bottom: rem(10);
+  }
+
+  &:last-child {
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: rem(1) solid var(--grayborder-color);
+    padding-top: rem(10);
+  }
+}

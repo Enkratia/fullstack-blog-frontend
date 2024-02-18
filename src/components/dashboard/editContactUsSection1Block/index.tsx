@@ -6,6 +6,8 @@ import React from "react";
 
 import { useGetContactUsQuery, useUpdateContactUsMutation } from "../../../redux/backendApi";
 
+import { SkeletonDashboardForm } from "../../../components";
+
 import { useValidateForm } from "../../../utils/customHooks";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 
@@ -43,7 +45,7 @@ export const EditContactUsSection1Block: React.FC = () => {
   };
 
   if (!info) {
-    return;
+    return <SkeletonDashboardForm />;
   }
 
   return (

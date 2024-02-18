@@ -1,12 +1,14 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 
 import { fetchWhyThisBlogQuery } from "../../fetchApi/fetchApi";
 
+import { SkeletonWhyThisBlog } from "../../components";
+
 import cs from "../../scss/helpers.module.scss";
 import s from "./whyThisBlog.module.scss";
 
-export const WhyThisBlog: React.FC = async () => {
+const WhyThisBlogSuspense: React.FC = async () => {
   const { data, isError } = await fetchWhyThisBlogQuery();
 
   if (!data) {
@@ -39,3 +41,9 @@ export const WhyThisBlog: React.FC = async () => {
     </section>
   );
 };
+
+export const WhyThisBlog: React.FC = async () => (
+  <Suspense fallback={<SkeletonWhyThisBlog />}>
+    <WhyThisBlogSuspense />
+  </Suspense>
+);

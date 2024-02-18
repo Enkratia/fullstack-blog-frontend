@@ -27,10 +27,10 @@
   }
 }
 
-.item {
-  @include bp-down("768") {
-    >div {
-      align-items: center;
-    }
-  }
-}
+// .item {
+//   @include bp-down("768") {
+//     >div {
+//       align-items: center;
+//     }
+//   }
+// }

@@ -7,6 +7,8 @@ import {
   useUpdateAboutUsStaticMutation,
 } from "../../../redux/backendApi";
 
+import { SkeletonDashboardForm } from "../../../components";
+
 import { useValidateForm } from "../../../utils/customHooks";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 
@@ -30,10 +32,6 @@ export const EditAboutUsSection1Block: React.FC = () => {
       .every((el) => (!el ? !el : !Object.keys(el)?.[0]?.includes("data-validity-warning")));
   };
 
-  if (!info) {
-    return;
-  }
-
   // **
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     validateFile(e.target.files);
@@ -52,6 +50,10 @@ export const EditAboutUsSection1Block: React.FC = () => {
     const formData = new FormData(formRef.current);
     updateAboutUsStatic(formData);
   };
+
+  if (!info) {
+    return <SkeletonDashboardForm />;
+  }
 
   return (
     <section className={s.root}>

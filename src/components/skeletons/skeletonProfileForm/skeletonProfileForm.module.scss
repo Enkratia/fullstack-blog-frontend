@@ -1,0 +1,33 @@
+@use "../../../scss/utils/" as *;
+
+.inputs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: rem(50);
+  gap: rem(20);
+
+  @include bp-down("576") {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input {
+  width: 100%;
+  height: rem(76);
+}
+
+.upload {
+  width: 100%;
+  height: rem(58);
+}
+
+.textarea {
+  margin-bottom: rem(30);
+  width: 100%;
+  height: rem(180);
+}
+
+.btn {
+  width: rem(160);
+  height: rem(58);
+}

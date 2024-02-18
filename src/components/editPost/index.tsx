@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 
 import { useGetPostByIdQuery } from "../../redux/backendApi";
 
-import { EditPostForm, PostNotFound } from "../../components";
+import { EditPostForm, PostNotFound, SkeletonEditPostForm } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./editPostBlock.module.scss";
@@ -28,16 +28,12 @@ export const EditPostBlock: React.FC = () => {
     );
   }
 
-  if (!data) {
-    return;
-  }
-
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container} ${cs.container1024}`}>
         <h2 className={`${s.title} ${cs.title}`}>Edit post</h2>
 
-        <EditPostForm post={data} />
+        {!data ? <SkeletonEditPostForm /> : <EditPostForm post={data} />}
       </div>
     </section>
   );

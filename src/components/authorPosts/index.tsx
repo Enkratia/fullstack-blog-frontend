@@ -7,73 +7,10 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
 
-import { Article, Navigation } from "../../components";
+import { Article, Navigation, SkeletonArticle } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./authorPosts.module.scss";
-
-// const NoPosts: React.FC = () => {
-//   return (
-//     <section className={s.root}>
-//       <div className={`${s.container} ${cs.container} ${cs.container1024}`}>
-//         <h2 className={s.title}>My Posts</h2>
-
-//         <p>No posts.</p>
-//       </div>
-//     </section>
-//   );
-// };
-
-// const posts: PostType[] = [
-//   {
-//     id: 1,
-//     title: "Font sizes in UI design: The complete guide to follow",
-//     category: "startup",
-//     createdAt: "2023-12-03T17:44:30.644Z",
-//     updatedAt: "2023-12-03T17:44:30.644Z",
-//     contentText:
-//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//     contentJson: "",
-//     imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
-//     tags: ["business", "experience"],
-//     isFeatured: true,
-//     views: 0,
-//     user: {
-//       id: 1,
-//       fullname: "John Doe",
-//       imageUrl: "",
-//       email: "email@email.com",
-//       profession: "",
-//       company: "",
-//       representation: "Lorem ipsum dolor sit amet, consectetur",
-//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//     },
-//   },
-//   {
-//     id: 2,
-//     title: "How to build rapport with your web design clients",
-//     category: "startup",
-//     createdAt: "2023-12-03T17:44:30.644Z",
-//     updatedAt: "2023-12-03T17:44:30.644Z",
-//     contentText:
-//       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-//     contentJson: "",
-//     imageUrl: "https://i.postimg.cc/2yy6jCt5/6168465168-2250x1500.png",
-//     tags: ["business", "experience"],
-//     isFeatured: true,
-//     views: 0,
-//     user: {
-//       id: 1,
-//       fullname: "John Doe",
-//       imageUrl: "",
-//       email: "email@email.com",
-//       profession: "",
-//       company: "",
-//       representation: "Lorem ipsum dolor sit amet, consectetur",
-//       userLinks: { facebook: "#", twitter: "#", instagram: "#", linkedin: "#" },
-//     },
-//   },
-// ];
 
 export const AuthorPosts: React.FC = () => {
   const limit = 2;
@@ -121,13 +58,9 @@ export const AuthorPosts: React.FC = () => {
     console.warn("Failed to load author`s posts");
   }
 
-  if (!posts) {
-    return;
-  }
-
   // **
   const refetchPostsAfterDelete = () => {
-    if (posts.length === 1 && page > 1) {
+    if (posts?.length === 1 && page > 1) {
       setPage((n) => n - 1);
       setIsNavigate({});
 
@@ -158,15 +91,21 @@ export const AuthorPosts: React.FC = () => {
       <div className={`${s.container} ${cs.container} ${cs.container1024}`}>
         <h2 className={s.title}>My Posts</h2>
 
-        {posts.length === 0 ? (
+        {posts?.length === 0 ? (
           <p>No posts.</p>
         ) : (
           <ul className={s.list}>
-            {posts.map((post) => (
-              <li key={post.id} className={s.item}>
-                <Article obj={post} isArticlePage={true} refetch={refetchPostsAfterDelete} />
-              </li>
-            ))}
+            {!posts
+              ? [...Array(2)].map((_, i) => (
+                  <li key={i} className={s.item}>
+                    <SkeletonArticle isArticlePage={true} />
+                  </li>
+                ))
+              : posts.map((post) => (
+                  <li key={post.id} className={s.item}>
+                    <Article obj={post} isArticlePage={true} refetch={refetchPostsAfterDelete} />
+                  </li>
+                ))}
           </ul>
         )}
 

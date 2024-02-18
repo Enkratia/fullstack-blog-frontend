@@ -10,7 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetUsersQuery } from "../../../redux/backendApi";
 
-import { AuthorCard, Pagination } from "../../../components";
+import { AuthorCard, Pagination, SkeletonAuthorCard } from "../../../components";
 import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -94,10 +94,6 @@ export const ViewUsersBlock: React.FC = () => {
       isRouter.current = true;
     }
   }, [isNavigate]);
-
-  if (!users) {
-    return;
-  }
 
   // **
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
@@ -223,11 +219,17 @@ export const ViewUsersBlock: React.FC = () => {
       </div>
 
       <ul className={s.list}>
-        {users.map((user, i) => (
-          <li key={i} className={s.item}>
-            <AuthorCard author={user} />
-          </li>
-        ))}
+        {!users
+          ? [...Array(3)].map((_, i) => (
+              <li key={i} className={s.item}>
+                <SkeletonAuthorCard key={i} />
+              </li>
+            ))
+          : users.map((user, i) => (
+              <li key={i} className={s.item}>
+                <AuthorCard author={user} />
+              </li>
+            ))}
       </ul>
 
       {totalPages > 1 && (

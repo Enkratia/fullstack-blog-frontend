@@ -8,19 +8,12 @@ import { formatDate2 } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./privacyPolicyHeader.module.scss";
-
-// const policy: PrivacyPolicyType = {
-//   message: "",
-//   createdAt: "2023-11-25T16:48:55.329Z",
-//   updatedAt: "2023-11-25T16:48:55.329Z",
-// };
+import { SkeletonPrivacyPolicyHeader } from "../skeletons/skeletonPrivacyPolicyHeader";
 
 export const PrivacyPolicyHeader: React.FC = () => {
   const { data: policy, isError } = useGetPrivacyPolicyQuery();
 
-  if (!policy) {
-    return;
-  }
+  console.log("2", useGetPrivacyPolicyQuery());
 
   return (
     <section className={s.root}>
@@ -29,7 +22,11 @@ export const PrivacyPolicyHeader: React.FC = () => {
       <div className={`${s.container} ${cs.container} ${cs.container768}`}>
         <p className={s.title}>Privacy Policy</p>
 
-        <span className={s.update}>{`Last updated on ${formatDate2(policy.updatedAt)}`}</span>
+        {!policy ? (
+          <SkeletonPrivacyPolicyHeader />
+        ) : (
+          <span className={s.update}>{`Last updated on ${formatDate2(policy.updatedAt)}`}</span>
+        )}
       </div>
     </section>
   );

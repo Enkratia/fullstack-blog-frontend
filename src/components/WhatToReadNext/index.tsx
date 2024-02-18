@@ -18,10 +18,6 @@ export const WhatToReadNext: React.FC = () => {
   const { data, isError } = useGetPostsQuery(request);
   const nextPosts = data?.data;
 
-  if (!nextPosts || nextPosts.length === 0) {
-    return;
-  }
-
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>List of related posts.</h2>

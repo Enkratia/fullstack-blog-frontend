@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetContactUsQueriesQuery } from "../../../redux/backendApi";
 
-import { Pagination, Query } from "../../../components";
+import { Pagination, Query, SkeletonDashboardQuery } from "../../../components";
 import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -90,13 +90,9 @@ export const ChangeQueriesBlock: React.FC = () => {
     }
   }, [isNavigate]);
 
-  if (!queries) {
-    return;
-  }
-
   // **
   const refetchQueriesAfterDelete = () => {
-    if (queries.length === 1 && page > 1) {
+    if (queries?.length === 1 && page > 1) {
       setPage((n) => n - 1);
       setIsNavigate({});
 
@@ -234,11 +230,17 @@ export const ChangeQueriesBlock: React.FC = () => {
       </Link>
 
       <ul className={s.list}>
-        {queries.map((obj, i) => (
-          <li key={obj.id} className={s.item}>
-            <Query obj={obj} refetch={refetchQueriesAfterDelete} />
-          </li>
-        ))}
+        {!queries
+          ? [...Array(3)].map((_, i) => (
+              <li key={i} className={s.item}>
+                <SkeletonDashboardQuery />
+              </li>
+            ))
+          : queries.map((obj, i) => (
+              <li key={obj.id} className={s.item}>
+                <Query obj={obj} refetch={refetchQueriesAfterDelete} />
+              </li>
+            ))}
       </ul>
 
       {totalPages > 1 && (
