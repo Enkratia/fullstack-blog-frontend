@@ -13,8 +13,6 @@ import { SkeletonPrivacyPolicyHeader } from "../skeletons/skeletonPrivacyPolicyH
 export const PrivacyPolicyHeader: React.FC = () => {
   const { data: policy, isError } = useGetPrivacyPolicyQuery();
 
-  console.log("2", useGetPrivacyPolicyQuery());
-
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>Privacy Policy.</h2>

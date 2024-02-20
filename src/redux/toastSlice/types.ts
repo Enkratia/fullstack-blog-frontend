@@ -1,13 +1,15 @@
-type ToastTypes = ["warning", "error", "info", "success", undefined];
+type ToastInitialStateInfoType = {
+  allArgs: string[];
+  allTexts: string[];
+  allTypes: ToastTypeType[];
+};
 
-export type ToastType = {
-  requestIds: string[];
-  text: string;
-  type: ToastTypes[number];
+export type ToastInitialStateType = {
+  toastInfo: ToastInitialStateInfoType;
 };
 
 export type ToastPayload = {
-  requestId: string;
-  text: string;
-  type: ToastTypes[number];
+  args: string | string[];
+  text: string | string[];
+  type: ToastTypeType | ToastTypeType[];
 };

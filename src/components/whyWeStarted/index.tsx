@@ -4,16 +4,21 @@ import Image from "next/image";
 
 import { fetchWhyWeStartedQuery } from "../../fetchApi/fetchApi";
 
-import { SkeletonWhyWeStarted } from "../../components";
+import { SkeletonWhyWeStarted, ToastComponent } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./whyWeStarted.module.scss";
 
 const WhyWeStartedSuspense: React.FC = async () => {
-  const { isError, data } = await fetchWhyWeStartedQuery();
+  const { data } = await fetchWhyWeStartedQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonWhyWeStarted />
+        <ToastComponent type="warning" requestId="server" text="Failed to load some data." />
+      </>
+    );
   }
 
   return (

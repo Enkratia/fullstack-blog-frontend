@@ -3,16 +3,21 @@ import Link from "next/link";
 
 import { fetchUsMissionQuery } from "../../fetchApi/fetchApi";
 
-import { SkeletonUsMission } from "../../components";
+import { SkeletonUsMission, ToastComponent } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./usMission.module.scss";
 
 const UsMissionSuspense: React.FC = async () => {
-  let { data, isError } = await fetchUsMissionQuery();
+  let { data } = await fetchUsMissionQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonUsMission />
+        <ToastComponent type="warning" requestId="server" text="Failed to load some data." />
+      </>
+    );
   }
 
   return (

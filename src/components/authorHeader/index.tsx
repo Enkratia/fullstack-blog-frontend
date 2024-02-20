@@ -2,11 +2,11 @@
 
 import React from "react";
 import Image from "next/image";
-import { notFound, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 import { useGetUserByIdQuery } from "../../redux/backendApi";
 
-import { SkeletonAuthorHeader } from "../../components";
+import { SkeletonAuthorHeader, ToastComponent } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./authorHeader.module.scss";
@@ -27,10 +27,19 @@ const socialIcons = {
 export const AuthorHeader: React.FC = () => {
   const { id } = useParams();
 
-  const { data: user, isError, isSuccess } = useGetUserByIdQuery(id as string);
+  const { data: user, isError, requestId } = useGetUserByIdQuery(id as string);
 
   if (isError) {
-    notFound();
+    return (
+      <>
+        <SkeletonAuthorHeader />
+        <ToastComponent
+          type="warning"
+          requestId={requestId ?? ""}
+          text="Failed to load some data."
+        />
+      </>
+    );
   }
 
   if (!user) {
@@ -49,13 +58,13 @@ export const AuthorHeader: React.FC = () => {
               alt={`Picture of ${user.fullname}`}
               className={s.image}
               fill
-              sizes="100vw"
+              sizes="293px"
             />
           </div>
         </div>
 
         <div className={s.text}>
-          <p className={s.title}>{`Hey there, I’m ${user.fullname} and welcome to my Blog`}</p>
+          <p className={s.title}>{`Hey there, I'm ${user.fullname} and welcome to my Blog`}</p>
 
           <p className={s.descr}>{user.representation}</p>
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { fetchPostsQuery } from "../../fetchApi/fetchApi";
 
-import { SkeletonBlogHeader } from "../../components";
+import { SkeletonBlogHeader, ToastComponent } from "../../components";
 import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
@@ -13,11 +13,16 @@ import s from "./blogHeader.module.scss";
 const BlogHeaderSuspense: React.FC = async () => {
   const request = "?isFeatured=true";
 
-  const { data, isError } = await fetchPostsQuery(request);
+  const { data, isError, originalArgs } = await fetchPostsQuery(request);
   const post = data?.data[0];
 
   if (isError) {
-    console.warn("Failed to load featured post");
+    return (
+      <>
+        <SkeletonBlogHeader />
+        <ToastComponent type="warning" args={originalArgs} text="Failed to load some data5." />
+      </>
+    );
   }
 
   if (!post) {

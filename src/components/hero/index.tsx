@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { fetchPostsQuery } from "../../fetchApi/fetchApi";
 
-import { SkeletonHero } from "../../components";
+import { SkeletonHero, ToastComponent } from "../../components";
 
 import { formatDate } from "../../utils/customFunctions";
 
@@ -14,11 +14,16 @@ import s from "./hero.module.scss";
 const HeroSuspense: React.FC = async () => {
   const request = "?isFeatured=true";
 
-  const { data, isError } = await fetchPostsQuery(request);
+  const { data, originalArgs } = await fetchPostsQuery(request);
   const post = data?.data[0];
 
   if (!post) {
-    return;
+    return (
+      <>
+        <SkeletonHero />
+        <ToastComponent type="warning" args={originalArgs} text="Failed to load some data3." />
+      </>
+    );
   }
 
   return (

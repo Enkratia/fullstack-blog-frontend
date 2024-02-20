@@ -7,12 +7,14 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
+import { useAppDispatch } from "../../redux/store";
 import { Article, Navigation, SkeletonArticle } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./allPosts.module.scss";
 
 export const AllPosts: React.FC = () => {
+  const dispatch = useAppDispatch();
   const limit = 5;
 
   const isRouter = React.useRef(false);
@@ -32,7 +34,7 @@ export const AllPosts: React.FC = () => {
 
   const request = `?_page=${page}&_limit=${limit}&_sort=createdAt&_order=DESC`;
 
-  const { data, isError, refetch } = useGetPostsQuery(request);
+  const { data, isError, refetch, originalArgs } = useGetPostsQuery(request);
   const posts = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
@@ -79,6 +81,10 @@ export const AllPosts: React.FC = () => {
     setPage((n) => n + 1);
     setIsNavigate({});
   };
+
+  // if (isError) {
+  //   dispatch(setT)
+  // }
 
   return (
     <section className={s.root}>

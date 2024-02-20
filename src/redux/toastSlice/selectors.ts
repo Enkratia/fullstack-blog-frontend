@@ -1,3 +1,3 @@
 import { RootState } from "../store";
 
-export const selectToast = (state: RootState) => state.toast;
+export const selectToast = (state: RootState) => state.toast.toastInfo;

@@ -1,7 +1,14 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { Header, CommonHelper, AuthProvider, StoreProvider, Footer } from "../components";
+import {
+  Header,
+  CommonHelper,
+  AuthProvider,
+  StoreProvider,
+  Footer,
+  ToastLayout,
+} from "../components";
 
 import "./globals.scss";
 
@@ -21,6 +28,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
         <StoreProvider>
           <AuthProvider>
             <CommonHelper />
+            <ToastLayout />
             <Header />
             {children}
             <Footer />

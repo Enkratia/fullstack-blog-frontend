@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { fetchCategoryDescriptionQuery } from "../../fetchApi/fetchApi";
 
-import { SkeletonCategories } from "../../components";
+import { SkeletonCategories, ToastComponent } from "../../components";
 import { capitalize } from "../../utils/customFunctions";
 
 import s from "./categories.module.scss";
@@ -32,10 +32,15 @@ const icons = [
 ];
 
 const CategoriesSuspense: React.FC = async () => {
-  const { data, isError } = await fetchCategoryDescriptionQuery();
+  const { data } = await fetchCategoryDescriptionQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonCategories />
+        <ToastComponent type="warning" requestId="server" text="Failed to load some data." />
+      </>
+    );
   }
 
   return (

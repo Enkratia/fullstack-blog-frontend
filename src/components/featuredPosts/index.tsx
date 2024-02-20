@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { fetchPostsQuery } from "../../fetchApi/fetchApi";
 
-import { SkeletonFeaturedPosts } from "../../components";
+import { SkeletonFeaturedPosts, ToastComponent } from "../../components";
 import { formatDate } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
@@ -14,14 +14,20 @@ const FeaturedPostsSuspense: React.FC = async () => {
   const requestFeatured = "?isFeatured=true";
   const requestAllPosts = "?_sort=createdAt&_order=DESC&_limit=4&_page=1";
 
-  const { data: featuredData, isError: isErrorFeatured } = await fetchPostsQuery(requestFeatured);
-  const { data: allPostsData, isError: isErrorAllPosts } = await fetchPostsQuery(requestAllPosts);
+  const { data: featuredData, originalArgs: featuredArgs } = await fetchPostsQuery(requestFeatured);
+  const { data: allPostsData, originalArgs: allPostsArgs } = await fetchPostsQuery(requestAllPosts);
 
   const featuredPost = featuredData?.data[0];
   const allPosts = allPostsData?.data;
 
   if (!featuredPost || !allPosts) {
-    return;
+    return (
+      <>
+        <SkeletonFeaturedPosts />
+        <ToastComponent type={"warning"} args={featuredArgs} text={"Failed to load some data0."} />
+        <ToastComponent type={"warning"} args={allPostsArgs} text={"Failed to load some data1."} />
+      </>
+    );
   }
 
   return (

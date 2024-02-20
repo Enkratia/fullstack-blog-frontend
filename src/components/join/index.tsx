@@ -2,16 +2,21 @@ import React, { Suspense } from "react";
 
 import { fetchJoinQuery } from "../../fetchApi/fetchApi";
 
-import { JoinBtn, SkeletonJoin } from "../../components";
+import { JoinBtn, SkeletonJoin, ToastComponent } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./join.module.scss";
 
 const JoinSuspense: React.FC = async () => {
-  const { isError, data } = await fetchJoinQuery();
+  const { data, originalArgs } = await fetchJoinQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonJoin />
+        <ToastComponent type="warning" args={originalArgs} text="Failed to load some data." />
+      </>
+    );
   }
 
   return (

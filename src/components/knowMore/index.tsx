@@ -3,16 +3,21 @@ import Image from "next/image";
 
 import { fetchKnowMoreQuery } from "../../fetchApi/fetchApi";
 
-import { SkeletonKnowMore } from "../../components";
+import { SkeletonKnowMore, ToastComponent } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./knowMore.module.scss";
 
 const KnowMoreSuspense: React.FC = async () => {
-  const { data, isError } = await fetchKnowMoreQuery();
+  const { data } = await fetchKnowMoreQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonKnowMore />
+        <ToastComponent type="warning" requestId="server" text="Failed to load some data." />
+      </>
+    );
   }
 
   return (
