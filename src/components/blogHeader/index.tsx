@@ -13,20 +13,16 @@ import s from "./blogHeader.module.scss";
 const BlogHeaderSuspense: React.FC = async () => {
   const request = "?isFeatured=true";
 
-  const { data, isError, originalArgs } = await fetchPostsQuery(request);
+  const { data, args } = await fetchPostsQuery(request);
   const post = data?.data[0];
 
-  if (isError) {
+  if (!post) {
     return (
       <>
         <SkeletonBlogHeader />
-        <ToastComponent type="warning" args={originalArgs} text="Failed to load some data5." />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
       </>
     );
-  }
-
-  if (!post) {
-    return;
   }
 
   return (

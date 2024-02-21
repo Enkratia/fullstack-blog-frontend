@@ -3,16 +3,21 @@ import Image from "next/image";
 
 import { fetchWhyThisBlogQuery } from "../../fetchApi/fetchApi";
 
-import { SkeletonWhyThisBlog } from "../../components";
+import { SkeletonWhyThisBlog, ToastComponent } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./whyThisBlog.module.scss";
 
 const WhyThisBlogSuspense: React.FC = async () => {
-  const { data, isError } = await fetchWhyThisBlogQuery();
+  const { data, args } = await fetchWhyThisBlogQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonWhyThisBlog />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
+      </>
+    );
   }
 
   return (

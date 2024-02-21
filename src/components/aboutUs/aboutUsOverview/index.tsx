@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { fetchAboutUsStatisticQuery } from "../../../fetchApi/fetchApi";
 
-import { SkeletonAboutUsOverview } from "../../../components";
+import { SkeletonAboutUsOverview, ToastComponent } from "../../../components";
 import { formatStatistic } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -14,10 +14,15 @@ type AboutUsOverviewProps = {
 };
 
 const AboutUsOverviewSuspense: React.FC<AboutUsOverviewProps> = async ({ data }) => {
-  const { data: statistic, isError } = await fetchAboutUsStatisticQuery();
+  const { data: statistic, args } = await fetchAboutUsStatisticQuery();
 
   if (!statistic) {
-    return;
+    return (
+      <>
+        <SkeletonAboutUsOverview />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
+      </>
+    );
   }
 
   return (

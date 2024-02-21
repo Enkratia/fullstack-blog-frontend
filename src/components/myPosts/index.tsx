@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
 import { useAppDispatch } from "../../redux/store";
+import { setToast } from "../../redux/toastSlice/slice";
 
 import { Article, Pagination, SkeletonArticle } from "../../components";
 
@@ -51,14 +52,37 @@ export const MyPosts: React.FC = () => {
   let requestLocal = `?${qs.stringify(new Request(false), { encode: true })}`;
   let request = `?${qs.stringify(new Request(true), { encode: true })}`;
 
-  const { data, isError, refetch } = useGetPostsQuery(request, {
+  const {
+    data,
+    isError,
+    isLoading,
+    isFetching,
+    refetch,
+    originalArgs,
+    endpointName,
+    isUninitialized,
+  } = useGetPostsQuery(request, {
     skip: session?.user?.id === undefined,
   });
   const posts = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
 
+  const isFailed = isError || (!posts?.length && !isLoading && !isFetching && !isUninitialized);
+
   // **
+  React.useEffect(() => {
+    if (isFailed) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load posts.",
+        }),
+      );
+    }
+  }, [isFailed]);
+
   React.useEffect(() => {
     if (!isRouter.current) {
       urlPage !== page && setPage(urlPage);

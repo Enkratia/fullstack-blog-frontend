@@ -1,17 +1,24 @@
 @use "../../../scss/utils/" as *;
 
 .root {
+  padding-top: rem(126);
+  color: var(--black-color);
+
+  @include bp-down("container") {
+    padding-top: calc(rem(34.46) + 6.73vw); // 126>56(1360>320)
+  }
+}
+
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
   grid-column: 1 / -1;
-  padding-top: rem(120);
-  padding-bottom: rem(120);
   text-align: center;
 
   svg {
-    max-width: rem(400);
-    max-height: rem(400);
+    width: rem(260);
+    height: rem(260);
   }
 }
 
@@ -23,7 +30,7 @@
 
 .subtitle {
   display: inline-block;
-  margin-bottom: rem(30);
+  margin-bottom: rem(20);
   font: var(--cap03-font);
   color: var(--mediumgray-color);
 }

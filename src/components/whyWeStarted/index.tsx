@@ -10,13 +10,13 @@ import cs from "../../scss/helpers.module.scss";
 import s from "./whyWeStarted.module.scss";
 
 const WhyWeStartedSuspense: React.FC = async () => {
-  const { data } = await fetchWhyWeStartedQuery();
+  const { data, args } = await fetchWhyWeStartedQuery();
 
   if (!data) {
     return (
       <>
         <SkeletonWhyWeStarted />
-        <ToastComponent type="warning" requestId="server" text="Failed to load some data." />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
       </>
     );
   }

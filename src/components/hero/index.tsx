@@ -14,14 +14,14 @@ import s from "./hero.module.scss";
 const HeroSuspense: React.FC = async () => {
   const request = "?isFeatured=true";
 
-  const { data, originalArgs } = await fetchPostsQuery(request);
+  const { data, args } = await fetchPostsQuery(request);
   const post = data?.data[0];
 
   if (!post) {
     return (
       <>
         <SkeletonHero />
-        <ToastComponent type="warning" args={originalArgs} text="Failed to load some data3." />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
       </>
     );
   }

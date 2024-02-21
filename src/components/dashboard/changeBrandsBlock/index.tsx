@@ -7,8 +7,10 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetFeaturedInQuery } from "../../../redux/backendApi";
+import { useAppDispatch } from "../../../redux/store";
+import { setToast } from "../../../redux/toastSlice/slice";
 
-import { Brand, Pagination, SkeletonBrand } from "../../../components";
+import { Brand, NotFoundData, Pagination, SkeletonBrand } from "../../../components";
 import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -25,6 +27,7 @@ type SortingCode = (typeof sorting)[number]["code"];
 const limit = 4;
 
 export const ChangeBrandsBlock: React.FC = () => {
+  const dispatch = useAppDispatch();
   const timer = React.useRef<NodeJS.Timeout>();
 
   // **
@@ -65,7 +68,7 @@ export const ChangeBrandsBlock: React.FC = () => {
   let requestLocal = `?${qs.stringify(new Request(false), { encode: true })}`;
   let request = `?${qs.stringify(new Request(true), { encode: true })}`;
 
-  const { data, isError, refetch } = useGetFeaturedInQuery(request);
+  const { data, isError, refetch, originalArgs, endpointName } = useGetFeaturedInQuery(request);
   const brands = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
@@ -74,6 +77,18 @@ export const ChangeBrandsBlock: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   // **
+  React.useEffect(() => {
+    if (isError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load data.",
+        }),
+      );
+    }
+  }, [isError]);
+
   React.useEffect(() => {
     if (!isRouter.current) {
       setPage(urlPage);
@@ -88,10 +103,6 @@ export const ChangeBrandsBlock: React.FC = () => {
       isRouter.current = true;
     }
   }, [isNavigate]);
-
-  // if (!brands) {
-  //   return;
-  // }
 
   // **
   const refetchBrandsAfterDelete = () => {
@@ -232,19 +243,23 @@ export const ChangeBrandsBlock: React.FC = () => {
         Create new brand
       </Link>
 
-      <ul className={s.list}>
-        {!brands
-          ? [...Array(4)].map((_, i) => (
-              <li key={i} className={s.item}>
-                <SkeletonBrand />
-              </li>
-            ))
-          : brands.map((brand) => (
-              <li key={brand.id} className={s.item}>
-                <Brand obj={brand} isEditable={true} refetch={refetchBrandsAfterDelete} />
-              </li>
-            ))}
-      </ul>
+      {brands?.length === 0 ? (
+        <NotFoundData />
+      ) : (
+        <ul className={s.list}>
+          {!brands
+            ? [...Array(4)].map((_, i) => (
+                <li key={i} className={s.item}>
+                  <SkeletonBrand />
+                </li>
+              ))
+            : brands.map((brand) => (
+                <li key={brand.id} className={s.item}>
+                  <Brand obj={brand} isEditable={true} refetch={refetchBrandsAfterDelete} />
+                </li>
+              ))}
+        </ul>
+      )}
 
       {totalPages > 1 && (
         <Pagination page={page} totalPages={totalPages} onPageChange={onPageChange} />

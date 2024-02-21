@@ -7,8 +7,10 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetTestimonialQuery } from "../../../redux/backendApi";
+import { useAppDispatch } from "../../../redux/store";
+import { setToast } from "../../../redux/toastSlice/slice";
 
-import { Pagination, SkeletonTestimonial, Testimonial } from "../../../components";
+import { NotFoundData, Pagination, SkeletonTestimonial, Testimonial } from "../../../components";
 import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -26,6 +28,7 @@ const defaultHeight = 160;
 const limit = 2;
 
 export const ChangeTestimonialsBlock: React.FC = () => {
+  const dispatch = useAppDispatch();
   const listRef = React.useRef<HTMLUListElement>(null);
   const timer = React.useRef<NodeJS.Timeout>();
 
@@ -67,13 +70,26 @@ export const ChangeTestimonialsBlock: React.FC = () => {
   let requestLocal = `?${qs.stringify(new Request(false), { encode: true })}`;
   let request = `?${qs.stringify(new Request(true), { encode: true })}`;
 
-  const { data, isError, refetch } = useGetTestimonialQuery(request);
+  const { data, isError, refetch, originalArgs, endpointName } = useGetTestimonialQuery(request);
   const testimonials = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
 
   const [active, setActive] = React.useState(getSortingIndex(sorting, sort));
   const [isOpen, setIsOpen] = React.useState(false);
+
+  // **
+  React.useEffect(() => {
+    if (isError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load data.",
+        }),
+      );
+    }
+  }, [isError]);
 
   // **
   React.useEffect(() => {
@@ -247,25 +263,29 @@ export const ChangeTestimonialsBlock: React.FC = () => {
         Create new testimonial
       </Link>
 
-      <ul className={s.list} ref={listRef}>
-        {!testimonials
-          ? [...Array(2)].map((_, i) => (
-              <li key={i} className={s.item}>
-                <SkeletonTestimonial isDashboard={true} />
-              </li>
-            ))
-          : testimonials.map((obj, i) => (
-              <li key={obj.id} className={s.item}>
-                <Testimonial
-                  obj={obj}
-                  index={0}
-                  currentSlide={0}
-                  isEditable={true}
-                  refetch={refetchTestimonialsAfterDelete}
-                />
-              </li>
-            ))}
-      </ul>
+      {testimonials?.length === 0 ? (
+        <NotFoundData />
+      ) : (
+        <ul className={s.list} ref={listRef}>
+          {!testimonials
+            ? [...Array(2)].map((_, i) => (
+                <li key={i} className={s.item}>
+                  <SkeletonTestimonial isDashboard={true} />
+                </li>
+              ))
+            : testimonials.map((obj, i) => (
+                <li key={obj.id} className={s.item}>
+                  <Testimonial
+                    obj={obj}
+                    index={0}
+                    currentSlide={0}
+                    isEditable={true}
+                    refetch={refetchTestimonialsAfterDelete}
+                  />
+                </li>
+              ))}
+        </ul>
+      )}
 
       {totalPages > 1 && (
         <Pagination page={page} totalPages={totalPages} onPageChange={onPageChange} />

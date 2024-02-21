@@ -7,6 +7,8 @@ import {
   useUpdateTestimonialMutation,
   useGetTestimonialByIdQuery,
 } from "../../../../redux/backendApi";
+import { useAppDispatch } from "../../../../redux/store";
+import { setToast } from "../../../../redux/toastSlice/slice";
 
 import { SkeletonDashboardForm } from "../../../../components";
 import { useValidateForm } from "../../../../utils/customHooks";
@@ -16,10 +18,16 @@ import cs from "../../../../scss/helpers.module.scss";
 import s from "./changeTestimonialEditBlock.module.scss";
 
 export const ChangeTestimonialEditBlock: React.FC = () => {
+  const dispatch = useAppDispatch();
   const formRef = React.useRef<HTMLFormElement>(null);
   const id = useParams().id;
 
-  const { data: testimonial, isError: isGetError } = useGetTestimonialByIdQuery(+id);
+  const {
+    data: testimonial,
+    isError: isGetError,
+    originalArgs: originalGetArgs,
+    endpointName: endpointGetName,
+  } = useGetTestimonialByIdQuery(+id);
 
   // **
   const [updateTestimonial, { isError, isSuccess, isLoading }] = useUpdateTestimonialMutation();
@@ -27,6 +35,20 @@ export const ChangeTestimonialEditBlock: React.FC = () => {
 
   const { isValidText, validateText, isValidFile, validateFile } = useValidateForm();
 
+  // **
+  React.useEffect(() => {
+    if (isGetError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointGetName + "" + originalGetArgs,
+          text: "Failed to load data.",
+        }),
+      );
+    }
+  }, [isGetError]);
+
+  // **
   if (!testimonial) {
     return <SkeletonDashboardForm />;
   }

@@ -5,23 +5,23 @@ import { GetPostsType } from "../redux/backendApi/types";
 import { BACKEND_URL } from "../utils/constants";
 
 const fetchApi = async (query: string) => {
-  const originalArgs = `${BACKEND_URL}/${query}`;
+  const args = `${BACKEND_URL}/${query}`;
 
   try {
-    const response = await fetch(originalArgs, {
+    const response = await fetch(args, {
       next: { tags: [query] },
       cache: "no-store",
     });
 
     if (!response.ok) {
-      return { isError: true, originalArgs };
+      return { isError: true, args };
     }
 
     const data = await response.json();
 
-    return { isError: false, data, originalArgs };
+    return { isError: false, data, args };
   } catch (error) {
-    return { isError: true, originalArgs };
+    return { isError: true, args };
   }
 };
 

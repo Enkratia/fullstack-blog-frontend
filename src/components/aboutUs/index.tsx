@@ -2,16 +2,27 @@ import React, { Suspense } from "react";
 
 import { fetchAboutUsStaticQuery } from "../../fetchApi/fetchApi";
 
-import { AboutUsHeader, AboutUsOverview, AboutUsVision, SkeletonAboutUs } from "../../components";
+import {
+  AboutUsHeader,
+  AboutUsOverview,
+  AboutUsVision,
+  SkeletonAboutUs,
+  ToastComponent,
+} from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./aboutUs.module.scss";
 
 const AboutUsSuspense: React.FC = async () => {
-  const { data, isError } = await fetchAboutUsStaticQuery();
+  const { data, args, isError } = await fetchAboutUsStaticQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonAboutUs />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
+      </>
+    );
   }
 
   return (

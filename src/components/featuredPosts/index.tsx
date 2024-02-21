@@ -14,18 +14,18 @@ const FeaturedPostsSuspense: React.FC = async () => {
   const requestFeatured = "?isFeatured=true";
   const requestAllPosts = "?_sort=createdAt&_order=DESC&_limit=4&_page=1";
 
-  const { data: featuredData, originalArgs: featuredArgs } = await fetchPostsQuery(requestFeatured);
-  const { data: allPostsData, originalArgs: allPostsArgs } = await fetchPostsQuery(requestAllPosts);
+  const { data: featuredData, args: args1 } = await fetchPostsQuery(requestFeatured);
+  const { data: allPostsData, args: args2 } = await fetchPostsQuery(requestAllPosts);
 
   const featuredPost = featuredData?.data[0];
-  const allPosts = allPostsData?.data;
+  const allPosts = allPostsData?.data || [];
 
   if (!featuredPost || !allPosts) {
     return (
       <>
         <SkeletonFeaturedPosts />
-        <ToastComponent type={"warning"} args={featuredArgs} text={"Failed to load some data0."} />
-        <ToastComponent type={"warning"} args={allPostsArgs} text={"Failed to load some data1."} />
+        <ToastComponent type={"warning"} args={args1} text={"Failed to load some data."} />
+        <ToastComponent type={"warning"} args={args2} text={"Failed to load some data."} />
       </>
     );
   }

@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
 
-import s from "./somethingWrong.module.scss";
-import cs from "../../../scss/helpers.module.scss";
-import Wrong from "../../../../public/img/default/wrong.svg";
+import s from "./notFoundOops.module.scss";
+import cs from "../../../../scss/helpers.module.scss";
+import Wrong from "../../../../../public/img/default/wrong.svg";
 // import NoData from "../../../../public/img/default/no-data.svg";
 
-export const SomethingWrong: React.FC = () => {
+export const NotFoundOops: React.FC = () => {
   return (
     <div className={s.root}>
       <Wrong />

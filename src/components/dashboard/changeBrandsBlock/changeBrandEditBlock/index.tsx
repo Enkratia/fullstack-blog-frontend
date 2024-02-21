@@ -11,12 +11,20 @@ import { checkRequestStatus } from "../../../../utils/customFunctions";
 
 import cs from "../../../../scss/helpers.module.scss";
 import s from "./changeBrandEditBlock.module.scss";
+import { useAppDispatch } from "@/redux/store";
+import { setToast } from "@/redux/toastSlice/slice";
 
 export const ChangeBrandEditBlock: React.FC = () => {
+  const dispatch = useAppDispatch();
   const formRef = React.useRef<HTMLFormElement>(null);
   const id = useParams().id;
 
-  const { data: brand, isError: isGetError } = useGetBrandByIdQuery(+id);
+  const {
+    data: brand,
+    isError: isGetError,
+    originalArgs: originalGetArgs,
+    endpointName: endpointGetName,
+  } = useGetBrandByIdQuery(+id);
 
   const [
     updateBrand,
@@ -25,6 +33,19 @@ export const ChangeBrandEditBlock: React.FC = () => {
   const requestStatus = checkRequestStatus(isUpdateError, isUpdateSuccess, isUpdateLoading);
 
   const { isValidText, validateText, isValidFile, validateFile } = useValidateForm();
+
+  // **
+  React.useEffect(() => {
+    if (isGetError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointGetName + "" + originalGetArgs,
+          text: "Failed to load data.",
+        }),
+      );
+    }
+  }, [isGetError]);
 
   if (!brand) {
     return <SkeletonDashboardForm />;

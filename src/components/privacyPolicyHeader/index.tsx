@@ -3,15 +3,30 @@
 import React from "react";
 
 import { useGetPrivacyPolicyQuery } from "../../redux/backendApi";
+import { setToast } from "../../redux/toastSlice/slice";
+import { useAppDispatch } from "../../redux/store";
 
+import { SkeletonPrivacyPolicyHeader } from "../../components";
 import { formatDate2 } from "../../utils/customFunctions";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./privacyPolicyHeader.module.scss";
-import { SkeletonPrivacyPolicyHeader } from "../skeletons/skeletonPrivacyPolicyHeader";
 
 export const PrivacyPolicyHeader: React.FC = () => {
-  const { data: policy, isError } = useGetPrivacyPolicyQuery();
+  const dispatch = useAppDispatch();
+  const { data: policy, isError, originalArgs, endpointName } = useGetPrivacyPolicyQuery();
+
+  React.useEffect(() => {
+    if (isError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load some data.",
+        }),
+      );
+    }
+  }, [isError]);
 
   return (
     <section className={s.root}>

@@ -6,6 +6,8 @@ import {
   useGetAboutUsStaticQuery,
   useUpdateAboutUsStaticMutation,
 } from "../../../redux/backendApi";
+import { useAppDispatch } from "../../../redux/store";
+import { setToast } from "../../../redux/toastSlice/slice";
 
 import { SkeletonDashboardForm } from "../../../components";
 
@@ -16,12 +18,18 @@ import cs from "../../../scss/helpers.module.scss";
 import s from "../editSection.module.scss";
 
 export const EditAboutUsSection1Block: React.FC = () => {
+  const dispatch = useAppDispatch();
   const formRef = React.useRef<HTMLFormElement>(null);
 
   const [updateAboutUsStatic, { isError, isSuccess, isLoading }] = useUpdateAboutUsStaticMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
-  const { data, isError: isGetError } = useGetAboutUsStaticQuery();
+  const {
+    data,
+    isError: isGetError,
+    originalArgs: originalGetArgs,
+    endpointName: endpointGetName,
+  } = useGetAboutUsStaticQuery();
   const info = data?.[0];
 
   const { isValidText, validateText, isValidFile, validateFile } = useValidateForm();
@@ -51,6 +59,20 @@ export const EditAboutUsSection1Block: React.FC = () => {
     updateAboutUsStatic(formData);
   };
 
+  // **
+  React.useEffect(() => {
+    if (isGetError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointGetName + "" + originalGetArgs,
+          text: "Failed to load data.",
+        }),
+      );
+    }
+  }, [isGetError]);
+
+  // **
   if (!info) {
     return <SkeletonDashboardForm />;
   }

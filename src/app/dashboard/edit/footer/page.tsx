@@ -2,13 +2,22 @@ import React, { Suspense } from "react";
 
 import { fetchFooterBottomQuery } from "../../../../fetchApi/fetchApi";
 
-import { EditFooterSection1Block, SkeletonDashboardForm } from "../../../../components";
+import {
+  EditFooterSection1Block,
+  SkeletonDashboardForm,
+  ToastComponent,
+} from "../../../../components";
 
 const DashboardEditFooterPageSuspense: React.FC = async () => {
-  const { data, isError } = await fetchFooterBottomQuery();
+  const { data, args } = await fetchFooterBottomQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonDashboardForm />
+        <ToastComponent type="warning" args={args} text="Failed to load data." />
+      </>
+    );
   }
 
   return (

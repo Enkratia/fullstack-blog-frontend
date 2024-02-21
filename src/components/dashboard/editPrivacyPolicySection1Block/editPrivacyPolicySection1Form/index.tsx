@@ -6,7 +6,7 @@ import { JSONContent } from "@tiptap/react";
 
 import { useUpdatePrivacyPolicyMutation } from "../../../../redux/backendApi";
 
-import { SkeletonDashboardPrivacyPolicy, TextEditor } from "../../../../components";
+import { TextEditor } from "../../../../components";
 import { useValidateForm } from "../../../../utils/customHooks";
 import { checkRequestStatus } from "../../../../utils/customFunctions";
 
@@ -61,10 +61,6 @@ export const EditPrivacyPolicySection1Form: React.FC<EditPrivacyPolicySection1Fo
 
     validateText(text, 1);
   };
-
-  if (!data) {
-    return <SkeletonDashboardPrivacyPolicy />;
-  }
 
   return (
     <section className={s.root}>

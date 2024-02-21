@@ -4,22 +4,25 @@ import { Toaster, toast } from "sonner";
 
 import React from "react";
 
-import { useAppSelector } from "../../../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../../../redux/store";
 import { selectToast } from "../../../../redux/toastSlice/selectors";
+import { resetTextsTypes } from "../../../../redux/toastSlice/slice";
 
 export const ToastLayout: React.FC = () => {
-  const lastArg = React.useRef(0);
-  const { allTypes, allTexts, allArgs } = useAppSelector(selectToast);
+  const dispatch = useAppDispatch();
+  const { allTypes, allTexts } = useAppSelector(selectToast);
 
   React.useEffect(() => {
-    allTypes.slice(lastArg.current).forEach((type, i) => {
+    if (!allTypes.length || !allTexts.length) return;
+
+    allTypes.forEach((type, i) => {
       if (type) {
         toast[type](allTexts[i]);
       }
-
-      lastArg.current += 1;
     });
-  }, [allTypes, allTexts, allArgs]);
+
+    dispatch(resetTextsTypes());
+  }, [allTypes, allTexts]);
 
   return (
     <div>

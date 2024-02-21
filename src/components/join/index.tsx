@@ -8,13 +8,13 @@ import cs from "../../scss/helpers.module.scss";
 import s from "./join.module.scss";
 
 const JoinSuspense: React.FC = async () => {
-  const { data, originalArgs } = await fetchJoinQuery();
+  const { data, args } = await fetchJoinQuery();
 
   if (!data) {
     return (
       <>
         <SkeletonJoin />
-        <ToastComponent type="warning" args={originalArgs} text="Failed to load some data." />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
       </>
     );
   }

@@ -18,22 +18,21 @@ export const ListAuthorsSlider = () => {
 
   const request = "?_sort_createdAt&_order=DESC&_limit=10&_page=1";
 
-  const { data, isError, isLoading, isFetching, requestId, originalArgs } =
+  const { data, isError, isLoading, isFetching, originalArgs, endpointName } =
     useGetUsersQuery(request);
   const authors = data?.data;
 
   const isReady = !!authors?.length;
   const isFailed = isError || (!authors?.length && !isLoading && !isFetching);
 
+  // **
   React.useEffect(() => {
     if (isFailed) {
-      console.log(requestId);
-
       dispatch(
         setToast({
           type: "warning",
-          args: originalArgs ?? "",
-          text: "Failed to load some data.111",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load some data.",
         }),
       );
     }

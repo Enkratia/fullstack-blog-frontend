@@ -9,8 +9,10 @@ import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetUsersQuery } from "../../../redux/backendApi";
+import { useAppDispatch } from "../../../redux/store";
+import { setToast } from "../../../redux/toastSlice/slice";
 
-import { AuthorCard, Pagination, SkeletonAuthorCard } from "../../../components";
+import { AuthorCard, NotFoundData, Pagination, SkeletonAuthorCard } from "../../../components";
 import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -27,6 +29,7 @@ type SortingCode = (typeof sorting)[number]["code"];
 const limit = 3;
 
 export const ViewUsersBlock: React.FC = () => {
+  const dispatch = useAppDispatch();
   const selectRef = React.useRef<HTMLUListElement>(null);
   const [initializeOS, instanceOS] = useOverlayScrollbars({ defer: true });
 
@@ -71,7 +74,7 @@ export const ViewUsersBlock: React.FC = () => {
   let requestLocal = `?${qs.stringify(new Request(false), { encode: true })}`;
   let request = `?${qs.stringify(new Request(true), { encode: true })}`;
 
-  const { data, isError } = useGetUsersQuery(request);
+  const { data, isError, originalArgs, endpointName } = useGetUsersQuery(request);
   const users = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
@@ -80,6 +83,18 @@ export const ViewUsersBlock: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   // **
+  React.useEffect(() => {
+    if (isError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load data.",
+        }),
+      );
+    }
+  }, [isError]);
+
   React.useEffect(() => {
     if (!isRouter.current) {
       setPage(urlPage);
@@ -218,19 +233,23 @@ export const ViewUsersBlock: React.FC = () => {
         </div>
       </div>
 
-      <ul className={s.list}>
-        {!users
-          ? [...Array(3)].map((_, i) => (
-              <li key={i} className={s.item}>
-                <SkeletonAuthorCard key={i} />
-              </li>
-            ))
-          : users.map((user, i) => (
-              <li key={i} className={s.item}>
-                <AuthorCard author={user} />
-              </li>
-            ))}
-      </ul>
+      {users?.length === 0 ? (
+        <NotFoundData />
+      ) : (
+        <ul className={s.list}>
+          {!users
+            ? [...Array(3)].map((_, i) => (
+                <li key={i} className={s.item}>
+                  <SkeletonAuthorCard key={i} />
+                </li>
+              ))
+            : users.map((user, i) => (
+                <li key={i} className={s.item}>
+                  <AuthorCard author={user} />
+                </li>
+              ))}
+        </ul>
+      )}
 
       {totalPages > 1 && (
         <Pagination page={page} totalPages={totalPages} onPageChange={onPageChange} />

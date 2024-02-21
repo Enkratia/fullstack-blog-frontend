@@ -2,19 +2,28 @@ import React, { Suspense } from "react";
 
 import { fetchWhyThisBlogQuery } from "../../../../../fetchApi/fetchApi";
 
-import { EditAboutUsSection3Block, SkeletonDashboardForm } from "../../../../../components";
+import {
+  EditAboutUsSection3Block,
+  SkeletonDashboardForm,
+  ToastComponent,
+} from "../../../../../components";
 
 const EditAboutUsSection3PageSuspense: React.FC = async () => {
-  const { data, isError } = await fetchWhyThisBlogQuery();
+  const { data, args } = await fetchWhyThisBlogQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonDashboardForm />
+        <ToastComponent type="warning" args={args} text="Failed to load data." />
+      </>
+    );
   }
 
   return (
-    <div>
+    <>
       <EditAboutUsSection3Block data={data} />
-    </div>
+    </>
   );
 };
 

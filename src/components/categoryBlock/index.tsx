@@ -10,6 +10,8 @@ import { useOverlayScrollbars } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
+import { useAppDispatch } from "../../redux/store";
+import { setToast } from "../../redux/toastSlice/slice";
 
 import { CategoryCategories, CategoryPosts, CategoryTags } from "../../components";
 import { useMediaQuery } from "../../utils/customHooks";
@@ -20,6 +22,7 @@ import s from "./categoryBlock.module.scss";
 import Close from "../../../public/img/close.svg";
 
 export const CategoryBlock: React.FC = () => {
+  const dispatch = useAppDispatch();
   const limit = 3;
 
   const osOptions = {
@@ -72,10 +75,23 @@ export const CategoryBlock: React.FC = () => {
   const requestLocal = `?${qs.stringify(new Request(false))}`;
   const request = `?${qs.stringify(new Request(true))}`;
 
-  const { data, isError, refetch } = useGetPostsQuery(request);
+  const { data, isError, refetch, originalArgs, endpointName } = useGetPostsQuery(request);
   const posts = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
+
+  // **
+  React.useEffect(() => {
+    if (isError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load some data.",
+        }),
+      );
+    }
+  }, [isError]);
 
   React.useEffect(() => {
     if (isMQ1024) {

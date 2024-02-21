@@ -7,8 +7,10 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetContactUsQueriesQuery } from "../../../redux/backendApi";
+import { useAppDispatch } from "../../../redux/store";
+import { setToast } from "../../../redux/toastSlice/slice";
 
-import { Pagination, Query, SkeletonDashboardQuery } from "../../../components";
+import { NotFoundData, Pagination, Query, SkeletonDashboardQuery } from "../../../components";
 import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -25,6 +27,7 @@ type SortingCode = (typeof sorting)[number]["code"];
 const limit = 3;
 
 export const ChangeQueriesBlock: React.FC = () => {
+  const dispatch = useAppDispatch();
   const timer = React.useRef<NodeJS.Timeout>();
 
   // **
@@ -65,13 +68,27 @@ export const ChangeQueriesBlock: React.FC = () => {
   let requestLocal = `?${qs.stringify(new Request(false), { encode: true })}`;
   let request = `?${qs.stringify(new Request(true), { encode: true })}`;
 
-  const { data, isError, refetch } = useGetContactUsQueriesQuery(request);
+  const { data, isError, refetch, originalArgs, endpointName } =
+    useGetContactUsQueriesQuery(request);
   const queries = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
 
   const [active, setActive] = React.useState(getSortingIndex(sorting, sort));
   const [isOpen, setIsOpen] = React.useState(false);
+
+  // **
+  React.useEffect(() => {
+    if (isError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load data.",
+        }),
+      );
+    }
+  }, [isError]);
 
   // **
   React.useEffect(() => {
@@ -229,19 +246,23 @@ export const ChangeQueriesBlock: React.FC = () => {
         Create new query
       </Link>
 
-      <ul className={s.list}>
-        {!queries
-          ? [...Array(3)].map((_, i) => (
-              <li key={i} className={s.item}>
-                <SkeletonDashboardQuery />
-              </li>
-            ))
-          : queries.map((obj, i) => (
-              <li key={obj.id} className={s.item}>
-                <Query obj={obj} refetch={refetchQueriesAfterDelete} />
-              </li>
-            ))}
-      </ul>
+      {queries?.length === 0 ? (
+        <NotFoundData />
+      ) : (
+        <ul className={s.list}>
+          {!queries
+            ? [...Array(3)].map((_, i) => (
+                <li key={i} className={s.item}>
+                  <SkeletonDashboardQuery />
+                </li>
+              ))
+            : queries.map((obj, i) => (
+                <li key={obj.id} className={s.item}>
+                  <Query obj={obj} refetch={refetchQueriesAfterDelete} />
+                </li>
+              ))}
+        </ul>
+      )}
 
       {totalPages > 1 && (
         <Pagination page={page} totalPages={totalPages} onPageChange={onPageChange} />

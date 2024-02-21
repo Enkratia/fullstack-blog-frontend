@@ -4,6 +4,8 @@ import React from "react";
 import { useParams } from "next/navigation";
 
 import { useGetContactUsMessageByIdQuery } from "../../../redux/backendApi";
+import { useAppDispatch } from "../../../redux/store";
+import { setToast } from "../../../redux/toastSlice/slice";
 
 import { SkeletonDashboardViewMessage } from "../../../components";
 import { formatEmailDate } from "../../../utils/customFunctions";
@@ -12,10 +14,30 @@ import cs from "../../../scss/helpers.module.scss";
 import s from "./viewMessageBlock.module.scss";
 
 export const ViewMessageBlock: React.FC = () => {
+  const dispatch = useAppDispatch();
   const id = useParams().id.toString();
 
-  const { data: message, isError } = useGetContactUsMessageByIdQuery(id);
+  const {
+    data: message,
+    isError,
+    endpointName,
+    originalArgs,
+  } = useGetContactUsMessageByIdQuery(id);
 
+  // **
+  React.useEffect(() => {
+    if (isError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load data.",
+        }),
+      );
+    }
+  }, [isError]);
+
+  // **
   if (!message) {
     return <SkeletonDashboardViewMessage />;
   }

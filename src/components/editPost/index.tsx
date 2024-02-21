@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 
 import { useGetPostByIdQuery } from "../../redux/backendApi";
 
-import { EditPostForm, PostNotFound, SkeletonEditPostForm } from "../../components";
+import { EditPostForm, NotFoundPost, SkeletonEditPostForm } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./editPostBlock.module.scss";
@@ -15,17 +15,7 @@ export const EditPostBlock: React.FC = () => {
   const { data, isError } = useGetPostByIdQuery(id);
 
   if (isError) {
-    console.warn("Failed to load post");
-
-    return (
-      <section className={s.root}>
-        <div className={s.container}>
-          <div className={`${s.head} ${cs.container}`}>
-            <PostNotFound />
-          </div>
-        </div>
-      </section>
-    );
+    return <NotFoundPost />;
   }
 
   return (

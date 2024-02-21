@@ -2,13 +2,22 @@ import React, { Suspense } from "react";
 
 import { fetchTestimonialStaticQuery } from "../../../../../fetchApi/fetchApi";
 
-import { EditHomeSection8Block, SkeletonDashboardForm } from "../../../../../components";
+import {
+  EditHomeSection8Block,
+  SkeletonDashboardForm,
+  ToastComponent,
+} from "../../../../../components";
 
 const EditHomeSection8PageSuspense: React.FC = async () => {
-  const { data, isError } = await fetchTestimonialStaticQuery();
+  const { data, args } = await fetchTestimonialStaticQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonDashboardForm />
+        <ToastComponent type="warning" args={args} text="Failed to load data." />
+      </>
+    );
   }
 
   return (

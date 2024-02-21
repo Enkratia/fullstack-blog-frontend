@@ -4,7 +4,7 @@ import {
   Article,
   Navigation,
   NavigationProps,
-  CategoryNotFound,
+  NotFoundCategory,
   SkeletonArticle,
 } from "../../../components";
 
@@ -28,7 +28,7 @@ export const CategoryPosts: React.FC<CategoryPostsProps> = ({
   if (posts && !posts.length) {
     return (
       <div className={s.rootWrapper}>
-        <CategoryNotFound resetFilters={resetFilters} />
+        <NotFoundCategory resetFilters={resetFilters} />
       </div>
     );
   }

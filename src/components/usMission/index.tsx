@@ -9,13 +9,13 @@ import cs from "../../scss/helpers.module.scss";
 import s from "./usMission.module.scss";
 
 const UsMissionSuspense: React.FC = async () => {
-  let { data } = await fetchUsMissionQuery();
+  let { data, args } = await fetchUsMissionQuery();
 
   if (!data) {
     return (
       <>
         <SkeletonUsMission />
-        <ToastComponent type="warning" requestId="server" text="Failed to load some data." />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
       </>
     );
   }

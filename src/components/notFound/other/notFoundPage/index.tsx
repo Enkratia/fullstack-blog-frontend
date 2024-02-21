@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
 
-import s from "./pageNotFound.module.scss";
-import cs from "../../../scss/helpers.module.scss";
-import Wrong from "../../../../public/img/default/wrong.svg";
+import s from "./notFoundPage.module.scss";
+import cs from "../../../../scss/helpers.module.scss";
+import Wrong from "../../../../../public/img/default/wrong.svg";
 // import NoData from "../../../../public/img/default/no-data.svg";
 
-export const PageNotFound: React.FC = () => {
+export const NotFoundPage: React.FC = () => {
   return (
     <div className={s.root}>
       <Wrong />

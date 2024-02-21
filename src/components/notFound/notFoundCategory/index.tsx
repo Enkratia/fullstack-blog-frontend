@@ -1,11 +1,14 @@
 import React from "react";
-import Link from "next/link";
 
-import s from "./postsNotFound.module.scss";
+import s from "./notFoundCategory.module.scss";
 import cs from "../../../scss/helpers.module.scss";
 import Sorry from "../../../../public/img/default/sorry.svg";
 
-export const PostsNotFound: React.FC = () => {
+type NotFoundCategoryProps = {
+  resetFilters: () => void;
+};
+
+export const NotFoundCategory: React.FC<NotFoundCategoryProps> = ({ resetFilters }) => {
   return (
     <div className={s.root}>
       <Sorry />
@@ -15,9 +18,9 @@ export const PostsNotFound: React.FC = () => {
       <span className={s.subtitle}>
         try softening your search terms or search in a different category
       </span>
-      {/* <Link href="/blog" className={`${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}>
-        Blog page
-      </Link> */}
+      <button onClick={resetFilters} className={cs.btn}>
+        Reset filters
+      </button>
     </div>
   );
 };

@@ -2,9 +2,6 @@
 
 import qs from "qs";
 
-// import { useOverlayScrollbars } from "overlayscrollbars-react";
-// import "overlayscrollbars/overlayscrollbars.css";
-
 import React from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -13,8 +10,10 @@ import {
   useGetContactUsMessagesQuery,
   useUpdateContactUsMessagesMutation,
 } from "../../../redux/backendApi";
+import { useAppDispatch } from "../../../redux/store";
+import { setToast } from "../../../redux/toastSlice/slice";
 
-import { Pagination, SkeletonDashboardViewMessages } from "../../../components";
+import { NotFoundData, Pagination, SkeletonDashboardViewMessages } from "../../../components";
 import { formatEmailDate, getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -31,6 +30,7 @@ type SortingCode = (typeof sorting)[number]["code"];
 const limit = 5;
 
 export const ViewMessagesBlock: React.FC = () => {
+  const dispatch = useAppDispatch();
   const timer = React.useRef<NodeJS.Timeout>();
 
   // **
@@ -71,7 +71,8 @@ export const ViewMessagesBlock: React.FC = () => {
   let requestLocal = `?${qs.stringify(new Request(false), { encode: true })}`;
   let request = `?${qs.stringify(new Request(true), { encode: true })}`;
 
-  const { data, isError, refetch } = useGetContactUsMessagesQuery(request);
+  const { data, isError, refetch, originalArgs, endpointName } =
+    useGetContactUsMessagesQuery(request);
   const messages = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
@@ -83,6 +84,18 @@ export const ViewMessagesBlock: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   // **
+  React.useEffect(() => {
+    if (isError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load data.",
+        }),
+      );
+    }
+  }, [isError]);
+
   React.useEffect(() => {
     if (!isRouter.current) {
       setPage(urlPage);
@@ -97,10 +110,6 @@ export const ViewMessagesBlock: React.FC = () => {
       isRouter.current = true;
     }
   }, [isNavigate]);
-
-  if (!messages) {
-    return;
-  }
 
   // **
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
@@ -237,22 +246,26 @@ export const ViewMessagesBlock: React.FC = () => {
         </div>
       </div>
 
-      <ul className={s.list}>
-        {!messages
-          ? [...Array(5)].map((_, i) => <SkeletonDashboardViewMessages key={i} />)
-          : messages.map((message) => (
-              <li key={message.id} className={s.item}>
-                <Link
-                  onClick={(e) => onLinkClick(e, message)}
-                  href={`/dashboard/view/messages/${message.id}`}
-                  className={`${s.link} ${message.read ? s.linkRead : ""}`}>
-                  <span className={s.fullname}>{message.fullname}</span>
-                  <span className={s.message}>{message.message}</span>
-                  <span className={s.date}>{formatEmailDate(message.createdAt)}</span>
-                </Link>
-              </li>
-            ))}
-      </ul>
+      {messages?.length === 0 ? (
+        <NotFoundData />
+      ) : (
+        <ul className={s.list}>
+          {!messages
+            ? [...Array(5)].map((_, i) => <SkeletonDashboardViewMessages key={i} />)
+            : messages.map((message) => (
+                <li key={message.id} className={s.item}>
+                  <Link
+                    onClick={(e) => onLinkClick(e, message)}
+                    href={`/dashboard/view/messages/${message.id}`}
+                    className={`${s.link} ${message.read ? s.linkRead : ""}`}>
+                    <span className={s.fullname}>{message.fullname}</span>
+                    <span className={s.message}>{message.message}</span>
+                    <span className={s.date}>{formatEmailDate(message.createdAt)}</span>
+                  </Link>
+                </li>
+              ))}
+        </ul>
+      )}
 
       {totalPages > 1 && (
         <Pagination page={page} totalPages={totalPages} onPageChange={onPageChange} />

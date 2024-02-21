@@ -2,12 +2,14 @@
 
 import React from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 
 import { useGetCategoryHeaderQuery } from "../../redux/backendApi";
+import { useAppDispatch } from "../../redux/store";
 
 import { SkeletonCategoryHeader } from "../../components";
 import { capitalize } from "../../utils/customFunctions";
+import { setToast } from "../../redux/toastSlice/slice";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./categoryHeader.module.scss";
@@ -15,12 +17,30 @@ import s from "./categoryHeader.module.scss";
 const categories: CategoryNames = ["startup", "business", "economy", "technology"];
 
 export const CategoryHeader: React.FC = () => {
+  const dispatch = useAppDispatch();
   const category = useParams().category as CategoryNames[number];
 
-  const { data, isError } = useGetCategoryHeaderQuery();
+  const { data, isError, isLoading, isFetching, endpointName, originalArgs } =
+    useGetCategoryHeaderQuery();
 
+  const isFailed = isError || (!data && !isLoading && !isFetching);
+
+  // **
+  React.useEffect(() => {
+    if (isFailed) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load some data.",
+        }),
+      );
+    }
+  }, [isFailed]);
+
+  // **
   if (!categories.includes(category)) {
-    return;
+    return notFound();
   }
 
   if (!data) {

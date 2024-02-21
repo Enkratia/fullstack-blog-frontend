@@ -2,13 +2,22 @@ import React, { Suspense } from "react";
 
 import { fetchJoinQuery } from "../../../../../fetchApi/fetchApi";
 
-import { EditHomeSection9Block, SkeletonDashboardForm } from "../../../../../components";
+import {
+  EditHomeSection9Block,
+  SkeletonDashboardForm,
+  ToastComponent,
+} from "../../../../../components";
 
 const EditHomeSection9PageSuspense: React.FC = async () => {
-  const { data, isError } = await fetchJoinQuery();
+  const { data, args } = await fetchJoinQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonDashboardForm />
+        <ToastComponent type="warning" args={args} text="Failed to load data." />
+      </>
+    );
   }
 
   return (

@@ -2,13 +2,22 @@ import React, { Suspense } from "react";
 
 import { fetchCategoryDescriptionQuery } from "../../../../../fetchApi/fetchApi";
 
-import { EditHomeSection4Block, SkeletonDashboardForm } from "../../../../../components";
+import {
+  EditHomeSection4Block,
+  SkeletonDashboardForm,
+  ToastComponent,
+} from "../../../../../components";
 
 const EditHomeSection4PageSuspense: React.FC = async () => {
-  const { data, isError } = await fetchCategoryDescriptionQuery();
+  const { data, args } = await fetchCategoryDescriptionQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonDashboardForm />
+        <ToastComponent type="warning" args={args} text="Failed to load data." />
+      </>
+    );
   }
 
   return (

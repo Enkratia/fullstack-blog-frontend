@@ -4,7 +4,7 @@ import React from "react";
 
 import { useGetContactUsQueriesQuery, useGetContactUsQuery } from "../../redux/backendApi";
 
-import { ContactUsForm, SkeletonContactUs, SomethingWrong } from "../../components";
+import { ContactUsForm, SkeletonContactUs, NotFoundOops } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./contactUs.module.scss";
@@ -12,12 +12,12 @@ import s from "./contactUs.module.scss";
 export const ContactUs: React.FC = () => {
   const { data, isError: isInfoError } = useGetContactUsQuery();
   const { data: queriesData, isError: isQueryError } = useGetContactUsQueriesQuery("");
-  const queries = queriesData?.data;
 
   const info = data?.[0];
+  const queries = queriesData?.data;
 
   if (isInfoError || isQueryError) {
-    return <SomethingWrong />;
+    return <NotFoundOops />;
   }
 
   if (!info || !queries) {

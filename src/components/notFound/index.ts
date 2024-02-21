@@ -1,7 +1,7 @@
-export * from "./postNotFound";
-export * from "./postsNotFound";
-export * from "./categoryNotFound";
+export * from "./other/notFoundOops";
+export * from "./other/notFoundPage";
+export * from "./other/notFoundData";
 
-export * from "./somethingWrong";
-
-export * from "./pageNotFound";
+export * from "./notFoundPost";
+export * from "./notFoundPosts";
+export * from "./notFoundCategory";

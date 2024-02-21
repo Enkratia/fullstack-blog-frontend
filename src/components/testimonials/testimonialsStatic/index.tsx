@@ -2,15 +2,20 @@ import React, { Suspense } from "react";
 
 import { fetchTestimonialStaticQuery } from "../../../fetchApi/fetchApi";
 
-import { SkeletonTestimonialsStatic } from "../../../components";
+import { SkeletonTestimonialsStatic, ToastComponent } from "../../../components";
 
 import s from "./testimonialsStatic.module.scss";
 
 const TestimonialStaticSuspense: React.FC = async () => {
-  const { data, isError } = await fetchTestimonialStaticQuery();
+  const { data, args } = await fetchTestimonialStaticQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonTestimonialsStatic />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
+      </>
+    );
   }
 
   return (

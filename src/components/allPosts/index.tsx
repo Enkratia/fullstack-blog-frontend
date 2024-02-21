@@ -7,7 +7,9 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
+import { setToast } from "../../redux/toastSlice/slice";
 import { useAppDispatch } from "../../redux/store";
+
 import { Article, Navigation, SkeletonArticle } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
@@ -34,10 +36,23 @@ export const AllPosts: React.FC = () => {
 
   const request = `?_page=${page}&_limit=${limit}&_sort=createdAt&_order=DESC`;
 
-  const { data, isError, refetch, originalArgs } = useGetPostsQuery(request);
+  const { data, isError, refetch, originalArgs, endpointName } = useGetPostsQuery(request);
   const posts = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
+
+  // **
+  React.useEffect(() => {
+    if (isError || posts?.length === 0) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load some data.",
+        }),
+      );
+    }
+  }, [isError, posts?.length]);
 
   React.useEffect(() => {
     if (!isRouter.current) {
@@ -81,10 +96,6 @@ export const AllPosts: React.FC = () => {
     setPage((n) => n + 1);
     setIsNavigate({});
   };
-
-  // if (isError) {
-  //   dispatch(setT)
-  // }
 
   return (
     <section className={s.root}>

@@ -5,6 +5,8 @@ import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
 import { useGetTestimonialQuery } from "../../../redux/backendApi";
+import { useAppDispatch } from "../../../redux/store";
+import { setToast } from "../../../redux/toastSlice/slice";
 
 import { SkeletonTestimonial, Testimonial } from "../../../components";
 
@@ -16,11 +18,15 @@ const limit = 3;
 const page = 1;
 
 export const TestimonialsSlider: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const sliderRef = React.useRef<HTMLDivElement>(null);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
 
   const request = `?_page=${page}&_limit=${limit}`;
-  const { data, isError } = useGetTestimonialQuery(request);
+
+  const { data, isError, isLoading, isFetching, originalArgs, endpointName } =
+    useGetTestimonialQuery(request);
   const testimonials = data?.data;
 
   const [slide, setSlide] = React.useState(0);
@@ -68,6 +74,19 @@ export const TestimonialsSlider: React.FC = () => {
 
   // **
   const slidesTotal = testimonials?.length;
+  const isFailed = isError || (!testimonials?.length && !isLoading && !isFetching);
+
+  React.useEffect(() => {
+    if (isFailed) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load some data.",
+        }),
+      );
+    }
+  }, [isFailed]);
 
   return (
     <div className={s.root} ref={emblaRef}>

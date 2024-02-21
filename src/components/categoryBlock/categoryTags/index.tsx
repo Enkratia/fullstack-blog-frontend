@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { useGetTagsQuery } from "../../../redux/backendApi";
+import { useAppDispatch } from "../../../redux/store";
+import { setToast } from "../../../redux/toastSlice/slice";
 
 import { SkeletonTag } from "../../../components";
 import { toArray } from "../../../utils/customFunctions";
@@ -19,6 +21,7 @@ type CategoryTagsProps = {
 };
 
 export const CategoryTags: React.FC<CategoryTagsProps> = ({ onTagClick }) => {
+  const dispatch = useAppDispatch();
   const limit = 8;
   const searchParams = useSearchParams().toString();
 
@@ -34,10 +37,26 @@ export const CategoryTags: React.FC<CategoryTagsProps> = ({ onTagClick }) => {
   const [tagPage, setTagePage] = React.useState(1);
 
   const request = `?_page=${tagPage}&_limit=${limit}`;
-  const { data, isError } = useGetTagsQuery(request);
+  const { data, isError, isLoading, isFetching, originalArgs, endpointName } =
+    useGetTagsQuery(request);
   const tags = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
+
+  const isFailed = isError || (!tags?.length && !isLoading && !isFetching);
+
+  // **
+  React.useEffect(() => {
+    if (isFailed) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load some data.",
+        }),
+      );
+    }
+  }, [isFailed]);
 
   React.useEffect(() => {
     if (!urlTags.length) {

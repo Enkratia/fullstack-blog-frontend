@@ -32,13 +32,13 @@ const icons = [
 ];
 
 const CategoriesSuspense: React.FC = async () => {
-  const { data } = await fetchCategoryDescriptionQuery();
+  const { data, args } = await fetchCategoryDescriptionQuery();
 
   if (!data) {
     return (
       <>
         <SkeletonCategories />
-        <ToastComponent type="warning" requestId="server" text="Failed to load some data." />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
       </>
     );
   }

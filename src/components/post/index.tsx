@@ -11,7 +11,7 @@ import Underline from "@tiptap/extension-underline";
 import { useGetPostByIdQuery } from "../../redux/backendApi";
 import { capitalize, formatDate2 } from "../../utils/customFunctions";
 
-import { PostNotFound, SkeletonPost } from "../../components";
+import { NotFoundPost, SkeletonPost } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./post.module.scss";
@@ -40,22 +40,16 @@ type PostProps = {
 export const Post: React.FC<PostProps> = ({ id }) => {
   const { data: post, isError } = useGetPostByIdQuery(id + "?_increment=views");
 
+  // **
   const html = React.useMemo(() => {
     if (!post) return "";
 
     return generateHTML(JSON.parse(post.contentJson), [StarterKit, Underline]);
   }, [post]);
 
-  if (isError || post === null) {
-    return (
-      <section className={s.root}>
-        <div className={s.container}>
-          <div className={`${s.head} ${cs.container}`}>
-            <PostNotFound />
-          </div>
-        </div>
-      </section>
-    );
+  // **
+  if (isError) {
+    return <NotFoundPost />;
   }
 
   if (!post) {

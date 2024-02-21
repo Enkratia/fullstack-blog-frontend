@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 
 import { fetchFooterBottomQuery } from "../../../fetchApi/fetchApi";
 
-import { SkeletonFooterBottom } from "../../../components";
+import { SkeletonFooterBottom, ToastComponent } from "../../../components";
 
 import { capitalize } from "../../../utils/customFunctions";
 
@@ -21,10 +21,15 @@ const socialLinks = {
 };
 
 export const FooterBottom: React.FC = async () => {
-  const { data, isError } = await fetchFooterBottomQuery();
+  const { data, args } = await fetchFooterBottomQuery();
 
   if (!data) {
-    return;
+    return (
+      <>
+        <SkeletonFooterBottom />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
+      </>
+    );
   }
 
   return (

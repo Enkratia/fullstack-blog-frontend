@@ -6,6 +6,8 @@ import {
   useGetCategoryHeaderQuery,
   useUpdateCategoryHeaderMutation,
 } from "../../../redux/backendApi";
+import { useAppDispatch } from "../../../redux/store";
+import { setToast } from "../../../redux/toastSlice/slice";
 
 import { SkeletonDashboardForm } from "../../../components";
 
@@ -16,9 +18,17 @@ import cs from "../../../scss/helpers.module.scss";
 import s from "../editSection.module.scss";
 
 export const EditCategorySection1Block: React.FC = () => {
+  const dispatch = useAppDispatch();
   const formRef = React.useRef<HTMLFormElement>(null);
-  const { data, isError: isGetError } = useGetCategoryHeaderQuery();
 
+  const {
+    data,
+    isError: isGetError,
+    originalArgs: originalGetArgs,
+    endpointName: endpointGetName,
+  } = useGetCategoryHeaderQuery();
+
+  // **
   const [updateCategoryHeader, { isError, isSuccess, isLoading }] =
     useUpdateCategoryHeaderMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
@@ -42,6 +52,20 @@ export const EditCategorySection1Block: React.FC = () => {
     updateCategoryHeader(formData);
   };
 
+  // **
+  React.useEffect(() => {
+    if (isGetError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointGetName + "" + originalGetArgs,
+          text: "Failed to load data.",
+        }),
+      );
+    }
+  }, [isGetError]);
+
+  //  **
   if (!data) {
     return <SkeletonDashboardForm />;
   }

@@ -22,6 +22,7 @@ const toastSlice = createSlice({
       const text = action.payload.text;
       const type = action.payload.type;
 
+      // **
       if (Array.isArray(args) && Array.isArray(text) && Array.isArray(type)) {
         const idxs: number[] = [];
 
@@ -39,10 +40,9 @@ const toastSlice = createSlice({
             allTypes: type.filter((_, i) => idxs.includes(i)),
           };
         }
-
-        return;
       }
 
+      // **
       if (typeof args === "string" && typeof text === "string" && typeof type === "string") {
         if (!allArgs.includes(args)) {
           state.toastInfo = {
@@ -53,9 +53,16 @@ const toastSlice = createSlice({
         }
       }
     },
+    resetTextsTypes: (state) => {
+      state.toastInfo = {
+        ...state.toastInfo,
+        allTexts: [],
+        allTypes: [],
+      };
+    },
   },
 });
 
-export const { setToast } = toastSlice.actions;
+export const { setToast, resetTextsTypes } = toastSlice.actions;
 
 export default toastSlice.reducer;

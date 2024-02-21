@@ -11,8 +11,11 @@ import { Article, Navigation, SkeletonArticle } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./authorPosts.module.scss";
+import { useAppDispatch } from "@/redux/store";
+import { setToast } from "@/redux/toastSlice/slice";
 
 export const AuthorPosts: React.FC = () => {
+  const dispatch = useAppDispatch();
   const limit = 2;
 
   const isRouter = React.useRef(false);
@@ -34,10 +37,23 @@ export const AuthorPosts: React.FC = () => {
   const request = `?_page=${page}&_limit=${limit}&user.id=${id}&_sort=createdAt&_order=DESC`;
   const requestlocal = `?_page=${page}&_limit=${limit}&_sort=createdAt&_order=DESC`;
 
-  const { data, isError, isLoading, refetch } = useGetPostsQuery(request);
+  const { data, isError, refetch, originalArgs, endpointName } = useGetPostsQuery(request);
   const posts = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
+
+  // **
+  React.useEffect(() => {
+    if (isError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load some data.",
+        }),
+      );
+    }
+  }, [isError]);
 
   React.useEffect(() => {
     if (!isRouter.current) {
@@ -53,10 +69,6 @@ export const AuthorPosts: React.FC = () => {
       isRouter.current = true;
     }
   }, [isNavigate]);
-
-  if (isError) {
-    console.warn("Failed to load author`s posts");
-  }
 
   // **
   const refetchPostsAfterDelete = () => {

@@ -5,8 +5,10 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 
 import { useGetUserByIdQuery } from "../../redux/backendApi";
+import { useAppDispatch } from "../../redux/store";
+import { setToast } from "../../redux/toastSlice/slice";
 
-import { SkeletonAuthorHeader, ToastComponent } from "../../components";
+import { SkeletonAuthorHeader } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./authorHeader.module.scss";
@@ -25,23 +27,25 @@ const socialIcons = {
 };
 
 export const AuthorHeader: React.FC = () => {
-  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const id = useParams().id.toString();
 
-  const { data: user, isError, requestId } = useGetUserByIdQuery(id as string);
+  const { data: user, isError, originalArgs, endpointName } = useGetUserByIdQuery(id);
 
-  if (isError) {
-    return (
-      <>
-        <SkeletonAuthorHeader />
-        <ToastComponent
-          type="warning"
-          requestId={requestId ?? ""}
-          text="Failed to load some data."
-        />
-      </>
-    );
-  }
+  // **
+  React.useEffect(() => {
+    if (isError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load some data.",
+        }),
+      );
+    }
+  }, [isError]);
 
+  // **
   if (!user) {
     return <SkeletonAuthorHeader />;
   }

@@ -6,6 +6,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import autoplay from "embla-carousel-autoplay";
 
 import { useGetFeaturedInQuery } from "../../redux/backendApi";
+import { useAppDispatch } from "../../redux/store";
+import { setToast } from "../../redux/toastSlice/slice";
 
 import { Brand, SkeletonBrand } from "../../components";
 
@@ -16,6 +18,8 @@ const limit = 10;
 const page = 1;
 
 export const FeaturedIn: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const plugins = [autoplay()];
   const [emblaRef] = useEmblaCarousel(
     {
@@ -33,10 +37,25 @@ export const FeaturedIn: React.FC = () => {
 
   const request = `?_page=${page}&_limit=${limit}`;
 
-  const { data, isError } = useGetFeaturedInQuery(request);
+  const { data, isError, isLoading, isFetching, endpointName, originalArgs } =
+    useGetFeaturedInQuery(request);
   const brands = data?.data;
 
   const isReady = brands && brands.length;
+  const isFailed = isError || (!brands?.length && !isLoading && !isFetching);
+
+  // **
+  React.useEffect(() => {
+    if (isFailed) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointName + "" + originalArgs,
+          text: "Failed to load some data.",
+        }),
+      );
+    }
+  }, [isFailed]);
 
   return (
     <section className={s.root}>

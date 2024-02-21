@@ -9,13 +9,13 @@ import cs from "../../scss/helpers.module.scss";
 import s from "./knowMore.module.scss";
 
 const KnowMoreSuspense: React.FC = async () => {
-  const { data } = await fetchKnowMoreQuery();
+  const { data, args } = await fetchKnowMoreQuery();
 
   if (!data) {
     return (
       <>
         <SkeletonKnowMore />
-        <ToastComponent type="warning" requestId="server" text="Failed to load some data." />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
       </>
     );
   }

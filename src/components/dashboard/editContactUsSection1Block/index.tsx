@@ -5,6 +5,8 @@ import { IMaskInput } from "react-imask";
 import React from "react";
 
 import { useGetContactUsQuery, useUpdateContactUsMutation } from "../../../redux/backendApi";
+import { useAppDispatch } from "../../../redux/store";
+import { setToast } from "../../../redux/toastSlice/slice";
 
 import { SkeletonDashboardForm } from "../../../components";
 
@@ -15,10 +17,16 @@ import cs from "../../../scss/helpers.module.scss";
 import s from "../editSection.module.scss";
 
 export const EditContactUsSection1Block: React.FC = () => {
+  const dispatch = useAppDispatch();
   const formRef = React.useRef<HTMLFormElement>(null);
   const phoneRef = React.useRef(null);
 
-  const { data, isError: isGetError } = useGetContactUsQuery();
+  const {
+    data,
+    isError: isGetError,
+    originalArgs: originalGetArgs,
+    endpointName: endpointGetName,
+  } = useGetContactUsQuery();
   const info = data?.[0];
 
   const [updateContactUs, { isError, isSuccess, isLoading }] = useUpdateContactUsMutation();
@@ -44,6 +52,20 @@ export const EditContactUsSection1Block: React.FC = () => {
     updateContactUs(formData);
   };
 
+  // **
+  React.useEffect(() => {
+    if (isGetError) {
+      dispatch(
+        setToast({
+          type: "warning",
+          args: endpointGetName + "" + originalGetArgs,
+          text: "Failed to load data.",
+        }),
+      );
+    }
+  }, [isGetError]);
+
+  // **
   if (!info) {
     return <SkeletonDashboardForm />;
   }
