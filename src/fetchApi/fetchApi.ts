@@ -33,7 +33,6 @@ export const fetchCategoryDescriptionQuery = async () => {
     ...res,
     data: res?.data?.[0] as CategoryDescriptionType,
   };
-  // return { isError: res?.isError, data: res?.data?.[0] as CategoryDescriptionType };
 };
 
 export const fetchJoinQuery = async () => {
@@ -43,7 +42,6 @@ export const fetchJoinQuery = async () => {
     ...res,
     data: res?.data?.[0] as JoinType,
   };
-  // return { isError: res?.isError, data: res?.data?.[0] as JoinType };
 };
 
 export const fetchPostsQuery = async (request: string) => {
@@ -53,7 +51,6 @@ export const fetchPostsQuery = async (request: string) => {
     ...res,
     data: res?.data as GetPostsType,
   };
-  // return { isError: res?.isError, data: res?.data as GetPostsType };
 };
 
 export const fetchFooterBottomQuery = async () => {
@@ -63,7 +60,6 @@ export const fetchFooterBottomQuery = async () => {
     ...res,
     data: res?.data?.[0] as FooterBottomType,
   };
-  // return { isError: res?.isError, data: res?.data?.[0] as FooterBottomType };
 };
 
 // HomePage
@@ -74,7 +70,6 @@ export const fetchUsMissionQuery = async () => {
     ...res,
     data: res?.data?.[0] as UsMissionType,
   };
-  // return { isError: res?.isError, data: res?.data?.[0] as UsMissionType };
 };
 
 export const fetchWhyWeStartedQuery = async () => {
@@ -84,7 +79,6 @@ export const fetchWhyWeStartedQuery = async () => {
     ...res,
     data: res?.data?.[0] as WhyWeStartedType,
   };
-  // return { isError: res?.isError, data: res?.data?.[0] as WhyWeStartedType };
 };
 
 export const fetchTestimonialStaticQuery = async () => {
@@ -94,7 +88,6 @@ export const fetchTestimonialStaticQuery = async () => {
     ...res,
     data: res?.data?.[0] as TestimonialStaticType,
   };
-  // return { isError: res?.isError, data: res?.data?.[0] as TestimonialStaticType };
 };
 
 // AboutUsPage
@@ -105,7 +98,6 @@ export const fetchAboutUsStaticQuery = async () => {
     ...res,
     data: res?.data?.[0] as AboutUsStaticType,
   };
-  // return { isError: res?.isError, data: res?.data?.[0] as AboutUsStaticType };
 };
 
 export const fetchAboutUsStatisticQuery = async () => {
@@ -115,8 +107,6 @@ export const fetchAboutUsStatisticQuery = async () => {
     ...res,
     data: res?.data as AboutUsOverviewType[],
   };
-
-  // return { isError: res?.isError, data: res?.data as AboutUsOverviewType[] };
 };
 
 export const fetchWhyThisBlogQuery = async () => {
@@ -126,7 +116,6 @@ export const fetchWhyThisBlogQuery = async () => {
     ...res,
     data: res?.data?.[0] as WhyThisBlogType,
   };
-  // return { isError: res?.isError, data: res?.data?.[0] as WhyThisBlogType };
 };
 
 export const fetchKnowMoreQuery = async () => {
@@ -136,7 +125,6 @@ export const fetchKnowMoreQuery = async () => {
     ...res,
     data: res?.data?.[0] as KnowMoreType,
   };
-  // return { isError: res?.isError, data: res?.data?.[0] as KnowMoreType };
 };
 
 // PostPage
@@ -147,7 +135,6 @@ export const fetchPostByIdQuery = async (id: number) => {
     ...res,
     data: res?.data?.[0] as KnowMoreType,
   };
-  // return { isError: res?.isError, data: res?.data as PostType };
 };
 
 // Account
@@ -159,5 +146,4 @@ export const fetchUserByIdQuery = async (id: number) => {
     ...res,
     data: res?.data as UserType,
   };
-  // return { isError: res?.isError, data: res?.data as UserType };
 };

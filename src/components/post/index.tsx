@@ -68,6 +68,7 @@ export const Post: React.FC<PostProps> = ({ id }) => {
                 className={s.userImage}
                 fill
                 sizes="48px"
+                priority={true}
               />
             </div>
 

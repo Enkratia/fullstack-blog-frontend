@@ -20,9 +20,10 @@
 }
 
 .category {
+  position: relative;
   border: rem(1) solid var(--mediumgray03-color);
   padding: rem(32);
-  transition: border-color 0.3s, background-color 0.3s;
+  transition: background-color 0.3s, border-color 0.3s;
   cursor: pointer;
 
   svg {

@@ -67,6 +67,12 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
 
     if (!validateForm()) return;
 
+    // const res = await signIn("mailru", {
+    //   redirect: false,
+    // });
+
+    // console.log(res);
+
     const res = await signIn("credentials", {
       email: fields.email,
       password: fields.password,
@@ -83,7 +89,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       return;
     }
 
-    window.location.assign(callbackUrl);
+    // window.location.assign(callbackUrl);
 
     // Workaround when no data resetted(reload) after login (just router.push() or nothing at all)
     // try {

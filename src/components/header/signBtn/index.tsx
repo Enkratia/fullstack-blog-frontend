@@ -84,7 +84,7 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
   return session ? (
     isMQ896 ? (
       <div onClick={onDropdownClick} className={s.root}>
-        <button className={`${s.btn} ${className}`}>{session.user.fullname}</button>
+        <button className={`${s.btn} ${className}`}>{session.user?.fullname ?? "test"}</button>
 
         <ul className={`${s.list} ${isActive ? s.listActive : ""}`}>
           <li className={s.item}>
