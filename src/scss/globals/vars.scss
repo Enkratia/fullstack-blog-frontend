@@ -93,12 +93,13 @@
   // Animations
   --popup-animation: popup-animation 0.2s ease forwards;
   --skeleton-animation: skeleton-animation 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --hide-on-transition-animation: hide-on-transition-animation 0.2s ease;
 
   // Gradients
   --overlay-gradient: radial-gradient(80.99% 71.93% at 74.58% 0%, rgba(0 0 0 / 40%) 0%, rgba(0 0 0 / 60%) 100%);
 }
 
-// Skeleton
+// **
 @keyframes skeleton-animation {
 
   0%,
@@ -111,9 +112,21 @@
   }
 }
 
+// **
 @keyframes popup-animation {
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+// **
+@keyframes hide-on-transition-animation {
+  0% {
+    display: none;
+  }
+
+  99% {
+    display: none;
   }
 }
