@@ -155,7 +155,7 @@
   &Item {
     padding: rem(32);
     padding-bottom: rem(25);
-    transition: background-color 0.3;
+    transition: background-color 0.3s;
 
     &:hover {
       background-color: var(--lightyellow-color);

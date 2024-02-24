@@ -1,0 +1,61 @@
+/* stylelint-disable order/order */
+@use "../../scss/utils/" as *;
+
+.scrollTop {
+  position: fixed;
+  right: rem(20);
+  bottom: rem(20);
+  z-index: var(--z-tooltip);
+  border-radius: 50%;
+  width: rem(42);
+  height: rem(42);
+  background-color: var(--yellow-color);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out, background-color 0.25s ease-in-out;
+  cursor: pointer;
+  pointer-events: none;
+
+  // &::before {
+  //   content: "Top";
+  //   position: absolute;
+  //   left: -80%;
+  //   top: 50%;
+  //   font: var(--body01-font);
+  //   color: var(--darkgray-color);
+  //   opacity: 0;
+  //   transform: translateY(-50%);
+  //   transition: opacity 0.25s ease-in-out;
+  //   pointer-events: none;
+  // }
+
+  svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: rem(20);
+    height: rem(20);
+    stroke: var(--black-color);
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
+
+  &:hover {
+    background-color: var(--yellow-hover-color);
+
+    &::before {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  // Active class
+  &Visible {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+
+  &High {
+    bottom: rem(70);
+  }
+}

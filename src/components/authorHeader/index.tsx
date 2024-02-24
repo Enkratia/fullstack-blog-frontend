@@ -19,8 +19,6 @@ import Instagram from "../../../public/img/instagram.svg";
 import Linkedin from "../../../public/img/linkedin.svg";
 import DefaultImage from "../../../public/img/default/user.png";
 
-import { useSession } from "next-auth/react";
-
 const socialIcons = {
   facebook: <Facebook aria-hidden="true" />,
   twitter: <Twitter aria-hidden="true" />,
@@ -29,9 +27,6 @@ const socialIcons = {
 };
 
 export const AuthorHeader: React.FC = () => {
-  const { data: session } = useSession();
-  console.log("session", session);
-
   const dispatch = useAppDispatch();
   const id = useParams().id.toString();
 

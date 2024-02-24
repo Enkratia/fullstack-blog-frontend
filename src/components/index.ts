@@ -3,6 +3,7 @@ export * from "./_storeProvider";
 export * from "./_commonHelper";
 export * from "./_reinitAppProvider";
 export * from "./_popup";
+export * from "./scrollToTop";
 
 // Common sections
 export * from "./join";

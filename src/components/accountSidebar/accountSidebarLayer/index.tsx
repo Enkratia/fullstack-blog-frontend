@@ -2,32 +2,33 @@
 
 import React from "react";
 import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
-
-// import { useReinitApp } from "../../../utils/customHooks";
-// import { revaldatePathAction } from "../../../utils/actions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./accountSidebarLayer.module.scss";
 
 const links = [
   {
-    segment: "profile",
+    segment: "/account/profile",
     title: "Profile",
   },
   {
-    segment: "add-post",
+    segment: "/account/add-post",
     title: "Add post",
   },
   {
-    segment: "my-posts",
+    segment: "/account/my-posts",
     title: "My posts",
+  },
+  {
+    segment: "/dashboard",
+    title: "Dashboard",
   },
 ];
 
 export const AccountSidebarLayer: React.FC = () => {
-  const segment = useSelectedLayoutSegment();
+  const pathname = usePathname();
 
   const ulRef = React.useRef<HTMLUListElement>(null);
   const [isActive, setIsActive] = React.useState(false);
@@ -72,8 +73,8 @@ export const AccountSidebarLayer: React.FC = () => {
 
       <ul className={`${s.list} ${isActive ? s.listActive : ""}`} ref={ulRef}>
         {links.map((link, i) => (
-          <li key={i} className={`${s.item} ${link.segment === segment ? s.itemActive : ""}`}>
-            <Link className={s.link} href={`/account/${link.segment}`}>
+          <li key={i} className={`${s.item} ${link.segment === pathname ? s.itemActive : ""}`}>
+            <Link className={s.link} href={link.segment}>
               {link.title}
             </Link>
           </li>

@@ -1,9 +1,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
-// import { useSession } from "next-auth/react";
 
 import { setOverflowHidden } from "../../utils/customFunctions";
-// import { FRONTEND_URL } from "../../utils/constants";
 
 import s from "./modalPA.module.scss";
 
@@ -15,7 +13,6 @@ type ModalPAProps = {
 export const ModalPA: React.FC<ModalPAProps> = ({ children, callbackUrl }) => {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const router = useRouter();
-  // const { data: session, status } = useSession();
 
   React.useEffect(() => {
     setOverflowHidden(true);
@@ -30,12 +27,7 @@ export const ModalPA: React.FC<ModalPAProps> = ({ children, callbackUrl }) => {
   const onModalCloseClick = () => {
     const pathname = new URL(callbackUrl).pathname;
 
-    // if (!!pathname.match(/^(\/account|\/dashboard)/) && !session) {
-    //   router.push(FRONTEND_URL);
-    //   return;
-    // }
-
-    router.push(pathname);
+    router.push(pathname, { scroll: false });
   };
 
   // **
@@ -69,3 +61,8 @@ export const ModalPA: React.FC<ModalPAProps> = ({ children, callbackUrl }) => {
     </div>
   );
 };
+
+// if (!!pathname.match(/^(\/account|\/dashboard)/) && !session) {
+//   router.push(FRONTEND_URL);
+//   return;
+// }
