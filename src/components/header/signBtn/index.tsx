@@ -92,7 +92,7 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
 
   return (
     <div onClick={onDropdownClick} className={s.root}>
-      <ul className={`${s.list} ${isActive ? s.listActive : ""}`}>
+      <ul className={`${s.list} ${s.listActive}`}>
         {links.map(({ segment, title }, i) => (
           <li key={i} className={s.item}>
             <Link href={segment} className={s.link}>
