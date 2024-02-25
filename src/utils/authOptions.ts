@@ -76,11 +76,11 @@ export const authOptions: NextAuthOptions = {
           throw Error("EmailOrPasswordAreIncorrect");
         }
 
-        const result = await res.json();
-
-        if (!result.user?.emailVerified) {
+        if (res.status === 403) {
           throw Error("EmailNotVerfied");
         }
+
+        const result = await res.json();
 
         return result;
       },
@@ -189,3 +189,8 @@ export const getAuthSession = () => getServerSession(authOptions);
 //     };
 //   },
 // }),
+
+// **
+// if (!result.user?.emailVerified) {
+//   throw Error("EmailNotVerfied");
+// }

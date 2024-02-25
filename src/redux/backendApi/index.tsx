@@ -480,3 +480,15 @@ export const {
   useUpdateQueryMutation,
   useDeleteQueryMutation,
 } = backendApi;
+
+// export const testApi = createApi({
+//   reducerPath: "megamenuApi",
+//   baseQuery: fetchBaseQuery({
+//     baseUrl: "https://json-server-vercel-test-eight.vercel.app/",
+//   }),
+//   endpoints: (builder) => ({
+//     getProducts: builder.query({
+//       query: () => "products",
+//     }),
+//   }),
+// });

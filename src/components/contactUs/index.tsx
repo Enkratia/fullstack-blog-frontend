@@ -3,6 +3,9 @@
 import React from "react";
 
 import { useGetContactUsQueriesQuery, useGetContactUsQuery } from "../../redux/backendApi";
+// import { useAppDispatch, useAppSelector } from "../../redux/store";
+// import { getCurrencies, plusOne } from "../../redux/testSlice/slice";
+// import { selectTest } from "../../redux/testSlice/selectors";
 
 import { ContactUsForm, SkeletonContactUs, NotFoundOops } from "../../components";
 
