@@ -90,44 +90,24 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
     window.location.reload();
   };
 
-  return !session ? (
-    isMQ896 ? (
-      <div onClick={onDropdownClick} className={s.root}>
-        {/* <button className={`${s.btn} ${className}`}>{session.user?.fullname}</button> */}
-
-        <ul className={`${s.list} ${isActive ? s.listActive : ""}`}>
-          {links.map(({ segment, title }, i) => (
-            <li key={i} className={s.item}>
-              <Link href={segment} className={s.link}>
-                {title}
-              </Link>
-            </li>
-          ))}
-
-          <li className={s.item}>
-            <Link onClick={onExitClick} href="/" className={s.link}>
-              Exit
+  return (
+    <div onClick={onDropdownClick} className={s.root}>
+      <ul className={`${s.list} ${isActive ? s.listActive : ""}`}>
+        {links.map(({ segment, title }, i) => (
+          <li key={i} className={s.item}>
+            <Link href={segment} className={s.link}>
+              {title}
             </Link>
           </li>
-        </ul>
-      </div>
-    ) : (
-      <Link
-        onClick={onCloseClick}
-        className={`${s.btn} ${className}`}
-        href="/account/profile"
-        scroll={false}>
-        {/* {session.user.fullname} */}
-      </Link>
-    )
-  ) : (
-    <Link
-      onClick={onSignClick}
-      className={className}
-      href={`/auth/signin?callbackUrl=${FRONTEND_URL}${pathname}${searchParams}`}
-      scroll={false}>
-      Sign-in/up
-    </Link>
+        ))}
+
+        <li className={s.item}>
+          <Link onClick={onExitClick} href="/" className={s.link}>
+            Exit
+          </Link>
+        </li>
+      </ul>
+    </div>
   );
 };
 
