@@ -2,11 +2,11 @@
 
 import React from "react";
 import { createPortal } from "react-dom";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
-import { useAppDispatch } from "../../redux/store";
-import { removeToken, setToken } from "../../redux/authSlice/slice";
+// import { useAppDispatch } from "../../redux/store";
+// import { removeToken, setToken } from "../../redux/authSlice/slice";
 
 import { checkModalHeaderAction } from "../../utils/actions";
 
@@ -21,9 +21,9 @@ const modalPages: ModalPagesType = {
 };
 
 export const CommonHelper: React.FC = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const pathname = usePathname();
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
   const [isActive, setIsActive] = React.useState(false);
   const modalPage = modalPages[pathname as ModalPageNamesType[number]];
@@ -45,13 +45,13 @@ export const CommonHelper: React.FC = () => {
   }, [pathname]);
 
   // For RTK Query
-  React.useEffect(() => {
-    if (session) {
-      dispatch(setToken(session.backendTokens?.accessToken));
-    } else {
-      dispatch(removeToken());
-    }
-  }, [session]);
+  // React.useEffect(() => {
+  //   if (session) {
+  //     dispatch(setToken(session.backendTokens?.accessToken));
+  //   } else {
+  //     dispatch(removeToken());
+  //   }
+  // }, [session]);
 
   return <div>{isActive && modalPage && createPortal(modalPage, document?.body, pathname)}</div>;
 };

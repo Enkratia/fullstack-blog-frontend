@@ -4,15 +4,11 @@ import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from "react-
 import { backendApi } from "./backendApi";
 import menuBtn from "./menuBtnSlice/slice";
 import dashboardMenuBtn from "./dashboardMenuBtnSlice/slice";
-import auth from "./authSlice/slice";
 import toast from "./toastSlice/slice";
-import test from "./testSlice/slice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      test,
-      auth,
       menuBtn,
       dashboardMenuBtn,
       toast,

@@ -15,15 +15,17 @@ import {
   UpdateTestimonialType,
   UpdateUserType,
 } from "./types";
-import type { RootState } from "../store";
+
+import { getSession } from "next-auth/react";
 
 import { BACKEND_URL } from "../../utils/constants";
 
 export const backendApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BACKEND_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
+    prepareHeaders: async (headers) => {
+      const session = await getSession();
+      const token = session?.backendTokens?.accessToken;
 
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
@@ -492,3 +494,7 @@ export const {
 //     }),
 //   }),
 // });
+
+// import type { RootState } from "../store";
+// prepareHeaders: async (headers, { getState }) => {
+// let token = (getState() as RootState).auth.token;

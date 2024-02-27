@@ -3,12 +3,12 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./accountSidebarLayer.module.scss";
 
-const links = [
+const rawLinks = [
   {
     segment: "/account/profile",
     title: "Profile",
@@ -29,6 +29,7 @@ const links = [
 
 export const AccountSidebarLayer: React.FC = () => {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   const ulRef = React.useRef<HTMLUListElement>(null);
   const [isActive, setIsActive] = React.useState(false);
@@ -60,6 +61,10 @@ export const AccountSidebarLayer: React.FC = () => {
   const onMenuBtnClick = () => {
     setIsActive((b) => !b);
   };
+
+  // **
+  const isAdmin = session?.user?.isAdmin;
+  const links = isAdmin ? rawLinks : rawLinks.slice(0, rawLinks.length - 1);
 
   return (
     <aside className={`${s.root} ${isActive ? s.rootActive : ""}`}>

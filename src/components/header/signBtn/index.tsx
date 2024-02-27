@@ -25,10 +25,6 @@ const links = [
     segment: "/account/my-posts",
     title: "My posts",
   },
-  {
-    segment: "/dashboard",
-    title: "Dashboard",
-  },
 ];
 
 type SignBtnProps = {
@@ -90,6 +86,9 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
     window.location.reload();
   };
 
+  // **
+  const isAdmin = session?.user?.isAdmin;
+
   return session ? (
     isMQ896 ? (
       <div onClick={onDropdownClick} className={s.root}>
@@ -103,6 +102,14 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
               </Link>
             </li>
           ))}
+
+          {isAdmin && (
+            <li className={s.item}>
+              <Link href="/dashboard" className={s.link}>
+                Dashboard
+              </Link>
+            </li>
+          )}
 
           <li className={s.item}>
             <Link onClick={onExitClick} href="/" className={s.link}>

@@ -63,12 +63,13 @@ export const Article: React.FC<ArticleType> = ({
   const { data: session } = useSession();
   let isFeatured = post.isFeatured;
   let isAuthor = false;
+  const isAdmin = session?.user?.isAdmin;
 
   if (session && isEditable) {
     const userId = session.user.id;
     const authorId = post.user.id;
 
-    if (authorId && userId && authorId === userId) {
+    if ((authorId && userId && authorId === userId) || isAdmin) {
       isAuthor = true;
     }
   }

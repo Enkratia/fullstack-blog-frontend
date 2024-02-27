@@ -1,3 +1,3 @@
-export type AuthSliceType = {
-  token: string | undefined;
-};
+// export type AuthSliceType = {
+//   token: string | undefined;
+// };
