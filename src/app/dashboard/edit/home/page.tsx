@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { EditHomeBlock } from "../../../../components";
+import { DashboardLayout, EditHomeBlock } from "../../../../components";
 
 export const metadata: Metadata = {
   title: "Edit: Home",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardEditHomePage: React.FC = () => {
   return (
-    <div>
+    <DashboardLayout>
       <EditHomeBlock />
-    </div>
+    </DashboardLayout>
   );
 };
 

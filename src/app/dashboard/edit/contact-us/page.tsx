@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { EditContactUsSection1Block } from "../../../../components";
+import { DashboardLayout, EditContactUsSection1Block } from "../../../../components";
 
 export const metadata: Metadata = {
   title: "Edit: Contact us",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardEditContactUsPage: React.FC = () => {
   return (
-    <div>
+    <DashboardLayout>
       <EditContactUsSection1Block />
-    </div>
+    </DashboardLayout>
   );
 };
 

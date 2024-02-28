@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { ChangeBlock } from "../../../components";
+import { ChangeBlock, DashboardLayout } from "../../../components";
 
 export const metadata: Metadata = {
   title: "Change",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardChangePage: React.FC = () => {
   return (
-    <div>
+    <DashboardLayout>
       <ChangeBlock />
-    </div>
+    </DashboardLayout>
   );
 };
 

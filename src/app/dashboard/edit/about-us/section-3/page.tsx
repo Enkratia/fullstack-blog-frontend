@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { fetchWhyThisBlogQuery } from "../../../../../fetchApi/fetchApi";
 
 import {
+  DashboardLayout,
   EditAboutUsSection3Block,
   SkeletonDashboardForm,
   ToastComponent,
@@ -34,9 +35,11 @@ const EditAboutUsSection3PageSuspense: React.FC = async () => {
 
 // **
 const EditAboutUsSection3Page: React.FC = async () => (
-  <Suspense fallback={<SkeletonDashboardForm />}>
-    <EditAboutUsSection3PageSuspense />
-  </Suspense>
+  <DashboardLayout>
+    <Suspense fallback={<SkeletonDashboardForm />}>
+      <EditAboutUsSection3PageSuspense />
+    </Suspense>
+  </DashboardLayout>
 );
 
 export default EditAboutUsSection3Page;

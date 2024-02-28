@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { ChangeQueriesBlock } from "../../../../components";
+import { ChangeQueriesBlock, DashboardLayout } from "../../../../components";
 
 export const metadata: Metadata = {
   title: "Change: Queries",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardChangeQueriesPage: React.FC = () => {
   return (
-    <div>
+    <DashboardLayout>
       <ChangeQueriesBlock />
-    </div>
+    </DashboardLayout>
   );
 };
 

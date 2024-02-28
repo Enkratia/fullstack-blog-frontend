@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { ViewBlock } from "../../../components";
+import { DashboardLayout, ViewBlock } from "../../../components";
 
 export const metadata: Metadata = {
   title: "View",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardViewPage: React.FC = () => {
   return (
-    <div>
+    <DashboardLayout>
       <ViewBlock />
-    </div>
+    </DashboardLayout>
   );
 };
 

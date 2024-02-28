@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { fetchTestimonialStaticQuery } from "../../../../../fetchApi/fetchApi";
 
 import {
+  DashboardLayout,
   EditHomeSection8Block,
   SkeletonDashboardForm,
   ToastComponent,
@@ -34,9 +35,11 @@ const EditHomeSection8PageSuspense: React.FC = async () => {
 
 // **
 const EditHomeSection8Page: React.FC = async () => (
-  <Suspense fallback={<SkeletonDashboardForm />}>
-    <EditHomeSection8PageSuspense />
-  </Suspense>
+  <DashboardLayout>
+    <Suspense fallback={<SkeletonDashboardForm />}>
+      <EditHomeSection8PageSuspense />
+    </Suspense>
+  </DashboardLayout>
 );
 
 export default EditHomeSection8Page;

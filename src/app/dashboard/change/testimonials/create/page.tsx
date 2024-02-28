@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { ChangeTestimonialCreateBlock } from "../../../../../components";
+import { ChangeTestimonialCreateBlock, DashboardLayout } from "../../../../../components";
 
 export const metadata: Metadata = {
   title: "Create testimonial",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardChangeTestimonialsCreatePage: React.FC = () => {
   return (
-    <div>
+    <DashboardLayout>
       <ChangeTestimonialCreateBlock />
-    </div>
+    </DashboardLayout>
   );
 };
 

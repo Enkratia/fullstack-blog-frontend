@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { ViewMessagesBlock } from "../../../../components";
+import { DashboardLayout, ViewMessagesBlock } from "../../../../components";
 
 export const metadata: Metadata = {
   title: "View: Messages",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardViewMessagesPage: React.FC = () => {
   return (
-    <>
+    <DashboardLayout>
       <ViewMessagesBlock />
-    </>
+    </DashboardLayout>
   );
 };
 

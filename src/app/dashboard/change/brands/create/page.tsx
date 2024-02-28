@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { ChangeBrandCreateBlock } from "../../../../../components";
+import { ChangeBrandCreateBlock, DashboardLayout } from "../../../../../components";
 
 export const metadata: Metadata = {
   title: "Create brand",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardChangeBrandCreatePage: React.FC = () => {
   return (
-    <div>
+    <DashboardLayout>
       <ChangeBrandCreateBlock />
-    </div>
+    </DashboardLayout>
   );
 };
 

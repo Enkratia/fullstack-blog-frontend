@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { ChangeBrandEditBlock } from "../../../../../components";
+import { ChangeBrandEditBlock, DashboardLayout } from "../../../../../components";
 
 export const metadata: Metadata = {
   title: "Edit brand",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardChangeBrandEditPage: React.FC = () => {
   return (
-    <div>
+    <DashboardLayout>
       <ChangeBrandEditBlock />
-    </div>
+    </DashboardLayout>
   );
 };
 

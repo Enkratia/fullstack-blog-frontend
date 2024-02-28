@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { ViewUsersBlock } from "../../../../components";
+import { DashboardLayout, ViewUsersBlock } from "../../../../components";
 
 export const metadata: Metadata = {
   title: "View: Users",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardViewUsersPage: React.FC = () => {
   return (
-    <>
+    <DashboardLayout>
       <ViewUsersBlock />
-    </>
+    </DashboardLayout>
   );
 };
 

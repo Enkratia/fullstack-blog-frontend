@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { EditCategorySection1Block } from "../../../../components";
+import { DashboardLayout, EditCategorySection1Block } from "../../../../components";
 
 export const metadata: Metadata = {
   title: "Edit: Category",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardEditCategoryPage: React.FC = () => {
   return (
-    <div>
+    <DashboardLayout>
       <EditCategorySection1Block />
-    </div>
+    </DashboardLayout>
   );
 };
 

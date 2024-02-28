@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { fetchKnowMoreQuery } from "../../../../../fetchApi/fetchApi";
 
 import {
+  DashboardLayout,
   EditAboutUsSection2Block,
   SkeletonDashboardForm,
   ToastComponent,
@@ -25,18 +26,16 @@ const EditAboutUsSection2PageSuspense: React.FC = async () => {
     );
   }
 
-  return (
-    <>
-      <EditAboutUsSection2Block data={data} />
-    </>
-  );
+  return <EditAboutUsSection2Block data={data} />;
 };
 
 // **
 const EditAboutUsSection2Page: React.FC = async () => (
-  <Suspense fallback={<SkeletonDashboardForm />}>
-    <EditAboutUsSection2PageSuspense />
-  </Suspense>
+  <DashboardLayout>
+    <Suspense fallback={<SkeletonDashboardForm />}>
+      <EditAboutUsSection2PageSuspense />
+    </Suspense>
+  </DashboardLayout>
 );
 
 export default EditAboutUsSection2Page;

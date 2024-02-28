@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { ChangePostsBlock } from "../../../../components";
+import { ChangePostsBlock, DashboardLayout } from "../../../../components";
 
 export const metadata: Metadata = {
   title: "Change: Posts",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardChangePostsPage: React.FC = () => {
   return (
-    <div>
+    <DashboardLayout>
       <ChangePostsBlock />
-    </div>
+    </DashboardLayout>
   );
 };
 

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { fetchFooterBottomQuery } from "../../../../fetchApi/fetchApi";
 
 import {
+  DashboardLayout,
   EditFooterSection1Block,
   SkeletonDashboardForm,
   ToastComponent,
@@ -34,9 +35,11 @@ const DashboardEditFooterPageSuspense: React.FC = async () => {
 
 // **
 const DashboardEditFooterPage: React.FC = async () => (
-  <Suspense fallback={<SkeletonDashboardForm />}>
-    <DashboardEditFooterPageSuspense />
-  </Suspense>
+  <DashboardLayout>
+    <Suspense fallback={<SkeletonDashboardForm />}>
+      <DashboardEditFooterPageSuspense />
+    </Suspense>
+  </DashboardLayout>
 );
 
 export default DashboardEditFooterPage;
