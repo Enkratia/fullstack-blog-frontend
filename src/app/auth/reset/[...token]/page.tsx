@@ -1,11 +1,14 @@
-"use client";
-
 import React from "react";
+import { Metadata } from "next";
 
 import { ResetPasswordBlock } from "../../../../components";
 
 import cs from "../../../../scss/helpers.module.scss";
 import s from "../../signin/signin.module.scss";
+
+export const metadata: Metadata = {
+  title: "Reset password",
+};
 
 const ResetPage: React.FC = () => {
   return (

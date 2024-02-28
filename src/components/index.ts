@@ -123,6 +123,7 @@ export * from "./editPost/editPostForm";
 
 /////////////////= ACCOUNT =////////////////////
 export * from "./accountSidebar";
+export * from "./accountLayout";
 
 // **
 export * from "./accountSidebar/accountSidebarLayer";

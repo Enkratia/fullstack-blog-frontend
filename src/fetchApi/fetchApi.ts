@@ -128,18 +128,17 @@ export const fetchKnowMoreQuery = async () => {
 };
 
 // PostPage
-export const fetchPostByIdQuery = async (id: number) => {
+export const fetchPostByIdQuery = async (id: string) => {
   const res = await fetchApi(`posts/${id}`);
 
   return {
     ...res,
-    data: res?.data?.[0] as KnowMoreType,
+    data: res?.data as PostType,
   };
 };
 
-// Account
-// ProfilePage
-export const fetchUserByIdQuery = async (id: number) => {
+// AuthorPage
+export const fetchUserByIdQuery = async (id: string) => {
   const res = await fetchApi(`users/${id}`);
 
   return {

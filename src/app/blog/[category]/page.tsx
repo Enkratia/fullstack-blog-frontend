@@ -1,6 +1,8 @@
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { CategoryBlock, CategoryHeader } from "../../../components";
+import { capitalize } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 
@@ -11,6 +13,14 @@ type BlogCategoryPageProps = {
     category: string;
   };
 };
+
+export async function generateMetadata({ params: { category } }: BlogCategoryPageProps) {
+  const title = category ? capitalize(category) : "Blog category";
+
+  return {
+    title,
+  };
+}
 
 const BlogCategoryPage: React.FC<BlogCategoryPageProps> = ({ params: { category } }) => {
   if (!categories.includes(category)) {

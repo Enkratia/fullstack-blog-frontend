@@ -1,6 +1,12 @@
+import { Metadata } from "next";
+
 import { BlogHeader, AllPosts, AllCategories, Join } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
+
+export const metadata: Metadata = {
+  title: "Blog",
+};
 
 export default function BlogPage() {
   return (

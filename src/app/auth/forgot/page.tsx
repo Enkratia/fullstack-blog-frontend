@@ -1,9 +1,14 @@
 import React from "react";
+import { Metadata } from "next";
 
 import { ForgotBlock } from "../../../components";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "../signin/signin.module.scss";
+
+export const metadata: Metadata = {
+  title: "Forgot password?",
+};
 
 type ForgotPageProps = {
   searchParams: Record<"callbackUrl", string>;

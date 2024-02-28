@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { UnsubscribeBlock } from "../../../components";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -6,6 +7,10 @@ type UnsubscribePageProps = {
   params: {
     token: string;
   };
+};
+
+export const metadata: Metadata = {
+  title: "Unsubscribe",
 };
 
 export default function UnsubscribePage({ params: { token } }: UnsubscribePageProps) {

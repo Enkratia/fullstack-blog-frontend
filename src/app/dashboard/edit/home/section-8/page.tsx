@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import type { Metadata } from "next";
 
 import { fetchTestimonialStaticQuery } from "../../../../../fetchApi/fetchApi";
 
@@ -7,6 +8,10 @@ import {
   SkeletonDashboardForm,
   ToastComponent,
 } from "../../../../../components";
+
+export const metadata: Metadata = {
+  title: "Edit: Home: Section 8",
+};
 
 const EditHomeSection8PageSuspense: React.FC = async () => {
   const { data, args } = await fetchTestimonialStaticQuery();
