@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import React from "react";
 
-import { DashboardBlock, DashboardLayout } from "../../components";
+import { DashboardBlock } from "../../components";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DashboardPage: React.FC = () => {
   return (
-    <DashboardLayout>
-      <DashboardBlock />
-    </DashboardLayout>
+    // <DashboardLayout>
+    <DashboardBlock />
+    // </DashboardLayout>
   );
 };
 
