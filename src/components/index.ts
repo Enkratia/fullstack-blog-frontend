@@ -144,10 +144,12 @@ export * from "./addPost/addPostForm";
 export * from "./myPosts";
 
 /////////////////= DASHBOARD =////////////////////
+export * from "./dashboardLayout";
 export * from "./dashboardSidebar";
-export * from "./dashboardSidebar/modalDashboard";
-export * from "./dashboardSidebar/dashboardNav";
+
 export * from "./dashboard/dashboardBreadcrumbs";
+export * from "./dashboardSidebar/dashboardNav";
+export * from "./dashboardSidebar/modalDashboard";
 
 // **
 export * from "./dashboard/editBlock";

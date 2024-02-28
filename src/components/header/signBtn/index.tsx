@@ -102,13 +102,13 @@ export const SignBtn: React.FC<SignBtnProps> = ({ className, onCloseClick }) => 
           </li>
         ))}
 
-        {isAdmin && (
-          <li className={s.item}>
-            <Link href="/dashboard" className={s.link}>
-              Dashboard
-            </Link>
-          </li>
-        )}
+        {/* {isAdmin && ( */}
+        <li className={s.item}>
+          <Link href="/dashboard" className={s.link}>
+            Dashboard
+          </Link>
+        </li>
+        {/* )} */}
 
         <li className={s.item}>
           <Link onClick={onExitClick} href="/" className={s.link}>
