@@ -93,7 +93,7 @@
   // Animations
   --popup-animation: popup-animation 0.2s ease forwards;
   --skeleton-animation: skeleton-animation 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --hide-on-transition-animation: hide-on-transition-animation 0.2s ease;
+  --hide-on-resize-animation: hide-on-resize-animation 0.3s;
 
   // Gradients
   --overlay-gradient: radial-gradient(80.99% 71.93% at 74.58% 0%, rgba(0 0 0 / 40%) 0%, rgba(0 0 0 / 60%) 100%);
@@ -121,12 +121,14 @@
 }
 
 // **
-@keyframes hide-on-transition-animation {
+@keyframes hide-on-resize-animation {
   0% {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
   }
 
   99% {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
   }
 }

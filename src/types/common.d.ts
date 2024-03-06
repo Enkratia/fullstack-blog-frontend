@@ -3,7 +3,8 @@ type ToastTypesType = ["warning", "error", "info", "success", undefined];
 type ToastTypeType = ToastTypesType[number];
 
 // **
-type ProtectedRoutesType = ["/account", "/dashboard", "/edit-post"];
+type AdminRoutesType = ["/dashboard"];
+type ProtectedRoutesType = ["/account", "/edit-post"];
 type ModalPageNamesType = ["/auth/signin", "/auth/signup", "/auth/forgot"];
 type ModalPagesType = { [key in ModalPageNamesType[number]]: React.ReactNode };
 
