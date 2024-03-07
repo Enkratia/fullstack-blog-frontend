@@ -1,4 +1,4 @@
-FROM node:20.11.1 AS BASE
+FROM node:20.11.1-alpine3.19 AS base
 
 # Step 1. Rebuild the source code only when needed
 FROM base AS builder

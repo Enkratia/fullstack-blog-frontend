@@ -16,18 +16,18 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
-      // {
-      //   protocol: "http",
-      //   hostname: "192.168.240.3",
-      //   port: "3001",
-      //   pathname: "/api/images/**",
-      // },
       {
         protocol: "http",
-        hostname: "localhost",
+        hostname: "192.168.240.3",
         port: "3001",
         pathname: "/api/images/**",
       },
+      // {
+      //   protocol: "http",
+      //   hostname: "localhost",
+      //   port: "3001",
+      //   pathname: "/api/images/**",
+      // },
     ],
   },
   webpack(config) {
