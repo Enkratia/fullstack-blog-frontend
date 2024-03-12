@@ -1,18 +1,14 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { DashboardLayout, EditAboutUsSection1Block } from "../../../../../components";
+import { EditAboutUsSection1Block } from "../../../../../components";
 
 export const metadata: Metadata = {
   title: "Edit: About us: Section1",
 };
 
 const EditAboutUsSection1Page: React.FC = () => {
-  return (
-    <DashboardLayout>
-      <EditAboutUsSection1Block />
-    </DashboardLayout>
-  );
+  return <EditAboutUsSection1Block />;
 };
 
 export default EditAboutUsSection1Page;

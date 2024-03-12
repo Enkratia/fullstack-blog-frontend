@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { fetchWhyWeStartedQuery } from "../../../../../fetchApi/fetchApi";
 
 import {
-  DashboardLayout,
   EditHomeSection5Block,
   SkeletonDashboardForm,
   ToastComponent,
@@ -35,11 +34,9 @@ const EditHomeSection5PageSuspense: React.FC = async () => {
 
 // **
 const EditHomeSection5Page: React.FC = async () => (
-  <DashboardLayout>
-    <Suspense fallback={<SkeletonDashboardForm />}>
-      <EditHomeSection5PageSuspense />
-    </Suspense>
-  </DashboardLayout>
+  <Suspense fallback={<SkeletonDashboardForm />}>
+    <EditHomeSection5PageSuspense />
+  </Suspense>
 );
 
 export default EditHomeSection5Page;

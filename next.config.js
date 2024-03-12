@@ -2,6 +2,35 @@
 
 const nextConfig = {
   output: "standalone",
+  transpilePackages: [
+    "@reduxjs/toolkit",
+    "@svgr/webpack",
+    "@tiptap/extension-color",
+    "@tiptap/extension-text-style",
+    "@tiptap/extension-underline",
+    "@tiptap/html",
+    "@tiptap/pm",
+    "@tiptap/react",
+    "@tiptap/starter-kit",
+    "@tiptap/core",
+    "zeed-dom",
+    "embla-carousel-autoplay",
+    "embla-carousel-react",
+    "next",
+    "next-auth",
+    "normalize.css",
+    "overlayscrollbars-react",
+    "qs",
+    "react",
+    "react-dom",
+    "react-imask",
+    "react-paginate",
+    "react-redux",
+    "sharp",
+    "sonner",
+    "use-immer",
+    "immer",
+  ],
   images: {
     remotePatterns: [
       {
@@ -18,16 +47,16 @@ const nextConfig = {
       },
       {
         protocol: "http",
-        hostname: "192.168.240.3",
+        hostname: "92.63.176.165",
         port: "3001",
         pathname: "/api/images/**",
       },
-      // {
-      //   protocol: "http",
-      //   hostname: "localhost",
-      //   port: "3001",
-      //   pathname: "/api/images/**",
-      // },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3001",
+        pathname: "/api/images/**",
+      },
     ],
   },
   webpack(config) {

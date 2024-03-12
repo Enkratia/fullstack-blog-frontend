@@ -1,18 +1,14 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { ChangePostsBlock, DashboardLayout } from "../../../../components";
+import { ChangePostsBlock } from "../../../../components";
 
 export const metadata: Metadata = {
   title: "Change: Posts",
 };
 
 const DashboardChangePostsPage: React.FC = () => {
-  return (
-    <DashboardLayout>
-      <ChangePostsBlock />
-    </DashboardLayout>
-  );
+  return <ChangePostsBlock />;
 };
 
 export default DashboardChangePostsPage;

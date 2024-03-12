@@ -1,18 +1,14 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { DashboardLayout, ViewMessagesBlock } from "../../../../components";
+import { ViewMessagesBlock } from "../../../../components";
 
 export const metadata: Metadata = {
   title: "View: Messages",
 };
 
 const DashboardViewMessagesPage: React.FC = () => {
-  return (
-    <DashboardLayout>
-      <ViewMessagesBlock />
-    </DashboardLayout>
-  );
+  return <ViewMessagesBlock />;
 };
 
 export default DashboardViewMessagesPage;

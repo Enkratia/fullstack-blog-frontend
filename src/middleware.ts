@@ -11,6 +11,7 @@ const modalPageNames: ModalPageNamesType = ["/auth/signin", "/auth/signup", "/au
 
 export async function middleware(req: NextRequest) {
   req.nextUrl.hostname = new URL(FRONTEND_URL).hostname;
+  req.nextUrl.port = new URL(FRONTEND_URL).port;
 
   const isModalPathname = (pathname: string) => {
     return modalPageNames.find((modalPageName: string) => {

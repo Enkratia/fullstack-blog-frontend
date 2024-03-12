@@ -9,7 +9,7 @@ type AccountLayoutProps = {
   children: any;
 };
 
-export const AccountLayout: React.FC<AccountLayoutProps> = ({ children }) => {
+const AccountLayout: React.FC<AccountLayoutProps> = ({ children }) => {
   return (
     <main className={s.root}>
       <div className={`${s.container} ${cs.container}`}>
@@ -19,3 +19,5 @@ export const AccountLayout: React.FC<AccountLayoutProps> = ({ children }) => {
     </main>
   );
 };
+
+export default AccountLayout;

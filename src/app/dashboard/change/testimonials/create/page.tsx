@@ -1,18 +1,14 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { ChangeTestimonialCreateBlock, DashboardLayout } from "../../../../../components";
+import { ChangeTestimonialCreateBlock } from "../../../../../components";
 
 export const metadata: Metadata = {
   title: "Create testimonial",
 };
 
 const DashboardChangeTestimonialsCreatePage: React.FC = () => {
-  return (
-    <DashboardLayout>
-      <ChangeTestimonialCreateBlock />
-    </DashboardLayout>
-  );
+  return <ChangeTestimonialCreateBlock />;
 };
 
 export default DashboardChangeTestimonialsCreatePage;

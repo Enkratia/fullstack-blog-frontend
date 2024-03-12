@@ -1,18 +1,14 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { DashboardLayout, EditContactUsSection1Block } from "../../../../components";
+import { EditContactUsSection1Block } from "../../../../components";
 
 export const metadata: Metadata = {
   title: "Edit: Contact us",
 };
 
 const DashboardEditContactUsPage: React.FC = () => {
-  return (
-    <DashboardLayout>
-      <EditContactUsSection1Block />
-    </DashboardLayout>
-  );
+  return <EditContactUsSection1Block />;
 };
 
 export default DashboardEditContactUsPage;

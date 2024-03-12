@@ -1,18 +1,14 @@
 import { Metadata } from "next";
 import React from "react";
 
-import { DashboardBlock, DashboardLayout } from "../../components";
+import { DashboardBlock } from "../../components";
 
 export const metadata: Metadata = {
   title: "Dashboard",
 };
 
 const DashboardPage: React.FC = () => {
-  return (
-    <DashboardLayout>
-      <DashboardBlock />
-    </DashboardLayout>
-  );
+  return <DashboardBlock />;
 };
 
 export default DashboardPage;

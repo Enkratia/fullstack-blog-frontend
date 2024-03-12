@@ -1,18 +1,14 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { DashboardLayout, EditHomeBlock } from "../../../../components";
+import { EditHomeBlock } from "../../../../components";
 
 export const metadata: Metadata = {
   title: "Edit: Home",
 };
 
 const DashboardEditHomePage: React.FC = () => {
-  return (
-    <DashboardLayout>
-      <EditHomeBlock />
-    </DashboardLayout>
-  );
+  return <EditHomeBlock />;
 };
 
 export default DashboardEditHomePage;

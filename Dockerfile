@@ -7,6 +7,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
+#  --cpu=x64 --os=linux sharp === fixes npm linux bug
 RUN npm ci --cache .npm --cpu=x64 --os=linux sharp
 
 COPY src ./src
@@ -14,19 +15,11 @@ COPY public ./public
 COPY next.config.js .
 COPY tsconfig.json .
 
-# Environment variables must be present at build time
-# ARG NEXTAUTH_SECRET
-# ENV NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-# ARG NEXTAUTH_URL
-# ENV NEXTAUTH_URL=${NEXTAUTH_URL}
-ARG NEXTAUTH_SECRET
-ENV NEXTAUTH_SECRET=dummy_secret
-ARG NEXTAUTH_URL
-ENV NEXTAUTH_URL=http://localhost:3000
-
+# Environment variables (that?) must be present at build time
 ARG NODE_ENV
 ENV NODE_ENV=production
 
+ARG NEXT_TELEMETRY_DISABLED
 ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN npm run build
@@ -38,24 +31,19 @@ WORKDIR /app
 
 USER root
 
-COPY --from=builder /app/public ./public
-
 # Automatically leverage output traces to reduce image size
 COPY --from=builder /app/next.config.js ./
-# COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/public ./public
 
 COPY --from=builder --chown=node:node /app/.next/standalone ./
 COPY --from=builder --chown=node:node /app/.next/static ./.next/static
 
-# Environment variables must be present at build time
-ARG NEXTAUTH_SECRET
-ENV NEXTAUTH_SECRET=dummy_secret
-ARG NEXTAUTH_URL
-ENV NEXTAUTH_URL=http://localhost:3000
-
+# Environment variables (that?) must be present at build time
 ARG NODE_ENV
 ENV NODE_ENV=production
 
+ARG NEXT_TELEMETRY_DISABLED
 ENV NEXT_TELEMETRY_DISABLED=1
 
 CMD ["node", "server.js"]
@@ -138,3 +126,24 @@ CMD ["node", "server.js"]
 
 # ENV PORT=3000
 # EXPOSE 3000
+
+
+# Define build arguments for environment variables
+
+# Set environment variables during the build process
+# ARG NEXTAUTH_SECRET
+# ENV NEXTAUTH_SECRET=dummy_secret
+# ARG NEXTAUTH_URL
+# ENV NEXTAUTH_URL=http://localhost:3000
+# ARG NEXTAUTH_SECRET
+# ENV NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+# ARG NEXTAUTH_URL
+# ENV NEXTAUTH_URL=${NEXTAUTH_URL}
+
+# COPY --from=builder /app/.env ./
+# COPY --from=builder /app/.env.override ./
+# COPY --chown=node:node .env.production .env.production
+# COPY --from=builder --chown=node:node /app/.next/standalone ./
+
+# ARG HOSTNAME
+# ENV HOSTNAME=192.168.240.4

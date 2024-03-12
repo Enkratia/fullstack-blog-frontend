@@ -4,7 +4,7 @@ import Link from "next/link";
 import { DashboardBreadcrumbs, DashboardSidebar } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
-import s from "./dashboard.module.scss";
+import s from "./dashboardLayout.module.scss";
 
 type DashboardLayoutProps = {
   children: any;
