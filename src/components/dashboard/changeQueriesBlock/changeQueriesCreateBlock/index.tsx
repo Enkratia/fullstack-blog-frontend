@@ -43,6 +43,7 @@ export const ChangeQueriesCreateBlock: React.FC = () => {
       <form className={s.form} onSubmit={(e) => e.preventDefault()} ref={formRef}>
         <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
           <textarea
+            spellCheck={false}
             placeholder="Query"
             name="content"
             className={`${s.input} ${cs.input}`}

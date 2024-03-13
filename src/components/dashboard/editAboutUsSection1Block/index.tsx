@@ -99,6 +99,7 @@ export const EditAboutUsSection1Block: React.FC = () => {
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 0)}
               className={`${s.input} ${cs.input}`}
               name="headerTitle"
@@ -108,6 +109,7 @@ export const EditAboutUsSection1Block: React.FC = () => {
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 1)}
               className={`${s.input} ${cs.input}`}
               name="headerDescription"
@@ -117,6 +119,7 @@ export const EditAboutUsSection1Block: React.FC = () => {
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 2)}
               className={`${s.input} ${cs.input}`}
               name="missionTitle"
@@ -126,6 +129,7 @@ export const EditAboutUsSection1Block: React.FC = () => {
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[3]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 3)}
               className={`${s.input} ${cs.input}`}
               name="missionDescription"
@@ -135,6 +139,7 @@ export const EditAboutUsSection1Block: React.FC = () => {
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[4]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 4)}
               className={`${s.input} ${cs.input}`}
               name="visionTitle"
@@ -144,6 +149,7 @@ export const EditAboutUsSection1Block: React.FC = () => {
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[5]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 5)}
               className={`${s.input} ${cs.input}`}
               name="visionDescription"

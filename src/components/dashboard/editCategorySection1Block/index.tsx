@@ -78,6 +78,7 @@ export const EditCategorySection1Block: React.FC = () => {
         <div className={s.content}>
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 0)}
               className={`${s.input} ${cs.input}`}
               name="startup"
@@ -87,6 +88,7 @@ export const EditCategorySection1Block: React.FC = () => {
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 1)}
               className={`${s.input} ${cs.input}`}
               name="economy"
@@ -96,6 +98,7 @@ export const EditCategorySection1Block: React.FC = () => {
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 2)}
               className={`${s.input} ${cs.input}`}
               name="business"
@@ -105,6 +108,7 @@ export const EditCategorySection1Block: React.FC = () => {
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[3]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 3)}
               className={`${s.input} ${cs.input}`}
               name="technology"

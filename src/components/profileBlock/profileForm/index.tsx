@@ -228,6 +228,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
       </div>
 
       <textarea
+        spellCheck={false}
         onChange={onInputChange}
         placeholder="Representation"
         name="representation"

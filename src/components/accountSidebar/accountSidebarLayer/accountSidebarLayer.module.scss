@@ -2,6 +2,10 @@
 @use "../../../scss/utils/" as *;
 
 .root {
+  color: var(--black-color);
+}
+
+.wrapper {
   border: rem(1) solid var(--grayborder-color);
   border-radius: rem(4);
   padding-block: rem(24);

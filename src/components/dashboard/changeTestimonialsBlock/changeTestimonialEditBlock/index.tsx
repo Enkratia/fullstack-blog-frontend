@@ -114,6 +114,7 @@ export const ChangeTestimonialEditBlock: React.FC = () => {
 
         <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
           <textarea
+            spellCheck={false}
             placeholder="Text"
             name="text"
             className={`${s.input} ${cs.input}`}

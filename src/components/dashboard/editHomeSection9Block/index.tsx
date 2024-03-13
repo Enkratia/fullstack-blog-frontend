@@ -47,6 +47,7 @@ export const EditHomeSection9Block: React.FC<EditHomeSection9BlockProps> = ({ da
         <div className={s.content}>
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 0)}
               className={`${s.input} ${cs.input}`}
               name="title"
@@ -56,6 +57,7 @@ export const EditHomeSection9Block: React.FC<EditHomeSection9BlockProps> = ({ da
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 1)}
               className={`${s.input} ${cs.input}`}
               name="description"

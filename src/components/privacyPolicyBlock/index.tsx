@@ -49,6 +49,7 @@ export const PrivacyPolicyBlock: React.FC = () => {
   return (
     <section className={s.root}>
       <article
+        spellCheck={false}
         className={`${cs.article} ${cs.container} ${cs.container768}`}
         dangerouslySetInnerHTML={{ __html: html }}></article>
     </section>

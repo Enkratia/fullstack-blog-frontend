@@ -164,6 +164,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries: queriesDa
 
       <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
         <textarea
+          spellCheck={false}
           onChange={(e) => validateText(e.target.value, 1)}
           className={`${s.textarea} ${cs.input}`}
           placeholder="Message"

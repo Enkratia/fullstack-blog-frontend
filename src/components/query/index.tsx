@@ -111,6 +111,7 @@ export const Query: React.FC<QueryProps> = ({ obj, refetch }) => {
       </div>
 
       <textarea
+        spellCheck={false}
         className={`${s.input} ${cs.input}`}
         disabled={!isEditable}
         defaultValue={obj.content}

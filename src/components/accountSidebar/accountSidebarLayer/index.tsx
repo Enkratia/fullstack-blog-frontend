@@ -67,30 +67,32 @@ export const AccountSidebarLayer: React.FC = () => {
   const links = isAdmin ? rawLinks : rawLinks.slice(0, rawLinks.length - 1);
 
   return (
-    <aside className={`${s.root} ${isActive ? s.rootActive : ""}`}>
-      <p className={`${s.title} ${cs.title}`}>Account</p>
+    <aside className={s.root}>
+      <div className={`${s.wrapper} ${isActive ? s.wrapperActive : ""}`}>
+        <p className={`${s.title} ${cs.title}`}>Account</p>
 
-      <div className={s.accountMenuBtnWrapper}>
-        <button onClick={onMenuBtnClick} className={`${s.accountMenuBtn} ${cs.btn}`}>
-          Account Menu
-        </button>
-      </div>
+        <div className={s.accountMenuBtnWrapper}>
+          <button onClick={onMenuBtnClick} className={`${s.accountMenuBtn} ${cs.btn}`}>
+            Account Menu
+          </button>
+        </div>
 
-      <ul className={`${s.list} ${isActive ? s.listActive : ""}`} ref={ulRef}>
-        {links.map((link, i) => (
-          <li key={i} className={`${s.item} ${link.segment === pathname ? s.itemActive : ""}`}>
-            <Link className={s.link} href={link.segment}>
-              {link.title}
+        <ul className={`${s.list} ${isActive ? s.listActive : ""}`} ref={ulRef}>
+          {links.map((link, i) => (
+            <li key={i} className={`${s.item} ${link.segment === pathname ? s.itemActive : ""}`}>
+              <Link className={s.link} href={link.segment}>
+                {link.title}
+              </Link>
+            </li>
+          ))}
+
+          <li className={s.item}>
+            <Link onClick={onExitClick} className={s.link} href="/">
+              Exit
             </Link>
           </li>
-        ))}
-
-        <li className={s.item}>
-          <Link onClick={onExitClick} className={s.link} href="/">
-            Exit
-          </Link>
-        </li>
-      </ul>
+        </ul>
+      </div>
     </aside>
   );
 };

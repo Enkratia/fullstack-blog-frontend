@@ -74,6 +74,7 @@ export const EditFooterSection1Block: React.FC<EditFooterSection1BlockProps> = (
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
             <textarea
+              spellCheck={false}
               onChange={(e) => validateText(e.target.value, 0)}
               className={`${s.input} ${cs.input}`}
               name="address"

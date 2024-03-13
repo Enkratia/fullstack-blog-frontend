@@ -95,6 +95,7 @@ export const Post: React.FC<PostProps> = ({ id }) => {
         </div>
 
         <div
+          spellCheck={false}
           className={`${cs.article} ${cs.container} ${cs.container836}`}
           dangerouslySetInnerHTML={{ __html: html }}></div>
       </div>
