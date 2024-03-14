@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 
 import { NotFoundPage } from "../components";
 
+// Does work?
 export const metadata: Metadata = {
-  title: "Not found",
+  title: "Page not found",
 };
 
-// Next.js Bug === link from "not-found" page => "home" page doesn't work
+// Next.js Bug === link from "not-found" page => "home" page doesn't work (?)
 const NotFound: React.FC = () => {
   return (
     <div>
