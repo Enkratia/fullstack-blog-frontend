@@ -47,9 +47,9 @@ const nextConfig = {
       },
       {
         protocol: "http",
-        hostname: "92.63.176.165",
-        port: "3001",
-        pathname: "/api/images/**",
+        hostname: "finsweet.ru",
+        port: "",
+        pathname: "/backend-api/images/**",
       },
       {
         protocol: "http",
