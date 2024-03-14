@@ -10,8 +10,9 @@ const protectedRoutes: ProtectedRoutesType = ["/account", "/edit-post"];
 const modalPageNames: ModalPageNamesType = ["/auth/signin", "/auth/signup", "/auth/forgot"];
 
 export async function middleware(req: NextRequest) {
-  req.nextUrl.hostname = new URL(FRONTEND_URL).hostname;
-  req.nextUrl.port = new URL(FRONTEND_URL).port;
+  console.log("req.nextUrl", req.nextUrl);
+  // req.nextUrl.hostname = new URL(FRONTEND_URL).hostname;
+  // req.nextUrl.port = new URL(FRONTEND_URL).port;
 
   const isModalPathname = (pathname: string) => {
     return modalPageNames.find((modalPageName: string) => {
