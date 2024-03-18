@@ -15,6 +15,7 @@
   grid-template-columns: 1fr minmax(0, max-content);
   grid-template-rows: repeat(2, auto);
   overflow: hidden;
+
   // width: 100%;
 }
 
@@ -33,17 +34,21 @@
 .image {
   bottom: 0;
   width: 100%;
-  height: 100%;
   object-fit: cover;
-  object-position: rem(158) bottom;
+  object-position: center bottom;
+
+  // height: 100%;
+  // object-position: rem(158) bottom;
 
   &Wrapper {
     position: absolute;
-    right: rem(331);
     bottom: 0;
     overflow: hidden;
     width: 100%;
     height: 100%;
+    max-width: rem(949);
+
+    // right: rem(331);
   }
 }
 
