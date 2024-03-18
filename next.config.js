@@ -46,7 +46,7 @@ const nextConfig = {
         pathname: "/**",
       },
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "finsweet.ru",
         port: "",
         pathname: "/backend-api/images/**",

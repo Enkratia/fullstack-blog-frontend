@@ -2,7 +2,7 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// nextjs выцепляет имя контейнера вместо hostname в docker production (использовать вместо req.url + заменять req.nextUrl.hostname)
+// nextjs выцепляет имя контейнера вместо hostname в docker production (использовать вместо req.url + заменять req.nextUrl.hostname | port)
 import { FRONTEND_URL } from "./utils/constants";
 
 const adminRoutes: AdminRoutesType = ["/dashboard"];
@@ -10,9 +10,8 @@ const protectedRoutes: ProtectedRoutesType = ["/account", "/edit-post"];
 const modalPageNames: ModalPageNamesType = ["/auth/signin", "/auth/signup", "/auth/forgot"];
 
 export async function middleware(req: NextRequest) {
-  console.log("req.nextUrl", req.nextUrl);
-  // req.nextUrl.hostname = new URL(FRONTEND_URL).hostname;
-  // req.nextUrl.port = new URL(FRONTEND_URL).port;
+  req.nextUrl.hostname = new URL(FRONTEND_URL).hostname;
+  req.nextUrl.port = new URL(FRONTEND_URL).port;
 
   const isModalPathname = (pathname: string) => {
     return modalPageNames.find((modalPageName: string) => {

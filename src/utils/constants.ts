@@ -3,5 +3,5 @@
 // export const FRONTEND_URL = "http://localhost:3000";
 
 // PRODUCTION
-export const BACKEND_URL = "http://finsweet.ru/backend-api";
-export const FRONTEND_URL = "http://finsweet.ru";
+export const BACKEND_URL = "https://finsweet.ru/backend-api";
+export const FRONTEND_URL = "https://finsweet.ru";
