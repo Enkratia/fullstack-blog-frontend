@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import useEmblaCarousel from "embla-carousel-react";
+import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react";
 
 import { useGetTestimonialQuery } from "../../../redux/backendApi";
 import { useAppDispatch } from "../../../redux/store";
@@ -71,6 +71,13 @@ export const TestimonialsSlider: React.FC = () => {
 
     setSlide(currentSlideIdx);
   }, [emblaApi]);
+
+  // **
+  const onSlideChange = (emblaApi: EmblaCarouselType) => {
+    setSlide(emblaApi.selectedScrollSnap());
+  };
+
+  emblaApi?.on("scroll", onSlideChange);
 
   // **
   const slidesTotal = testimonials?.length;

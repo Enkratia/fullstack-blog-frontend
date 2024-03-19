@@ -1,13 +1,15 @@
 @use "../../scss/utils/" as *;
 
 .root {
-  position: fixed;
+  position: sticky;
   left: 0;
   top: 0;
   z-index: var(--z-modal);
-  padding-right: var(--scrollbar-offset);
   width: 100%;
   color: var(--black-color);
+
+  // padding-right: var(--scrollbar-offset);
+  // position: fixed;
 }
 
 .wrapper {
