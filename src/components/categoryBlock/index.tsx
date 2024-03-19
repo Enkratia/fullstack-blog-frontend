@@ -249,10 +249,12 @@ export const CategoryBlock: React.FC = () => {
             </div>
 
             <div ref={sidebarRef}>
-              <aside className={s.sidebar}>
-                <CategoryCategories onCategoryClick={onCategoryClick} />
-                <CategoryTags onTagClick={onTagClick} />
-              </aside>
+              <div className={s.sidebarPaddingWrapper}>
+                <aside className={s.sidebar}>
+                  <CategoryCategories onCategoryClick={onCategoryClick} />
+                  <CategoryTags onTagClick={onTagClick} />
+                </aside>
+              </div>
             </div>
           </div>
         </div>
