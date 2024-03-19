@@ -73,14 +73,18 @@ export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick })
     linkPrevRef.current = linkMostMatched;
   }, [pathname]);
 
+  React.useEffect(() => {}, [pathname]);
+
   React.useEffect(() => {
-    if (!isMount.current) return;
-    isMount.current = false;
+    // if (!isMount.current) return;
+    // isMount.current = false;
 
-    const linkActive = document.body.querySelector("[data-link-active]");
-    if (!linkActive) return;
+    // const linkActive = document.body.querySelector("[data-link-active]") as HTMLAnchorElement;
+    // if (!linkActive) return;
 
-    const dropdown = linkActive.closest("[data-dropdown-idx]");
+    const dropdown = linkPrevRef.current?.closest("[data-dropdown-idx]");
+
+    // const dropdown = linkActive.closest("[data-dropdown-idx]");
     if (!dropdown) return;
 
     const dropdownBtn = dropdown.firstElementChild as HTMLAnchorElement;
@@ -91,7 +95,9 @@ export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick })
     if (dropdownIdx) {
       onDropdownClick(dropdownBtn, +dropdownIdx);
     }
-  }, []);
+
+    // linkPrevRef.current = linkActive;
+  }, [pathname]);
 
   // **
   const getLinkElements = (segment1: string, segment2?: string, isList?: boolean) => {
@@ -128,9 +134,12 @@ export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick })
     if (!list) return;
 
     if (list.hasAttribute("style") && btn === linkPrevRef.current) {
+      console.log(linkPrevRef.current);
       list.removeAttribute("style");
 
       setIsOpen((o) => {
+        if (o[idx] === false) return o;
+
         o[idx] = false;
         return o;
       });
@@ -142,6 +151,8 @@ export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick })
     list.style.height = listSH + "px";
 
     setIsOpen((o) => {
+      if (o[idx] === true) return o;
+
       o[idx] = true;
       return o;
     });
