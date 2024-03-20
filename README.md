@@ -10,10 +10,10 @@ npm run dev
 
 ### Стек:
 - Next.js
-- Redux toolkit (RTK query)
 - Typescript
-- SCSS / CSS модули
+- Redux toolkit (RTK query)
 - Nginx
+- SCSS / CSS модули
 
 **Использовались:**
 
