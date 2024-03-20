@@ -12,6 +12,7 @@ npm run dev
 - Next.js
 - Typescript
 - Redux toolkit (RTK query)
+- Docker
 - Nginx
 - SCSS / CSS модули
 
