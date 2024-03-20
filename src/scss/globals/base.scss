@@ -31,9 +31,9 @@ body {
 
   // padding-top: rem(81.94);
 
-  @include bp-down("480") {
-    padding-top: rem(152);
-  }
+  // @include bp-down("480") {
+  //   padding-top: rem(152);
+  // }
 }
 
 main {

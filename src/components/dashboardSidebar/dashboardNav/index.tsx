@@ -32,6 +32,8 @@ type DashboardNavProps = {
 
 export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick }) => {
   const linkPrevRef = React.useRef<HTMLAnchorElement | null>();
+  const linkPrevDropdownRef = React.useRef<HTMLAnchorElement | null>();
+
   const isMount = React.useRef(true);
   const navRef = React.useRef<HTMLElement>(null);
 
@@ -39,12 +41,14 @@ export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick })
 
   const pathname = usePathname();
 
+  // снять класс с неактивной ссылки | добавить активной
   React.useEffect(() => {
     if (pathname === "/dashboard") {
       navRef.current?.querySelector("[data-link-active]")?.removeAttribute("data-link-active");
       return;
     }
 
+    // **
     const links = navRef.current?.querySelectorAll("a") || [];
 
     const linksMatched = [...links].filter((link) => {
@@ -65,6 +69,7 @@ export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick })
       return matchesPrev > mathesNext ? -1 : 1;
     })[0];
 
+    // **
     const linkPrev = navRef.current?.querySelector("[data-link-active]") as HTMLAnchorElement;
     linkPrev?.removeAttribute("data-link-active");
 
@@ -73,18 +78,9 @@ export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick })
     linkPrevRef.current = linkMostMatched;
   }, [pathname]);
 
-  React.useEffect(() => {}, [pathname]);
-
+  // открыть dropdown при клике | закрыть, если прошлой активной ссылкой был этот dropdown (по клику только)
   React.useEffect(() => {
-    // if (!isMount.current) return;
-    // isMount.current = false;
-
-    // const linkActive = document.body.querySelector("[data-link-active]") as HTMLAnchorElement;
-    // if (!linkActive) return;
-
     const dropdown = linkPrevRef.current?.closest("[data-dropdown-idx]");
-
-    // const dropdown = linkActive.closest("[data-dropdown-idx]");
     if (!dropdown) return;
 
     const dropdownBtn = dropdown.firstElementChild as HTMLAnchorElement;
@@ -95,9 +91,48 @@ export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick })
     if (dropdownIdx) {
       onDropdownClick(dropdownBtn, +dropdownIdx);
     }
-
-    // linkPrevRef.current = linkActive;
   }, [pathname]);
+
+  // **
+  const onDropdownClick = (btn: HTMLAnchorElement, idx: number, isRealClick?: boolean) => {
+    const list = btn.nextElementSibling as HTMLUListElement;
+    if (!list) return;
+
+    // **
+    if (isRealClick) {
+      linkPrevDropdownRef.current = btn;
+    }
+
+    const isThisDropdownBtnLastActive = linkPrevDropdownRef.current === linkPrevRef.current;
+
+    // **
+    if (list.hasAttribute("style") && isRealClick && isThisDropdownBtnLastActive) {
+      list.removeAttribute("style");
+
+      setIsOpen((o) => {
+        if (o[idx] === false) return o;
+
+        o[idx] = false;
+        return o;
+      });
+
+      return;
+    }
+
+    const listSH = list.scrollHeight;
+    list.style.height = listSH + "px";
+
+    setIsOpen((o) => {
+      if (o[idx] === true) return o;
+
+      o[idx] = true;
+      return o;
+    });
+  };
+
+  const onCloseClick = () => {
+    onModalCloseClick && onModalCloseClick();
+  };
 
   // **
   const getLinkElements = (segment1: string, segment2?: string, isList?: boolean) => {
@@ -129,40 +164,6 @@ export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick })
     );
   };
 
-  const onDropdownClick = (btn: HTMLAnchorElement, idx: number) => {
-    const list = btn.nextElementSibling as HTMLUListElement;
-    if (!list) return;
-
-    if (list.hasAttribute("style") && btn === linkPrevRef.current) {
-      console.log(linkPrevRef.current);
-      list.removeAttribute("style");
-
-      setIsOpen((o) => {
-        if (o[idx] === false) return o;
-
-        o[idx] = false;
-        return o;
-      });
-
-      return;
-    }
-
-    const listSH = list.scrollHeight;
-    list.style.height = listSH + "px";
-
-    setIsOpen((o) => {
-      if (o[idx] === true) return o;
-
-      o[idx] = true;
-      return o;
-    });
-  };
-
-  // **
-  const onCloseClick = () => {
-    onModalCloseClick && onModalCloseClick();
-  };
-
   return (
     <div className={s.navWrapper}>
       <div className={s.head}>
@@ -185,7 +186,7 @@ export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick })
             <div className={s.dropdown} data-dropdown-idx={0}>
               <Link
                 href="/dashboard/edit/about-us"
-                onClick={(e) => onDropdownClick(e.currentTarget, 0)}
+                onClick={(e) => onDropdownClick(e.currentTarget, 0, true)}
                 className={`${s.btn} ${isOpen[0] ? s.btnActive : ""}`}
                 aria-expanded={false}
                 aria-controls="edit-about-us">
@@ -201,7 +202,7 @@ export const DashboardNav: React.FC<DashboardNavProps> = ({ onModalCloseClick })
             <div className={s.dropdown} data-dropdown-idx={1}>
               <Link
                 href="/dashboard/edit/home"
-                onClick={(e) => onDropdownClick(e.currentTarget, 1)}
+                onClick={(e) => onDropdownClick(e.currentTarget, 1, true)}
                 className={`${s.btn} ${isOpen[1] ? s.btnActive : ""}`}
                 aria-expanded={false}
                 aria-controls="edit-home">
