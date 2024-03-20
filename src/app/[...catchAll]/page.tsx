@@ -6,13 +6,9 @@ export const metadata: Metadata = {
   title: "Not found",
 };
 
-// Чтобы нивелировать до минимума баг с not-found.tsx (ссылка с него не работает, если переходить на главную старницу)
+// Чтобы нивелировать до минимума баг с not-found.tsx (ссылка с него не работает, если переходить на главную старницу) (перепроверить - есть ли баг)
 const CatchAllPage: React.FC = () => {
-  return (
-    <div>
-      <NotFoundPage />
-    </div>
-  );
+  return <NotFoundPage />;
 };
 
 export default CatchAllPage;
