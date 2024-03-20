@@ -17,4 +17,4 @@ npm run dev
 **Использовались:**
 
 1. В качестве `backend`: [`json-server`](https://www.npmjs.com/package/json-server), [`json-server-auth`](https://www.npmjs.com/package/json-server-auth).
-2. Как `хостинг`: [`netlify`](https://www.timeweb.cloud.com)
+2. Как `хостинг`: [`timeweb`](https://www.timeweb.cloud.com)
