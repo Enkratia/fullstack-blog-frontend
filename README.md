@@ -10,11 +10,12 @@ npm run dev
 
 ### Стек:
 - Next.js
-- Typescript
 - Redux toolkit (RTK query)
+- Typescript
 - SCSS / CSS модули
+- Nginx
 
 **Использовались:**
 
 1. В качестве `backend`: [`json-server`](https://www.npmjs.com/package/json-server), [`json-server-auth`](https://www.npmjs.com/package/json-server-auth).
-2. Как `хостинг`: [`timeweb`](https://www.timeweb.cloud.com)
+2. Как `хостинг`: [`timeweb`](https://www.timeweb.cloud)
