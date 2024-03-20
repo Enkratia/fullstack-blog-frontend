@@ -60,7 +60,7 @@ const FeaturedPostsSuspense: React.FC = async () => {
             </div>
 
             <Link
-              href={`/blog/${featuredPost.category}/${featuredPost.user.id}`}
+              href={`/blog/${featuredPost.category}/${featuredPost.id}`}
               className={s.featuredTitleSecondLink}>
               <h3 className={s.featuredTitleSecond}>{featuredPost.title}</h3>
             </Link>
@@ -68,7 +68,7 @@ const FeaturedPostsSuspense: React.FC = async () => {
             <p className={s.featuredDescr}>{featuredPost.contentText}</p>
 
             <Link
-              href={`/blog/${featuredPost.category}/${featuredPost.user.id}`}
+              href={`/blog/${featuredPost.category}/${featuredPost.id}`}
               className={`${s.btn} ${cs.btn}`}>{`Read More >`}</Link>
           </div>
         </div>
