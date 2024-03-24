@@ -1,36 +1,40 @@
 /** @type {import('next').NextConfig} */
 
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
 const nextConfig = {
-  output: "standalone",
-  transpilePackages: [
-    "@reduxjs/toolkit",
-    "@svgr/webpack",
-    "@tiptap/extension-color",
-    "@tiptap/extension-text-style",
-    "@tiptap/extension-underline",
-    "@tiptap/html",
-    "@tiptap/pm",
-    "@tiptap/react",
-    "@tiptap/starter-kit",
-    "@tiptap/core",
-    "zeed-dom",
-    "embla-carousel-autoplay",
-    "embla-carousel-react",
-    "next",
-    "next-auth",
-    "normalize.css",
-    "overlayscrollbars-react",
-    "qs",
-    "react",
-    "react-dom",
-    "react-imask",
-    "react-paginate",
-    "react-redux",
-    "sharp",
-    "sonner",
-    "use-immer",
-    "immer",
-  ],
+  // output: "standalone",
+  // transpilePackages: [
+  //   "@reduxjs/toolkit",
+  //   "@svgr/webpack",
+  //   "@tiptap/extension-color",
+  //   "@tiptap/extension-text-style",
+  //   "@tiptap/extension-underline",
+  //   "@tiptap/html",
+  //   "@tiptap/pm",
+  //   "@tiptap/react",
+  //   "@tiptap/starter-kit",
+  //   "@tiptap/core",
+  //   "zeed-dom",
+  //   "embla-carousel-autoplay",
+  //   "embla-carousel-react",
+  //   "next",
+  //   "next-auth",
+  //   "normalize.css",
+  //   "overlayscrollbars-react",
+  //   "qs",
+  //   "react",
+  //   "react-dom",
+  //   "react-imask",
+  //   "react-paginate",
+  //   "react-redux",
+  //   "sharp",
+  //   "sonner",
+  //   "use-immer",
+  //   "immer",
+  // ],
   images: {
     remotePatterns: [
       {
@@ -65,6 +69,7 @@ const nextConfig = {
       },
     ],
   },
+
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.(".svg"));
 
@@ -89,8 +94,9 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);
 
+////////////////////////////////////
 // "browserslist": [
 //   "chrome 40",
 //   "edge 79",
