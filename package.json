@@ -6,15 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "analyze:build": "ANALYZE=true npm run build"
+    "lint": "next lint"
   },
   "browserslist": [
-    "chrome 87",
-    "edge 87",
-    "firefox 69",
-    "opera 73",
-    "safari 14"
+    "chrome 64",
+    "edge 79",
+    "firefox 67",
+    "opera 51",
+    "safari 12"
   ],
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",

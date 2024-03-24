@@ -5,36 +5,36 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const nextConfig = {
-  // output: "standalone",
-  // transpilePackages: [
-  //   "@reduxjs/toolkit",
-  //   "@svgr/webpack",
-  //   "@tiptap/extension-color",
-  //   "@tiptap/extension-text-style",
-  //   "@tiptap/extension-underline",
-  //   "@tiptap/html",
-  //   "@tiptap/pm",
-  //   "@tiptap/react",
-  //   "@tiptap/starter-kit",
-  //   "@tiptap/core",
-  //   "zeed-dom",
-  //   "embla-carousel-autoplay",
-  //   "embla-carousel-react",
-  //   "next",
-  //   "next-auth",
-  //   "normalize.css",
-  //   "overlayscrollbars-react",
-  //   "qs",
-  //   "react",
-  //   "react-dom",
-  //   "react-imask",
-  //   "react-paginate",
-  //   "react-redux",
-  //   "sharp",
-  //   "sonner",
-  //   "use-immer",
-  //   "immer",
-  // ],
+  output: "standalone",
+  transpilePackages: [
+    "@reduxjs/toolkit",
+    "@svgr/webpack",
+    "@tiptap/extension-color",
+    "@tiptap/extension-text-style",
+    "@tiptap/extension-underline",
+    "@tiptap/html",
+    "@tiptap/pm",
+    "@tiptap/react",
+    "@tiptap/starter-kit",
+    "@tiptap/core",
+    "zeed-dom",
+    "embla-carousel-autoplay",
+    "embla-carousel-react",
+    "next",
+    "next-auth",
+    "normalize.css",
+    "overlayscrollbars-react",
+    "qs",
+    "react",
+    "react-dom",
+    "react-imask",
+    "react-paginate",
+    "react-redux",
+    "sharp",
+    "sonner",
+    "use-immer",
+    "immer",
+  ],
   images: {
     remotePatterns: [
       {
@@ -87,7 +87,6 @@ const nextConfig = {
       },
     );
 
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
@@ -95,14 +94,5 @@ const nextConfig = {
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
-
-////////////////////////////////////
-// "browserslist": [
-//   "chrome 40",
-//   "edge 79",
-//   "firefox 40",
-//   "opera 40",
-//   "safari 8"
-// ],
 
 // config.plugins.push(new MiniCssExtractPlugin());
