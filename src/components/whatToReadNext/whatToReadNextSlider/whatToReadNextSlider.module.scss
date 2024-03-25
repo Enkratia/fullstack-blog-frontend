@@ -95,11 +95,9 @@
 }
 
 .descr {
-  display: -webkit-box;
-  overflow: hidden;
+  @include line-clamp(28, 3);
+
   margin: 0;
   font: var(--body01-font);
   color: var(--black07-color);
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
 }

@@ -92,15 +92,13 @@
   }
 
   &Descr {
-    display: -webkit-box;
-    overflow: hidden;
+    @include line-clamp(28, 2);
+
     margin: 0;
     margin-bottom: rem(32);
     max-width: rem(551);
     font: var(--body01-font);
     color: var(--mediumgray-color);
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
   }
 
   &:hover {

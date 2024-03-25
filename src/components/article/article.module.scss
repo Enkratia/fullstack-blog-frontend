@@ -87,16 +87,14 @@
   }
 
   &Text {
-    display: -webkit-box;
-    overflow: hidden;
+    @include line-clamp(28, 2);
+
     margin: 0;
     font: var(--body01-font);
     color: var(--mediumgray-color);
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
 
     &CategoryPage {
-      -webkit-line-clamp: 3;
+      @include line-clamp(28, 3);
     }
   }
 }

@@ -1,0 +1,30 @@
+/* stylelint-disable scss/at-mixin-argumentless-call-parentheses */
+/* stylelint-disable declaration-empty-line-before */
+/* stylelint-disable scss/at-rule-conditional-no-parentheses */
+/* stylelint-disable scss/operator-no-unspaced */
+/* stylelint-disable order/properties-order */
+@use "./functions.scss" as *;
+
+@mixin line-clamp($line-height: null, $lines-to-show: 1) {
+  overflow: hidden;
+
+  @if ($lines-to-show ==1) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @if ($lines-to-show > 1) {
+    @if ($line-height) {
+      max-height: rem($line-height * $lines-to-show);
+    }
+
+    @supports (-webkit-line-clamp: 1) {
+      display: -webkit-box;
+      -webkit-line-clamp: $lines-to-show;
+      -webkit-box-orient: vertical;
+      max-height: 100%;
+    }
+  }
+}
+
+// ** адаптивный font-size тут не работает (c vw)
