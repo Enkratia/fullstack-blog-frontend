@@ -123,6 +123,7 @@ export * from "./editPost/editPostForm";
 
 /////////////////= ACCOUNT =////////////////////
 export * from "./accountSidebar";
+export * from "./accountLayoutBlock";
 
 // **
 export * from "./accountSidebar/accountSidebarLayer";
@@ -144,6 +145,7 @@ export * from "./myPosts";
 
 /////////////////= DASHBOARD =////////////////////
 export * from "./dashboardSidebar";
+export * from "./dashboardLayoutBlock";
 
 export * from "./dashboard/dashboardBreadcrumbs";
 export * from "./dashboardSidebar/dashboardNav";

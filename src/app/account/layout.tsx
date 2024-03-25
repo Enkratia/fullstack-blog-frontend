@@ -1,9 +1,6 @@
 import React from "react";
 
-import { AccountSidebar } from "../../components";
-
-import cs from "../../scss/helpers.module.scss";
-import s from "./accountLayout.module.scss";
+import { AccountSidebar, AccountLayoutBlock } from "../../components";
 
 type AccountLayoutProps = {
   children: any;
@@ -11,12 +8,10 @@ type AccountLayoutProps = {
 
 const AccountLayout: React.FC<AccountLayoutProps> = ({ children }) => {
   return (
-    <main className={s.root}>
-      <div className={`${s.container} ${cs.container}`}>
-        <AccountSidebar />
-        {children}
-      </div>
-    </main>
+    <AccountLayoutBlock>
+      <AccountSidebar />
+      {children}
+    </AccountLayoutBlock>
   );
 };
 
