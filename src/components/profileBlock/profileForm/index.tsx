@@ -1,9 +1,11 @@
 "use client";
 
 import React from "react";
+import { useImmer } from "use-immer";
 
 import { useUpdateUserMutation } from "../../../redux/backendApi";
 
+import { ShowPassBtn } from "../../../components";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 import { useValidateForm } from "../../../utils/customHooks";
 
@@ -29,6 +31,7 @@ type ProfileFormProps = {
 };
 
 export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
+  const [isShowPass, setIsShowPass] = useImmer([false, false]);
   const setInitialsFields = (): ProfileFieldsType => {
     return {
       fullname: user.fullname,
@@ -120,6 +123,14 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
     setIsMount(false);
   };
 
+  // **
+  const onShowPassBtnClick = (idx: number) => {
+    setIsShowPass((o) => {
+      o[idx] = !o[idx];
+      return o;
+    });
+  };
+
   return (
     <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
       <div className={s.inputs}>
@@ -148,23 +159,27 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
         <div className={`${cs.inputWrapper}`} {...isValidPassLength}>
           <input
             onChange={onPasswordChange}
-            type="password"
+            type={isShowPass[0] ? "text" : "password"}
             placeholder="Password"
             name="password"
             className={`${s.input} ${cs.input}`}
             defaultValue={fields.password}
           />
+
+          <ShowPassBtn isShowPass={isShowPass[0]} setIsShowPass={() => onShowPassBtnClick(0)} />
         </div>
 
         <div className={`${cs.inputWrapper}`} {...isValidPassConfirm}>
           <input
             onChange={onPaswordConfirmChange}
-            type="password"
+            type={isShowPass[1] ? "text" : "password"}
             placeholder="Confirm password"
             name="passwordConfirm"
             className={`${s.input} ${cs.input}`}
             defaultValue={fields.passwordConfirm}
           />
+
+          <ShowPassBtn isShowPass={isShowPass[1]} setIsShowPass={() => onShowPassBtnClick(1)} />
         </div>
 
         <input

@@ -8,7 +8,7 @@ import { useCreateUserMutation } from "../../redux/backendApi";
 
 import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
 
-import { SignupBlockSuccess } from "../../components";
+import { ShowPassBtn, SignupBlockSuccess } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "../signinBlock/signinBlock.module.scss";
@@ -35,6 +35,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
   const [fields, setFields] = useImmer(initialFields);
+  const [isShowPass, setIsShowPass] = useImmer([false, false]);
 
   const {
     isValidText,
@@ -124,6 +125,14 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     }
   };
 
+  // **
+  const onShowPassBtnClick = (idx: number) => {
+    setIsShowPass((o) => {
+      o[idx] = !o[idx];
+      return o;
+    });
+  };
+
   return (
     <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
       <p className={`${s.title} ${cs.title}`}>Sign-up</p>
@@ -158,22 +167,26 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
             <input
               onChange={onPasswordChange}
               className={`${s.input} ${cs.input}`}
-              type="password"
+              type={isShowPass[0] ? "text" : "password"}
               name="password"
               placeholder="Password"
               value={fields.password}
             />
+
+            <ShowPassBtn isShowPass={isShowPass[0]} setIsShowPass={() => onShowPassBtnClick(0)} />
           </div>
 
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassConfirm}>
             <input
               onChange={onPasswordConfirmChange}
               className={`${s.input} ${cs.input}`}
-              type="password"
+              type={isShowPass[1] ? "text" : "password"}
               name="confirmPassword"
               placeholder="Password"
               value={fields.passwordConfirm}
             />
+
+            <ShowPassBtn isShowPass={isShowPass[1]} setIsShowPass={() => onShowPassBtnClick(1)} />
           </div>
 
           <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>

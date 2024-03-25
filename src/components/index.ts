@@ -20,6 +20,7 @@ export * from "./textEditor";
 export * from "./brand";
 export * from "./testimonial";
 export * from "./join/joinBtn";
+export * from "./showPassBtn";
 
 // ***
 export * from "./signinBlock";

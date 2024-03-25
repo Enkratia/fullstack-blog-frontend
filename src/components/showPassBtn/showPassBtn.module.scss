@@ -1,0 +1,26 @@
+@use "../../scss/utils/" as *;
+
+.showPass {
+  position: absolute;
+  right: rem(20);
+  top: 50%;
+  border: none;
+  padding: 0;
+  width: rem(24);
+  height: rem(24);
+  background-color: transparent;
+  transform: translateY(-50%);
+  cursor: pointer;
+
+  svg {
+    width: inherit;
+    height: inherit;
+    transition: stroke 0.3s;
+  }
+
+  &:hover {
+    svg {
+      stroke: var(--purple-color);
+    }
+  }
+}

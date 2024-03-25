@@ -5,6 +5,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useImmer } from "use-immer";
 
+import { ShowPassBtn } from "../../components";
 import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
 
 import cs from "../../scss/helpers.module.scss";
@@ -22,6 +23,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
   const callback = `?callbackUrl=${callbackUrl}`;
 
   const [fields, setFields] = useImmer({ email: "", password: "" });
+  const [isShowPass, setIsShowPass] = React.useState(false);
 
   const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();
 
@@ -100,10 +102,12 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
         <input
           onChange={onPasswordChange}
           className={`${s.input} ${cs.input}`}
-          type="password"
+          type={isShowPass ? "text" : "password"}
           placeholder="Password"
           value={fields.password}
         />
+
+        <ShowPassBtn isShowPass={isShowPass} setIsShowPass={() => setIsShowPass((b) => !b)} />
       </div>
 
       <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>

@@ -391,12 +391,12 @@
         visibility: visible;
       }
 
-      &::after {
-        content: "";
-        background-image: url("../../public/img/validity/warning.svg");
-        opacity: 1;
-        visibility: visible;
-      }
+      // &::after {
+      //   content: "";
+      //   background-image: url("../../public/img/validity/warning.svg");
+      //   opacity: 1;
+      //   visibility: visible;
+      // }
 
       >.input {
         border-color: var(--danger-color);
@@ -439,12 +439,12 @@
       //   visibility: visible;
       // }
 
-      &::after {
-        content: "";
-        background-image: url("../../public/img/validity/success.svg");
-        opacity: 1;
-        visibility: visible;
-      }
+      // &::after {
+      //   content: "";
+      //   background-image: url("../../public/img/validity/success.svg");
+      //   opacity: 1;
+      //   visibility: visible;
+      // }
 
       >.input {
         border-color: var(--success-color);
@@ -469,6 +469,10 @@
       &::after {
         content: none;
       }
+    }
+
+    &Pass {
+      &Show {}
     }
   }
 
