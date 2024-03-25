@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useSession } from "next-auth/react";
 import { useImmer } from "use-immer";
 
 import { useUpdateUserMutation } from "../../../redux/backendApi";
@@ -31,6 +32,8 @@ type ProfileFormProps = {
 };
 
 export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
+  const { data: session, update: updateSession } = useSession();
+
   const [isShowPass, setIsShowPass] = useImmer([false, false]);
   const setInitialsFields = (): ProfileFieldsType => {
     return {
@@ -82,7 +85,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   };
 
   // **
-  const onSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onSubmitClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (!validateForm() || !formRef.current) return;
 
@@ -91,10 +94,14 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
     formData.delete("passwordConfirm");
     formData.get("password") === "" && formData.delete("password");
 
-    updateUser({
+    const res = await updateUser({
       id: user.id,
       body: formData,
     });
+
+    if ("data" in res) {
+      updateSession({ newUser: res.data });
+    }
   };
 
   // **

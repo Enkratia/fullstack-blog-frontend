@@ -22,7 +22,7 @@ type validateTextProps = (value: string | null, idx: number, options?: validateT
 const mailRegExp = /^\S+@\S+\.\S+$/;
 
 export const useValidateForm = () => {
-  const [isValidText, setIsValidText] = useImmer<Record<string, string>[]>([]);
+  const [isValidText, setIsValidText] = useImmer<Record<string, string>[]>([{}]);
 
   // **
   const [isValidEmail, setIsValidEmail] = useImmer<Record<string, string>>({});
@@ -31,7 +31,7 @@ export const useValidateForm = () => {
   const [isValidPhone, setIsValidPhone] = useImmer<Record<string, string>>({});
 
   // **
-  const [isValidSelect, setIsValidSelect] = useImmer<Record<string, string>[]>([]);
+  const [isValidSelect, setIsValidSelect] = useImmer<Record<string, string>[]>([{}]);
 
   // **
   const passLengthRef = React.useRef({ value: "", comparison: false }); // store validation result
@@ -52,6 +52,21 @@ export const useValidateForm = () => {
   // **
   const [isValidFile, setIsValidFile] = useImmer<Record<string, string>>({});
 
+  // **
+  const isValidAll = [
+    isValidText,
+    isValidEmail,
+    isValidPhone,
+    isValidSelect,
+    isValidPassLength,
+    isValidPassConfirm,
+    isValidContent,
+    isValidFile,
+  ];
+
+  const [isValidate, setIsValidate] = React.useState(false);
+
+  // ***
   const validateFile = (files: FileList | null) => {
     const filesCount = files && files.length === 1;
 
@@ -247,23 +262,52 @@ export const useValidateForm = () => {
     }
   }
 
+  // ***
+  const validateAllSuccessForm = () => {
+    return isValidAll
+      .flat()
+      .every((el) => (!el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success")));
+  };
+
+  const validateAnyWarningForm = () => {
+    return isValidAll
+      .flat()
+      .every((el) => (!el ? !el : !Object.keys(el)?.[0]?.includes("data-validity-warning")));
+  };
+
+  // ***
+  function wrapObject(data: Record<string, string>) {
+    return isValidate ? data : {};
+  }
+
+  function wrapArray(data: Record<string, string>[]) {
+    return data.map((el) => {
+      return isValidate ? el : {};
+    });
+  }
+
   return {
-    isValidEmail,
+    isValidEmail: wrapObject(isValidEmail),
     validateEmail,
-    isValidPassLength,
+    isValidPassLength: wrapObject(isValidPassLength),
     validatePassLength,
-    isValidText,
+    isValidText: wrapArray(isValidText),
     validateText,
-    isValidPassConfirm,
+    isValidPassConfirm: wrapObject(isValidPassConfirm),
     validatePassConfirm,
-    isValidPhone,
+    isValidPhone: wrapObject(isValidPhone),
     validatePhone,
-    isValidSelect,
+    isValidSelect: wrapArray(isValidSelect),
     validateSelect,
-    isValidContent,
+    isValidContent: wrapObject(isValidContent),
     validateContent,
-    isValidFile,
+    isValidFile: wrapObject(isValidFile),
     validateFile,
+
+    // **
+    validateAllSuccessForm,
+    validateAnyWarningForm,
+    setIsValidate,
   };
 };
 

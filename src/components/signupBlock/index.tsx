@@ -46,6 +46,10 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     validatePassLength,
     isValidPassConfirm,
     validatePassConfirm,
+
+    // **
+    validateAllSuccessForm,
+    setIsValidate,
   } = useValidateForm();
 
   // **
@@ -53,13 +57,6 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     if (onModalCloseClick) {
       onModalCloseClick();
     }
-  };
-
-  // **
-  const validateForm = () => {
-    return [isValidText[0], isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
-      !el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success"),
-    );
   };
 
   // **
@@ -102,7 +99,10 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    if (!validateAllSuccessForm()) {
+      setIsValidate(true);
+      return;
+    }
 
     const form = formRef.current;
     if (!form) return;
@@ -190,11 +190,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
           </div>
 
           <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>
-            <button
-              onClick={onSubmit}
-              className={`${s.btn} ${cs.btn} ${cs.btnLg}`}
-              disabled={!validateForm()}
-              type="submit">
+            <button onClick={onSubmit} className={`${s.btn} ${cs.btn} ${cs.btnLg}`} type="submit">
               Submit
             </button>
           </div>

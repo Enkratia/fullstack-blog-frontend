@@ -34,17 +34,20 @@ export const backendApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Posts", "Brands", "Testimonials", "Queries"],
+  tagTypes: ["Users", "Posts", "Brands", "Testimonials", "Queries"],
   endpoints: (builder) => ({
     // GET
     getUserById: builder.query<UserType, string>({
       query: (id) => `users/${id}`,
+      providesTags: ["Users"],
     }),
     getUsers: builder.query<GetUsersType, string>({
       query: (request) => `users/${request}`,
+      providesTags: ["Users"],
     }),
     getPostById: builder.query<PostType, string>({
       query: (id) => `posts/${id}`,
+      providesTags: ["Posts"],
     }),
     getPosts: builder.query<GetPostsType, string>({
       query: (request) => `posts/${request}`,
@@ -192,6 +195,7 @@ export const backendApi = createApi({
           body: body,
         };
       },
+      invalidatesTags: ["Users"],
     }),
     updatePost: builder.mutation<any, UpdatePostType>({
       query: ({ id, body }) => {
@@ -201,6 +205,7 @@ export const backendApi = createApi({
           body: body,
         };
       },
+      invalidatesTags: ["Posts"],
     }),
     updateAboutUsStatic: builder.mutation<any, FormData>({
       query: (body) => {
