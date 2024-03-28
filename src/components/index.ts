@@ -3,6 +3,8 @@ export * from "./_storeProvider";
 export * from "./_commonHelper";
 export * from "./_reinitAppProvider";
 export * from "./_popup";
+export * from "./_formSelect";
+
 export * from "./scrollToTop";
 
 // Common sections

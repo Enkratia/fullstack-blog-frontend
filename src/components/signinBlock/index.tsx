@@ -25,7 +25,17 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
   const [fields, setFields] = useImmer({ email: "", password: "" });
   const [isShowPass, setIsShowPass] = React.useState(false);
 
-  const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();
+  const {
+    isValidEmail,
+    validateEmail,
+    isValidPassLength,
+    validatePassLength,
+
+    // **
+    formRef,
+    validateAllSuccessForm,
+    setIsValidate,
+  } = useValidateForm();
 
   // **
   const onCloseClick = () => {
@@ -35,20 +45,13 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
   };
 
   // **
-  const validateForm = () => {
-    return [isValidEmail, isValidPassLength].every((el) =>
-      !el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success"),
-    );
-  };
-
-  // **
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFields((o) => {
       o.email = e.target.value;
       return o;
     });
 
-    validateEmail(e.target.value);
+    validateEmail(e.target);
   };
 
   const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,13 +60,16 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       return o;
     });
 
-    validatePassLength(e.target.value);
+    validatePassLength(e.target, { single: true });
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    if (!validateAllSuccessForm()) {
+      setIsValidate(true);
+      return;
+    }
 
     const res = await signIn("credentials", {
       email: fields.email,
@@ -85,7 +91,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
   };
 
   return (
-    <form onClick={(e) => e.preventDefault} className={s.root}>
+    <form onClick={(e) => e.preventDefault} className={s.root} ref={formRef}>
       <p className={`${s.title} ${cs.title}`}>Sign-in</p>
 
       <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
@@ -93,10 +99,19 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
           onChange={onEmailChange}
           className={`${s.input} ${cs.input}`}
           type="text"
+          name="email"
           placeholder="Email"
           value={fields.email}
         />
       </div>
+
+      {/* <FormInput
+        onChange={onEmailChange}
+        onValidate={(e) => validateEmail(e.target)}
+        inputClassName={`${s.input} ${cs.input}`}
+        type="text"
+        placeholder="Email"
+      /> */}
 
       <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassLength}>
         <input
@@ -104,6 +119,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
           className={`${s.input} ${cs.input}`}
           type={isShowPass ? "text" : "password"}
           placeholder="Password"
+          name="password"
           value={fields.password}
         />
 
@@ -111,11 +127,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       </div>
 
       <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>
-        <button
-          onClick={onSubmit}
-          className={`${s.btn} ${cs.btn} ${cs.btnLg}`}
-          disabled={!validateForm()}
-          type="submit">
+        <button onClick={onSubmit} className={`${s.btn} ${cs.btn} ${cs.btnLg}`} type="submit">
           Submit
         </button>
       </div>

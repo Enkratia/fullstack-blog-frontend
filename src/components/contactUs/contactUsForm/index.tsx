@@ -2,20 +2,32 @@
 
 import React from "react";
 
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import "overlayscrollbars/overlayscrollbars.css";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useCreateContactUsMessageMutation } from "../../../redux/backendApi";
 
-import { useValidateForm } from "../../../utils/customHooks";
+import { FormSelect } from "../../../components";
 import { checkRequestStatus, toArray } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./contactUsForm.module.scss";
 
-import AngleDown from "../../../../public/img/angle-down.svg";
+const placeholder = "Query Related";
 
-const selectPlaceholder = "Query Related";
+const FormSchema = z.object({
+  fullname: z
+    .string()
+    .min(2, "Fullname should be atleast 2 characters")
+    .max(45, "Fullname must be less than 45 characters")
+    .regex(new RegExp("^[a-zA-Z]+$"), "No special characters allowed"),
+  email: z.string().email("Please enter a valid email address"),
+  message: z.string().min(2, "Message should be atleast 2 characters"),
+  query: z.string().min(1, "Please choose an option"),
+});
+
+type InputType = z.infer<typeof FormSchema>;
 
 type ContactUsFormProps = {
   queries: ContactUsQueriesType;
@@ -23,163 +35,199 @@ type ContactUsFormProps = {
 
 export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries: queriesData }) => {
   const formRef = React.useRef<HTMLFormElement>(null);
+  const [activeOption, setActiveOption] = React.useState(0);
 
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [active, setActive] = React.useState(0);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, submitCount },
+  } = useForm<InputType>({
+    resolver: zodResolver(FormSchema),
+  });
 
   const [createMessage, { isError, isSuccess, isLoading }] = useCreateContactUsMessageMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
-  const { isValidText, validateText, isValidEmail, validateEmail, isValidSelect, validateSelect } =
-    useValidateForm();
-
-  const validateForm = () => {
-    return [isValidEmail, isValidText[0], isValidText[1], isValidSelect[0]].every((el) =>
-      !el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success"),
-    );
+  // **
+  const onSelectValidation = (option: number, options: string[]) => {
+    setValue("query", option ? options[option] : "", {
+      shouldValidate: !!submitCount,
+    });
   };
 
-  // **
   const onSubmit = () => {
     const form = formRef.current;
-    if (!form || !validateForm()) return;
+    if (!form) return;
 
     const formData = new FormData(form);
     createMessage(formData);
   };
 
-  // **
-  const onSelectClick = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
-    if (e.target === e.currentTarget.lastElementChild) return;
-
-    const select = e.currentTarget;
-    setIsOpen((b) => !b);
-
-    function hideSelect(e: MouseEvent) {
-      if (select && !e.composedPath().includes(select)) {
-        setIsOpen(false);
-
-        document.documentElement.removeEventListener("click", hideSelect);
-      }
-    }
-
-    document.documentElement.addEventListener("click", hideSelect);
-  };
-
-  const onSelectKeyDown = (e: React.KeyboardEvent<HTMLDivElement>, idx: number) => {
-    const select = e.currentTarget;
-
-    if (e.key === "Enter") {
-      setIsOpen((b) => !b);
-    }
-
-    function hideSelect(e: MouseEvent) {
-      if (select && !e.composedPath().includes(select)) {
-        setIsOpen(false);
-
-        document.documentElement.removeEventListener("click", hideSelect);
-      }
-    }
-
-    document.documentElement.addEventListener("click", hideSelect);
-  };
-
-  const onSelectOptionClick = (e: React.MouseEvent<HTMLLIElement>, idx: number, option: number) => {
-    setActive(option);
-
-    validateSelect(e.currentTarget, idx);
-  };
-
-  const onSelectOptionKeyDown = (
-    e: React.KeyboardEvent<HTMLLIElement>,
-    idx: number,
-    option: number,
-  ) => {
-    if (e.key === "Enter") {
-      setActive(option);
-
-      validateSelect(e.currentTarget, idx);
-
-      (e.currentTarget.closest('[role="listbox"]') as HTMLDivElement)?.focus();
-    }
-  };
-
-  // **
-  const queries = [selectPlaceholder, ...toArray(queriesData)];
-
   return (
-    <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-        <input
-          type="text"
-          onChange={(e) => validateText(e.target.value, 0)}
-          placeholder="Full Name"
-          name="fullname"
-          className={cs.input}
+    <form className={s.root} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
+      <div
+        className={`${s.inputWrapper} ${cs.inputWrapper}`}
+        data-form-error={errors?.fullname?.message}>
+        <input {...register("fullname")} type="text" placeholder="Full Name" className={cs.input} />
+      </div>
+
+      <div
+        className={`${s.inputWrapper} ${cs.inputWrapper}`}
+        data-form-error={errors?.email?.message}>
+        <input {...register("email")} type="text" placeholder="Your Email" className={cs.input} />
+      </div>
+
+      <div
+        className={`${s.inputWrapper} ${cs.inputWrapper}`}
+        data-form-error={errors?.query?.message}>
+        <FormSelect
+          name="query"
+          placeholder={placeholder}
+          onSelectValidation={onSelectValidation}
+          options={toArray(queriesData)}
+          activeOption={activeOption}
+          setActiveOption={setActiveOption}
+          register={register}
         />
       </div>
 
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
-        <input
-          type="text"
-          onChange={(e) => validateEmail(e.target.value)}
-          placeholder="Your Email"
-          name="email"
-          className={cs.input}
-        />
-      </div>
-
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidSelect[0]}>
-        <div
-          className={`${cs.select} ${cs.input}`}
-          role="listbox"
-          tabIndex={0}
-          onKeyDown={(e) => onSelectKeyDown(e, 0)}
-          onClick={(e) => onSelectClick(e, 0)}>
-          <div className={`${cs.selectHead} ${active === 0 ? "" : cs.selectHeadActive}`}>
-            <span className={cs.selectSelected}>{queries[active]}</span>
-            <input type="hidden" name="query" value={queries[active]} />
-
-            <AngleDown aria-hidden="true" className={cs.inputSvg} />
-          </div>
-          <div
-            className={`${cs.selectWrapper} ${cs.input} ${isOpen ? cs.selectWrapperActive : ""}`}>
-            <OverlayScrollbarsComponent defer element="ul" className={cs.selectList}>
-              {queries.map((query, i) => (
-                <li
-                  key={i}
-                  tabIndex={0}
-                  className={`${cs.selectItem} ${active === i ? cs.selectItemActive : ""}`}
-                  role="option"
-                  aria-selected={active === i ? "true" : "false"}
-                  onKeyDown={(e) => onSelectOptionKeyDown(e, 0, i)}
-                  onClick={(e) => onSelectOptionClick(e, 0, i)}>
-                  {query}
-                </li>
-              ))}
-            </OverlayScrollbarsComponent>
-          </div>
-        </div>
-      </div>
-
-      <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
+      <div
+        className={`${s.inputWrapper} ${cs.inputWrapper}`}
+        data-form-error={errors?.message?.message}>
         <textarea
+          {...register("message")}
           spellCheck={false}
-          onChange={(e) => validateText(e.target.value, 1)}
           className={`${s.textarea} ${cs.input}`}
-          placeholder="Message"
-          name="message"></textarea>
+          placeholder="Message"></textarea>
       </div>
 
       <div className={cs.btnWrapper} {...requestStatus}>
-        <button
-          onClick={onSubmit}
-          className={`${s.submit} ${cs.btn} ${cs.btnLg}`}
-          disabled={!validateForm()}
-          type="button">
+        <button className={`${s.submit} ${cs.btn} ${cs.btnLg}`} type="submit">
           Send Message
         </button>
       </div>
     </form>
   );
 };
+
+//////////////////////////////////////////////////////////////////////////
+// **
+/* <Controller
+              control={control}
+              // name="accepted"
+              name="query"
+              render={({ field: { value, onChange } }) => ( */
+
+/* <Controller
+              name="query"
+              control={control}
+              render={({ field: { value } }) => <input value={value} />}
+            /> */
+
+// onChange={onChange}
+// name="query"
+// defaultValue={active === 0 ? "" : queries[active]}
+
+/* )}
+            /> */
+
+// **
+
+/* <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}> */
+
+/* <FormInput
+        element="input"
+        type="text"
+        onChange={() => validateText(2)}
+        placeholder="test placeholder"
+        name="test"
+        className={`${cs.select} ${cs.input}`}
+      /> */
+
+/* </div> */
+
+// **
+
+/* <FormControl>
+        <Select
+          value={active.toString()}
+          onChange={test}
+          IconComponent={() => <AngleDown aria-hidden="true" />}
+          displayEmpty
+          className={cs.selectTest}
+          inputProps={{ MenuProps: { disableScrollLock: true } }}>
+          {queries.map((query, i) => (
+            <MenuItem key={i} value={i}>
+              {query}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl> */
+
+/* <div
+        className={`${s.inputWrapper} ${cs.inputWrapper} ${cs.input}`}
+        style={{ position: "relative" }}> */
+
+/* <div style={{ width: "100%" }}> */
+
+/* </div> */
+
+/* </div> */
+
+// import MenuItem from "@mui/material/MenuItem";
+// import FormHelperText from "@mui/material/FormHelperText";
+// import FormControl from "@mui/material/FormControl";
+// import Select, { SelectChangeEvent } from "@mui/material/Select";
+
+// **
+// phone: z.string(),
+// password: z
+//   .string()
+//   .min(6, "Password should be atleast 6 characters")
+//   .max(45, "Password must be less than 45 characters"),
+// confirmPassword: z
+//   .string()
+//   .min(6, "Password should be atleast 6 characters")
+//   .max(45, "Password must be less than 45 characters"),
+// accepted: z.literal(true, {
+//   errorMap: () => ({
+//     message: "Please accepte all terms",
+//   }),
+// }),
+// .refine((data) => data.password === data.confirmPassword, {
+//   message: "Passwords doesn't match",
+//   path: ["password", "confirmPassword"],
+// });
+
+// **
+
+/* <div
+   className={`${cs.select} ${cs.input}`}
+   role="listbox"
+   tabIndex={0}
+   onKeyDown={(e) => onSelectKeyDown(e, 0)}
+   onClick={(e) => onSelectClick(e, 0)}>
+   <div className={`${cs.selectHead} ${active === 0 ? "" : cs.selectHeadActive}`}>
+     <span className={cs.selectSelected}>{queries[active]}</span>
+     <input type="hidden" name="query" value={active === 0 ? "" : queries[active]} />
+     <AngleDown aria-hidden="true" className={cs.inputSvg} />
+   </div>
+   <div
+     className={`${cs.selectWrapper} ${cs.input} ${isOpen ? cs.selectWrapperActive : ""}`}>
+     <OverlayScrollbarsComponent defer element="ul" className={cs.selectList}>
+       {queries.map((query, i) => (
+         <li
+           key={i}
+           tabIndex={0}
+           className={`${cs.selectItem} ${active === i ? cs.selectItemActive : ""}`}
+           role="option"
+           aria-selected={active === i ? "true" : "false"}
+           onKeyDown={(e) => onSelectOptionKeyDown(e, 0, i)}
+           onClick={(e) => onSelectOptionClick(e, 0, i)}>
+           {query}
+         </li>
+       ))}
+     </OverlayScrollbarsComponent>
+   </div>
+ </div> */

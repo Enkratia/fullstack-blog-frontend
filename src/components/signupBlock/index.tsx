@@ -66,7 +66,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
       return o;
     });
 
-    validateText(e.target.value, idx);
+    validateText(e.target, idx);
   };
 
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +75,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
       return o;
     });
 
-    validateEmail(e.target.value);
+    validateEmail(e.target);
   };
 
   const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +84,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
       return o;
     });
 
-    validatePassLength(e.target.value);
+    validatePassLength(e.target);
   };
 
   const onPasswordConfirmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,12 +93,13 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
       return o;
     });
 
-    validatePassConfirm(e.target.value);
+    validatePassConfirm(e.target);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
+    console.log(validateAllSuccessForm());
     if (!validateAllSuccessForm()) {
       setIsValidate(true);
       return;
@@ -133,6 +134,14 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     });
   };
 
+  const testRef = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (!testRef.current) return;
+    // validateText(testRef.current, 0);
+    console.log(testRef.current);
+  });
+
   return (
     <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
       <p className={`${s.title} ${cs.title}`}>Sign-up</p>
@@ -143,6 +152,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
         <div className={s.content}>
           <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
             <input
+              ref={testRef}
               onChange={(e) => onFullnameChange(e, 0)}
               className={`${s.input} ${cs.input}`}
               type="text"
