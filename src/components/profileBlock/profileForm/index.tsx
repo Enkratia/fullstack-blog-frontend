@@ -2,16 +2,39 @@
 
 import React from "react";
 import { useSession } from "next-auth/react";
-import { useImmer } from "use-immer";
+
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useUpdateUserMutation } from "../../../redux/backendApi";
 
-import { ShowPassBtn } from "../../../components";
+import { FormInput, FormSubmit } from "../../../components";
 import { checkRequestStatus } from "../../../utils/customFunctions";
-import { useValidateForm } from "../../../utils/customHooks";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./profileForm.module.scss";
+
+const FormSchema = z
+  .object({
+    fullname: z
+      .string()
+      .min(2, "Fullname should be atleast 2 characters")
+      .max(45, "Fullname must be less than 45 characters"),
+    email: z.string().email("Please enter a valid email address"),
+    password: z
+      .string()
+      .regex(new RegExp(/^.{0}$|^.{6,46}$/), "Password should be 6-45 characters"),
+    confirmPassword: z
+      .string()
+      .regex(new RegExp(/^.{0}$|^.{6,46}$/), "Password should be 6-45 characters"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords doesn't match",
+    path: ["confirmPassword"],
+  });
+
+type InputType = z.infer<typeof FormSchema>;
 
 type ProfileFieldsType = {
   fullname: string;
@@ -34,7 +57,6 @@ type ProfileFormProps = {
 export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   const { data: session, update: updateSession } = useSession();
 
-  const [isShowPass, setIsShowPass] = useImmer([false, false]);
   const setInitialsFields = (): ProfileFieldsType => {
     return {
       fullname: user.fullname,
@@ -52,46 +74,38 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   };
 
   const formRef = React.useRef<HTMLFormElement>(null);
-  const [isMount, setIsMount] = React.useState(true);
   const [fields] = React.useState(setInitialsFields());
 
   const [updateUser, { isError, isSuccess, isLoading }] = useUpdateUserMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
   const {
-    isValidText,
-    validateText,
-    isValidEmail,
-    validateEmail,
-    isValidPassLength,
-    validatePassLength,
-    isValidPassConfirm,
-    validatePassConfirm,
-  } = useValidateForm();
-
-  // **
-  const validateForm = () => {
-    return [isValidText[0], isValidEmail, isValidPassLength, isValidPassConfirm].every((el) =>
-      !el ? !el : !Object.keys(el)?.[0]?.includes("data-validity-warning"),
-    );
-  };
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputType>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      fullname: user.fullname,
+      email: user.email,
+      password: "",
+      confirmPassword: "",
+    },
+  });
 
   // **
   const onUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const fileInput = e.currentTarget?.nextElementSibling as HTMLInputElement;
     if (fileInput) fileInput.click();
-
-    setIsMount(false);
   };
 
   // **
-  const onSubmitClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (!validateForm() || !formRef.current) return;
+  const onSubmit = async () => {
+    if (!formRef.current) return;
 
     const formData = new FormData(formRef.current);
 
-    formData.delete("passwordConfirm");
+    formData.delete("confirmPassword");
     formData.get("password") === "" && formData.delete("password");
 
     const res = await updateUser({
@@ -104,101 +118,62 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
     }
   };
 
-  // **
-  const onFullnameChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
-    validateText(e.target.value, idx);
-    setIsMount(false);
-  };
-
-  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validateEmail(e.target.value);
-    setIsMount(false);
-  };
-
-  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validatePassLength(e.target.value, { resetWhenEmpty: true });
-    setIsMount(false);
-  };
-
-  const onPaswordConfirmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validatePassConfirm(e.target.value, { resetWhenEmpty: true });
-    setIsMount(false);
-  };
-
-  // **
-  const onInputChange = () => {
-    setIsMount(false);
-  };
-
-  // **
-  const onShowPassBtnClick = (idx: number) => {
-    setIsShowPass((o) => {
-      o[idx] = !o[idx];
-      return o;
-    });
-  };
-
   return (
-    <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
+    <form className={s.root} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
       <div className={s.inputs}>
-        <div className={`${cs.inputWrapper}`} {...isValidText[0]}>
-          <input
-            onChange={(e) => onFullnameChange(e, 0)}
-            type="text"
-            placeholder="Fullname"
-            name="fullname"
-            className={`${s.input} ${cs.input}`}
-            defaultValue={fields.fullname}
-          />
-        </div>
+        <FormInput
+          isPass={false}
+          classNameWrapper={cs.inputWrapper}
+          classNameInput={`${s.input} ${cs.input}`}
+          error={errors?.fullname?.message}
+          register={register}
+          name="fullname"
+          type="text"
+          placeholder="Full Name"
+        />
 
-        <div className={`${cs.inputWrapper}`} {...isValidEmail}>
-          <input
-            onChange={onEmailChange}
-            type="text"
-            placeholder="Email"
-            name="email"
-            className={`${s.input} ${cs.input}`}
-            defaultValue={fields.email}
-          />
-        </div>
+        <FormInput
+          isPass={false}
+          classNameWrapper={cs.inputWrapper}
+          classNameInput={`${s.input} ${cs.input}`}
+          error={errors?.email?.message}
+          register={register}
+          name="email"
+          type="text"
+          placeholder="Email"
+        />
 
-        <div className={`${cs.inputWrapper}`} {...isValidPassLength}>
-          <input
-            onChange={onPasswordChange}
-            type={isShowPass[0] ? "text" : "password"}
-            placeholder="Password"
-            name="password"
-            className={`${s.input} ${cs.input}`}
-            defaultValue={fields.password}
-          />
+        <FormInput
+          isPass={true}
+          classNameWrapper={cs.inputWrapper}
+          classNameInput={`${s.input} ${cs.input}`}
+          error={errors?.password?.message}
+          register={register}
+          name="password"
+          type="password"
+          placeholder="Password"
+        />
 
-          <ShowPassBtn isShowPass={isShowPass[0]} setIsShowPass={() => onShowPassBtnClick(0)} />
-        </div>
-
-        <div className={`${cs.inputWrapper}`} {...isValidPassConfirm}>
-          <input
-            onChange={onPaswordConfirmChange}
-            type={isShowPass[1] ? "text" : "password"}
-            placeholder="Confirm password"
-            name="passwordConfirm"
-            className={`${s.input} ${cs.input}`}
-            defaultValue={fields.passwordConfirm}
-          />
-
-          <ShowPassBtn isShowPass={isShowPass[1]} setIsShowPass={() => onShowPassBtnClick(1)} />
-        </div>
+        <FormInput
+          isPass={true}
+          classNameWrapper={cs.inputWrapper}
+          classNameInput={`${s.input} ${cs.input}`}
+          error={errors?.confirmPassword?.message}
+          register={register}
+          name="confirmPassword"
+          type="password"
+          placeholder="Confirm password"
+        />
 
         <input
-          onChange={onInputChange}
           type="text"
           placeholder="Profession"
           name="profession"
           className={`${s.input} ${cs.input}`}
           defaultValue={fields.profession}
         />
+
         <input
-          onChange={onInputChange}
           type="text"
           placeholder="Company"
           name="company"
@@ -210,13 +185,13 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           <button onClick={onUploadClick} type="button" className={`${s.upload} ${cs.btn}`}>
             Upload picture
           </button>
+
           <input type="file" accept=".png, .jpg, .jpeg, .svg" name="file" hidden />
         </div>
       </div>
 
       <div className={s.inputs}>
         <input
-          onChange={onInputChange}
           type="text"
           placeholder="Facebook link"
           name="facebook"
@@ -224,7 +199,6 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           defaultValue={fields.facebook}
         />
         <input
-          onChange={onInputChange}
           type="text"
           placeholder="Twitter link"
           name="twitter"
@@ -232,7 +206,6 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           defaultValue={fields.twitter}
         />
         <input
-          onChange={onInputChange}
           type="text"
           placeholder="Instagram link"
           name="instagram"
@@ -240,7 +213,6 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           defaultValue={fields.instagram}
         />
         <input
-          onChange={onInputChange}
           type="text"
           placeholder="LinkedIn link"
           name="linkedin"
@@ -251,22 +223,18 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
 
       <textarea
         spellCheck={false}
-        onChange={onInputChange}
         placeholder="Representation"
         name="representation"
         className={`${s.textarea} ${cs.input}`}
         defaultValue={fields.representation}
       />
 
-      <div className={cs.btnWrapper} {...requestStatus}>
-        <button
-          onClick={onSubmitClick}
-          type="button"
-          disabled={isMount || !validateForm()}
-          className={`${s.submit} ${cs.btn}`}>
-          Submit
-        </button>
-      </div>
+      <FormSubmit
+        classNameWrapper={cs.btnWrapper}
+        classNameBtn={`${s.submit} ${cs.btn}`}
+        text="Submit"
+        requestStatus={requestStatus}
+      />
     </form>
   );
 };

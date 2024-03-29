@@ -2,55 +2,64 @@
 
 import React from "react";
 import Link from "next/link";
-import { useImmer } from "use-immer";
+
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useCreateUserMutation } from "../../redux/backendApi";
 
-import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
-
-import { ShowPassBtn, SignupBlockSuccess } from "../../components";
+import { FormInput, FormSubmit, SignupBlockSuccess } from "../../components";
+import { useAuthErrorMessage } from "../../utils/customHooks";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "../signinBlock/signinBlock.module.scss";
 import Close from "../../../public/img/close.svg";
+
+const FormSchema = z
+  .object({
+    fullname: z
+      .string()
+      .min(2, "Fullname should be atleast 2 characters")
+      .max(45, "Fullname must be less than 45 characters")
+      .regex(new RegExp("^[a-zA-Z]+$"), "No special characters allowed"),
+    email: z.string().email("Please enter a valid email address"),
+    password: z
+      .string()
+      .min(6, "Password should be atleast 6 characters")
+      .max(45, "Password must be less than 45 characters"),
+    confirmPassword: z
+      .string()
+      .min(6, "Password should be atleast 6 characters")
+      .max(45, "Password must be less than 45 characters"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords doesn't match",
+    path: ["confirmPassword"],
+  });
+
+type InputType = z.infer<typeof FormSchema>;
 
 type SignupBlockProps = {
   callbackUrl: string;
   onModalCloseClick?: () => void;
 };
 
-const initialFields = {
-  fullname: "",
-  email: "",
-  password: "",
-  passwordConfirm: "",
-};
-
 export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCloseClick }) => {
-  const callback = `?callbackUrl=${callbackUrl}`;
   const formRef = React.useRef<HTMLFormElement>(null);
+  const callback = `?callbackUrl=${callbackUrl}`;
 
   const [createUser, { isSuccess }] = useCreateUserMutation();
-
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
-  const [fields, setFields] = useImmer(initialFields);
-  const [isShowPass, setIsShowPass] = useImmer([false, false]);
-
   const {
-    isValidText,
-    validateText,
-    isValidEmail,
-    validateEmail,
-    isValidPassLength,
-    validatePassLength,
-    isValidPassConfirm,
-    validatePassConfirm,
-
-    // **
-    validateAllSuccessForm,
-    setIsValidate,
-  } = useValidateForm();
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm<InputType>({
+    resolver: zodResolver(FormSchema),
+  });
 
   // **
   const onCloseClick = () => {
@@ -59,52 +68,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     }
   };
 
-  // **
-  const onFullnameChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
-    setFields((o) => {
-      o.fullname = e.target.value;
-      return o;
-    });
-
-    validateText(e.target, idx);
-  };
-
-  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields((o) => {
-      o.email = e.target.value;
-      return o;
-    });
-
-    validateEmail(e.target);
-  };
-
-  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields((o) => {
-      o.password = e.target.value;
-      return o;
-    });
-
-    validatePassLength(e.target);
-  };
-
-  const onPasswordConfirmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields((o) => {
-      o.passwordConfirm = e.target.value;
-      return o;
-    });
-
-    validatePassConfirm(e.target);
-  };
-
-  const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    console.log(validateAllSuccessForm());
-    if (!validateAllSuccessForm()) {
-      setIsValidate(true);
-      return;
-    }
-
+  const onSubmit = async () => {
     const form = formRef.current;
     if (!form) return;
 
@@ -126,84 +90,64 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     }
   };
 
-  // **
-  const onShowPassBtnClick = (idx: number) => {
-    setIsShowPass((o) => {
-      o[idx] = !o[idx];
-      return o;
-    });
-  };
-
-  const testRef = React.useRef<HTMLInputElement>(null);
-
-  React.useEffect(() => {
-    if (!testRef.current) return;
-    // validateText(testRef.current, 0);
-    console.log(testRef.current);
-  });
-
   return (
-    <form className={s.root} onSubmit={(e) => e.preventDefault()} ref={formRef}>
+    <form className={s.root} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
       <p className={`${s.title} ${cs.title}`}>Sign-up</p>
 
       {isSuccess ? (
-        <SignupBlockSuccess email={fields.email} />
+        <SignupBlockSuccess email={getValues().email} />
       ) : (
         <div className={s.content}>
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-            <input
-              ref={testRef}
-              onChange={(e) => onFullnameChange(e, 0)}
-              className={`${s.input} ${cs.input}`}
-              type="text"
-              name="fullname"
-              placeholder="Fullname"
-              value={fields.fullname}
-            />
-          </div>
+          <FormInput
+            isPass={false}
+            classNameWrapper={s.inputWrapper}
+            classNameInput={`${s.input} ${cs.input}`}
+            error={errors?.fullname?.message}
+            register={register}
+            name="fullname"
+            type="text"
+            placeholder="Full Name"
+          />
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
-            <input
-              onChange={onEmailChange}
-              className={`${s.input} ${cs.input}`}
-              type="text"
-              name="email"
-              placeholder="Email"
-              value={fields.email}
-            />
-          </div>
+          <FormInput
+            isPass={false}
+            classNameWrapper={s.inputWrapper}
+            classNameInput={`${s.input} ${cs.input}`}
+            error={errors?.email?.message}
+            register={register}
+            name="email"
+            type="text"
+            placeholder="Email"
+          />
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassLength}>
-            <input
-              onChange={onPasswordChange}
-              className={`${s.input} ${cs.input}`}
-              type={isShowPass[0] ? "text" : "password"}
-              name="password"
-              placeholder="Password"
-              value={fields.password}
-            />
+          <FormInput
+            isPass={true}
+            classNameWrapper={s.inputWrapper}
+            classNameInput={`${s.input} ${cs.input}`}
+            error={errors?.password?.message}
+            register={register}
+            name="password"
+            type="password"
+            placeholder="Password"
+          />
 
-            <ShowPassBtn isShowPass={isShowPass[0]} setIsShowPass={() => onShowPassBtnClick(0)} />
-          </div>
+          <FormInput
+            isPass={true}
+            classNameWrapper={s.inputWrapper}
+            classNameInput={`${s.input} ${cs.input}`}
+            error={errors?.confirmPassword?.message}
+            register={register}
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirm password"
+          />
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidPassConfirm}>
-            <input
-              onChange={onPasswordConfirmChange}
-              className={`${s.input} ${cs.input}`}
-              type={isShowPass[1] ? "text" : "password"}
-              name="confirmPassword"
-              placeholder="Password"
-              value={fields.passwordConfirm}
-            />
-
-            <ShowPassBtn isShowPass={isShowPass[1]} setIsShowPass={() => onShowPassBtnClick(1)} />
-          </div>
-
-          <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>
-            <button onClick={onSubmit} className={`${s.btn} ${cs.btn} ${cs.btnLg}`} type="submit">
-              Submit
-            </button>
-          </div>
+          <FormSubmit
+            classNameWrapper={`${s.btnWrapper} ${cs.btnWrapper}`}
+            classNameBtn={`${s.btn} ${cs.btn} ${cs.btnLg}`}
+            text="Submit"
+            requestStatus={authMessage}
+          />
 
           <div className={s.descr}>
             <div className={s.descrWrapper}>

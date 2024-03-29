@@ -3,13 +3,25 @@
 import React from "react";
 import Link from "next/link";
 
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useCheckUserEmailMutation } from "../../redux/backendApi";
-import { useAuthErrorMessage, useValidateForm } from "../../utils/customHooks";
+
+import { FormInput, FormSubmit } from "../../components";
+import { ForgotBlockSuccess } from "./forgotBlockSuccess";
+import { useAuthErrorMessage } from "../../utils/customHooks";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "../signinBlock/signinBlock.module.scss";
 import Close from "../../../public/img/close.svg";
-import { ForgotBlockSuccess } from "./forgotBlockSuccess";
+
+const FormSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+});
+
+type InputType = z.infer<typeof FormSchema>;
 
 type ForgotBlockProps = {
   callbackUrl: string;
@@ -21,10 +33,16 @@ export const ForgotBlock: React.FC<ForgotBlockProps> = ({ callbackUrl, onModalCl
   const callback = `?callbackUrl=${callbackUrl}`;
 
   const { authMessage, setAuthError } = useAuthErrorMessage();
-  const { isValidEmail, validateEmail } = useValidateForm();
-
-  const [email, setEmail] = React.useState("");
   const [checkUserEmail, { isSuccess }] = useCheckUserEmailMutation();
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm<InputType>({
+    resolver: zodResolver(FormSchema),
+  });
 
   // **
   const onCloseClick = () => {
@@ -33,24 +51,7 @@ export const ForgotBlock: React.FC<ForgotBlockProps> = ({ callbackUrl, onModalCl
     }
   };
 
-  // **
-  const validateForm = () => {
-    return [isValidEmail].every((el) =>
-      !el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success"),
-    );
-  };
-
-  // **
-  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    validateEmail(e.target.value);
-  };
-
-  const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    if (!validateForm()) return;
-
+  const onSubmit = async () => {
     const form = formRef.current;
     if (!form) return;
 
@@ -72,33 +73,30 @@ export const ForgotBlock: React.FC<ForgotBlockProps> = ({ callbackUrl, onModalCl
   };
 
   return (
-    <form onClick={(e) => e.preventDefault} className={s.root} ref={formRef}>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.root} ref={formRef}>
       {isSuccess ? (
-        <ForgotBlockSuccess email={email} />
+        <ForgotBlockSuccess email={getValues().email} />
       ) : (
         <div className={s.content}>
           <p className={`${s.title} ${cs.title}`}>Forgot password?</p>
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidEmail}>
-            <input
-              onChange={onEmailChange}
-              className={`${s.input} ${cs.input}`}
-              type="text"
-              placeholder="Email"
-              value={email}
-              name="email"
-            />
-          </div>
+          <FormInput
+            isPass={false}
+            classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+            classNameInput={`${s.input} ${cs.input}`}
+            error={errors?.email?.message}
+            register={register}
+            name="email"
+            type="text"
+            placeholder="Email"
+          />
 
-          <div className={`${cs.btnWrapper} ${s.btnWrapper}`} {...authMessage}>
-            <button
-              onClick={onSubmit}
-              className={`${s.btn} ${cs.btn} ${cs.btnLg}`}
-              disabled={!validateForm()}
-              type="submit">
-              Submit
-            </button>
-          </div>
+          <FormSubmit
+            classNameWrapper={`${s.btnWrapper} ${cs.btnWrapper}`}
+            classNameBtn={`${s.submit} ${cs.btn} ${cs.btnLg}`}
+            text="Submit"
+            requestStatus={authMessage}
+          />
 
           <div className={s.descr}>
             <div className={s.descrWrapper}>

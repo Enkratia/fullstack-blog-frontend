@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useCreateContactUsMessageMutation } from "../../../redux/backendApi";
 
-import { FormSelect } from "../../../components";
+import { FormInput, FormSelect, FormSubmit, FormTextarea } from "../../../components";
 import { checkRequestStatus, toArray } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
@@ -66,47 +66,56 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries: queriesDa
 
   return (
     <form className={s.root} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
-      <div
-        className={`${s.inputWrapper} ${cs.inputWrapper}`}
-        data-form-error={errors?.fullname?.message}>
-        <input {...register("fullname")} type="text" placeholder="Full Name" className={cs.input} />
-      </div>
+      <FormInput
+        isPass={false}
+        classNameWrapper={s.inputWrapper}
+        classNameInput={cs.input}
+        error={errors?.fullname?.message}
+        register={register}
+        name="fullname"
+        type="text"
+        placeholder="Full Name"
+      />
 
-      <div
-        className={`${s.inputWrapper} ${cs.inputWrapper}`}
-        data-form-error={errors?.email?.message}>
-        <input {...register("email")} type="text" placeholder="Your Email" className={cs.input} />
-      </div>
+      <FormInput
+        isPass={false}
+        classNameWrapper={s.inputWrapper}
+        classNameInput={cs.input}
+        error={errors?.email?.message}
+        register={register}
+        name="email"
+        type="text"
+        placeholder="Your Email"
+      />
 
-      <div
-        className={`${s.inputWrapper} ${cs.inputWrapper}`}
-        data-form-error={errors?.query?.message}>
-        <FormSelect
-          name="query"
-          placeholder={placeholder}
-          onSelectValidation={onSelectValidation}
-          options={toArray(queriesData)}
-          activeOption={activeOption}
-          setActiveOption={setActiveOption}
-          register={register}
-        />
-      </div>
+      <FormSelect
+        classNameWrapper={s.inputWrapper}
+        classNameInput={cs.input}
+        error={errors?.query?.message}
+        name="query"
+        placeholder={placeholder}
+        onSelectValidation={onSelectValidation}
+        options={toArray(queriesData)}
+        activeOption={activeOption}
+        setActiveOption={setActiveOption}
+        register={register}
+      />
 
-      <div
-        className={`${s.inputWrapper} ${cs.inputWrapper}`}
-        data-form-error={errors?.message?.message}>
-        <textarea
-          {...register("message")}
-          spellCheck={false}
-          className={`${s.textarea} ${cs.input}`}
-          placeholder="Message"></textarea>
-      </div>
+      <FormTextarea
+        classNameWrapper={s.inputWrapper}
+        classNameTextarea={`${s.textarea} ${cs.input}`}
+        error={errors?.message?.message}
+        register={register}
+        name="message"
+        placeholder="Message"
+      />
 
-      <div className={cs.btnWrapper} {...requestStatus}>
-        <button className={`${s.submit} ${cs.btn} ${cs.btnLg}`} type="submit">
-          Send Message
-        </button>
-      </div>
+      <FormSubmit
+        classNameWrapper=""
+        classNameBtn={`${s.submit} ${cs.btn} ${cs.btnLg}`}
+        text="Send Message"
+        requestStatus={requestStatus}
+      />
     </form>
   );
 };
@@ -231,3 +240,39 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries: queriesDa
      </OverlayScrollbarsComponent>
    </div>
  </div> */
+
+// **
+/* <div
+        className={`${s.inputWrapper} ${cs.inputWrapper}`}
+        data-form-error={errors?.query?.message}> */
+
+/* </div> */
+
+/* <div
+  className={`${s.inputWrapper} ${cs.inputWrapper}`}
+  data-form-error={errors?.email?.message}>
+  <input {...register("email")} type="text" placeholder="Your Email" className={cs.input} />
+</div> */
+
+/* <div
+className={`${s.inputWrapper} ${cs.inputWrapper}`}
+data-form-error={errors?.fullname?.message}>
+<input {...register("fullname")} type="text" placeholder="Full Name" className={cs.input} />
+</div> */
+
+/* 
+<div
+  className={`${s.inputWrapper} ${cs.inputWrapper}`}
+  data-form-error={errors?.message?.message}>
+  <textarea
+    {...register("message")}
+    spellCheck={false}
+    className={`${s.textarea} ${cs.input}`}
+    placeholder="Message"></textarea>
+</div> */
+
+/* <div className={cs.btnWrapper} {...requestStatus}>
+  <button className={`${s.submit} ${cs.btn} ${cs.btnLg}`} type="submit">
+    Send Message
+  </button>
+</div>; */

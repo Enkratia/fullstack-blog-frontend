@@ -156,43 +156,45 @@
     pointer-events: none;
   }
 
+  &Message {
+    display: none;
+    margin-top: rem(5);
+    font: var(--validation-font);
+    line-height: 100%;
+    text-align: left;
+    color: var(--danger-color);
+  }
+
   &Wrapper {
     position: relative;
 
-    &::before {
-      content: none;
-      position: absolute;
-      left: 0;
-      top: calc(100% - rem(6));
-      font: var(--validation-font);
-    }
-
     // **
     &[data-auth-message] {
-      &::before {
-        content: attr(data-auth-message);
+      .btnMessage {
+        display: block;
         color: var(--danger-color);
       }
     }
 
     // **
     &[data-request-success] {
-      &::before {
-        content: "Data sent";
+      .btnMessage {
+        display: block;
         color: var(--success-color);
       }
     }
 
     &[data-request-warning] {
-      &::before {
-        content: "Failed to send data";
+      .btnMessage {
+        display: block;
         color: var(--danger-color);
       }
     }
 
     &[data-request-process] {
-      &::before {
-        content: "Data is sent...";
+      .btnMessage {
+        display: block;
+        color: var(--black-color);
       }
     }
   }
@@ -350,146 +352,59 @@
   background-color: var(--light-color);
   transition: border-color 0.3s;
 
+  &Message {
+    display: none;
+    margin-top: rem(5);
+    font: var(--validation-font);
+    line-height: 100%;
+    text-align: left;
+    color: var(--danger-color);
+  }
+
+  &SelectSvg {
+    position: absolute;
+    right: rem(66);
+    top: 50%;
+    width: rem(20);
+    height: rem(20);
+    stroke: var(--black-color);
+    transform: translateY(-50%) rotate(180deg);
+    transform-origin: center;
+
+    &Active {
+      @extend .inputSelectSvg;
+
+      transform: translateY(-50%) rotate(0);
+    }
+  }
+
   &Wrapper {
     position: relative;
-    display: flex;
-    flex-wrap: wrap;
+    font-size: 0;
 
-    &::after {
+    &Inner {
       position: relative;
-      z-index: var(--z-up);
-      // position: absolute;
-      // left: 0;
-      // top: calc(100% - rem(6));
-      // z-index: var(--z-up);
-      font: var(--validation-font);
     }
 
-    // &::after {
-    //   position: absolute;
-    //   right: rem(66);
-    //   top: 50%;
-    //   z-index: var(--z-up);
-    //   display: block;
-    //   width: rem(20);
-    //   height: rem(20);
-    //   background-position: center;
-    //   background-size: cover;
-    //   background-repeat: no-repeat;
-    //   transform: translate(50%, -50%);
-    // }
-
-    // .inputSvg {
-    //   position: absolute;
-    //   right: rem(66);
-    //   top: 50%;
-    //   z-index: var(--z-up);
-    //   display: block;
-    //   transform: translate(50%, -50%);
-    // }
-
-    // **
-    &[data-form-error] {
-      &::after {
-        content: attr(data-form-error);
-        color: var(--danger-color);
-        opacity: 1;
-        visibility: visible;
-      }
+    &Active {
+      @extend .inputWrapper;
 
       >.input {
         border-color: var(--danger-color);
       }
+
+      .inputWrapperInner {
+        position: relative;
+
+        >.input {
+          border-color: var(--danger-color);
+        }
+      }
+
+      >.inputMessage {
+        display: block;
+      }
     }
-
-    // **
-    // &[data-validity-warning] {
-    //   &::before {
-    //     content: attr(data-validity-warning);
-    //     color: var(--danger-color);
-    //     opacity: 1;
-    //     visibility: visible;
-    //   }
-
-    //   // &::after {
-    //   //   content: "";
-    //   //   background-image: url("../../public/img/validity/warning.svg");
-    //   //   opacity: 1;
-    //   //   visibility: visible;
-    //   // }
-
-    //   // >.input {
-    //   //   border-color: var(--danger-color);
-    //   // }
-
-    //   // .inputSvg {
-    //   //   display: none;
-    //   // }
-    // }
-
-    // &[data-validity-warning-pass] {
-    //   @extend .inputWrapper, [data-validity-warning];
-
-    //   &::before {
-    //     content: attr(data-validity-warning-pass);
-    //   }
-
-    //   &::after {
-    //     content: none;
-    //   }
-    // }
-
-    // &[data-validity-warning-file] {
-    //   @extend .inputWrapper, [data-validity-warning];
-
-    //   &::before {
-    //     content: attr(data-validity-warning-file);
-    //   }
-
-    //   &::after {
-    //     content: none;
-    //   }
-    // }
-
-    // &[data-validity-success] {
-    //   // &::before {
-    //   //   content: "Looks good!";
-    //   //   color: var(--success-color);
-    //   //   opacity: 1;
-    //   //   visibility: visible;
-    //   // }
-
-    //   // &::after {
-    //   //   content: "";
-    //   //   background-image: url("../../public/img/validity/success.svg");
-    //   //   opacity: 1;
-    //   //   visibility: visible;
-    //   // }
-
-    //   >.input {
-    //     border-color: var(--success-color);
-    //   }
-
-    //   .inputSvg {
-    //     display: none;
-    //   }
-    // }
-
-    // &[data-validity-success-pass] {
-    //   @extend .inputWrapper, [data-validity-success];
-
-    //   &::after {
-    //     content: none;
-    //   }
-    // }
-
-    // &[data-validity-success-file] {
-    //   @extend .inputWrapper, [data-validity-success];
-
-    //   &::after {
-    //     content: none;
-    //   }
-    // }
   }
 
   // **
@@ -534,15 +449,11 @@
     color: var(--black-color);
 
     &:hover {
-      color: var(--mediumgray-color);
+      color: var(--black-color);
     }
 
     &Active {
-      color: var(--darkgray-color);
-    }
-
-    svg {
-      flex-shrink: 0;
+      color: var(--black-color);
     }
   }
 
@@ -594,7 +505,7 @@
     cursor: pointer;
 
     &:hover {
-      color: var(--mediumgray-color);
+      color: var(--purple-color);
     }
 
     &Active {

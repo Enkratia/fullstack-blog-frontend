@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import { UseFormRegister } from "react-hook-form";
 import { useEditor, EditorContent, Editor, JSONContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -110,14 +111,20 @@ const EditorBar: React.FC<EditorBarProps> = ({ editor }) => {
 
 type TextEditorProps = {
   setContent: (text: string, json: JSONContent) => void;
-  isValidText: Record<string, string>;
   defaultContent?: JSONContent;
+  error: string | undefined;
+  register: UseFormRegister<any>;
+  name: string;
+  textContent: string;
 };
 
 export const TextEditor: React.FC<TextEditorProps> = ({
   setContent,
-  isValidText,
   defaultContent,
+  register,
+  error,
+  name,
+  textContent,
 }) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
@@ -137,7 +144,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
   };
 
   return (
-    <div className={`${s.root} ${cs.inputWrapper}`} {...isValidText}>
+    <div className={`${s.root} ${error ? cs.inputWrapperActive : cs.inputWrapper}`}>
       <EditorBar editor={editor} />
       <EditorContent
         editor={editor}
@@ -145,6 +152,10 @@ export const TextEditor: React.FC<TextEditorProps> = ({
         className={`${s.content} ${cs.article} ${cs.input}`}
         tabIndex={0}
       />
+
+      <input {...register(name)} type="hidden" name={name} value={textContent} />
+
+      <strong className={cs.inputMessage}>{error ?? ""}</strong>
     </div>
   );
 };

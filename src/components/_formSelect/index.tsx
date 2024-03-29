@@ -1,28 +1,30 @@
 import React from "react";
 
 import { UseFormRegister } from "react-hook-form";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import "overlayscrollbars/overlayscrollbars.css";
 
 import cs from "../../scss/helpers.module.scss";
-import AngleDown from "../../../public/img/angle-down.svg";
+import Chevron from "../../../public/img/default/chevron.svg";
 
-type FormSelect = {
+type FormSelectProps = {
+  error: string | undefined;
   register: UseFormRegister<any>;
   name: string;
   placeholder: string;
-  className?: string;
+  classNameWrapper: string;
+  classNameInput: string;
   options: string[];
   activeOption: number;
   setActiveOption: React.Dispatch<React.SetStateAction<number>>;
   onSelectValidation: (option: number, options: string[]) => void;
 };
 
-export const FormSelect: React.FC<FormSelect> = ({
+export const FormSelect: React.FC<FormSelectProps> = ({
+  error,
   register,
   name,
   placeholder,
-  className,
+  classNameWrapper,
+  classNameInput,
   options,
   activeOption,
   setActiveOption,
@@ -83,40 +85,69 @@ export const FormSelect: React.FC<FormSelect> = ({
   };
 
   return (
-    <div
-      className={`${className ? className : ""} ${cs.select} ${cs.input}`}
-      role="listbox"
-      tabIndex={0}
-      onKeyDown={onSelectKeyDown}
-      onClick={onSelectClick}>
-      <div className={`${cs.selectHead} ${activeOption === 0 ? "" : cs.selectHeadActive}`}>
-        <span className={cs.selectSelected}>{finalOptions[activeOption]}</span>
+    <div className={`${classNameWrapper} ${error ? cs.inputWrapperActive : cs.inputWrapper}`}>
+      <div
+        className={`${cs.select} ${classNameInput}`}
+        role="listbox"
+        tabIndex={0}
+        onKeyDown={onSelectKeyDown}
+        onClick={onSelectClick}>
+        <div className={`${cs.selectHead} ${activeOption === 0 ? "" : cs.selectHeadActive}`}>
+          <span className={cs.selectSelected}>{finalOptions[activeOption]}</span>
 
-        <input
-          {...register(name)}
-          type="hidden"
-          name={name}
-          value={activeOption === 0 ? "" : finalOptions[activeOption]}
-        />
+          <input
+            {...register(name)}
+            type="hidden"
+            name={name}
+            value={activeOption === 0 ? "" : finalOptions[activeOption]}
+          />
 
-        <AngleDown aria-hidden="true" />
+          <Chevron
+            aria-hidden="true"
+            className={isOpen ? cs.inputSelectSvg : cs.inputSelectSvgActive}
+          />
+        </div>
+        <div
+          className={`${cs.selectWrapper} ${classNameInput} ${
+            isOpen ? cs.selectWrapperActive : ""
+          }`}>
+          <ul className={cs.selectList}>
+            {finalOptions.map((option, i) => (
+              <li
+                key={i}
+                tabIndex={0}
+                className={`${cs.selectItem} ${activeOption === i ? cs.selectItemActive : ""}`}
+                role="option"
+                aria-selected={activeOption === i ? "true" : "false"}
+                onKeyDown={(e) => onSelectOptionKeyDown(e, i)}
+                onClick={(e) => onSelectOptionClick(e, i)}>
+                {option}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div className={`${cs.selectWrapper} ${cs.input} ${isOpen ? cs.selectWrapperActive : ""}`}>
-        <OverlayScrollbarsComponent defer element="ul" className={cs.selectList}>
-          {finalOptions.map((option, i) => (
-            <li
-              key={i}
-              tabIndex={0}
-              className={`${cs.selectItem} ${activeOption === i ? cs.selectItemActive : ""}`}
-              role="option"
-              aria-selected={activeOption === i ? "true" : "false"}
-              onKeyDown={(e) => onSelectOptionKeyDown(e, i)}
-              onClick={(e) => onSelectOptionClick(e, i)}>
-              {option}
-            </li>
-          ))}
-        </OverlayScrollbarsComponent>
-      </div>
+
+      <strong className={cs.inputMessage}>{error ?? ""}</strong>
     </div>
   );
 };
+
+/* <FormSelect
+  classNameWrapper={s.inputWrapper}
+  classNameInput={cs.input}
+  error={errors?.query?.message}
+  name="query"
+  placeholder={placeholder}
+  onSelectValidation={onSelectValidation}
+  options={toArray(queriesData)}
+  activeOption={activeOption}
+  setActiveOption={setActiveOption}
+  register={register}
+/>; */
+
+// **
+// import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+// import "overlayscrollbars/overlayscrollbars.css";
+/* <OverlayScrollbarsComponent defer element="ul" className={cs.selectList}> */
+/* </OverlayScrollbarsComponent> */
