@@ -169,6 +169,8 @@ export * from "./dashboard/dashboardBlock/dashboardBlockStats";
 
 // Edit pages
 export * from "./dashboard/editAboutUsSection1Block";
+export * from "./dashboard/editAboutUsSection1Block/editAboutUsSection1Form";
+
 export * from "./dashboard/editAboutUsSection2Block";
 export * from "./dashboard/editAboutUsSection3Block";
 
@@ -181,6 +183,7 @@ export * from "./dashboard/editHomeSection9Block";
 
 // **
 export * from "./dashboard/editCategorySection1Block";
+export * from "./dashboard/editCategorySection1Block/editCategorySection1Form";
 
 // **
 export * from "./dashboard/editContactUsSection1Block";

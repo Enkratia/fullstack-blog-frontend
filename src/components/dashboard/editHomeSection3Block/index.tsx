@@ -2,13 +2,26 @@
 
 import React from "react";
 
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useUpdateUsMissionStaticMutation } from "../../../redux/backendApi";
 
-import { useValidateForm } from "../../../utils/customHooks";
+import { FormSubmit, FormTextarea } from "../../../components";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "../editSection.module.scss";
+
+const FormSchema = z.object({
+  aboutTitle: z.string().min(2, "Title should be atleast 2 characters"),
+  aboutDescription: z.string().min(2, "Description should be atleast 2 characters"),
+  missionTitle: z.string().min(2, "Title should be atleast 2 characters"),
+  missionDescription: z.string().min(2, "Description should be atleast 2 characters"),
+});
+
+type InputType = z.infer<typeof FormSchema>;
 
 type EditHomeSection3BlockProps = {
   data: UsMissionType;
@@ -20,20 +33,23 @@ export const EditHomeSection3Block: React.FC<EditHomeSection3BlockProps> = ({ da
   const [updateUsMission, { isError, isSuccess, isLoading }] = useUpdateUsMissionStaticMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
-  const { isValidText, validateText } = useValidateForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputType>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      aboutTitle: data.about.title,
+      aboutDescription: data.about.description,
+      missionTitle: data.mission.title,
+      missionDescription: data.mission.description,
+    },
+  });
 
   // **
-  const validateForm = () => {
-    return [isValidText]
-      .flat()
-      .every((el) => (!el ? !el : !Object.keys(el)?.[0]?.includes("data-validity-warning")));
-  };
-
-  // **
-  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    if (!formRef.current || !validateForm()) return;
+  const onSubmit = () => {
+    if (!formRef.current) return;
 
     const formData = new FormData(formRef.current);
     updateUsMission(formData);
@@ -43,55 +59,52 @@ export const EditHomeSection3Block: React.FC<EditHomeSection3BlockProps> = ({ da
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Section 3</h2>
 
-      <form className={s.form} ref={formRef} onSubmit={(e) => e.preventDefault()}>
+      <form className={s.form} ref={formRef} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.content}>
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 0)}
-              className={`${s.input} ${cs.input}`}
-              name="aboutTitle"
-              defaultValue={data.about.title}
-            />
-          </div>
+          <FormTextarea
+            classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+            classNameTextarea={`${s.input} ${cs.input}`}
+            error={errors?.aboutTitle?.message}
+            register={register}
+            name="aboutTitle"
+            placeholder="Title"
+          />
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 1)}
-              className={`${s.input} ${cs.input}`}
-              name="aboutDescription"
-              defaultValue={data.about.description}
-            />
-          </div>
+          <FormTextarea
+            classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+            classNameTextarea={`${s.input} ${cs.input}`}
+            error={errors?.aboutDescription?.message}
+            register={register}
+            name="aboutDescription"
+            placeholder="Description"
+          />
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 2)}
-              className={`${s.input} ${cs.input}`}
-              name="missionTitle"
-              defaultValue={data.mission.title}
-              rows={3}
-            />
-          </div>
+          <FormTextarea
+            classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+            classNameTextarea={`${s.input} ${cs.input}`}
+            error={errors?.missionTitle?.message}
+            register={register}
+            name="missionTitle"
+            placeholder="Title"
+            rows={3}
+          />
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[3]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 3)}
-              className={`${s.input} ${cs.input}`}
-              name="missionDescription"
-              defaultValue={data.mission.description}
-              rows={3}
-            />
-          </div>
+          <FormTextarea
+            classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+            classNameTextarea={`${s.input} ${cs.input}`}
+            error={errors?.missionDescription?.message}
+            register={register}
+            name="missionDescription"
+            placeholder="Description"
+            rows={3}
+          />
 
-          <div className={cs.btnWrapper} {...requestStatus}>
-            <button onClick={onSubmit} type="button" className={cs.btn} disabled={!validateForm()}>
-              Submit
-            </button>
-          </div>
+          <FormSubmit
+            classNameWrapper={cs.btnWrapper}
+            classNameBtn={cs.btn}
+            text="Submit"
+            requestStatus={requestStatus}
+          />
         </div>
       </form>
     </section>

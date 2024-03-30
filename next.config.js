@@ -67,6 +67,12 @@ const nextConfig = {
         port: "3001",
         pathname: "/api/images/**",
       },
+      {
+        protocol: "http",
+        hostname: "192.168.240.3",
+        port: "3001",
+        pathname: "/api/images/**",
+      },
     ],
   },
 

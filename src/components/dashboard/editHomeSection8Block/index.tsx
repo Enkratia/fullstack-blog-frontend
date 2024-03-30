@@ -2,13 +2,25 @@
 
 import React from "react";
 
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useUpdateTestimonialStaticMutation } from "../../../redux/backendApi";
 
-import { useValidateForm } from "../../../utils/customHooks";
+import { FormSubmit, FormTextarea } from "../../../components";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "../editSection.module.scss";
+
+const FormSchema = z.object({
+  title: z.string().min(2, "Title should be atleast 2 characters"),
+  subtitle: z.string().min(2, "Subtitle should be atleast 2 characters"),
+  description: z.string().min(2, "Description should be atleast 2 characters"),
+});
+
+type InputType = z.infer<typeof FormSchema>;
 
 type EditHomeSection8BlockProps = {
   data: TestimonialStaticType;
@@ -21,20 +33,23 @@ export const EditHomeSection8Block: React.FC<EditHomeSection8BlockProps> = ({ da
     useUpdateTestimonialStaticMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
-  const { isValidText, validateText } = useValidateForm();
+  // **
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputType>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      title: data.title,
+      subtitle: data.subtitle,
+      description: data.description,
+    },
+  });
 
   // **
-  const validateForm = () => {
-    return [isValidText]
-      .flat()
-      .every((el) => (!el ? !el : !Object.keys(el)?.[0]?.includes("data-validity-warning")));
-  };
-
-  // **
-  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    if (!formRef.current || !validateForm()) return;
+  const onSubmit = () => {
+    if (!formRef.current) return;
 
     const formData = new FormData(formRef.current);
     updateTestimonialStatic(formData);
@@ -44,44 +59,42 @@ export const EditHomeSection8Block: React.FC<EditHomeSection8BlockProps> = ({ da
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Section 8</h2>
 
-      <form className={s.form} ref={formRef} onSubmit={(e) => e.preventDefault()}>
+      <form className={s.form} ref={formRef} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.content}>
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 0)}
-              className={`${s.input} ${cs.input}`}
-              name="title"
-              defaultValue={data.title}
-            />
-          </div>
+          <FormTextarea
+            classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+            classNameTextarea={`${s.input} ${cs.input}`}
+            error={errors?.title?.message}
+            register={register}
+            name="title"
+            placeholder=""
+          />
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 1)}
-              className={`${s.input} ${cs.input}`}
-              name="subtitle"
-              defaultValue={data.subtitle}
-            />
-          </div>
+          <FormTextarea
+            classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+            classNameTextarea={`${s.input} ${cs.input}`}
+            error={errors?.subtitle?.message}
+            register={register}
+            name="subtitle"
+            placeholder=""
+          />
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 2)}
-              className={`${s.input} ${cs.input}`}
-              name="description"
-              defaultValue={data.description}
-              rows={3}
-            />
-          </div>
+          <FormTextarea
+            classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+            classNameTextarea={`${s.input} ${cs.input}`}
+            error={errors?.description?.message}
+            register={register}
+            name="description"
+            placeholder=""
+            rows={3}
+          />
 
-          <div className={cs.btnWrapper} {...requestStatus}>
-            <button onClick={onSubmit} type="button" className={cs.btn} disabled={!validateForm()}>
-              Submit
-            </button>
-          </div>
+          <FormSubmit
+            classNameWrapper={cs.btnWrapper}
+            classNameBtn={cs.btn}
+            text="Submit"
+            requestStatus={requestStatus}
+          />
         </div>
       </form>
     </section>

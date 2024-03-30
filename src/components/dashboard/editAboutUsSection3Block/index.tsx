@@ -2,13 +2,25 @@
 
 import React from "react";
 
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useUpdateWhyThisBlogStaticMutation } from "../../../redux/backendApi";
 
-import { useValidateForm } from "../../../utils/customHooks";
+import { FormSubmit, FormTextarea } from "../../../components";
 import { checkRequestStatus } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "../editSection.module.scss";
+
+const FormSchema = z.object({
+  title: z.string().min(2, "Title should be atleast 2 characters"),
+  subtitle: z.string().min(2, "Subtitle should be atleast 2 characters"),
+  description: z.string().min(2, "Description should be atleast 2 characters"),
+});
+
+type InputType = z.infer<typeof FormSchema>;
 
 type EditAboutUsSection3BlockProps = {
   data: WhyThisBlogType;
@@ -17,33 +29,31 @@ type EditAboutUsSection3BlockProps = {
 export const EditAboutUsSection3Block: React.FC<EditAboutUsSection3BlockProps> = ({ data }) => {
   const formRef = React.useRef<HTMLFormElement>(null);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputType>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      title: data.title,
+      subtitle: data.subtitle,
+      description: data.description,
+    },
+  });
+
   const [updateWhyThisBlog, { isError, isSuccess, isLoading }] =
     useUpdateWhyThisBlogStaticMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
-  const { isValidText, validateText, isValidFile, validateFile } = useValidateForm();
-
   // **
-  const validateForm = () => {
-    return [isValidText, isValidFile]
-      .flat()
-      .every((el) => (!el ? !el : !Object.keys(el)?.[0]?.includes("data-validity-warning")));
-  };
-
-  // **
-  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validateFile(e.target.files);
-  };
-
   const onUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const fileInput = e.currentTarget?.nextElementSibling as HTMLInputElement;
     if (fileInput) fileInput.click();
   };
 
-  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    if (!formRef.current || !validateForm()) return;
+  const onSubmit = () => {
+    if (!formRef.current) return;
 
     const formData = new FormData(formRef.current);
     updateWhyThisBlog(formData);
@@ -53,58 +63,51 @@ export const EditAboutUsSection3Block: React.FC<EditAboutUsSection3BlockProps> =
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Section 3</h2>
 
-      <form className={s.form} ref={formRef} onSubmit={(e) => e.preventDefault()}>
+      <form className={s.form} ref={formRef} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.content}>
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidFile}>
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`}>
             <button onClick={onUploadClick} type="button" className={cs.btn}>
               Upload picture
             </button>
 
-            <input
-              onChange={onFileChange}
-              type="file"
-              accept=".png, .jpg, .jpeg, .svg"
-              name="file"
-              hidden
-            />
+            <input type="file" accept=".png, .jpg, .jpeg, .svg" name="file" hidden />
           </div>
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 0)}
-              className={`${s.input} ${cs.input}`}
-              name="title"
-              defaultValue={data.title}
-            />
-          </div>
+          <FormTextarea
+            classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+            classNameTextarea={`${s.input} ${cs.input}`}
+            error={errors?.title?.message}
+            register={register}
+            name="title"
+            placeholder=""
+          />
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 1)}
-              className={`${s.input} ${cs.input}`}
-              name="subtitle"
-              defaultValue={data.subtitle}
-            />
-          </div>
+          <FormTextarea
+            classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+            classNameTextarea={`${s.input} ${cs.input}`}
+            error={errors?.subtitle?.message}
+            register={register}
+            name="subtitle"
+            placeholder=""
+            rows={4}
+          />
 
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 2)}
-              className={`${s.input} ${cs.input}`}
-              name="description"
-              defaultValue={data.description}
-              rows={4}
-            />
-          </div>
+          <FormTextarea
+            classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+            classNameTextarea={`${s.input} ${cs.input}`}
+            error={errors?.description?.message}
+            register={register}
+            name="description"
+            placeholder=""
+            rows={4}
+          />
 
-          <div className={cs.btnWrapper} {...requestStatus}>
-            <button onClick={onSubmit} type="button" className={cs.btn} disabled={!validateForm()}>
-              Submit
-            </button>
-          </div>
+          <FormSubmit
+            classNameWrapper={cs.btnWrapper}
+            classNameBtn={cs.btn}
+            text="Submit"
+            requestStatus={requestStatus}
+          />
         </div>
       </form>
     </section>

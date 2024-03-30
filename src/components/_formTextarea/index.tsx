@@ -11,6 +11,7 @@ type FormTextareaProps = {
   error: string | undefined;
   name: string;
   placeholder: string;
+  rows?: number;
 };
 
 export const FormTextarea: React.FC<FormTextareaProps> = ({
@@ -20,6 +21,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
   register,
   name,
   placeholder,
+  rows = 2,
 }) => {
   return (
     <div className={`${classNameWrapper} ${error ? cs.inputWrapperActive : cs.inputWrapper}`}>
@@ -28,6 +30,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
         placeholder={placeholder}
         className={classNameTextarea}
         spellCheck={false}
+        rows={rows}
       />
 
       <strong className={cs.inputMessage}>{error}</strong>
@@ -42,4 +45,5 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
   register={register}
   name="message"
   placeholder="Message"
+  rows={rows}
 />; */
