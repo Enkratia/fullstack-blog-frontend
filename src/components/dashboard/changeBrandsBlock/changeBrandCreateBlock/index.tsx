@@ -2,13 +2,30 @@
 
 import React from "react";
 
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useCreateBrandMutation } from "../../../../redux/backendApi";
 
-import { useValidateForm } from "../../../../utils/customHooks";
+import { FormFileInput, FormInput, FormSubmit } from "../../../../components";
 import { checkRequestStatus } from "../../../../utils/customFunctions";
 
 import cs from "../../../../scss/helpers.module.scss";
 import s from "./changeBrandCreateBlock.module.scss";
+
+const ImageSchema = z
+  .any()
+  .refine((files) => files?.length >= 1, { message: "Picture is required" })
+  .optional();
+
+const FormSchema = z.object({
+  title: z.string().min(1, "Title should not be emtpy"),
+  linkUrl: z.string().min(1, "Title should not be emtpy"),
+  file: ImageSchema,
+});
+
+type InputType = z.infer<typeof FormSchema>;
 
 export const ChangeBrandCreateBlock: React.FC = () => {
   const formRef = React.useRef<HTMLFormElement>(null);
@@ -16,74 +33,67 @@ export const ChangeBrandCreateBlock: React.FC = () => {
   const [createBrand, { isError, isSuccess, isLoading }] = useCreateBrandMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
-  const { isValidText, validateText, isValidFile, validateFile } = useValidateForm();
+  // **
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputType>({
+    resolver: zodResolver(FormSchema),
+  });
 
   // **
-  const validateForm = () => {
-    return [isValidText, isValidFile]
-      .flat()
-      .every((el) => (!el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success")));
-  };
-
-  // **
-  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
+  const onSubmit = () => {
     const form = formRef.current;
-    if (!form || !validateForm()) return;
+    if (!form) return;
 
     const formData = new FormData(form);
     createBrand(formData);
-  };
-
-  // **
-  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validateFile(e.target.files);
-  };
-
-  const onUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const fileInput = e.currentTarget?.nextElementSibling as HTMLInputElement;
-    if (fileInput) fileInput.click();
   };
 
   return (
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Create new brand</h2>
 
-      <form className={s.form} onSubmit={(e) => e.preventDefault()} ref={formRef}>
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-          <input
-            type="text"
-            placeholder="Title"
-            name="title"
-            className={`${s.input} ${cs.input}`}
-            onChange={(e) => validateText(e.target.value, 0)}
-          />
-        </div>
+      <form className={s.form} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
+        <FormInput
+          isPass={false}
+          classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+          classNameInput={`${s.input} ${cs.input}`}
+          error={errors?.title?.message}
+          register={register}
+          name="title"
+          type="text"
+          placeholder="Title"
+        />
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
-          <input
-            type="text"
-            placeholder="Link"
-            name="linkUrl"
-            className={`${s.input} ${cs.input}`}
-            onChange={(e) => validateText(e.target.value, 1)}
-          />
-        </div>
+        <FormInput
+          isPass={false}
+          classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+          classNameInput={`${s.input} ${cs.input}`}
+          error={errors?.linkUrl?.message}
+          register={register}
+          name="linkUrl"
+          type="text"
+          placeholder="Link"
+        />
 
-        <div className={`${s.btnWrapper} ${cs.inputWrapper}`} {...isValidFile}>
-          <button onClick={onUploadClick} type="button" className={`${s.btnd} ${cs.btn}`}>
-            Upload picture
-          </button>
+        <FormFileInput
+          text="Upload picture"
+          error={errors?.file?.message?.toString()}
+          name="file"
+          accept=".png, .jpg, .jpeg"
+          register={register}
+          classNameBtn={`${s.btn} ${cs.btn}`}
+          classNameWrapper={`${s.btnWrapper} ${cs.inputWrapper}`}
+        />
 
-          <input onChange={onFileChange} type="file" accept=".png" name="file" hidden />
-        </div>
-
-        <div className={`${cs.btnWrapper} ${cs.btnWrapper}`} {...requestStatus}>
-          <button className={`${s.btn} ${cs.btn}`} disabled={!validateForm()} onClick={onSubmit}>
-            Submit
-          </button>
-        </div>
+        <FormSubmit
+          classNameWrapper={cs.btnWrapper}
+          classNameBtn={cs.btn}
+          text="Submit"
+          requestStatus={requestStatus}
+        />
       </form>
     </section>
   );

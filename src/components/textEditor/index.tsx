@@ -153,7 +153,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
         tabIndex={0}
       />
 
-      <input {...register(name)} type="hidden" name={name} value={textContent} />
+      <input {...register(name)} type="hidden" value={textContent} />
 
       <strong className={cs.inputMessage}>{error ?? ""}</strong>
     </div>

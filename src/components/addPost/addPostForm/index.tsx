@@ -125,7 +125,7 @@ export const AddPostForm: React.FC = () => {
         text="Upload picture"
         error={errors?.file?.message?.toString()}
         name="file"
-        accept=".png, .jpg, .jpeg, .svg"
+        accept=".png, .jpg, .jpeg"
         register={register}
         classNameBtn={`${s.upload} ${cs.btn}`}
         classNameWrapper={`${s.uploadWrapper} ${cs.inputWrapper}`}
@@ -134,9 +134,9 @@ export const AddPostForm: React.FC = () => {
       <TextEditor
         name="contentText"
         register={register}
-        textContent={content.text}
         error={errors.contentText?.message}
         setContent={(text: string, json: JSONContent) => onEditorChange({ text, json })}
+        textContent={content.text}
       />
 
       <FormInput

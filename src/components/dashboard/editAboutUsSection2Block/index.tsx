@@ -68,7 +68,7 @@ export const EditAboutUsSection2Block: React.FC<EditAboutUsSection2BlockProps> =
               Upload picture
             </button>
 
-            <input type="file" accept=".png, .jpg, .jpeg, .svg" name="file" hidden />
+            <input type="file" accept=".png, .jpg, .jpeg" name="file" hidden />
           </div>
 
           <FormTextarea

@@ -15,10 +15,10 @@ import cs from "../../../../scss/helpers.module.scss";
 import s from "../../editSection.module.scss";
 
 const FormSchema = z.object({
-  startup: z.string().min(2, "Startup should be atleast 2 characters"),
-  economy: z.string().min(2, "Economy should be atleast 2 characters"),
-  business: z.string().min(2, "Business should be atleast 2 characters"),
-  technology: z.string().min(2, "Technology should be atleast 2 characters"),
+  startup: z.string().min(2, "Field should have atleast 2 characters"),
+  economy: z.string().min(2, "Field should have atleast 2 characters"),
+  business: z.string().min(2, "Field should have atleast 2 characters"),
+  technology: z.string().min(2, "Field should have atleast 2 characters"),
 });
 
 type InputType = z.infer<typeof FormSchema>;
@@ -64,16 +64,6 @@ export const EditCategorySection1Form: React.FC<EditCategorySection1FormProps> =
 
       <form className={s.form} ref={formRef} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.content}>
-          {/* <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 0)}
-              className={`${s.input} ${cs.input}`}
-              name="startup"
-              defaultValue={data.startup}
-            />
-          </div> */}
-
           <FormTextarea
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
@@ -82,16 +72,6 @@ export const EditCategorySection1Form: React.FC<EditCategorySection1FormProps> =
             name="startup"
             placeholder=""
           />
-
-          {/* <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 1)}
-              className={`${s.input} ${cs.input}`}
-              name="economy"
-              defaultValue={data.economy}
-            />
-          </div> */}
 
           <FormTextarea
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
@@ -102,16 +82,6 @@ export const EditCategorySection1Form: React.FC<EditCategorySection1FormProps> =
             placeholder=""
           />
 
-          {/* <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 2)}
-              className={`${s.input} ${cs.input}`}
-              name="business"
-              defaultValue={data.business}
-            />
-          </div> */}
-
           <FormTextarea
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
@@ -121,16 +91,6 @@ export const EditCategorySection1Form: React.FC<EditCategorySection1FormProps> =
             placeholder=""
           />
 
-          {/* <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[3]}>
-            <textarea
-              spellCheck={false}
-              onChange={(e) => validateText(e.target.value, 3)}
-              className={`${s.input} ${cs.input}`}
-              name="technology"
-              defaultValue={data.technology}
-            />
-          </div> */}
-
           <FormTextarea
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
@@ -139,12 +99,6 @@ export const EditCategorySection1Form: React.FC<EditCategorySection1FormProps> =
             name="technology"
             placeholder=""
           />
-
-          {/* <div className={cs.btnWrapper} {...requestStatus}>
-            <button onClick={onSubmit} type="button" className={cs.btn} disabled={!validateForm()}>
-              Submit
-            </button>
-          </div> */}
 
           <FormSubmit
             classNameWrapper={cs.btnWrapper}

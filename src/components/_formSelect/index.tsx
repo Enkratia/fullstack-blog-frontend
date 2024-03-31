@@ -146,6 +146,12 @@ export const FormSelect: React.FC<FormSelectProps> = ({
   register={register}
 />; */
 
+// const onSelectValidation = (option: number, options: string[]) => {
+//   setValue("category", option ? options[option] : "", {
+//     shouldValidate: !!submitCount,
+//   });
+// };
+
 // **
 // import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 // import "overlayscrollbars/overlayscrollbars.css";

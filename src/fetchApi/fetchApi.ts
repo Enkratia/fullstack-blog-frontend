@@ -146,3 +146,13 @@ export const fetchUserByIdQuery = async (id: string) => {
     data: res?.data as UserType,
   };
 };
+
+// ContactUsPage
+export const fetchContactUsQuery = async () => {
+  const res = await fetchApi(`contact-us`);
+
+  return {
+    ...res,
+    data: res?.data?.[0] as ContactUsType,
+  };
+};

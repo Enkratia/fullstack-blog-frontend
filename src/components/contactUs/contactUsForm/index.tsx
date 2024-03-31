@@ -20,8 +20,8 @@ const FormSchema = z.object({
   fullname: z
     .string()
     .min(2, "Fullname should be atleast 2 characters")
-    .max(45, "Fullname must be less than 45 characters")
-    .regex(new RegExp("^[a-zA-Z]+$"), "No special characters allowed"),
+    .max(45, "Fullname must be less than 45 characters"),
+  // .regex(new RegExp("^[a-zA-Z]+$"), "No special characters allowed"),
   email: z.string().email("Please enter a valid email address"),
   message: z.string().min(2, "Message should be atleast 2 characters"),
   query: z.string().min(1, "Please choose an option"),

@@ -71,7 +71,7 @@ export const EditHomeSection5Block: React.FC<EditHomeSection5BlockProps> = ({ da
               Upload picture
             </button>
 
-            <input type="file" accept=".png, .jpg, .jpeg, .svg" name="file" hidden />
+            <input type="file" accept=".png, .jpg, .jpeg" name="file" hidden />
           </div>
 
           <FormTextarea

@@ -26,9 +26,9 @@ const EditHomeSection3PageSuspense: React.FC = async () => {
   }
 
   return (
-    <div>
+    <>
       <EditHomeSection3Block data={data} />
-    </div>
+    </>
   );
 };
 

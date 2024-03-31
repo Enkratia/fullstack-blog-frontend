@@ -21,22 +21,67 @@ const FormSchema = z
     fullname: z
       .string()
       .min(2, "Fullname should be atleast 2 characters")
-      .max(45, "Fullname must be less than 45 characters")
-      .regex(new RegExp("^[a-zA-Z]+$"), "No special characters allowed"),
+      .max(45, "Fullname must be less than 45 characters"),
+    // .regex(new RegExp("^[a-zA-Z]+$"), "No special characters allowed"),
     email: z.string().email("Please enter a valid email address"),
-    password: z
-      .string()
-      .min(6, "Password should be atleast 6 characters")
-      .max(45, "Password must be less than 45 characters"),
-    confirmPassword: z
-      .string()
-      .min(6, "Password should be atleast 6 characters")
-      .max(45, "Password must be less than 45 characters"),
+    password: z.string(),
+    // .min(6, "Password should be atleast 6 characters")
+    // .max(45, "Password must be less than 45 characters"),
+    confirmPassword: z.string(),
+    // .min(6, "Password should be atleast 6 characters")
+    // .max(45, "Password must be less than 45 characters"),
   })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords doesn't match",
-    path: ["confirmPassword"],
-  });
+  .refine(
+    (data) => {
+      return data.password === data.confirmPassword;
+    },
+    {
+      message: "Passwords doesn't match",
+      path: ["confirmPassword"],
+    },
+  )
+  .refine(
+    (data) => {
+      return data.password === data.confirmPassword;
+    },
+    {
+      message: "Passwords doesn't match",
+      path: ["password"],
+    },
+  );
+
+// .refine(
+//   (data) => {
+//     console.log(data);
+//     return data.password === data.confirmPassword;
+//   },
+//   {
+//     message: "Passwords doesn't match",
+//     // path: ["password"],
+//   },
+// );
+
+// import * as yup from "yup";
+
+// const validationSchema: Yup.object({
+//   password: Yup.string().required('Password is required'),
+//   passwordConfirmation: Yup.string()
+//      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+// });
+
+// export const basicSchema = yup.object().shape({
+//   fullname: yup
+//     .string()
+//     .min(2, "Fullname should be atleast 2 characters")
+//     .max(45, "Fullname must be less than 45 characters")
+//     .required("Required"),
+//   email: yup.string().email("Please enter a valid email").required("Required"),
+//   password: yup.string().required("Required"),
+//   confirmPassword: yup
+//     .string()
+//     .oneOf([yup.ref("password"), null], "Passwords must match")
+//     .required("Required"),
+// });
 
 type InputType = z.infer<typeof FormSchema>;
 
@@ -89,6 +134,9 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
       return;
     }
   };
+
+  console.log(errors.password?.message);
+  console.log(errors.confirmPassword?.message);
 
   return (
     <form className={s.root} onSubmit={handleSubmit(onSubmit)} ref={formRef}>

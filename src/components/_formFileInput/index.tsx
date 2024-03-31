@@ -6,7 +6,7 @@ import cs from "../../scss/helpers.module.scss";
 
 type FormFileInputProps = {
   text: string;
-  accept: string;
+  accept: string | string[];
   error: string | undefined;
   name: string;
   register: UseFormRegister<any>;
@@ -34,12 +34,49 @@ export const FormFileInput: React.FC<FormFileInputProps> = ({
         {text}
       </button>
 
-      <input {...register(name)} type="file" accept={accept} hidden />
+      <input {...register(name)} type="file" accept={accept.toString()} hidden />
 
       <strong className={cs.inputMessage}>{error}</strong>
     </div>
   );
 };
+
+/* <FormFileInput
+  text="Upload picture"
+  error={errors?.file?.message?.toString()}
+  name="file"
+  accept={ACCEPTED_IMAGE_TYPES}
+  register={register}
+  classNameBtn={`${s.upload} ${cs.btn}`}
+  classNameWrapper={`${s.uploadWrapper} ${cs.inputWrapper}`}
+/>; */
+
+// const ImageSchema = z
+//   .any()
+//   // not required
+//   .refine((f) => (!f?.length ? !!f?.length : ACCEPTED_IMAGE_TYPES.split(", ").includes(f?.[0]?.type)), {
+//     message: `${ACCEPTED_IMAGE_NAMES} files are accepted`,
+//   })
+//   // required
+//   .refine((files) => files?.length >= 1, { message: "Picture is required" })
+//   .refine((f) => ACCEPTED_IMAGE_TYPES.split(", ").includes(f?.[0]?.type), {
+//     message: `${ACCEPTED_IMAGE_NAMES} files are accepted`,
+//   })
+//   .optional();
+
+// OLD
+// const ImageSchema = z
+//   .any()
+//   .refine((files) => files?.length >= 1, { message: "Picture is required" })
+//   .refine((files) => [".jpg", ".jpeg", ".png", ".svg"].includes(files?.[0]?.type), {
+//     message: ".jpg, .jpeg, .png and .svg files are accepted",
+//   })
+//   .optional();
+
+// const imageSchema = z
+//   .any()
+//   .refine((files) => files?.length >= 1, { message: "Picture is required." })
+//   .optional();
 
 // const imageSchema = z
 //   .any()

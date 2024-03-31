@@ -76,7 +76,7 @@ export const EditAboutUsSection1Form: React.FC<EditAboutUsSection1FormProps> = (
               Upload picture
             </button>
 
-            <input type="file" accept=".png, .jpg, .jpeg, .svg" name="file" hidden />
+            <input type="file" accept=".png, .jpg, .jpeg" name="file" hidden />
           </div>
 
           <FormTextarea

@@ -2,13 +2,35 @@
 
 import React from "react";
 
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useCreateTestimonialMutation } from "../../../../redux/backendApi";
 
-import { useValidateForm } from "../../../../utils/customHooks";
+import { FormFileInput, FormInput, FormSubmit, FormTextarea } from "../../../../components";
 import { checkRequestStatus } from "../../../../utils/customFunctions";
+import { ACCEPTED_IMAGE_NAMES, ACCEPTED_IMAGE_TYPES } from "../../../../utils/constants";
 
 import cs from "../../../../scss/helpers.module.scss";
 import s from "./changeTestimonialCreateBlock.module.scss";
+
+const ImageSchema = z
+  .any()
+  .refine((files) => files?.length >= 1, { message: "Picture is required" })
+  .refine((f) => ACCEPTED_IMAGE_TYPES.split(", ").includes(f?.[0]?.type), {
+    message: `${ACCEPTED_IMAGE_NAMES} files are accepted`,
+  })
+  .optional();
+
+const FormSchema = z.object({
+  fullname: z.string().min(2, "Field should have atleast 2 characters"),
+  address: z.string().min(2, "Field should have atleast 2 characters"),
+  text: z.string().min(2, "Field should have atleast 2 characters"),
+  file: ImageSchema,
+});
+
+type InputType = z.infer<typeof FormSchema>;
 
 export const ChangeTestimonialCreateBlock: React.FC = () => {
   const formRef = React.useRef<HTMLFormElement>(null);
@@ -16,85 +38,77 @@ export const ChangeTestimonialCreateBlock: React.FC = () => {
   const [createTestimonial, { isError, isSuccess, isLoading }] = useCreateTestimonialMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
-  const { isValidText, validateText, isValidFile, validateFile } = useValidateForm();
+  // **
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputType>({
+    resolver: zodResolver(FormSchema),
+  });
 
   // **
-  const validateForm = () => {
-    return [isValidText, isValidFile]
-      .flat()
-      .every((el) => (!el ? !!el : Object.keys(el)?.[0]?.includes("data-validity-success")));
-  };
-
-  // **
-  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
+  const onSubmit = () => {
     const form = formRef.current;
-    if (!form || !validateForm()) return;
+    if (!form) return;
 
     const formData = new FormData(form);
     createTestimonial(formData);
-  };
-
-  // **
-  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validateFile(e.target.files);
-  };
-
-  const onUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const fileInput = e.currentTarget?.nextElementSibling as HTMLInputElement;
-    if (fileInput) fileInput.click();
   };
 
   return (
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Create new Testimonial</h2>
 
-      <form className={s.form} onSubmit={(e) => e.preventDefault()} ref={formRef}>
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[0]}>
-          <input
-            type="text"
-            placeholder="Fullname"
-            name="fullname"
-            className={`${s.input} ${cs.input}`}
-            onChange={(e) => validateText(e.target.value, 0)}
-          />
-        </div>
+      <form className={s.form} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
+        <FormInput
+          isPass={false}
+          classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+          classNameInput={`${s.input} ${cs.input}`}
+          error={errors?.fullname?.message}
+          register={register}
+          name="fullname"
+          type="text"
+          placeholder="Fullname"
+        />
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[1]}>
-          <input
-            type="text"
-            placeholder="Address"
-            name="address"
-            className={`${s.input} ${cs.input}`}
-            onChange={(e) => validateText(e.target.value, 1)}
-          />
-        </div>
+        <FormInput
+          isPass={false}
+          classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+          classNameInput={`${s.input} ${cs.input}`}
+          error={errors?.address?.message}
+          register={register}
+          name="address"
+          type="text"
+          placeholder="Address"
+        />
 
-        <div className={`${s.inputWrapper} ${cs.inputWrapper}`} {...isValidText[2]}>
-          <textarea
-            spellCheck={false}
-            placeholder="Text"
-            name="text"
-            className={`${s.input} ${cs.input}`}
-            onChange={(e) => validateText(e.target.value, 2)}
-            rows={5}
-          />
-        </div>
+        <FormTextarea
+          classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
+          classNameTextarea={`${s.input} ${cs.input}`}
+          error={errors?.text?.message}
+          register={register}
+          name="text"
+          placeholder="Text"
+          rows={5}
+        />
 
-        <div className={`${s.btnWrapper} ${cs.inputWrapper}`} {...isValidFile}>
-          <button onClick={onUploadClick} type="button" className={`${s.btnd} ${cs.btn}`}>
-            Upload picture
-          </button>
+        <FormFileInput
+          text="Upload picture"
+          error={errors?.file?.message?.toString()}
+          name="file"
+          accept={ACCEPTED_IMAGE_TYPES}
+          register={register}
+          classNameBtn={`${s.btn} ${cs.btn}`}
+          classNameWrapper={`${s.btnWrapper} ${cs.inputWrapper}`}
+        />
 
-          <input onChange={onFileChange} type="file" accept=".png" name="file" hidden />
-        </div>
-
-        <div className={`${cs.btnWrapper} ${cs.btnWrapper}`} {...requestStatus}>
-          <button className={`${s.btn} ${cs.btn}`} disabled={!validateForm()} onClick={onSubmit}>
-            Submit
-          </button>
-        </div>
+        <FormSubmit
+          classNameWrapper={`${cs.btnWrapper} ${cs.btnWrapper}`}
+          classNameBtn={`${s.btn} ${cs.btn}`}
+          text="Submit"
+          requestStatus={requestStatus}
+        />
       </form>
     </section>
   );

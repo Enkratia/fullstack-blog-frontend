@@ -49,6 +49,12 @@ export const FormInput: React.FC<FormInputProps> = ({
   );
 };
 
+// const onSelectValidation = (option: number, options: string[]) => {
+//   setValue("query", option ? options[option] : "", {
+//     shouldValidate: !!submitCount,
+//   });
+// };
+
 /* <FormInput
   isPass={false}
   classNameWrapper={s.inputWrapper}
@@ -59,3 +65,10 @@ export const FormInput: React.FC<FormInputProps> = ({
   type="text"
   placeholder="Full Name"
 />; */
+
+// const TagsSchema = z
+//   .string()
+//   .refine((value) => value.replace(/(\s|,)/g, "").length >= 1, {
+//     message: "Tags should contain atleast 1 tag",
+//   })
+//   .optional();

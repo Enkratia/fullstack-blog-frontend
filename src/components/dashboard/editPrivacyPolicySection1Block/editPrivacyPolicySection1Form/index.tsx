@@ -4,14 +4,23 @@ import React from "react";
 import { useImmer } from "use-immer";
 import { JSONContent } from "@tiptap/react";
 
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useUpdatePrivacyPolicyMutation } from "../../../../redux/backendApi";
 
-import { TextEditor } from "../../../../components";
-import { useValidateForm } from "../../../../utils/customHooks";
+import { FormSubmit, TextEditor } from "../../../../components";
 import { checkRequestStatus } from "../../../../utils/customFunctions";
 
 import cs from "../../../../scss/helpers.module.scss";
 import s from "../../editSection.module.scss";
+
+const FormSchema = z.object({
+  text: z.string().min(1, "Policy should have atleast 1 character"),
+});
+
+type InputType = z.infer<typeof FormSchema>;
 
 type ContentType = { text: string; json: JSONContent };
 
@@ -30,22 +39,23 @@ export const EditPrivacyPolicySection1Form: React.FC<EditPrivacyPolicySection1Fo
   const [updatePrivacyPolicy, { isError, isSuccess, isLoading }] = useUpdatePrivacyPolicyMutation();
   const requestStatus = checkRequestStatus(isError, isSuccess, isLoading);
 
-  const { isValidText, validateText } = useValidateForm();
+  // **
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<InputType>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      text: data.message,
+    },
+  });
 
   // **
-  const validateForm = () => {
-    return [isValidText]
-      .flat()
-      .every((el) => (!el ? !el : !Object.keys(el)?.[0]?.includes("data-validity-warning")));
-  };
-
-  // **
-  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    if (!validateForm()) return;
-
+  const onSubmit = () => {
     const formData = new FormData();
+    formData.delete("text");
     formData.set("message", JSON.stringify(content.json));
 
     updatePrivacyPolicy(formData);
@@ -59,26 +69,30 @@ export const EditPrivacyPolicySection1Form: React.FC<EditPrivacyPolicySection1Fo
       return o;
     });
 
-    validateText(text, 1);
+    setValue("text", text);
   };
 
   return (
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Privacy Policy</h2>
 
-      <form className={s.form} onSubmit={(e) => e.preventDefault()}>
+      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.content}>
           <TextEditor
-            isValidText={isValidText[0]}
             setContent={(text: string, json: JSONContent) => onEditorChange({ text, json })}
             defaultContent={JSON.parse(data.message)}
+            register={register}
+            error={errors.text?.message}
+            name="text"
+            textContent={content.text}
           />
 
-          <div className={cs.btnWrapper} {...requestStatus}>
-            <button onClick={onSubmit} type="button" className={cs.btn} disabled={!validateForm()}>
-              Submit
-            </button>
-          </div>
+          <FormSubmit
+            classNameWrapper={cs.btnWrapper}
+            classNameBtn={cs.btn}
+            text="Submit"
+            requestStatus={requestStatus}
+          />
         </div>
       </form>
     </section>

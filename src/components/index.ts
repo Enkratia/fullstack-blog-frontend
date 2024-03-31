@@ -10,6 +10,7 @@ export * from "./_formInput";
 export * from "./_formTextarea";
 export * from "./_formSubmit";
 export * from "./_formFileInput";
+export * from "./_formPhoneInput";
 
 export * from "./scrollToTop";
 
@@ -187,6 +188,7 @@ export * from "./dashboard/editCategorySection1Block/editCategorySection1Form";
 
 // **
 export * from "./dashboard/editContactUsSection1Block";
+export * from "./dashboard/editContactUsSection1Block/editContactUsSection1Form";
 
 // **
 export * from "./dashboard/editFooterSection1Block";
@@ -217,11 +219,13 @@ export * from "./dashboard/changePostsBlock";
 export * from "./dashboard/changeBrandsBlock";
 export * from "./dashboard/changeBrandsBlock/changeBrandCreateBlock";
 export * from "./dashboard/changeBrandsBlock/changeBrandEditBlock";
+export * from "./dashboard/changeBrandsBlock/changeBrandEditBlock/changeBrandEditForm";
 
 // **
 export * from "./dashboard/changeTestimonialsBlock";
 export * from "./dashboard/changeTestimonialsBlock/changeTestimonialCreateBlock";
 export * from "./dashboard/changeTestimonialsBlock/changeTestimonialEditBlock";
+export * from "./dashboard/changeTestimonialsBlock/changeTestimonialEditBlock/changeTestimonialEditForm";
 
 // **
 export * from "./dashboard/changeQueriesBlock";

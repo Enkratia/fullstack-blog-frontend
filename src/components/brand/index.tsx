@@ -65,8 +65,10 @@ export const Brand: React.FC<BrandProps> = ({ obj, isEditable = false, refetch }
 
   return (
     <div className={s.root}>
-      <Link href={obj.linkUrl} target="_blank" className={s.link}>
-        <Image src={obj.imageUrl} alt={obj.title} className={s.image} fill sizes="160px" />
+      <div className={s.wrapper}>
+        <Link href={obj.linkUrl} target="_blank">
+          <Image src={obj.imageUrl} alt={obj.title} className={s.image} fill sizes="160px" />
+        </Link>
 
         {isAuthor && (
           <div className={`${s.toolbar} ${cs.toolbar}`}>
@@ -82,7 +84,7 @@ export const Brand: React.FC<BrandProps> = ({ obj, isEditable = false, refetch }
             </button>
           </div>
         )}
-      </Link>
+      </div>
 
       {isShowConfirmDelete && (
         <ConfirmDeleteBrandPopup onConfirmClick={(value) => onConfirmDelete(value)} />
