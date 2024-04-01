@@ -6,6 +6,7 @@ import cs from "../../scss/helpers.module.scss";
 
 export const metadata: Metadata = {
   title: "Blog",
+  description: "Page where you can see all our posts.",
 };
 
 export default function BlogPage() {

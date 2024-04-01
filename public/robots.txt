@@ -1,0 +1,13 @@
+# Block:
+User-agent: *
+Disallow: /account
+
+User-agent: *
+Disallow: /account
+
+User-agent: *
+Disallow: /edit-post
+
+# Allow:
+User-agent: *
+Allow: /

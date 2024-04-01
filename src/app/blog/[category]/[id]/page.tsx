@@ -15,7 +15,12 @@ export async function generateMetadata({ params: { id } }: BlogPostPageProps) {
   const { data: post } = await fetchPostByIdQuery(id);
 
   const title = post?.title ? capitalize(post.title) : "Post";
-  return { title };
+  const description = post?.title ? `Page where you can read ${post.title} post` : "";
+
+  return {
+    title,
+    description,
+  };
 }
 
 const BlogPostPage: React.FC<BlogPostPageProps> = ({ params: { id } }) => {

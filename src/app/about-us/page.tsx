@@ -5,6 +5,7 @@ import cs from "../../scss/helpers.module.scss";
 
 export const metadata: Metadata = {
   title: "About us",
+  description: "Page where you can read more information about us",
 };
 
 export default function AboutUsPage() {

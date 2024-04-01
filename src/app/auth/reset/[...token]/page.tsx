@@ -8,6 +8,7 @@ import s from "../../signin/signin.module.scss";
 
 export const metadata: Metadata = {
   title: "Reset password",
+  description: "Page where you can reset your old password and get new one",
 };
 
 const ResetPage: React.FC = () => {

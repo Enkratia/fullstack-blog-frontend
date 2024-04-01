@@ -17,6 +17,8 @@ import cs from "../scss/helpers.module.scss";
 
 export const metadata: Metadata = {
   title: "Finsweet",
+  description:
+    "Finsweet is a social publishing platform that is open to all and home to a diverse array of stories, ideas and perspectives.",
 };
 
 export default function Home() {

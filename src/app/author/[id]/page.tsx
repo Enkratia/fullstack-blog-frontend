@@ -9,6 +9,7 @@ export async function generateMetadata({ params: { id } }: AuthorPageProps) {
 
   return {
     title: user?.fullname || "Author",
+    description: `Page of ${user?.fullname}` || "Author's page",
   };
 }
 

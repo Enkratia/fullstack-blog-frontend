@@ -5,6 +5,7 @@ import cs from "../../scss/helpers.module.scss";
 
 export const metadata: Metadata = {
   title: "Contact us",
+  description: "Our contact information: phone, address, email and where you can send us email.",
 };
 
 export default function ContactUsPage() {

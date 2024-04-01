@@ -5,6 +5,7 @@ import cs from "../../scss/helpers.module.scss";
 
 export const metadata: Metadata = {
   title: "Privacy policy",
+  description: "Page where you can read our privacy policy",
 };
 
 export default function PrivacyPolicyPage() {

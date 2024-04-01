@@ -7,6 +7,7 @@ import cs from "../../../../scss/helpers.module.scss";
 
 export const metadata: Metadata = {
   title: "Email activation",
+  description: "Page where you can activate your email address",
 };
 
 export default function ActivationPage() {

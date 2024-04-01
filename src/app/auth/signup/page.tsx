@@ -9,6 +9,7 @@ import s from "../signin/signin.module.scss";
 
 export const metadata: Metadata = {
   title: "Signup",
+  description: "Page where you can signup",
 };
 
 type SignupPageProps = {

@@ -11,6 +11,7 @@ type UnsubscribePageProps = {
 
 export const metadata: Metadata = {
   title: "Unsubscribe",
+  description: "Page where you can unsubscribe your email",
 };
 
 export default function UnsubscribePage({ params: { token } }: UnsubscribePageProps) {

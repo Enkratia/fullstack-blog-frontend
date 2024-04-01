@@ -16,9 +16,11 @@ type BlogCategoryPageProps = {
 
 export async function generateMetadata({ params: { category } }: BlogCategoryPageProps) {
   const title = category ? capitalize(category) : "Blog category";
+  const description = `Page where you can see all our posts for ${category} category`;
 
   return {
     title,
+    description,
   };
 }
 

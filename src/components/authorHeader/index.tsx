@@ -25,7 +25,7 @@ type AuthorHeaderSuspenseProps = {
   id: string;
 };
 
-const AuthorHeaderSuspense: React.FC<AuthorHeaderSuspenseProps> = async ({ id }) => {
+export const AuthorHeader: React.FC<AuthorHeaderSuspenseProps> = async ({ id }) => {
   const { data: user, args } = await fetchUserByIdQuery(id);
 
   if (!user) {
@@ -89,15 +89,15 @@ const AuthorHeaderSuspense: React.FC<AuthorHeaderSuspenseProps> = async ({ id })
 };
 
 // **
-type AuthorHeaderProps = {
-  id: string;
-};
+// type AuthorHeaderProps = {
+//   id: string;
+// };
 
-export const AuthorHeader: React.FC<AuthorHeaderProps> = ({ id }) => (
-  <Suspense fallback={<SkeletonAuthorHeader />}>
-    <AuthorHeaderSuspense id={id} />
-  </Suspense>
-);
+// export const AuthorHeader: React.FC<AuthorHeaderProps> = ({ id }) => (
+//   <Suspense fallback={<SkeletonAuthorHeader />}>
+//     <AuthorHeaderSuspense id={id} />
+//   </Suspense>
+// );
 
 // export const AuthorHeader: React.FC = () => {
 //   const dispatch = useAppDispatch();
