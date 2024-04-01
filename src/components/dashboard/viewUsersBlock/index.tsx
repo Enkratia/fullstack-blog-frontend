@@ -2,8 +2,8 @@
 
 import qs from "qs";
 
-import { useOverlayScrollbars } from "overlayscrollbars-react";
-import "overlayscrollbars/overlayscrollbars.css";
+// import { useOverlayScrollbars } from "overlayscrollbars-react";
+// import "overlayscrollbars/overlayscrollbars.css";
 
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -31,7 +31,7 @@ const limit = 3;
 export const ViewUsersBlock: React.FC = () => {
   const dispatch = useAppDispatch();
   const selectRef = React.useRef<HTMLUListElement>(null);
-  const [initializeOS, instanceOS] = useOverlayScrollbars({ defer: true });
+  // const [initializeOS, instanceOS] = useOverlayScrollbars({ defer: true });
 
   // **
   const timer = React.useRef<NodeJS.Timeout>();
