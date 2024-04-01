@@ -2,8 +2,8 @@ import React from "react";
 
 import { UseFormRegister } from "react-hook-form";
 
-import cs from "../../scss/helpers.module.scss";
-import Chevron from "../../../public/img/default/chevron.svg";
+import cs from "../../../scss/helpers.module.scss";
+import Chevron from "../../../../public/img/default/chevron.svg";
 
 type FormSelectProps = {
   error: string | undefined;

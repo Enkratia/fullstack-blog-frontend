@@ -4,7 +4,7 @@ import React from "react";
 
 import { IMaskInput } from "react-imask";
 
-import cs from "../../scss/helpers.module.scss";
+import cs from "../../../scss/helpers.module.scss";
 
 type FormPhoneInputProps = {
   error: string | undefined;

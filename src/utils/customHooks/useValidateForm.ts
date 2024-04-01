@@ -153,7 +153,6 @@ export const useValidateForm = () => {
     }
   };
 
-  // const validateText: validateTextProps = (value, idx, options) => {
   const validateText: validateTextProps = (element, idx, options) => {
     if (!element) return;
     const value = element.value;

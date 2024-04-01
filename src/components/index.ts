@@ -3,15 +3,9 @@ export * from "./_storeProvider";
 export * from "./_commonHelper";
 export * from "./_reinitAppProvider";
 export * from "./_popup";
+export * from "./_form";
 
 // **
-export * from "./_formSelect";
-export * from "./_formInput";
-export * from "./_formTextarea";
-export * from "./_formSubmit";
-export * from "./_formFileInput";
-export * from "./_formPhoneInput";
-
 export * from "./scrollToTop";
 
 // Common sections
@@ -29,7 +23,6 @@ export * from "./textEditor";
 export * from "./brand";
 export * from "./testimonial";
 export * from "./join/joinBtn";
-export * from "./showPassBtn";
 
 // ***
 export * from "./signinBlock";

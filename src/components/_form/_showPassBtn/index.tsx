@@ -1,8 +1,8 @@
 import React from "react";
 
 import s from "./showPassBtn.module.scss";
-import Eye from "../../../public/img/eye.svg";
-import EyeClosed from "../../../public/img/default/eye-off.svg";
+import Eye from "../../../../public/img/eye.svg";
+import EyeClosed from "../../../../public/img/default/eye-off.svg";
 
 type ShowPassBtnProps = {
   isShowPass: boolean;

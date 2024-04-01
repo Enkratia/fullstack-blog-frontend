@@ -2,9 +2,9 @@ import React from "react";
 
 import { UseFormRegister } from "react-hook-form";
 
-import { ShowPassBtn } from "../../components";
+import { ShowPassBtn } from "../../../components";
 
-import cs from "../../scss/helpers.module.scss";
+import cs from "../../../scss/helpers.module.scss";
 
 type FormInputProps = {
   isPass: boolean;
@@ -49,11 +49,11 @@ export const FormInput: React.FC<FormInputProps> = ({
   );
 };
 
-// const onSelectValidation = (option: number, options: string[]) => {
-//   setValue("query", option ? options[option] : "", {
-//     shouldValidate: !!submitCount,
-//   });
-// };
+// const password = watch("password");
+// React.useEffect(() => {
+//   if (!submitCount) return;
+//   trigger("confirmPassword");
+// }, [password, trigger, submitCount]);
 
 /* <FormInput
   isPass={false}

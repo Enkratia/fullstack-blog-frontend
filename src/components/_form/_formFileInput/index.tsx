@@ -2,7 +2,7 @@ import React from "react";
 
 import { UseFormRegister } from "react-hook-form";
 
-import cs from "../../scss/helpers.module.scss";
+import cs from "../../../scss/helpers.module.scss";
 
 type FormFileInputProps = {
   text: string;

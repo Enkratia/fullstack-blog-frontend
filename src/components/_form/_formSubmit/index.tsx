@@ -1,6 +1,6 @@
 import React from "react";
 
-import cs from "../../scss/helpers.module.scss";
+import cs from "../../../scss/helpers.module.scss";
 
 type FormSubmitProps = {
   classNameWrapper: string;
