@@ -82,7 +82,9 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    watch,
+    trigger,
+    formState: { errors, submitCount },
   } = useForm<InputType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -92,6 +94,12 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
       confirmPassword: "",
     },
   });
+
+  const password = watch("password");
+  React.useEffect(() => {
+    if (!submitCount) return;
+    trigger("confirmPassword");
+  }, [password, trigger, submitCount]);
 
   // **
   const onUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
