@@ -103,7 +103,7 @@ export const Article: React.FC<ArticleType> = ({
   // **
   React.useEffect(() => {
     if (isUpdateSuccess) {
-      refetch && refetch();
+      // refetch && refetch();
       resetUpdate();
     }
 
@@ -115,7 +115,7 @@ export const Article: React.FC<ArticleType> = ({
 
   React.useEffect(() => {
     if (isDeleteSuccess) {
-      refetch && refetch();
+      // refetch && refetch();
       resetDelete();
     }
 

@@ -36,7 +36,7 @@ const nextConfig = {
     "immer",
   ],
   images: {
-    minimumCacheTTL: 900000000,
+    minimumCacheTTL: 31540000000,
     remotePatterns: [
       {
         protocol: "https",

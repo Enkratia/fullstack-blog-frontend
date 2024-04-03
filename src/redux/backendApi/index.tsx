@@ -1,3 +1,4 @@
+import { getSession } from "next-auth/react";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import {
@@ -16,10 +17,22 @@ import {
   UpdateUserType,
 } from "./types";
 
-import { getSession } from "next-auth/react";
-
 import { BACKEND_URL } from "../../utils/constants";
+import { revalidateTagsAction } from "../../utils/actions";
 
+// **
+const invalidateFetchTags = async (tags: TagTypesType[]) => {
+  try {
+    await revalidateTagsAction(tags);
+  } catch {
+    console.warn(`Failed to revalidate tag: ${tags}`);
+  }
+};
+
+export type TagTypesType = (typeof tagTypes)[number];
+const tagTypes = ["Users", "Posts", "Brands", "Testimonials", "Queries"] as const;
+
+// **
 export const backendApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BACKEND_URL,
@@ -34,7 +47,7 @@ export const backendApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Users", "Posts", "Brands", "Testimonials", "Queries"],
+  tagTypes,
   endpoints: (builder) => ({
     // GET
     getUserById: builder.query<UserType, string>({
@@ -342,6 +355,9 @@ export const backendApi = createApi({
         };
       },
       invalidatesTags: ["Testimonials"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Testimonials"]);
+      },
     }),
     updateQuery: builder.mutation<any, UpdateQueryType>({
       query: ({ id, body }) => {

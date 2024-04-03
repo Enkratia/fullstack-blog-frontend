@@ -1,14 +1,22 @@
 "use server";
 
 import { headers } from "next/headers";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
-// Reset server data
+import type { TagTypesType } from "../redux/backendApi";
+
+// **
 export const revalidatePathAction = async (pathname?: string, pathtype?: "layout" | "page") => {
   const name = pathname ?? "/";
   const type = pathtype ?? "layout";
 
   revalidatePath(name, type);
+  return true;
+};
+
+// **
+export const revalidateTagsAction = async (tags: TagTypesType[]) => {
+  tags.forEach((tag) => revalidateTag(tag));
   return true;
 };
 

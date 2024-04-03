@@ -1,27 +1,40 @@
 "use server";
 
-import { GetPostsType } from "../redux/backendApi/types";
+import type { GetPostsType } from "../redux/backendApi/types";
+import type { TagTypesType } from "../redux/backendApi";
 
 import { BACKEND_URL } from "../utils/constants";
 
-const fetchApi = async (query: string) => {
+const fetchApi = async (query: string, tags?: TagTypesType[]) => {
   const args = `${BACKEND_URL}/${query}`;
 
   try {
     const response = await fetch(args, {
-      next: { tags: [query] },
-      cache: "no-store",
+      next: {
+        tags,
+        revalidate: 60,
+      },
     });
 
     if (!response.ok) {
-      return { isError: true, args };
+      return {
+        isError: true,
+        args,
+      };
     }
 
     const data = await response.json();
 
-    return { isError: false, data, args };
+    return {
+      isError: false,
+      data,
+      args,
+    };
   } catch (error) {
-    return { isError: true, args };
+    return {
+      isError: true,
+      args,
+    };
   }
 };
 
@@ -130,6 +143,7 @@ export const fetchKnowMoreQuery = async () => {
 // PostPage
 export const fetchPostByIdQuery = async (id: string) => {
   const res = await fetchApi(`posts/${id}`);
+  // const res = await fetchApi(`posts/${id}`, ["Posts"]);
 
   return {
     ...res,
