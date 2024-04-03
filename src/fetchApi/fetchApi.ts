@@ -58,7 +58,7 @@ export const fetchJoinQuery = async () => {
 };
 
 export const fetchPostsQuery = async (request: string) => {
-  const res = await fetchApi(`posts${request}`);
+  const res = await fetchApi(`posts${request}`, ["Posts"]);
 
   return {
     ...res,
@@ -142,8 +142,7 @@ export const fetchKnowMoreQuery = async () => {
 
 // PostPage
 export const fetchPostByIdQuery = async (id: string) => {
-  const res = await fetchApi(`posts/${id}`);
-  // const res = await fetchApi(`posts/${id}`, ["Posts"]);
+  const res = await fetchApi(`posts/${id}`, ["Posts"]);
 
   return {
     ...res,
@@ -168,5 +167,14 @@ export const fetchContactUsQuery = async () => {
   return {
     ...res,
     data: res?.data?.[0] as ContactUsType,
+  };
+};
+
+export const fetchContactUsQueriesQuery = async (request: string) => {
+  const res = await fetchApi(`contact-us-queries${request}`);
+
+  return {
+    ...res,
+    data: res?.data as ContactUsQueriesType,
   };
 };

@@ -1,31 +1,34 @@
-"use client";
+// "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 
 import { useGetContactUsQueriesQuery, useGetContactUsQuery } from "../../redux/backendApi";
-// import { useAppDispatch, useAppSelector } from "../../redux/store";
-// import { getCurrencies, plusOne } from "../../redux/testSlice/slice";
-// import { selectTest } from "../../redux/testSlice/selectors";
+import { fetchContactUsQueriesQuery, fetchContactUsQuery } from "../../fetchApi/fetchApi";
 
 import { ContactUsForm, SkeletonContactUs, NotFoundOops } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./contactUs.module.scss";
 
-export const ContactUs: React.FC = () => {
-  const { data, isError: isInfoError } = useGetContactUsQuery();
-  const { data: queriesData, isError: isQueryError } = useGetContactUsQueriesQuery("");
+const ContactUsSuspense: React.FC = async () => {
+  // const { data, isError: isInfoError } = useGetContactUsQuery();
+  // const { data: queriesData, isError: isQueryError } = useGetContactUsQueriesQuery("");
 
-  const info = data?.[0];
-  const queries = queriesData?.data;
+  const { data: info, isError: isInfoError } = await fetchContactUsQuery();
+  const { data: queries, isError: isQueryError } = await fetchContactUsQueriesQuery("");
 
-  if (isInfoError || isQueryError) {
+  // const info = data?.[0];
+  // const queries = queriesData?.data;
+
+  console.log(info, queries);
+
+  if (!info || !queries || isInfoError || isQueryError) {
     return <NotFoundOops />;
   }
 
-  if (!info || !queries) {
-    return <SkeletonContactUs />;
-  }
+  // if (!info || !queries) {
+  //   return <SkeletonContactUs />;
+  // }
 
   return (
     <section className={s.root}>
@@ -63,3 +66,10 @@ export const ContactUs: React.FC = () => {
     </section>
   );
 };
+
+// **
+export const ContactUs: React.FC = () => (
+  <Suspense>
+    <ContactUsSuspense />
+  </Suspense>
+);

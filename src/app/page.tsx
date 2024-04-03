@@ -42,3 +42,9 @@ export default function Home() {
 // await new Promise((resolve) => {
 //   setTimeout(() => resolve(""), 6000);
 // });
+
+// const a = await fetch("https://dummyjson.com/quotes");
+// const b = await fetch("https://dummyjson.com/comments");
+// const c = await fetch("https://dummyjson.com/posts");
+// const d = await fetch("https://dummyjson.com/users");
+// const e = await fetch("https://dummyjson.com/products");

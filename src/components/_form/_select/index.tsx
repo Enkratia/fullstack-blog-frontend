@@ -113,3 +113,10 @@ export const Select: React.FC<SelectProps> = ({
     </div>
   );
 };
+
+/* <Select
+  classNameInput={cs.input}
+  sorting={sorting}
+  activeOption={activeOption}
+  onSelectChange={onSelectChange}
+/> */

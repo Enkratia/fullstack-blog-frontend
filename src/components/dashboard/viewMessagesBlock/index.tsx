@@ -2,7 +2,7 @@
 
 import qs from "qs";
 
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -13,12 +13,16 @@ import {
 import { useAppDispatch } from "../../../redux/store";
 import { setToast } from "../../../redux/toastSlice/slice";
 
-import { NotFoundData, Pagination, SkeletonDashboardViewMessages } from "../../../components";
+import {
+  NotFoundData,
+  Pagination,
+  Select,
+  SkeletonDashboardViewMessages,
+} from "../../../components";
 import { formatEmailDate, getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./viewMessagesBlock.module.scss";
-import AngleDown from "../../../../public/img/angle-down.svg";
 
 const sorting = [
   { title: "Newer", code: "+createdAt" },
@@ -29,7 +33,7 @@ type SortingCode = (typeof sorting)[number]["code"];
 
 const limit = 5;
 
-export const ViewMessagesBlock: React.FC = () => {
+const ViewMessagesBlockSuspense: React.FC = () => {
   const dispatch = useAppDispatch();
   const timer = React.useRef<NodeJS.Timeout>();
 
@@ -80,8 +84,7 @@ export const ViewMessagesBlock: React.FC = () => {
   // **
   const [updateContactUsMessages] = useUpdateContactUsMessagesMutation();
 
-  const [active, setActive] = React.useState(getSortingIndex(sorting, sort));
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [activeOption, setActiveOption] = React.useState(getSortingIndex(sorting, sort));
 
   // **
   React.useEffect(() => {
@@ -112,66 +115,6 @@ export const ViewMessagesBlock: React.FC = () => {
   }, [isNavigate]);
 
   // **
-  const onSelectClick = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
-    if (e.target === e.currentTarget.lastElementChild) return;
-
-    const select = e.currentTarget;
-    setIsOpen((b) => !b);
-
-    function hideSelect(e: MouseEvent) {
-      if (select && !e.composedPath().includes(select)) {
-        setIsOpen(false);
-
-        document.documentElement.removeEventListener("click", hideSelect);
-      }
-    }
-
-    document.documentElement.addEventListener("click", hideSelect);
-  };
-
-  const onSelectKeyDown = (e: React.KeyboardEvent<HTMLDivElement>, idx: number) => {
-    const select = e.currentTarget;
-
-    if (e.key === "Enter") {
-      setIsOpen((b) => !b);
-    }
-
-    function hideSelect(e: MouseEvent) {
-      if (select && !e.composedPath().includes(select)) {
-        setIsOpen(false);
-
-        document.documentElement.removeEventListener("click", hideSelect);
-      }
-    }
-
-    document.documentElement.addEventListener("click", hideSelect);
-  };
-
-  const onSelectOptionClick = (e: React.MouseEvent<HTMLLIElement>, idx: number, option: number) => {
-    setActive(option);
-
-    setSort(sorting[option].code);
-    setPage(1);
-    setIsNavigate({});
-  };
-
-  const onSelectOptionKeyDown = (
-    e: React.KeyboardEvent<HTMLLIElement>,
-    idx: number,
-    option: number,
-  ) => {
-    if (e.key === "Enter") {
-      setActive(option);
-
-      setSort(sorting[option].code);
-      setPage(1);
-      setIsNavigate({});
-
-      (e.currentTarget.closest('[role="listbox"]') as HTMLDivElement)?.focus();
-    }
-  };
-
-  // **
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timer.current);
 
@@ -181,6 +124,18 @@ export const ViewMessagesBlock: React.FC = () => {
 
       setIsNavigate({});
     }, 250);
+  };
+
+  const onSelectChange = (option: number) => {
+    setActiveOption(option);
+    setSort(sorting[option].code);
+    setPage(1);
+    setIsNavigate({});
+  };
+
+  const onPageChange = ({ selected }: Record<string, number>) => {
+    setPage(selected + 1);
+    setIsNavigate({});
   };
 
   // **
@@ -196,11 +151,6 @@ export const ViewMessagesBlock: React.FC = () => {
     }
   };
 
-  const onPageChange = ({ selected }: Record<string, number>) => {
-    setPage(selected + 1);
-    setIsNavigate({});
-  };
-
   return (
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Messages</h2>
@@ -214,36 +164,12 @@ export const ViewMessagesBlock: React.FC = () => {
           className={`${s.input} ${cs.input}`}
         />
 
-        <div
-          className={`${cs.select} ${cs.input}`}
-          role="listbox"
-          tabIndex={0}
-          onKeyDown={(e) => onSelectKeyDown(e, 0)}
-          onClick={(e) => onSelectClick(e, 0)}>
-          <div className={`${cs.selectHead} ${active === 0 ? "" : cs.selectHeadActive}`}>
-            <span className={cs.selectSelected}>{sorting[active].title}</span>
-            <input type="hidden" name="query" value={sorting[active].title} />
-
-            <AngleDown aria-hidden="true" className={cs.inputSvg} />
-          </div>
-          <div
-            className={`${cs.selectWrapper} ${cs.input} ${isOpen ? cs.selectWrapperActive : ""}`}>
-            <ul className={cs.selectList}>
-              {sorting.map(({ title }, i) => (
-                <li
-                  key={i}
-                  tabIndex={0}
-                  className={`${cs.selectItem} ${active === i ? cs.selectItemActive : ""}`}
-                  role="option"
-                  aria-selected={active === i ? "true" : "false"}
-                  onKeyDown={(e) => onSelectOptionKeyDown(e, 0, i)}
-                  onClick={(e) => onSelectOptionClick(e, 0, i)}>
-                  {title}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <Select
+          classNameInput={cs.input}
+          sorting={sorting}
+          activeOption={activeOption}
+          onSelectChange={onSelectChange}
+        />
       </div>
 
       {messages?.length === 0 ? (
@@ -273,3 +199,10 @@ export const ViewMessagesBlock: React.FC = () => {
     </section>
   );
 };
+
+// **
+export const ViewMessagesBlock: React.FC = () => (
+  <Suspense>
+    <ViewMessagesBlockSuspense />
+  </Suspense>
+);

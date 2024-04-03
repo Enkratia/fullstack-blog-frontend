@@ -219,6 +219,9 @@ export const backendApi = createApi({
         };
       },
       invalidatesTags: ["Posts"],
+      // async onQueryStarted() {
+      //   await invalidateFetchTags(["Posts"]);
+      // },
     }),
     updateAboutUsStatic: builder.mutation<any, FormData>({
       query: (body) => {
@@ -387,6 +390,10 @@ export const backendApi = createApi({
           method: "PATCH",
         };
       },
+      invalidatesTags: ["Posts"],
+      // async onQueryStarted() {
+      //   await invalidateFetchTags(["Posts"]);
+      // },
     }),
     activateUser: builder.query<any, string>({
       query: (token) => {
@@ -406,6 +413,9 @@ export const backendApi = createApi({
         };
       },
       invalidatesTags: ["Posts"],
+      // async onQueryStarted() {
+      //   await invalidateFetchTags(["Posts"]);
+      // },
     }),
     deleteBrand: builder.mutation<any, number>({
       query: (id) => {

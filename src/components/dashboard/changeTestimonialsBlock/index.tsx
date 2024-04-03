@@ -2,7 +2,7 @@
 
 import qs from "qs";
 
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -32,7 +32,7 @@ type SortingCode = (typeof sorting)[number]["code"];
 const defaultHeight = 160;
 const limit = 2;
 
-export const ChangeTestimonialsBlock: React.FC = () => {
+const ChangeTestimonialsBlockSuspense: React.FC = () => {
   const dispatch = useAppDispatch();
   const listRef = React.useRef<HTMLUListElement>(null);
   const timer = React.useRef<NodeJS.Timeout>();
@@ -220,3 +220,10 @@ export const ChangeTestimonialsBlock: React.FC = () => {
     </section>
   );
 };
+
+// **
+export const ChangeTestimonialsBlock: React.FC = () => (
+  <Suspense>
+    <ChangeTestimonialsBlockSuspense />
+  </Suspense>
+);
