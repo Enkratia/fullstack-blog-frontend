@@ -1,41 +1,40 @@
-"use client";
+import React, { Suspense } from "react";
 
-import React from "react";
-import { useParams } from "next/navigation";
+import { fetchBrandByIdQuery } from "../../../../fetchApi/fetchApi";
 
-import { useGetBrandByIdQuery } from "../../../../redux/backendApi";
-import { useAppDispatch } from "../../../../redux/store";
-import { setToast } from "../../../../redux/toastSlice/slice";
-
-import { ChangeBrandEditForm, SkeletonDashboardForm } from "../../../../components";
+import { ChangeBrandEditForm, SkeletonDashboardForm, ToastComponent } from "../../../../components";
 
 import cs from "../../../../scss/helpers.module.scss";
 import s from "./changeBrandEditBlock.module.scss";
 
-export const ChangeBrandEditBlock: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const id = useParams().id;
+type ChangeBrandEditBlockProps = {
+  id: string;
+};
 
-  const { data, isError, originalArgs, endpointName } = useGetBrandByIdQuery(+id);
+const ChangeBrandEditBlockSuspense: React.FC<ChangeBrandEditBlockProps> = async ({ id }) => {
+  const { data, isError, args } = await fetchBrandByIdQuery(+id);
 
-  // **
-  React.useEffect(() => {
-    if (isError) {
-      dispatch(
-        setToast({
-          type: "warning",
-          args: endpointName + "" + originalArgs,
-          text: "Failed to load data.",
-        }),
-      );
-    }
-  }, [isError]);
+  if (!data || isError) {
+    return (
+      <>
+        <SkeletonDashboardForm />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
+      </>
+    );
+  }
 
   return (
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Edit brand</h2>
 
-      {!data ? <SkeletonDashboardForm /> : <ChangeBrandEditForm data={data} />}
+      <ChangeBrandEditForm data={data} />
     </section>
   );
 };
+
+// **
+export const ChangeBrandEditBlock: React.FC<ChangeBrandEditBlockProps> = ({ id }) => (
+  <Suspense fallback={<SkeletonDashboardForm />}>
+    <ChangeBrandEditBlockSuspense id={id} />
+  </Suspense>
+);

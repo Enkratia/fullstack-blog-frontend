@@ -2,7 +2,7 @@
 
 import qs from "qs";
 
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -15,7 +15,6 @@ import { getSortingIndex } from "../../../utils/customFunctions";
 
 import cs from "../../../scss/helpers.module.scss";
 import s from "./changeBrandsBlock.module.scss";
-import AngleDown from "../../../../public/img/angle-down.svg";
 
 const sorting = [
   { title: "Newer", code: "+createdAt" },
@@ -26,12 +25,12 @@ type SortingCode = (typeof sorting)[number]["code"];
 
 const limit = 4;
 
-export const ChangeBrandsBlock: React.FC = () => {
+const ChangeBrandsBlockSuspense: React.FC = () => {
   const dispatch = useAppDispatch();
   const timer = React.useRef<NodeJS.Timeout>();
 
   // **
-  const isRouter = React.useRef(true);
+  const isRouter = React.useRef(false);
   const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
 
   const searchParams = useSearchParams().toString();
@@ -191,3 +190,10 @@ export const ChangeBrandsBlock: React.FC = () => {
     </section>
   );
 };
+
+// **
+export const ChangeBrandsBlock: React.FC = () => (
+  <Suspense>
+    <ChangeBrandsBlockSuspense />
+  </Suspense>
+);

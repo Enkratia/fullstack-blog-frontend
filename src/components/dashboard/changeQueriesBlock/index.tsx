@@ -2,7 +2,7 @@
 
 import qs from "qs";
 
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -31,7 +31,7 @@ type SortingCode = (typeof sorting)[number]["code"];
 
 const limit = 3;
 
-export const ChangeQueriesBlock: React.FC = () => {
+const ChangeQueriesBlockSuspense: React.FC = () => {
   const dispatch = useAppDispatch();
   const timer = React.useRef<NodeJS.Timeout>();
 
@@ -198,3 +198,10 @@ export const ChangeQueriesBlock: React.FC = () => {
     </section>
   );
 };
+
+// **
+export const ChangeQueriesBlock: React.FC = () => (
+  <Suspense>
+    <ChangeQueriesBlockSuspense />
+  </Suspense>
+);

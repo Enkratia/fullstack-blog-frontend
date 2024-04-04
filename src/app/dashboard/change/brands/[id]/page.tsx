@@ -7,8 +7,14 @@ export const metadata: Metadata = {
   title: "Edit brand",
 };
 
-const DashboardChangeBrandEditPage: React.FC = () => {
-  return <ChangeBrandEditBlock />;
+type DashboardChangeBrandEditPageProps = {
+  params: { id: string };
+};
+
+const DashboardChangeBrandEditPage: React.FC<DashboardChangeBrandEditPageProps> = ({
+  params: { id },
+}) => {
+  return <ChangeBrandEditBlock id={id} />;
 };
 
 export default DashboardChangeBrandEditPage;

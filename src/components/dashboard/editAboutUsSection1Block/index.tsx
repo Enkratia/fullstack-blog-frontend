@@ -1,36 +1,25 @@
-"use client";
-
 import React from "react";
 
-import { useGetAboutUsStaticQuery } from "../../../redux/backendApi";
-import { useAppDispatch } from "../../../redux/store";
-import { setToast } from "../../../redux/toastSlice/slice";
+import { fetchAboutUsStaticQuery } from "../../../fetchApi/fetchApi";
 
-import { EditAboutUsSection1Form, SkeletonDashboardForm } from "../../../components";
+import {
+  EditAboutUsSection1Form,
+  SkeletonDashboardForm,
+  ToastComponent,
+} from "../../../components";
 
-export const EditAboutUsSection1Block: React.FC = () => {
-  const dispatch = useAppDispatch();
-
-  const { data, isError, originalArgs, endpointName } = useGetAboutUsStaticQuery();
-  const info = data?.[0];
-
-  // **
-  React.useEffect(() => {
-    if (isError) {
-      dispatch(
-        setToast({
-          type: "warning",
-          args: endpointName + "" + originalArgs,
-          text: "Failed to load data.",
-        }),
-      );
-    }
-  }, [isError]);
+export const EditAboutUsSection1Block: React.FC = async () => {
+  const { data, isError, args } = await fetchAboutUsStaticQuery();
 
   // **
-  if (!info) {
-    return <SkeletonDashboardForm />;
+  if (!data || isError) {
+    return (
+      <>
+        <SkeletonDashboardForm />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
+      </>
+    );
   }
 
-  return <EditAboutUsSection1Form info={info} />;
+  return <EditAboutUsSection1Form info={data} />;
 };

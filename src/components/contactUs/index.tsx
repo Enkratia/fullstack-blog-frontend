@@ -1,8 +1,5 @@
-// "use client";
-
 import React, { Suspense } from "react";
 
-import { useGetContactUsQueriesQuery, useGetContactUsQuery } from "../../redux/backendApi";
 import { fetchContactUsQueriesQuery, fetchContactUsQuery } from "../../fetchApi/fetchApi";
 
 import { ContactUsForm, SkeletonContactUs, NotFoundOops } from "../../components";
@@ -11,24 +8,12 @@ import cs from "../../scss/helpers.module.scss";
 import s from "./contactUs.module.scss";
 
 const ContactUsSuspense: React.FC = async () => {
-  // const { data, isError: isInfoError } = useGetContactUsQuery();
-  // const { data: queriesData, isError: isQueryError } = useGetContactUsQueriesQuery("");
-
   const { data: info, isError: isInfoError } = await fetchContactUsQuery();
-  const { data: queries, isError: isQueryError } = await fetchContactUsQueriesQuery("");
+  const { data: queriesData, isError: isQueryError } = await fetchContactUsQueriesQuery("");
 
-  // const info = data?.[0];
-  // const queries = queriesData?.data;
-
-  console.log(info, queries);
-
-  if (!info || !queries || isInfoError || isQueryError) {
+  if (!info || !queriesData || isInfoError || isQueryError) {
     return <NotFoundOops />;
   }
-
-  // if (!info || !queries) {
-  //   return <SkeletonContactUs />;
-  // }
 
   return (
     <section className={s.root}>
@@ -61,7 +46,7 @@ const ContactUsSuspense: React.FC = async () => {
           </div>
         </div>
 
-        <ContactUsForm queries={queries} />
+        <ContactUsForm queries={queriesData.data} />
       </div>
     </section>
   );
@@ -69,7 +54,7 @@ const ContactUsSuspense: React.FC = async () => {
 
 // **
 export const ContactUs: React.FC = () => (
-  <Suspense>
+  <Suspense fallback={<SkeletonContactUs />}>
     <ContactUsSuspense />
   </Suspense>
 );

@@ -1,12 +1,28 @@
 "use server";
 
-import type { GetPostsType } from "../redux/backendApi/types";
+import type {
+  GetContactUsQueriesType,
+  GetPostsType,
+  GetUsersType,
+} from "../redux/backendApi/types";
 import type { TagTypesType } from "../redux/backendApi";
 
 import { BACKEND_URL } from "../utils/constants";
+import { getAuthSession } from "../utils/authOptions";
 
 const fetchApi = async (query: string, tags?: TagTypesType[]) => {
   const args = `${BACKEND_URL}/${query}`;
+
+  const session = await getAuthSession();
+  const token = session?.backendTokens?.accessToken;
+
+  let headers = {};
+
+  if (token) {
+    headers = {
+      authorization: `Bearer ${token}`,
+    };
+  }
 
   try {
     const response = await fetch(args, {
@@ -14,6 +30,7 @@ const fetchApi = async (query: string, tags?: TagTypesType[]) => {
         tags,
         revalidate: 60,
       },
+      headers,
     });
 
     if (!response.ok) {
@@ -75,6 +92,15 @@ export const fetchFooterBottomQuery = async () => {
   };
 };
 
+export const fetchUsersQuery = async (request: string) => {
+  const res = await fetchApi(`users/${request}`);
+
+  return {
+    ...res,
+    data: res?.data as GetUsersType,
+  };
+};
+
 // HomePage
 export const fetchUsMissionQuery = async () => {
   const res = await fetchApi("us-mission");
@@ -100,6 +126,26 @@ export const fetchTestimonialStaticQuery = async () => {
   return {
     ...res,
     data: res?.data?.[0] as TestimonialStaticType,
+  };
+};
+
+export const fetchBrandByIdQuery = async (id: number) => {
+  const res = await fetchApi(`featured-in/${id}`);
+  console.log(res);
+
+  return {
+    ...res,
+    data: res.data as FeaturedCompanyType,
+  };
+};
+
+// CategoryPage
+export const fetchCategoryHeaderQuery = async () => {
+  const res = await fetchApi("category-header");
+
+  return {
+    ...res,
+    data: res?.data as CategoryHeaderType,
   };
 };
 
@@ -175,6 +221,16 @@ export const fetchContactUsQueriesQuery = async (request: string) => {
 
   return {
     ...res,
-    data: res?.data as ContactUsQueriesType,
+    data: res?.data as GetContactUsQueriesType,
+  };
+};
+
+// PrivacyPolicyPage
+export const fetchPrivacyPolicyQuery = async () => {
+  const res = await fetchApi(`privacy-policy`);
+
+  return {
+    ...res,
+    data: res?.data as PrivacyPolicyType,
   };
 };

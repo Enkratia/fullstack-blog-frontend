@@ -1,5 +1,13 @@
 import { Metadata } from "next";
-import { PrivacyPolicyBlock, PrivacyPolicyHeader } from "../../components";
+
+import { fetchPrivacyPolicyQuery } from "../../fetchApi/fetchApi";
+
+import {
+  NotFoundOops,
+  PrivacyPolicyBlock,
+  PrivacyPolicyHeader,
+  ToastComponent,
+} from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 
@@ -8,12 +16,23 @@ export const metadata: Metadata = {
   description: "Page where you can read our privacy policy",
 };
 
-export default function PrivacyPolicyPage() {
+export default async function PrivacyPolicyPage() {
+  const { data, isError, args } = await fetchPrivacyPolicyQuery();
+
+  if (!data || isError) {
+    return (
+      <>
+        <NotFoundOops />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
+      </>
+    );
+  }
+
   return (
     <main>
       <h1 className={cs.srOnly}>Privacy Policy.</h1>
-      <PrivacyPolicyHeader />
-      <PrivacyPolicyBlock />
+      <PrivacyPolicyHeader data={data} />
+      <PrivacyPolicyBlock data={data} />
     </main>
   );
 }

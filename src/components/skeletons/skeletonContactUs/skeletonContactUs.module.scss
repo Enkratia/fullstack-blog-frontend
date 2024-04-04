@@ -13,6 +13,9 @@
 
 // Header
 .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: rem(64);
   width: 100%;
 

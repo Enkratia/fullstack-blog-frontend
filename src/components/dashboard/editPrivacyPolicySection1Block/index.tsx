@@ -1,36 +1,30 @@
-"use client";
+import React, { Suspense } from "react";
 
-import React from "react";
+import { fetchPrivacyPolicyQuery } from "../../../fetchApi/fetchApi";
 
-import { useGetPrivacyPolicyQuery } from "../../../redux/backendApi";
+import {
+  EditPrivacyPolicySection1Form,
+  SkeletonDashboardPrivacyPolicy,
+  ToastComponent,
+} from "../../../components";
 
-import { EditPrivacyPolicySection1Form, SkeletonDashboardPrivacyPolicy } from "../../../components";
-import { useAppDispatch } from "@/redux/store";
-import { setToast } from "@/redux/toastSlice/slice";
+const EditPrivacyPolicySection1BlockSuspense: React.FC = async () => {
+  const { data, isError, args } = await fetchPrivacyPolicyQuery();
 
-export const EditPrivacyPolicySection1Block: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const { data, isError, originalArgs, endpointName } = useGetPrivacyPolicyQuery();
-
-  React.useEffect(() => {
-    if (isError) {
-      dispatch(
-        setToast({
-          type: "warning",
-          args: endpointName + "" + originalArgs,
-          text: "Failed to load data.",
-        }),
-      );
-    }
-  }, [isError]);
-
-  if (!data) {
-    return <SkeletonDashboardPrivacyPolicy />;
+  if (!data || isError) {
+    return (
+      <>
+        <SkeletonDashboardPrivacyPolicy />
+        <ToastComponent type="warning" args={args} text="Failed to load some data." />
+      </>
+    );
   }
 
-  return (
-    <div>
-      <EditPrivacyPolicySection1Form data={data} />
-    </div>
-  );
+  return <EditPrivacyPolicySection1Form data={data} />;
 };
+
+export const EditPrivacyPolicySection1Block: React.FC = () => (
+  <Suspense fallback={<SkeletonDashboardPrivacyPolicy />}>
+    <EditPrivacyPolicySection1BlockSuspense />
+  </Suspense>
+);

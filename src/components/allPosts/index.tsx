@@ -2,7 +2,7 @@
 
 import qs from "qs";
 
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -15,7 +15,7 @@ import { Article, Navigation, SkeletonArticle } from "../../components";
 import cs from "../../scss/helpers.module.scss";
 import s from "./allPosts.module.scss";
 
-export const AllPosts: React.FC = () => {
+const AllPostsSuspense: React.FC = () => {
   const dispatch = useAppDispatch();
   const limit = 5;
 
@@ -121,3 +121,10 @@ export const AllPosts: React.FC = () => {
     </section>
   );
 };
+
+// **
+export const AllPosts: React.FC = () => (
+  <Suspense>
+    <AllPostsSuspense />
+  </Suspense>
+);

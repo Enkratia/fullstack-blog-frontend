@@ -2,37 +2,21 @@
 
 import React from "react";
 
-import { generateHTML } from "@tiptap/react";
+import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
-
-import { useGetPrivacyPolicyQuery } from "../../redux/backendApi";
-import { setToast } from "../../redux/toastSlice/slice";
-import { useAppDispatch } from "../../redux/store";
 
 import { SkeletonPrivacyPolicy } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./privacyPolicyBlock.module.scss";
 
-export const PrivacyPolicyBlock: React.FC = () => {
-  const dispatch = useAppDispatch();
+type PrivacyPolicyBlockProps = {
+  data: PrivacyPolicyType;
+};
 
-  const { data, isError, originalArgs, endpointName } = useGetPrivacyPolicyQuery();
-  const policy = data?.message;
-
-  // **
-  React.useEffect(() => {
-    if (isError) {
-      dispatch(
-        setToast({
-          type: "warning",
-          args: endpointName + "" + originalArgs,
-          text: "Failed to load some data.",
-        }),
-      );
-    }
-  }, [isError]);
+export const PrivacyPolicyBlock: React.FC<PrivacyPolicyBlockProps> = ({ data }) => {
+  const policy = data.message;
 
   // **
   const html = React.useMemo(() => {

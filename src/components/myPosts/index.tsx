@@ -2,7 +2,7 @@
 
 import qs from "qs";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -17,7 +17,7 @@ import s from "./myPosts.module.scss";
 
 const limit = 3;
 
-export const MyPosts: React.FC = () => {
+const MyPostsSuspense: React.FC = () => {
   const dispatch = useAppDispatch();
   const isRouter = React.useRef(true);
   const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
@@ -139,3 +139,10 @@ export const MyPosts: React.FC = () => {
     </div>
   );
 };
+
+// **
+export const MyPosts: React.FC = () => (
+  <Suspense>
+    <MyPostsSuspense />
+  </Suspense>
+);
