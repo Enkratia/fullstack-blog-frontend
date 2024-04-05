@@ -9,14 +9,32 @@ export const metadata: Metadata = {
   description: "Page where you can see all our posts.",
 };
 
-export default function BlogPage() {
+type BlogPageProps = {
+  searchParams: Record<string, string>;
+};
+
+import qs from "qs";
+import { fetchPostsQuery } from "../../fetchApi/fetchApi";
+const limit = 5;
+
+const BlogPage: React.FC<BlogPageProps> = async ({ searchParams }) => {
+  const urlSearch = qs.parse(searchParams, { arrayLimit: 1000 });
+  const urlPage = Number(urlSearch._page || "1");
+  const request = `?_page=${urlPage}&_limit=${limit}&_sort=createdAt&_order=DESC`;
+
+  const { data } = await fetchPostsQuery(request);
+
   return (
     <main>
       <h1 className={cs.srOnly}>Blog page</h1>
       <BlogHeader />
-      <AllPosts />
+
+      {/* <AllPostsLayer searchParams={searchParams} /> */}
+      <AllPosts data={data} searchParams={searchParams} />
       <AllCategories />
       <Join />
     </main>
   );
-}
+};
+
+export default BlogPage;

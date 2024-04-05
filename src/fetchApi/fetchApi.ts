@@ -8,14 +8,23 @@ import type {
 import type { TagTypesType } from "../redux/backendApi";
 
 import { BACKEND_URL } from "../utils/constants";
-import { getAuthSession } from "../utils/authOptions";
+import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+
+import { authOptions } from "../utils/authOptions";
 
 const fetchApi = async (query: string, tags?: TagTypesType[], revalidateTime?: number) => {
   const args = `${BACKEND_URL}/${query}`;
   const revalidate = process.env.NODE_ENV === "production" ? revalidateTime ?? 600 : 60;
 
-  const session = await getAuthSession();
+  // new getServerSession is making every route dynamical because it uses cookies()
+  // const session = await getSession();
+  const session = await getServerSession(authOptions);
+  console.log(session);
   const token = session?.backendTokens?.accessToken;
+
+  // const session = await getSession();
+  // const token = session?.backendTokens?.accessToken;
 
   let headers = {};
 
@@ -68,6 +77,8 @@ export const fetchCategoryDescriptionQuery = async () => {
 
 export const fetchJoinQuery = async () => {
   const res = await fetchApi("join", ["Join"]);
+
+  console.log("join");
 
   return {
     ...res,

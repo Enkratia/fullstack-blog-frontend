@@ -13,12 +13,6 @@ export async function middleware(req: NextRequest) {
   req.nextUrl.hostname = new URL(FRONTEND_URL).hostname;
   req.nextUrl.port = new URL(FRONTEND_URL).port;
 
-  //   return NextResponse.next({
-  //     request: {
-  //        // New request headers
-  //        'x-pathname': request.nextUrl.pathname,
-  //     },
-  //  });
   const isModalPathname = (pathname: string) => {
     return modalPageNames.find((modalPageName: string) => {
       return pathname.startsWith(modalPageName);
