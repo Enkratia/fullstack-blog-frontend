@@ -89,7 +89,10 @@ const ChangeBrandsBlockSuspense: React.FC = () => {
 
   React.useEffect(() => {
     if (!isRouter.current) {
+      setActiveOption(getSortingIndex(sorting, urlSort));
       setPage(urlPage);
+      setSort(urlSort);
+      setSearch(urlSearch);
     }
 
     isRouter.current = false;
@@ -117,9 +120,9 @@ const ChangeBrandsBlockSuspense: React.FC = () => {
   // **
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timer.current);
+    setSearch(e.target.value);
 
     timer.current = setTimeout(() => {
-      setSearch(e.target.value);
       setPage(1);
 
       setIsNavigate({});
@@ -147,7 +150,7 @@ const ChangeBrandsBlockSuspense: React.FC = () => {
 
       <div className={`${s.tooltip} ${cs.tooltip}`}>
         <input
-          defaultValue={search}
+          value={search}
           onChange={onSearchChange}
           type="text"
           placeholder="Search"

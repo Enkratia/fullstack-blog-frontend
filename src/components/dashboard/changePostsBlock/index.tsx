@@ -29,7 +29,7 @@ const ChangePostsBlockSuspense: React.FC = () => {
   const timer = React.useRef<NodeJS.Timeout>();
 
   // **
-  const isRouter = React.useRef(true);
+  const isRouter = React.useRef(false);
   const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
 
   const searchParams = useSearchParams().toString();
@@ -89,7 +89,10 @@ const ChangePostsBlockSuspense: React.FC = () => {
   // **
   React.useEffect(() => {
     if (!isRouter.current) {
+      setActiveOption(getSortingIndex(sorting, urlSort));
       setPage(urlPage);
+      setSort(urlSort);
+      setSearch(urlSearch);
     }
 
     isRouter.current = false;
@@ -105,9 +108,9 @@ const ChangePostsBlockSuspense: React.FC = () => {
   // **
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timer.current);
+    setSearch(e.target.value);
 
     timer.current = setTimeout(() => {
-      setSearch(e.target.value);
       setPage(1);
 
       setIsNavigate({});
@@ -135,7 +138,7 @@ const ChangePostsBlockSuspense: React.FC = () => {
 
       <div className={`${s.tooltip} ${cs.tooltip}`}>
         <input
-          defaultValue={search}
+          value={search}
           onChange={onSearchChange}
           type="text"
           placeholder="Search"

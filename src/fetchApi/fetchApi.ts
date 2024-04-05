@@ -68,6 +68,7 @@ export const fetchCategoryDescriptionQuery = async () => {
 export const fetchJoinQuery = async () => {
   const res = await fetchApi("join");
 
+  console.log("join");
   return {
     ...res,
     data: res?.data?.[0] as JoinType,
