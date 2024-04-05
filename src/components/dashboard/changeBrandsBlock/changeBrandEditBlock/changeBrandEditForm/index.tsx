@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useParams } from "next/navigation";
 
 import { z } from "zod";
 import { useForm } from "react-hook-form";

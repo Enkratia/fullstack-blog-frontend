@@ -10,8 +10,9 @@ import type { TagTypesType } from "../redux/backendApi";
 import { BACKEND_URL } from "../utils/constants";
 import { getAuthSession } from "../utils/authOptions";
 
-const fetchApi = async (query: string, tags?: TagTypesType[]) => {
+const fetchApi = async (query: string, tags?: TagTypesType[], revalidateTime?: number) => {
   const args = `${BACKEND_URL}/${query}`;
+  const revalidate = process.env.NODE_ENV === "production" ? revalidateTime ?? 600 : 60;
 
   const session = await getAuthSession();
   const token = session?.backendTokens?.accessToken;
@@ -28,7 +29,7 @@ const fetchApi = async (query: string, tags?: TagTypesType[]) => {
     const response = await fetch(args, {
       next: {
         tags,
-        revalidate: 60,
+        revalidate,
       },
       headers,
     });
@@ -57,7 +58,7 @@ const fetchApi = async (query: string, tags?: TagTypesType[]) => {
 
 // Common
 export const fetchCategoryDescriptionQuery = async () => {
-  const res = await fetchApi("category-description");
+  const res = await fetchApi("category-description", ["CategoryDescription"]);
 
   return {
     ...res,
@@ -66,9 +67,8 @@ export const fetchCategoryDescriptionQuery = async () => {
 };
 
 export const fetchJoinQuery = async () => {
-  const res = await fetchApi("join");
+  const res = await fetchApi("join", ["Join"]);
 
-  console.log("join");
   return {
     ...res,
     data: res?.data?.[0] as JoinType,
@@ -85,7 +85,7 @@ export const fetchPostsQuery = async (request: string) => {
 };
 
 export const fetchFooterBottomQuery = async () => {
-  const res = await fetchApi("footer-bottom");
+  const res = await fetchApi("footer-bottom", ["FooterBottom"]);
 
   return {
     ...res,
@@ -94,7 +94,7 @@ export const fetchFooterBottomQuery = async () => {
 };
 
 export const fetchUsersQuery = async (request: string) => {
-  const res = await fetchApi(`users/${request}`);
+  const res = await fetchApi(`users/${request}`, ["Users"]);
 
   return {
     ...res,
@@ -104,7 +104,7 @@ export const fetchUsersQuery = async (request: string) => {
 
 // HomePage
 export const fetchUsMissionQuery = async () => {
-  const res = await fetchApi("us-mission");
+  const res = await fetchApi("us-mission", ["UsMission"]);
 
   return {
     ...res,
@@ -113,7 +113,7 @@ export const fetchUsMissionQuery = async () => {
 };
 
 export const fetchWhyWeStartedQuery = async () => {
-  const res = await fetchApi("why-we-started");
+  const res = await fetchApi("why-we-started", ["WhyWeStarted"]);
 
   return {
     ...res,
@@ -122,7 +122,7 @@ export const fetchWhyWeStartedQuery = async () => {
 };
 
 export const fetchTestimonialStaticQuery = async () => {
-  const res = await fetchApi("testimonial-static");
+  const res = await fetchApi("testimonial-static", ["TestimonialStatic"]);
 
   return {
     ...res,
@@ -131,8 +131,7 @@ export const fetchTestimonialStaticQuery = async () => {
 };
 
 export const fetchBrandByIdQuery = async (id: number) => {
-  const res = await fetchApi(`featured-in/${id}`);
-  console.log(res);
+  const res = await fetchApi(`featured-in/${id}`, ["Brands"]);
 
   return {
     ...res,
@@ -142,7 +141,7 @@ export const fetchBrandByIdQuery = async (id: number) => {
 
 // CategoryPage
 export const fetchCategoryHeaderQuery = async () => {
-  const res = await fetchApi("category-header");
+  const res = await fetchApi("category-header", ["CategoryHeader"]);
 
   return {
     ...res,
@@ -152,7 +151,7 @@ export const fetchCategoryHeaderQuery = async () => {
 
 // AboutUsPage
 export const fetchAboutUsStaticQuery = async () => {
-  const res = await fetchApi("about-us-static");
+  const res = await fetchApi("about-us-static", ["AboutUsStatic"]);
 
   return {
     ...res,
@@ -161,7 +160,7 @@ export const fetchAboutUsStaticQuery = async () => {
 };
 
 export const fetchAboutUsStatisticQuery = async () => {
-  const res = await fetchApi("about-us-statistic");
+  const res = await fetchApi("about-us-statistic", undefined, 60);
 
   return {
     ...res,
@@ -170,7 +169,7 @@ export const fetchAboutUsStatisticQuery = async () => {
 };
 
 export const fetchWhyThisBlogQuery = async () => {
-  const res = await fetchApi("why-this-blog");
+  const res = await fetchApi("why-this-blog", ["WhyThisBlog"]);
 
   return {
     ...res,
@@ -179,7 +178,7 @@ export const fetchWhyThisBlogQuery = async () => {
 };
 
 export const fetchKnowMoreQuery = async () => {
-  const res = await fetchApi("know-more");
+  const res = await fetchApi("know-more", ["KnowMore"]);
 
   return {
     ...res,
@@ -199,7 +198,7 @@ export const fetchPostByIdQuery = async (id: string) => {
 
 // AuthorPage
 export const fetchUserByIdQuery = async (id: string) => {
-  const res = await fetchApi(`users/${id}`);
+  const res = await fetchApi(`users/${id}`, ["Users"]);
 
   return {
     ...res,
@@ -209,7 +208,7 @@ export const fetchUserByIdQuery = async (id: string) => {
 
 // ContactUsPage
 export const fetchContactUsQuery = async () => {
-  const res = await fetchApi(`contact-us`);
+  const res = await fetchApi(`contact-us`, ["ContactUs"]);
 
   return {
     ...res,
@@ -218,7 +217,7 @@ export const fetchContactUsQuery = async () => {
 };
 
 export const fetchContactUsQueriesQuery = async (request: string) => {
-  const res = await fetchApi(`contact-us-queries${request}`);
+  const res = await fetchApi(`contact-us-queries${request}`, ["ContactUsQueries"]);
 
   return {
     ...res,
@@ -228,7 +227,7 @@ export const fetchContactUsQueriesQuery = async (request: string) => {
 
 // PrivacyPolicyPage
 export const fetchPrivacyPolicyQuery = async () => {
-  const res = await fetchApi(`privacy-policy`);
+  const res = await fetchApi(`privacy-policy`, ["PrivacyPolicy"]);
 
   return {
     ...res,

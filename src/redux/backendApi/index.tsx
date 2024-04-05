@@ -29,8 +29,33 @@ const invalidateFetchTags = async (tags: TagTypesType[]) => {
   }
 };
 
+const tagTypes = [
+  "Users",
+  "Posts",
+  "Brands",
+  "Testimonials",
+  "ContactUsQueries",
+
+  // **
+  "PrivacyPolicy",
+  "CategoryHeader",
+  "AboutUsStatic",
+  "CategoryDescription",
+  "Join",
+  "UsMission",
+  "WhyWeStarted",
+  "TestimonialStatic",
+  "WhyThisBlog",
+  "KnowMore",
+
+  // **
+  "ContactUs",
+  "FooterBottom",
+
+  // **
+  "Messages",
+] as const;
 export type TagTypesType = (typeof tagTypes)[number];
-const tagTypes = ["Users", "Posts", "Brands", "Testimonials", "Queries"] as const;
 
 // **
 export const backendApi = createApi({
@@ -47,6 +72,7 @@ export const backendApi = createApi({
       return headers;
     },
   }),
+  keepUnusedDataFor: 600,
   tagTypes,
   endpoints: (builder) => ({
     // GET
@@ -68,6 +94,7 @@ export const backendApi = createApi({
     }),
     getTags: builder.query<GetTagsType, string>({
       query: (request) => `posts/tags${request}`,
+      providesTags: ["Posts"],
     }),
     getFeaturedIn: builder.query<GetFeaturedInType, string>({
       query: (request) => `featured-in${request}`,
@@ -77,39 +104,55 @@ export const backendApi = createApi({
       query: (request) => `testimonial${request}`,
       providesTags: ["Testimonials"],
     }),
-    getAboutUsStatic: builder.query<AboutUsStaticType[], void>({
-      query: () => "about-us-static",
-    }),
-    getCategoryHeader: builder.query<CategoryHeaderType, void>({
-      query: () => "category-header",
-    }),
-    getContactUs: builder.query<ContactUsType[], void>({
-      query: () => "contact-us",
-    }),
     getContactUsQueries: builder.query<GetContactUsQueriesType, string>({
       query: (request) => `contact-us-queries${request}`,
-      providesTags: ["Queries"],
-    }),
-    getPrivacyPolicy: builder.query<PrivacyPolicyType, void>({
-      query: () => "privacy-policy",
-    }),
-    getAboutUsStatistic: builder.query<AboutUsOverviewType[], void>({
-      query: () => "about-us-statistic",
-    }),
-    getSubscribersCount: builder.query<SubscribersCountType, void>({
-      query: () => "subscribe/count",
-    }),
-    getContactUsMessages: builder.query<GetContactUsMessagesType, string>({
-      query: (request) => `contact-us-messages${request}`,
-    }),
-    getContactUsMessageById: builder.query<ContactUsMessageType, string>({
-      query: (id) => `contact-us-messages/${id}`,
+      providesTags: ["ContactUsQueries"],
     }),
     getBrandById: builder.query<FeaturedCompanyType, number>({
       query: (id) => `featured-in/${id}`,
+      providesTags: ["Brands"],
     }),
     getTestimonialById: builder.query<TestimonialType, number>({
       query: (id) => `testimonial/${id}`,
+      providesTags: ["Testimonials"],
+    }),
+
+    // **
+    getAboutUsStatic: builder.query<AboutUsStaticType[], void>({
+      query: () => "about-us-static",
+      providesTags: ["AboutUsStatic"],
+    }),
+    getCategoryHeader: builder.query<CategoryHeaderType, void>({
+      query: () => "category-header",
+      providesTags: ["CategoryHeader"],
+    }),
+    getPrivacyPolicy: builder.query<PrivacyPolicyType, void>({
+      query: () => "privacy-policy",
+      providesTags: ["PrivacyPolicy"],
+    }),
+    getContactUs: builder.query<ContactUsType[], void>({
+      query: () => "contact-us",
+      providesTags: ["ContactUs"],
+    }),
+
+    // **
+    getContactUsMessages: builder.query<GetContactUsMessagesType, string>({
+      query: (request) => `contact-us-messages${request}`,
+      providesTags: ["Messages"],
+    }),
+    getContactUsMessageById: builder.query<ContactUsMessageType, string>({
+      query: (id) => `contact-us-messages/${id}`,
+      providesTags: ["Messages"],
+    }),
+
+    // **
+    getAboutUsStatistic: builder.query<AboutUsOverviewType[], void>({
+      query: () => "about-us-statistic",
+      keepUnusedDataFor: 60,
+    }),
+    getSubscribersCount: builder.query<SubscribersCountType, void>({
+      query: () => "subscribe/count",
+      keepUnusedDataFor: 60,
     }),
 
     // CREATE
@@ -121,6 +164,10 @@ export const backendApi = createApi({
           body: body,
         };
       },
+      invalidatesTags: ["Users", "Posts"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Users", "Posts"]);
+      },
     }),
     createPost: builder.mutation<any, FormData>({
       query: (body) => {
@@ -129,6 +176,10 @@ export const backendApi = createApi({
           method: "POST",
           body: body,
         };
+      },
+      invalidatesTags: ["Users", "Posts"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Users", "Posts"]);
       },
     }),
     createSubscribe: builder.mutation<any, FormData>({
@@ -147,6 +198,10 @@ export const backendApi = createApi({
           method: "POST",
           body: body,
         };
+      },
+      invalidatesTags: ["Messages"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Messages"]);
       },
     }),
     checkUserEmail: builder.mutation<any, FormData>({
@@ -167,6 +222,9 @@ export const backendApi = createApi({
         };
       },
       invalidatesTags: ["Brands"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Brands"]);
+      },
     }),
     createTestimonial: builder.mutation<any, FormData>({
       query: (body) => {
@@ -177,6 +235,9 @@ export const backendApi = createApi({
         };
       },
       invalidatesTags: ["Testimonials"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Testimonials"]);
+      },
     }),
     createQuery: builder.mutation<any, FormData>({
       query: (body) => {
@@ -186,7 +247,10 @@ export const backendApi = createApi({
           body: body,
         };
       },
-      invalidatesTags: ["Queries"],
+      invalidatesTags: ["ContactUsQueries"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["ContactUsQueries"]);
+      },
     }),
 
     // **
@@ -208,7 +272,10 @@ export const backendApi = createApi({
           body: body,
         };
       },
-      invalidatesTags: ["Users"],
+      invalidatesTags: ["Users", "Posts"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Users", "Posts"]);
+      },
     }),
     updatePost: builder.mutation<any, UpdatePostType>({
       query: ({ id, body }) => {
@@ -218,10 +285,10 @@ export const backendApi = createApi({
           body: body,
         };
       },
-      invalidatesTags: ["Posts"],
-      // async onQueryStarted() {
-      //   await invalidateFetchTags(["Posts"]);
-      // },
+      invalidatesTags: ["Users", "Posts"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Users", "Posts"]);
+      },
     }),
     updateAboutUsStatic: builder.mutation<any, FormData>({
       query: (body) => {
@@ -230,6 +297,10 @@ export const backendApi = createApi({
           method: "PATCH",
           body: body,
         };
+      },
+      invalidatesTags: ["AboutUsStatic"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["AboutUsStatic"]);
       },
     }),
     updateKnowMoreStatic: builder.mutation<any, FormData>({
@@ -240,6 +311,10 @@ export const backendApi = createApi({
           body: body,
         };
       },
+      invalidatesTags: ["KnowMore"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["KnowMore"]);
+      },
     }),
     updateWhyThisBlogStatic: builder.mutation<any, FormData>({
       query: (body) => {
@@ -248,6 +323,10 @@ export const backendApi = createApi({
           method: "PATCH",
           body: body,
         };
+      },
+      invalidatesTags: ["WhyThisBlog"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["WhyThisBlog"]);
       },
     }),
     updateUsMissionStatic: builder.mutation<any, FormData>({
@@ -258,6 +337,10 @@ export const backendApi = createApi({
           body: body,
         };
       },
+      invalidatesTags: ["UsMission"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["UsMission"]);
+      },
     }),
     updateCategoryDescriptionStatic: builder.mutation<any, FormData>({
       query: (body) => {
@@ -266,6 +349,10 @@ export const backendApi = createApi({
           method: "PATCH",
           body: body,
         };
+      },
+      invalidatesTags: ["CategoryDescription"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["CategoryDescription"]);
       },
     }),
     updateWhyWeStartedStatic: builder.mutation<any, FormData>({
@@ -276,6 +363,10 @@ export const backendApi = createApi({
           body: body,
         };
       },
+      invalidatesTags: ["WhyWeStarted"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["WhyWeStarted"]);
+      },
     }),
     updateTestimonialStatic: builder.mutation<any, FormData>({
       query: (body) => {
@@ -284,6 +375,10 @@ export const backendApi = createApi({
           method: "PATCH",
           body: body,
         };
+      },
+      invalidatesTags: ["TestimonialStatic"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["TestimonialStatic"]);
       },
     }),
     updateJoin: builder.mutation<any, FormData>({
@@ -294,6 +389,10 @@ export const backendApi = createApi({
           body: body,
         };
       },
+      invalidatesTags: ["Join"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Join"]);
+      },
     }),
     updateCategoryHeader: builder.mutation<any, FormData>({
       query: (body) => {
@@ -302,6 +401,10 @@ export const backendApi = createApi({
           method: "PATCH",
           body: body,
         };
+      },
+      invalidatesTags: ["CategoryHeader"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["CategoryHeader"]);
       },
     }),
     updateContactUs: builder.mutation<any, FormData>({
@@ -312,6 +415,10 @@ export const backendApi = createApi({
           body: body,
         };
       },
+      invalidatesTags: ["FooterBottom", "ContactUs"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["FooterBottom", "ContactUs"]);
+      },
     }),
     updateFooterBottom: builder.mutation<any, FormData>({
       query: (body) => {
@@ -320,6 +427,10 @@ export const backendApi = createApi({
           method: "PATCH",
           body: body,
         };
+      },
+      invalidatesTags: ["FooterBottom", "ContactUs"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["FooterBottom", "ContactUs"]);
       },
     }),
     updatePrivacyPolicy: builder.mutation<any, FormData>({
@@ -330,6 +441,10 @@ export const backendApi = createApi({
           body: body,
         };
       },
+      invalidatesTags: ["PrivacyPolicy"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["PrivacyPolicy"]);
+      },
     }),
     updateContactUsMessages: builder.mutation<any, number>({
       query: (id) => {
@@ -337,6 +452,10 @@ export const backendApi = createApi({
           url: `contact-us-messages/${id}`,
           method: "PATCH",
         };
+      },
+      invalidatesTags: ["Messages"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Messages"]);
       },
     }),
     updateBrand: builder.mutation<any, UpdateBrandType>({
@@ -348,6 +467,9 @@ export const backendApi = createApi({
         };
       },
       invalidatesTags: ["Brands"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Brands"]);
+      },
     }),
     updateTestimonial: builder.mutation<any, UpdateTestimonialType>({
       query: ({ id, body }) => {
@@ -370,7 +492,10 @@ export const backendApi = createApi({
           body: body,
         };
       },
-      invalidatesTags: ["Queries"],
+      invalidatesTags: ["ContactUsQueries"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["ContactUsQueries"]);
+      },
     }),
 
     // **
@@ -391,9 +516,9 @@ export const backendApi = createApi({
         };
       },
       invalidatesTags: ["Posts"],
-      // async onQueryStarted() {
-      //   await invalidateFetchTags(["Posts"]);
-      // },
+      async onQueryStarted() {
+        await invalidateFetchTags(["Posts"]);
+      },
     }),
     activateUser: builder.query<any, string>({
       query: (token) => {
@@ -413,9 +538,9 @@ export const backendApi = createApi({
         };
       },
       invalidatesTags: ["Posts"],
-      // async onQueryStarted() {
-      //   await invalidateFetchTags(["Posts"]);
-      // },
+      async onQueryStarted() {
+        await invalidateFetchTags(["Posts"]);
+      },
     }),
     deleteBrand: builder.mutation<any, number>({
       query: (id) => {
@@ -425,6 +550,9 @@ export const backendApi = createApi({
         };
       },
       invalidatesTags: ["Brands"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Brands"]);
+      },
     }),
     deleteTestimonial: builder.mutation<any, number>({
       query: (id) => {
@@ -434,6 +562,9 @@ export const backendApi = createApi({
         };
       },
       invalidatesTags: ["Testimonials"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["Testimonials"]);
+      },
     }),
     deleteQuery: builder.mutation<any, number>({
       query: (id) => {
@@ -441,6 +572,10 @@ export const backendApi = createApi({
           url: `contact-us-queries/${id}`,
           method: "DELETE",
         };
+      },
+      invalidatesTags: ["ContactUsQueries"],
+      async onQueryStarted() {
+        await invalidateFetchTags(["ContactUsQueries"]);
       },
     }),
 

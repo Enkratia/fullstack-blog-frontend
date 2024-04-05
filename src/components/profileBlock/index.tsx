@@ -38,8 +38,6 @@ export const ProfileBlock: React.FC = () => {
     }
   }, [isError]);
 
-  console.log(user);
-
   return (
     <section className={s.root}>
       <h2 className={`${s.title} ${cs.title}`}>Profile</h2>
