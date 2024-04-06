@@ -31,6 +31,7 @@ const ChangeBrandsBlockSuspense: React.FC = () => {
 
   // **
   const isRouter = React.useRef(false);
+  const [isFetch, setIsFetch] = React.useState(true);
   const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
 
   const searchParams = useSearchParams().toString();
@@ -67,7 +68,10 @@ const ChangeBrandsBlockSuspense: React.FC = () => {
   let requestLocal = `?${qs.stringify(new Request(false), { encode: true })}`;
   let request = `?${qs.stringify(new Request(true), { encode: true })}`;
 
-  const { data, isError, refetch, originalArgs, endpointName } = useGetFeaturedInQuery(request);
+  const { data, isError, refetch, originalArgs, endpointName } = useGetFeaturedInQuery(request, {
+    skip: !isFetch,
+  });
+
   const brands = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
@@ -93,6 +97,7 @@ const ChangeBrandsBlockSuspense: React.FC = () => {
       setPage(urlPage);
       setSort(urlSort);
       setSearch(urlSearch);
+      setIsFetch(true);
     }
 
     isRouter.current = false;
@@ -110,22 +115,21 @@ const ChangeBrandsBlockSuspense: React.FC = () => {
     if (brands?.length === 1 && page > 1) {
       setPage((n) => n - 1);
       setIsNavigate({});
-
+      setIsFetch(true);
       return;
     }
-
-    refetch();
   };
 
   // **
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timer.current);
     setSearch(e.target.value);
+    setIsFetch(false);
 
     timer.current = setTimeout(() => {
       setPage(1);
-
       setIsNavigate({});
+      setIsFetch(true);
     }, 250);
   };
 
@@ -133,6 +137,7 @@ const ChangeBrandsBlockSuspense: React.FC = () => {
   const onPageChange = ({ selected }: Record<string, number>) => {
     setPage(selected + 1);
     setIsNavigate({});
+    setIsFetch(true);
   };
 
   // **
@@ -142,6 +147,7 @@ const ChangeBrandsBlockSuspense: React.FC = () => {
     setSort(sorting[option].code);
     setPage(1);
     setIsNavigate({});
+    setIsFetch(true);
   };
 
   return (

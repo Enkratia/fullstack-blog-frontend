@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+  border: rem(1) solid var(--skeleton-border-color);
   padding-block: rem(40);
   padding-inline: rem(15);
   width: 100%;

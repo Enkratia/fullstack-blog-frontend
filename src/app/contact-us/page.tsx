@@ -8,11 +8,13 @@ export const metadata: Metadata = {
   description: "Our contact information: phone, address, email and where you can send us email.",
 };
 
-export default function ContactUsPage() {
+const ContactUsPage: React.FC = () => {
   return (
     <main>
       <h1 className={cs.srOnly}>Contact information.</h1>
       <ContactUs />
     </main>
   );
-}
+};
+
+export default ContactUsPage;

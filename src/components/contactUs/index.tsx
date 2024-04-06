@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 
 import { fetchContactUsQueriesQuery, fetchContactUsQuery } from "../../fetchApi/fetchApi";
 
-import { ContactUsForm, SkeletonContactUs, NotFoundOops } from "../../components";
+import { ContactUsForm, NotFoundOops, SkeletonContactUs } from "../../components";
 
 import cs from "../../scss/helpers.module.scss";
 import s from "./contactUs.module.scss";

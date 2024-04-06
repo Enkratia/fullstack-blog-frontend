@@ -75,7 +75,6 @@ export * from "./testimonials/testimonialsStatic";
 // BlogPage
 export * from "./blogHeader";
 export * from "./allPosts";
-export * from "./_allPostsLayer"; //TMP
 export * from "./allCategories";
 
 // BlogPostPage

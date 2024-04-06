@@ -37,6 +37,7 @@ const ChangeQueriesBlockSuspense: React.FC = () => {
 
   // **
   const isRouter = React.useRef(false);
+  const [isFetch, setIsFetch] = React.useState(true);
   const [isNavigate, setIsNavigate] = React.useState<boolean | {}>(false);
 
   const searchParams = useSearchParams().toString();
@@ -73,8 +74,11 @@ const ChangeQueriesBlockSuspense: React.FC = () => {
   let requestLocal = `?${qs.stringify(new Request(false), { encode: true })}`;
   let request = `?${qs.stringify(new Request(true), { encode: true })}`;
 
-  const { data, isError, refetch, originalArgs, endpointName } =
-    useGetContactUsQueriesQuery(request);
+  const { data, isError, refetch, originalArgs, endpointName } = useGetContactUsQueriesQuery(
+    request,
+    { skip: !isFetch },
+  );
+
   const queries = data?.data;
   const totalCount = data?.totalCount;
   const totalPages = Math.ceil((totalCount || 1) / limit);
@@ -101,6 +105,7 @@ const ChangeQueriesBlockSuspense: React.FC = () => {
       setPage(urlPage);
       setSort(urlSort);
       setSearch(urlSearch);
+      setIsFetch(true);
     }
 
     isRouter.current = false;
@@ -119,22 +124,22 @@ const ChangeQueriesBlockSuspense: React.FC = () => {
     if (queries?.length === 1 && page > 1) {
       setPage((n) => n - 1);
       setIsNavigate({});
+      setIsFetch(true);
 
       return;
     }
-
-    refetch();
   };
 
   // **
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timer.current);
     setSearch(e.target.value);
+    setIsFetch(false);
 
     timer.current = setTimeout(() => {
       setPage(1);
-
       setIsNavigate({});
+      setIsFetch(true);
     }, 250);
   };
 
@@ -144,12 +149,14 @@ const ChangeQueriesBlockSuspense: React.FC = () => {
     setSort(sorting[option].code);
     setPage(1);
     setIsNavigate({});
+    setIsFetch(true);
   };
 
   // **
   const onPageChange = ({ selected }: Record<string, number>) => {
     setPage(selected + 1);
     setIsNavigate({});
+    setIsFetch(true);
   };
 
   return (

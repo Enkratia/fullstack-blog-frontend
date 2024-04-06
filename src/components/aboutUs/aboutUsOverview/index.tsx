@@ -34,7 +34,7 @@ const AboutUsOverviewSuspense: React.FC<AboutUsOverviewProps> = async ({ data })
         alt="Picture for 'About Us' section."
         aria-hidden="true"
         priority={true}
-        sizes="100vw"
+        sizes="1280px"
       />
 
       <ul className={s.overview}>

@@ -17,7 +17,7 @@ import {
   UpdateUserType,
 } from "./types";
 
-import { BACKEND_URL } from "../../utils/constants";
+import { BACKEND_URL, IS_DEV } from "../../utils/constants";
 import { revalidateTagsAction } from "../../utils/actions";
 
 // **
@@ -72,7 +72,7 @@ export const backendApi = createApi({
       return headers;
     },
   }),
-  keepUnusedDataFor: 600,
+  keepUnusedDataFor: IS_DEV ? 60 : 600,
   tagTypes,
   endpoints: (builder) => ({
     // GET

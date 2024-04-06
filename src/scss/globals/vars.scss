@@ -92,7 +92,7 @@
 
   // Animations
   --popup-animation: popup-animation 0.2s ease forwards;
-  --skeleton-animation: skeleton-animation 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --skeleton-animation: skeleton-animation 1s linear infinite;
   --hide-on-resize-animation: hide-on-resize-animation 0.3s;
 
   // Gradients
@@ -100,15 +100,10 @@
 }
 
 // **
+
 @keyframes skeleton-animation {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.5;
+  to {
+    background-position: left;
   }
 }
 
@@ -132,3 +127,16 @@
     pointer-events: none;
   }
 }
+
+// --skeleton-animation: skeleton-animation 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+// @keyframes skeleton-animation {
+
+//   0%,
+//   100% {
+//     opacity: 1;
+//   }
+
+//   50% {
+//     opacity: 0.5;
+//   }
+// }
