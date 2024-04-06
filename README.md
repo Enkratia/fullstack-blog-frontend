@@ -19,7 +19,6 @@ manofthetreasure@gmail.com
 123456
 ```
 
-Хостинг:
 
 [`https://finsweet.ru`](https://finsweet.ru)
 
