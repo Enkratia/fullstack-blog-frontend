@@ -7,6 +7,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 const nextConfig = {
   output: "standalone",
   transpilePackages: [
+    "@hookform/resolvers",
     "@reduxjs/toolkit",
     "@svgr/webpack",
     "@tiptap/extension-color",
@@ -27,6 +28,7 @@ const nextConfig = {
     "qs",
     "react",
     "react-dom",
+    "react-hook-form",
     "react-imask",
     "react-paginate",
     "react-redux",
@@ -34,6 +36,7 @@ const nextConfig = {
     "sonner",
     "use-immer",
     "immer",
+    "zod",
   ],
   images: {
     minimumCacheTTL: 31540000000,
