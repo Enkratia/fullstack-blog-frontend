@@ -6,6 +6,7 @@
 - В панели управления: изменение любой секции сайта, добавление постов/брэндов/.., чтение писем из формы обратной связи.
 
 ### Демо:
+[`https://finsweet.ru`](https://finsweet.ru)
 
 **Пожалуйста, если используете email - вводите реальный адрес.**
 
@@ -18,9 +19,6 @@ manofthetreasure@gmail.com
 ```sh
 123456
 ```
-
-
-[`https://finsweet.ru`](https://finsweet.ru)
 
 ### Стек:
 
@@ -35,4 +33,4 @@ manofthetreasure@gmail.com
 
 1. В качестве `backend`: [`nest.js`](https://github.com/Enkratia/fullstack-backend-blog)
 2. Как `хостинг(vds)`: [`timeweb.cloud`](https://www.timeweb.cloud)
-3. Макет: [`ссылка`](<https://www.figma.com/file/a8wx6iSjafCqs6KXMy8ErH/Client-First-Template-12---Blog-(Community)?type=design&node-id=27-387&mode=design&t=HaBAaY8uHz9Q1KPs-0>) (макет немного изменили, но на 99% он тот же)
+3. Макет: [`ссылка`](<https://www.figma.com/file/a8wx6iSjafCqs6KXMy8ErH/Client-First-Template-12---Blog-(Community)?type=design&node-id=27-387&mode=design&t=HaBAaY8uHz9Q1KPs-0>)
