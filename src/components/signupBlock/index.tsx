@@ -157,6 +157,15 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
             requestStatus={authMessage}
           />
 
+          <div className={`${s.inputWrapper} ${cs.inputWrapper}`}>
+            {/* <div className={s.agreement}> */}
+          </div>
+
+          <label htmlFor="signup-consent" className={s.agreementText}>
+            I agree to receive communications from Createx Store.
+          </label>
+          {/* </div> */}
+
           <div className={s.descr}>
             <div className={s.descrWrapper}>
               <span className={s.descrText}>Already have an account?</span>

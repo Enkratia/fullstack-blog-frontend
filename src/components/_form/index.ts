@@ -6,3 +6,4 @@ export * from "./_formSubmit";
 export * from "./_formTextarea";
 export * from "./_select";
 export * from "./_showPassBtn";
+export * from "./_checkbox";
