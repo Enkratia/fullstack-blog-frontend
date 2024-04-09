@@ -130,6 +130,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
     <form className={s.root} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
       <div className={s.inputs}>
         <FormInput
+          id=""
           isPass={false}
           classNameWrapper={cs.inputWrapper}
           classNameInput={`${s.input} ${cs.input}`}
@@ -141,6 +142,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
         />
 
         <FormInput
+          id=""
           isPass={false}
           classNameWrapper={cs.inputWrapper}
           classNameInput={`${s.input} ${cs.input}`}
@@ -152,6 +154,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
         />
 
         <FormInput
+          id=""
           isPass={true}
           classNameWrapper={cs.inputWrapper}
           classNameInput={`${s.input} ${cs.input}`}
@@ -163,6 +166,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
         />
 
         <FormInput
+          id=""
           isPass={true}
           classNameWrapper={cs.inputWrapper}
           classNameInput={`${s.input} ${cs.input}`}

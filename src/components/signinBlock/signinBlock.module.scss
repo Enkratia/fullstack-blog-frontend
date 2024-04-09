@@ -32,18 +32,28 @@
 
 // **
 .inputWrapper {
-  &:not(:last-child) {
-    margin-bottom: rem(16);
-  }
-}
+  margin-bottom: rem(16);
 
-.showPass {
-  // right: 0;
-  // top: 0;
+  &:nth-child(4) {
+    margin-bottom: rem(20);
+  }
 }
 
 .btnWrapper {
   margin-bottom: rem(16);
+}
+
+.checkbox {
+  margin-right: rem(10);
+
+  &Link {
+    text-decoration: underline;
+    text-underline-position: under;
+  }
+
+  &Wrapper {
+    margin-bottom: rem(10);
+  }
 }
 
 // **

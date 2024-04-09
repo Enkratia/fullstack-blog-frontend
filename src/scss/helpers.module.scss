@@ -124,88 +124,6 @@
   }
 }
 
-.btn {
-  display: inline-block;
-  border: rem(1) solid var(--yellow-color);
-  padding-top: rem(17);
-  padding-bottom: rem(15);
-  padding-inline: rem(48);
-  font: var(--btn-font);
-  color: var(--black-color);
-  background-color: var(--yellow-color);
-  transition: opacity 0.3s;
-  cursor: pointer;
-
-  &White {
-    background-color: var(--light-color);
-  }
-
-  &Lg {
-    padding-block: rem(15);
-    width: 100%;
-    font: var(--h4-font);
-  }
-
-  &Disabled {
-    opacity: 0.8;
-    pointer-events: none;
-  }
-
-  &:disabled {
-    opacity: 0.8;
-    pointer-events: none;
-  }
-
-  &Message {
-    display: none;
-    margin-top: rem(5);
-    font: var(--validation-font);
-    line-height: 100%;
-    text-align: left;
-    color: var(--danger-color);
-  }
-
-  &Wrapper {
-    position: relative;
-
-    // **
-    &[data-auth-message] {
-      .btnMessage {
-        display: block;
-        color: var(--danger-color);
-      }
-    }
-
-    // **
-    &[data-request-success] {
-      .btnMessage {
-        display: block;
-        color: var(--success-color);
-      }
-    }
-
-    &[data-request-warning] {
-      .btnMessage {
-        display: block;
-        color: var(--danger-color);
-      }
-    }
-
-    &[data-request-process] {
-      .btnMessage {
-        display: block;
-        color: var(--black-color);
-      }
-    }
-  }
-
-  &:hover {
-    border: rem(1) solid var(--yellow-hover-color);
-    background-color: var(--yellow-hover-color);
-    transition: background-color 0.3s;
-  }
-}
-
 .socialBtn {
   display: inline-flex;
 
@@ -437,6 +355,83 @@
   }
 }
 
+.btn {
+  display: inline-block;
+  border: rem(1) solid var(--yellow-color);
+  padding-top: rem(17);
+  padding-bottom: rem(15);
+  padding-inline: rem(48);
+  font: var(--btn-font);
+  color: var(--black-color);
+  background-color: var(--yellow-color);
+  transition: opacity 0.3s;
+  cursor: pointer;
+
+  &White {
+    background-color: var(--light-color);
+  }
+
+  &Lg {
+    padding-block: rem(15);
+    width: 100%;
+    font: var(--h4-font);
+  }
+
+  &Disabled {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  &:disabled {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  &Message {
+    @extend .inputMessage;
+  }
+
+  &Wrapper {
+    position: relative;
+
+    // **
+    &[data-auth-message] {
+      .btnMessage {
+        display: block;
+        color: var(--danger-color);
+      }
+    }
+
+    // **
+    &[data-request-success] {
+      .btnMessage {
+        display: block;
+        color: var(--success-color);
+      }
+    }
+
+    &[data-request-warning] {
+      .btnMessage {
+        display: block;
+        color: var(--danger-color);
+      }
+    }
+
+    &[data-request-process] {
+      .btnMessage {
+        display: block;
+        color: var(--black-color);
+      }
+    }
+  }
+
+  &:hover {
+    border: rem(1) solid var(--yellow-hover-color);
+    background-color: var(--yellow-hover-color);
+    transition: background-color 0.3s;
+  }
+}
+
 // **
 .select {
   position: relative;
@@ -499,12 +494,17 @@
   }
 
   &Item {
+    outline: none;
     padding-block: rem(2);
     color: var(--black-color);
     transition: color 0.3s;
     cursor: pointer;
 
     &:hover {
+      color: var(--purple-color);
+    }
+
+    &:focus {
       color: var(--purple-color);
     }
 
@@ -730,6 +730,89 @@
   @include bp-down("500") {
     flex-direction: column;
     gap: rem(10);
+  }
+}
+
+.checkbox {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border: rem(1) solid var(--mediumgray-color);
+  border-radius: rem(3);
+  width: rem(16);
+  height: rem(16);
+  background-color: transparent;
+  transition: border-color 0.3s, background-color 0.3s;
+  cursor: pointer;
+  user-select: none;
+
+  svg {
+    width: rem(14);
+    height: rem(14);
+    stroke: var(--black-color);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s;
+  }
+
+  &Message {
+    @extend .inputMessage;
+  }
+
+  &Wrapper {
+    text-align: left;
+
+    &Active {
+      text-align: left;
+
+      // .checkbox {
+      //   border-color: var(--danger-color);
+      // }
+
+      // .checkboxWrapperInner {
+      //   position: relative;
+
+      //   >.checkbox {
+      //     border-color: var(--danger-color);
+      //   }
+      // }
+
+      >.checkboxMessage {
+        display: block;
+      }
+    }
+  }
+
+  &Label {
+    font: var(--body01-font);
+    word-break: break-all;
+  }
+
+  &Checked {
+    border-color: var(--mediumgray-color);
+
+    svg {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &:hover {
+    border-color: var(--purple-color);
+
+    svg {
+      stroke: var(--purple-color);
+    }
+  }
+
+  &:focus-within {
+    border-color: var(--black-color);
+
+    svg {
+      stroke: var(--black-color);
+    }
   }
 }
 

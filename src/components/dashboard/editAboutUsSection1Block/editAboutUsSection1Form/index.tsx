@@ -80,6 +80,7 @@ export const EditAboutUsSection1Form: React.FC<EditAboutUsSection1FormProps> = (
           </div>
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.headerTitle?.message}
@@ -89,6 +90,7 @@ export const EditAboutUsSection1Form: React.FC<EditAboutUsSection1FormProps> = (
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.headerDescription?.message}
@@ -98,6 +100,7 @@ export const EditAboutUsSection1Form: React.FC<EditAboutUsSection1FormProps> = (
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.missionTitle?.message}
@@ -107,6 +110,7 @@ export const EditAboutUsSection1Form: React.FC<EditAboutUsSection1FormProps> = (
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.missionDescription?.message}
@@ -116,6 +120,7 @@ export const EditAboutUsSection1Form: React.FC<EditAboutUsSection1FormProps> = (
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.visionTitle?.message}
@@ -125,6 +130,7 @@ export const EditAboutUsSection1Form: React.FC<EditAboutUsSection1FormProps> = (
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.visionDescription?.message}

@@ -74,6 +74,7 @@ export const EditAboutUsSection3Block: React.FC<EditAboutUsSection3BlockProps> =
           </div>
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.title?.message}
@@ -83,6 +84,7 @@ export const EditAboutUsSection3Block: React.FC<EditAboutUsSection3BlockProps> =
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.subtitle?.message}
@@ -93,6 +95,7 @@ export const EditAboutUsSection3Block: React.FC<EditAboutUsSection3BlockProps> =
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.description?.message}

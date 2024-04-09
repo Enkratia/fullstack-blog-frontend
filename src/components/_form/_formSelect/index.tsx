@@ -9,6 +9,7 @@ type FormSelectProps = {
   error: string | undefined;
   register: UseFormRegister<any>;
   name: string;
+  id: string;
   placeholder: string;
   classNameWrapper: string;
   classNameInput: string;
@@ -22,6 +23,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
   error,
   register,
   name,
+  id,
   placeholder,
   classNameWrapper,
   classNameInput,
@@ -30,6 +32,8 @@ export const FormSelect: React.FC<FormSelectProps> = ({
   setActiveOption,
   onSelectValidation,
 }) => {
+  const selectListRef = React.useRef<HTMLUListElement>(null);
+
   const [isOpen, setIsOpen] = React.useState(false);
   const finalOptions = [placeholder, ...options];
 
@@ -48,15 +52,58 @@ export const FormSelect: React.FC<FormSelectProps> = ({
     }
 
     document.documentElement.addEventListener("click", hideSelect);
+
+    if ("id" in e.target && e.target.id !== "" && e.target.id === id) {
+      select.focus();
+    }
   };
 
   const onSelectKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const select = e.currentTarget;
 
+    const getPrevLiIdx = () => {
+      const prevFocusedLi = selectListRef.current?.querySelector("li:focus");
+      const allLi = selectListRef.current?.querySelectorAll("li") || [];
+      let liIdx = Array.from(allLi).findIndex((el) => el === prevFocusedLi);
+
+      if (!selectListRef.current?.contains(e.target as HTMLElement)) {
+        liIdx = activeOption;
+      }
+
+      return liIdx;
+    };
+
+    // **
     if (e.key === "Enter") {
       setIsOpen((b) => !b);
+    } else if (e.key === " ") {
+      e.preventDefault();
+      setIsOpen((b) => !b);
+    } else if (e.key === "ArrowUp" && isOpen) {
+      e.preventDefault();
+
+      const liIdx = getPrevLiIdx();
+
+      const nextOption = liIdx > 0 ? liIdx - 1 : liIdx;
+      selectListRef.current?.querySelectorAll("li")?.[nextOption]?.focus();
+    } else if (e.key === "ArrowDown" && isOpen) {
+      e.preventDefault();
+
+      const liIdx = getPrevLiIdx();
+
+      const nextOption = liIdx < finalOptions.length - 1 ? liIdx + 1 : liIdx;
+      selectListRef.current?.querySelectorAll("li")?.[nextOption]?.focus();
+    } else if ((e.key === "PageUp" || e.key === "Home") && isOpen) {
+      e.preventDefault();
+
+      selectListRef.current?.querySelectorAll("li")?.[0]?.focus();
+    } else if ((e.key === "PageDown" || e.key === "End") && isOpen) {
+      e.preventDefault();
+
+      selectListRef.current?.querySelectorAll("li")?.[finalOptions.length - 1]?.focus();
     }
 
+    // **
     function hideSelect(e: MouseEvent) {
       if (select && !e.composedPath().includes(select)) {
         setIsOpen(false);
@@ -66,6 +113,11 @@ export const FormSelect: React.FC<FormSelectProps> = ({
     }
 
     document.documentElement.addEventListener("click", hideSelect);
+
+    // **
+    if ("id" in e.target && e.target.id !== "" && e.target.id === id) {
+      select.focus();
+    }
   };
 
   const onSelectOptionClick = (e: React.MouseEvent<HTMLLIElement>, option: number) => {
@@ -84,6 +136,12 @@ export const FormSelect: React.FC<FormSelectProps> = ({
     }
   };
 
+  const onSelectBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setIsOpen(false);
+    }
+  };
+
   return (
     <div className={`${classNameWrapper} ${error ? cs.inputWrapperActive : cs.inputWrapper}`}>
       <div
@@ -91,15 +149,17 @@ export const FormSelect: React.FC<FormSelectProps> = ({
         role="listbox"
         tabIndex={0}
         onKeyDown={onSelectKeyDown}
+        onBlur={onSelectBlur}
         onClick={onSelectClick}>
         <div className={`${cs.selectHead} ${activeOption === 0 ? "" : cs.selectHeadActive}`}>
           <span className={cs.selectSelected}>{finalOptions[activeOption]}</span>
 
           <input
             {...register(name)}
-            type="hidden"
-            name={name}
+            type="text"
+            id={id}
             value={activeOption === 0 ? "" : finalOptions[activeOption]}
+            hidden
           />
 
           <Chevron
@@ -111,7 +171,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
           className={`${cs.selectWrapper} ${classNameInput} ${
             isOpen ? cs.selectWrapperActive : ""
           }`}>
-          <ul className={cs.selectList}>
+          <ul className={cs.selectList} ref={selectListRef}>
             {finalOptions.map((option, i) => (
               <li
                 key={i}
@@ -134,6 +194,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
 };
 
 /* <FormSelect
+  id=""
   classNameWrapper={s.inputWrapper}
   classNameInput={cs.input}
   error={errors?.query?.message}

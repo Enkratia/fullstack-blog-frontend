@@ -12,6 +12,7 @@ type FormPhoneInputProps = {
   classNameInput: string;
   defaultValue: string;
   name: string;
+  id: string;
   placeholder: string;
   mask: string;
   onPhoneValidation: (value: string) => void;
@@ -20,6 +21,7 @@ type FormPhoneInputProps = {
 export const FormPhoneInput: React.FC<FormPhoneInputProps> = ({
   error = "",
   name,
+  id,
   classNameWrapper,
   classNameInput,
   placeholder,
@@ -38,6 +40,7 @@ export const FormPhoneInput: React.FC<FormPhoneInputProps> = ({
         type="text"
         className={classNameInput}
         name={name}
+        id={id}
         placeholder={placeholder}
         defaultValue={defaultValue}
       />
@@ -48,6 +51,7 @@ export const FormPhoneInput: React.FC<FormPhoneInputProps> = ({
 };
 
 /* <FormPhoneInput
+  id=""
   error={errors.contactPhone?.message}
   classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
   classNameInput={`${s.input} ${cs.input}`}

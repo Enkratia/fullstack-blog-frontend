@@ -7,6 +7,7 @@ import { ShowPassBtn } from "../../../components";
 import cs from "../../../scss/helpers.module.scss";
 
 type FormInputProps = {
+  id: string;
   isPass: boolean;
   register: UseFormRegister<any>;
   classNameWrapper: string;
@@ -18,6 +19,7 @@ type FormInputProps = {
 };
 
 export const FormInput: React.FC<FormInputProps> = ({
+  id,
   isPass,
   classNameWrapper,
   classNameInput,
@@ -37,6 +39,7 @@ export const FormInput: React.FC<FormInputProps> = ({
           type={isPass ? (isShowPass ? "text" : "password") : type}
           placeholder={placeholder}
           className={classNameInput}
+          id={id}
         />
 
         {isPass && (
@@ -56,6 +59,7 @@ export const FormInput: React.FC<FormInputProps> = ({
 // }, [password, trigger, submitCount]);
 
 /* <FormInput
+  id=""
   isPass={false}
   classNameWrapper={s.inputWrapper}
   classNameInput={cs.input}

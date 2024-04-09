@@ -81,6 +81,7 @@ export const ForgotBlock: React.FC<ForgotBlockProps> = ({ callbackUrl, onModalCl
           <p className={`${s.title} ${cs.title}`}>Forgot password?</p>
 
           <FormInput
+            id=""
             isPass={false}
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameInput={`${s.input} ${cs.input}`}

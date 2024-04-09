@@ -76,6 +76,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       <p className={`${s.title} ${cs.title}`}>Sign-in</p>
 
       <FormInput
+        id=""
         isPass={false}
         classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
         classNameInput={`${s.input} ${cs.input}`}
@@ -87,6 +88,7 @@ export const SigninBlock: React.FC<SigninBlockProps> = ({ callbackUrl, onModalCl
       />
 
       <FormInput
+        id=""
         isPass={true}
         classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
         classNameInput={`${s.input} ${cs.input}`}

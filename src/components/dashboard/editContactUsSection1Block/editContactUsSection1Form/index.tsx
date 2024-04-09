@@ -73,6 +73,7 @@ export const EditContactUsSection1Form: React.FC<EditContactUsSection1Form> = ({
     <form className={s.form} ref={formRef} onSubmit={handleSubmit(onSubmit)}>
       <div className={s.content}>
         <FormTextarea
+          id=""
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameTextarea={`${s.input} ${cs.input}`}
           error={errors?.contactEmail?.message}
@@ -82,6 +83,7 @@ export const EditContactUsSection1Form: React.FC<EditContactUsSection1Form> = ({
         />
 
         <FormPhoneInput
+          id=""
           error={errors.contactPhone?.message}
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameInput={`${s.input} ${cs.input}`}
@@ -93,6 +95,7 @@ export const EditContactUsSection1Form: React.FC<EditContactUsSection1Form> = ({
         />
 
         <FormTextarea
+          id=""
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameTextarea={`${s.input} ${cs.input}`}
           error={errors?.headerTitle?.message}
@@ -102,6 +105,7 @@ export const EditContactUsSection1Form: React.FC<EditContactUsSection1Form> = ({
         />
 
         <FormTextarea
+          id=""
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameTextarea={`${s.input} ${cs.input}`}
           error={errors?.headerSubtitle?.message}
@@ -111,6 +115,7 @@ export const EditContactUsSection1Form: React.FC<EditContactUsSection1Form> = ({
         />
 
         <FormTextarea
+          id=""
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameTextarea={`${s.input} ${cs.input}`}
           error={errors?.headerDescription?.message}
@@ -120,6 +125,7 @@ export const EditContactUsSection1Form: React.FC<EditContactUsSection1Form> = ({
         />
 
         <FormTextarea
+          id=""
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameTextarea={`${s.input} ${cs.input}`}
           error={errors?.timeDays?.message}
@@ -129,6 +135,7 @@ export const EditContactUsSection1Form: React.FC<EditContactUsSection1Form> = ({
         />
 
         <FormTextarea
+          id=""
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameTextarea={`${s.input} ${cs.input}`}
           error={errors?.timeHours?.message}
@@ -138,6 +145,7 @@ export const EditContactUsSection1Form: React.FC<EditContactUsSection1Form> = ({
         />
 
         <FormTextarea
+          id=""
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameTextarea={`${s.input} ${cs.input}`}
           error={errors?.timeDescription?.message}

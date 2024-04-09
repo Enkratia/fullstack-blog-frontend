@@ -62,6 +62,7 @@ export const ChangeTestimonialCreateBlock: React.FC = () => {
 
       <form className={s.form} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
         <FormInput
+          id=""
           isPass={false}
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameInput={`${s.input} ${cs.input}`}
@@ -73,6 +74,7 @@ export const ChangeTestimonialCreateBlock: React.FC = () => {
         />
 
         <FormInput
+          id=""
           isPass={false}
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameInput={`${s.input} ${cs.input}`}
@@ -84,6 +86,7 @@ export const ChangeTestimonialCreateBlock: React.FC = () => {
         />
 
         <FormTextarea
+          id=""
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameTextarea={`${s.input} ${cs.input}`}
           error={errors?.text?.message}

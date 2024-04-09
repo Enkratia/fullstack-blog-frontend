@@ -62,6 +62,7 @@ export const EditHomeSection8Block: React.FC<EditHomeSection8BlockProps> = ({ da
       <form className={s.form} ref={formRef} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.content}>
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.title?.message}
@@ -71,6 +72,7 @@ export const EditHomeSection8Block: React.FC<EditHomeSection8BlockProps> = ({ da
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.subtitle?.message}
@@ -80,6 +82,7 @@ export const EditHomeSection8Block: React.FC<EditHomeSection8BlockProps> = ({ da
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.description?.message}

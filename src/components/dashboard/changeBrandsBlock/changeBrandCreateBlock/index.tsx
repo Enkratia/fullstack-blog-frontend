@@ -57,6 +57,7 @@ export const ChangeBrandCreateBlock: React.FC = () => {
 
       <form className={s.form} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
         <FormInput
+          id=""
           isPass={false}
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameInput={`${s.input} ${cs.input}`}
@@ -68,6 +69,7 @@ export const ChangeBrandCreateBlock: React.FC = () => {
         />
 
         <FormInput
+          id=""
           isPass={false}
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameInput={`${s.input} ${cs.input}`}

@@ -173,6 +173,7 @@ const ChangeQueriesBlockSuspense: React.FC = () => {
         />
 
         <Select
+          id=""
           classNameInput={cs.input}
           sorting={sorting}
           activeOption={activeOption}

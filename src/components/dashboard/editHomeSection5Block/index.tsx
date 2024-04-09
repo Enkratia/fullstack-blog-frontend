@@ -75,6 +75,7 @@ export const EditHomeSection5Block: React.FC<EditHomeSection5BlockProps> = ({ da
           </div>
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.title?.message}
@@ -84,6 +85,7 @@ export const EditHomeSection5Block: React.FC<EditHomeSection5BlockProps> = ({ da
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.subtitle?.message}
@@ -93,6 +95,7 @@ export const EditHomeSection5Block: React.FC<EditHomeSection5BlockProps> = ({ da
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.description?.message}

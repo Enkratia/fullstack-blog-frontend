@@ -50,6 +50,7 @@ export const ChangeQueriesCreateBlock: React.FC = () => {
 
       <form className={s.form} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
         <FormTextarea
+          id=""
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameTextarea={`${s.input} ${cs.input}`}
           error={errors?.content?.message}

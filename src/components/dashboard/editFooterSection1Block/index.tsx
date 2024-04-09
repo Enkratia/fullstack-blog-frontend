@@ -74,6 +74,7 @@ export const EditFooterSection1Block: React.FC<EditFooterSection1BlockProps> = (
       <form className={s.form} ref={formRef} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.content}>
           <FormInput
+            id=""
             isPass={false}
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameInput={`${s.input} ${cs.input}`}
@@ -85,6 +86,7 @@ export const EditFooterSection1Block: React.FC<EditFooterSection1BlockProps> = (
           />
 
           <FormPhoneInput
+            id=""
             error={errors.phone?.message}
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameInput={`${s.input} ${cs.input}`}
@@ -96,6 +98,7 @@ export const EditFooterSection1Block: React.FC<EditFooterSection1BlockProps> = (
           />
 
           <FormTextarea
+            id=""
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameTextarea={`${s.input} ${cs.input}`}
             error={errors?.address?.message}
@@ -105,6 +108,7 @@ export const EditFooterSection1Block: React.FC<EditFooterSection1BlockProps> = (
           />
 
           <FormInput
+            id=""
             isPass={false}
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameInput={`${s.input} ${cs.input}`}
@@ -116,6 +120,7 @@ export const EditFooterSection1Block: React.FC<EditFooterSection1BlockProps> = (
           />
 
           <FormInput
+            id=""
             isPass={false}
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameInput={`${s.input} ${cs.input}`}
@@ -127,6 +132,7 @@ export const EditFooterSection1Block: React.FC<EditFooterSection1BlockProps> = (
           />
 
           <FormInput
+            id=""
             isPass={false}
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameInput={`${s.input} ${cs.input}`}
@@ -138,6 +144,7 @@ export const EditFooterSection1Block: React.FC<EditFooterSection1BlockProps> = (
           />
 
           <FormInput
+            id=""
             isPass={false}
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameInput={`${s.input} ${cs.input}`}

@@ -51,6 +51,7 @@ export const FooterMid: React.FC = () => {
 
       <form className={s.form} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
         <FormInput
+          id=""
           isPass={false}
           classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
           classNameInput={`${s.input} ${cs.input}`}

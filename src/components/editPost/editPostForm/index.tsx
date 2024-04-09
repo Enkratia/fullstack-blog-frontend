@@ -126,6 +126,7 @@ export const EditPostForm: React.FC<EditPostFormProps> = ({ post }) => {
   return (
     <form className={s.root} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
       <FormInput
+        id=""
         isPass={false}
         classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
         classNameInput={`${s.input} ${cs.input}`}
@@ -137,6 +138,7 @@ export const EditPostForm: React.FC<EditPostFormProps> = ({ post }) => {
       />
 
       <FormSelect
+        id=""
         classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
         classNameInput={cs.input}
         error={errors?.category?.message}
@@ -169,6 +171,7 @@ export const EditPostForm: React.FC<EditPostFormProps> = ({ post }) => {
       />
 
       <FormInput
+        id=""
         isPass={false}
         classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
         classNameInput={`${s.input} ${cs.input}`}

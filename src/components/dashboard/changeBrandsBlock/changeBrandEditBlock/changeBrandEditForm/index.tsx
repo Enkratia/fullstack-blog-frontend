@@ -67,6 +67,7 @@ export const ChangeBrandEditForm: React.FC<ChangeBrandEditBlockProps> = ({ data 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
       <FormInput
+        id=""
         isPass={false}
         classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
         classNameInput={`${s.input} ${cs.input}`}
@@ -78,6 +79,7 @@ export const ChangeBrandEditForm: React.FC<ChangeBrandEditBlockProps> = ({ data 
       />
 
       <FormInput
+        id=""
         isPass={false}
         classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
         classNameInput={`${s.input} ${cs.input}`}

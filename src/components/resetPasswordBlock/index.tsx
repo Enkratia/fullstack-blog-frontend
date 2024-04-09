@@ -106,6 +106,7 @@ export const ResetPasswordBlock: React.FC = () => {
           <p className={`${s.title} ${cs.title}`}>Reset password</p>
 
           <FormInput
+            id=""
             isPass={true}
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameInput={`${s.input} ${cs.input}`}
@@ -117,6 +118,7 @@ export const ResetPasswordBlock: React.FC = () => {
           />
 
           <FormInput
+            id=""
             isPass={true}
             classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
             classNameInput={`${s.input} ${cs.input}`}

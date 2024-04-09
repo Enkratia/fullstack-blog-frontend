@@ -67,6 +67,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries: queriesDa
   return (
     <form className={s.root} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
       <FormInput
+        id=""
         isPass={false}
         classNameWrapper={s.inputWrapper}
         classNameInput={cs.input}
@@ -78,6 +79,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries: queriesDa
       />
 
       <FormInput
+        id=""
         isPass={false}
         classNameWrapper={s.inputWrapper}
         classNameInput={cs.input}
@@ -89,6 +91,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries: queriesDa
       />
 
       <FormSelect
+        id=""
         classNameWrapper={s.inputWrapper}
         classNameInput={cs.input}
         error={errors?.query?.message}
@@ -102,6 +105,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries: queriesDa
       />
 
       <FormTextarea
+        id=""
         classNameWrapper={s.inputWrapper}
         classNameTextarea={`${s.textarea} ${cs.input}`}
         error={errors?.message?.message}

@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useCreateUserMutation } from "../../redux/backendApi";
 
-import { FormInput, FormSubmit, SignupBlockSuccess } from "../../components";
+import { FormCheckbox, FormInput, FormSubmit, SignupBlockSuccess } from "../../components";
 import { useAuthErrorMessage } from "../../utils/customHooks";
 
 import cs from "../../scss/helpers.module.scss";
@@ -32,6 +32,7 @@ const FormSchema = z
       .string()
       .min(6, "Password should be atleast 6 characters")
       .max(45, "Password must be less than 45 characters"),
+    consent: z.literal<boolean>(true, { errorMap: () => ({ message: "Please accept all terms" }) }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords doesn't match",
@@ -49,6 +50,8 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
   const formRef = React.useRef<HTMLFormElement>(null);
   const callback = `?callbackUrl=${callbackUrl}`;
 
+  const [isChecked, setIsChecked] = React.useState(false);
+
   const [createUser, { isSuccess }] = useCreateUserMutation();
   const { authMessage, setAuthError } = useAuthErrorMessage();
 
@@ -58,11 +61,13 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     getValues,
     trigger,
     watch,
+    setValue,
     formState: { errors, submitCount },
   } = useForm<InputType>({
     resolver: zodResolver(FormSchema),
   });
 
+  // **
   const password = watch("password");
   React.useEffect(() => {
     if (!submitCount) return;
@@ -82,6 +87,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
 
     const formData = new FormData(form);
     formData.delete("confirmPassword");
+    formData.delete("consent");
 
     const res = await createUser(formData);
 
@@ -98,6 +104,11 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
     }
   };
 
+  const onCheckboxChange = (isChecked: boolean) => {
+    setIsChecked(!isChecked);
+    setValue("consent", !isChecked, { shouldValidate: !!submitCount });
+  };
+
   return (
     <form className={s.root} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
       <p className={`${s.title} ${cs.title}`}>Sign-up</p>
@@ -107,6 +118,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
       ) : (
         <div className={s.content}>
           <FormInput
+            id=""
             isPass={false}
             classNameWrapper={s.inputWrapper}
             classNameInput={`${s.input} ${cs.input}`}
@@ -118,6 +130,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
           />
 
           <FormInput
+            id=""
             isPass={false}
             classNameWrapper={s.inputWrapper}
             classNameInput={`${s.input} ${cs.input}`}
@@ -129,6 +142,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
           />
 
           <FormInput
+            id=""
             isPass={true}
             classNameWrapper={s.inputWrapper}
             classNameInput={`${s.input} ${cs.input}`}
@@ -140,6 +154,7 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
           />
 
           <FormInput
+            id=""
             isPass={true}
             classNameWrapper={s.inputWrapper}
             classNameInput={`${s.input} ${cs.input}`}
@@ -150,21 +165,28 @@ export const SignupBlock: React.FC<SignupBlockProps> = ({ callbackUrl, onModalCl
             placeholder="Confirm password"
           />
 
+          <FormCheckbox
+            isChecked={isChecked}
+            onCheckboxChange={onCheckboxChange}
+            register={register}
+            error={errors.consent?.message}
+            name="consent"
+            id="signup-consent"
+            className={s.checkbox}
+            classNameWrapper={s.checkboxWrapper}
+            classNameLabel={s.checkboxLabel}>
+            <span className={s.checkBoxText}>I have read the</span>{" "}
+            <a className={s.checkboxLink} href="/privacy-policy" target="_blank">
+              privacy policy.
+            </a>
+          </FormCheckbox>
+
           <FormSubmit
             classNameWrapper={`${s.btnWrapper} ${cs.btnWrapper}`}
             classNameBtn={`${s.btn} ${cs.btn} ${cs.btnLg}`}
             text="Submit"
             requestStatus={authMessage}
           />
-
-          <div className={`${s.inputWrapper} ${cs.inputWrapper}`}>
-            {/* <div className={s.agreement}> */}
-          </div>
-
-          <label htmlFor="signup-consent" className={s.agreementText}>
-            I agree to receive communications from Createx Store.
-          </label>
-          {/* </div> */}
 
           <div className={s.descr}>
             <div className={s.descrWrapper}>

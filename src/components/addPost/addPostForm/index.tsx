@@ -98,6 +98,7 @@ export const AddPostForm: React.FC = () => {
   return (
     <form className={s.root} onSubmit={handleSubmit(onSubmit)} ref={formRef}>
       <FormInput
+        id=""
         isPass={false}
         classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
         classNameInput={`${s.input} ${cs.input}`}
@@ -109,6 +110,7 @@ export const AddPostForm: React.FC = () => {
       />
 
       <FormSelect
+        id=""
         classNameWrapper={s.inputWrapper}
         classNameInput={cs.input}
         error={errors?.category?.message}
@@ -140,6 +142,7 @@ export const AddPostForm: React.FC = () => {
       />
 
       <FormInput
+        id=""
         isPass={false}
         classNameWrapper={`${s.inputWrapper} ${cs.inputWrapper}`}
         classNameInput={`${s.input} ${cs.input}`}
