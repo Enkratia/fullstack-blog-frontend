@@ -180,12 +180,6 @@ export const ViewUsersBlockSuspense: React.FC = () => {
                   <AuthorCard author={user} />
                 </li>
               ))}
-
-          {/* {[...Array(3)].map((_, i) => (
-            <li key={i} className={s.item}>
-              <SkeletonAuthorCard key={i} />
-            </li>
-          ))} */}
         </ul>
       )}
 

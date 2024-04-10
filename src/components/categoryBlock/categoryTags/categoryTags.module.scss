@@ -14,15 +14,17 @@
   flex-wrap: wrap;
   list-style: none;
   margin: 0;
-  margin-bottom: rem(25);
+  margin-bottom: rem(-16);
+  margin-left: rem(-16);
   padding: 0;
-  gap: rem(16);
 }
 
 .item {
   display: flex;
   flex-grow: 1;
   justify-content: center;
+  margin-bottom: rem(16);
+  margin-left: rem(16);
   text-align: center;
 }
 
@@ -57,6 +59,7 @@
 .navigation {
   display: flex;
   justify-content: center;
+  margin-top: rem(25);
 }
 
 .btn {

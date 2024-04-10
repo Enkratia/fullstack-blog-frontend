@@ -723,14 +723,13 @@
 
 // **
 .tooltip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   margin-bottom: rem(30);
   gap: rem(30);
 
   @include bp-down("500") {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: rem(10);
   }
 }
