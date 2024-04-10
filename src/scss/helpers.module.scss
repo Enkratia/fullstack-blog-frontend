@@ -470,7 +470,7 @@
     z-index: var(--z-postup);
     border: rem(1) solid var(--mediumgray-color);
     border-radius: rem(4);
-    padding-right: rem(10); // Для каст. скроллбара
+    // padding-right: rem(10); // Для каст. скроллбара
     width: calc(100% + rem(2));
     background-color: var(--light-color);
     opacity: 0;
@@ -489,27 +489,29 @@
     overflow: auto;
     margin: 0;
     padding: 0;
-    max-height: rem(160);
+    padding-block: rem(10);
     background-color: var(--light-color);
   }
 
   &Item {
     outline: none;
-    padding-block: rem(2);
+    border: none;
+    padding-block: rem(4);
     color: var(--black-color);
     transition: color 0.3s;
     cursor: pointer;
 
     &:hover {
-      color: var(--purple-color);
+      background-color: var(--yellow-hover060-color);
     }
 
     &:focus {
-      color: var(--purple-color);
+      border: none;
+      background-color: var(--yellow-hover060-color);
     }
 
     &Active {
-      color: var(--mediumgray-color);
+      background-color: var(--yellow-color);
     }
   }
 }
