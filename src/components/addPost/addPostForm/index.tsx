@@ -117,7 +117,7 @@ export const AddPostForm: React.FC = () => {
         name="category"
         placeholder={capitalize(categoriesPlaceholder)}
         onSelectValidation={onSelectValidation}
-        options={categoriesNames.map((el) => capitalize(el))}
+        options={categoriesNames}
         activeOption={activeOption}
         setActiveOption={setActiveOption}
         register={register}
