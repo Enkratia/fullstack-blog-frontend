@@ -84,7 +84,7 @@ export const AddPostForm: React.FC = () => {
 
   // **
   const onSelectValidation = (option: number, options: string[]) => {
-    setValue("category", option ? options[option] : "", {
+    setValue("category", option ? options[option].toLowerCase() : "", {
       shouldValidate: !!submitCount,
     });
   };

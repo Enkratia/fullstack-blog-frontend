@@ -118,7 +118,7 @@ export const EditPostForm: React.FC<EditPostFormProps> = ({ post }) => {
   };
 
   const onSelectValidation = (option: number, options: string[]) => {
-    setValue("category", option ? options[option] : "", {
+    setValue("category", option ? options[option].toLowerCase() : "", {
       shouldValidate: !!submitCount,
     });
   };

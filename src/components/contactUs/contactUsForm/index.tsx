@@ -51,7 +51,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = ({ queries: queriesDa
 
   // **
   const onSelectValidation = (option: number, options: string[]) => {
-    setValue("query", option ? options[option] : "", {
+    setValue("query", option ? options[option].toLowerCase() : "", {
       shouldValidate: !!submitCount,
     });
   };
